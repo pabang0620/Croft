@@ -1,9 +1,22 @@
-import React from "react";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Layout from './layout/Layout';
+import GlobalDashBoard from './pages/GlobalDashBoard';
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className=" bg-green-100 font-extralight">확인용 테일윈드
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <Layout>
+        <Router>
+          <Routes>
+            <Route path="/" element={<GlobalDashBoard />} />
+          </Routes>
+        </Router>
+      </Layout>
+    </QueryClientProvider>
   );
 }
 
