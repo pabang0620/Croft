@@ -12,6 +12,7 @@ module.exports = {
         base500: '#767676',
         yellow: '#F2F600',
         'lightest-gray': '#F1F1F1',
+        'custom-color': '#F3ECDF',
       },
     },
   },

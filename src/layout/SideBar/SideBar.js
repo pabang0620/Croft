@@ -18,7 +18,7 @@ function SideBar() {
 
   return (
     <div
-      className={`fixed left-0 top-0 flex flex-col bg-base600 text-white ease-in-out duration-300 h-screen cursor-pointer ${
+      className={`flex flex-col bg-base600 text-white ease-in-out duration-300 h-screen cursor-pointer ${
         closeSide ? 'w-[60px]' : 'w-[220px]'
       }`}
     >
