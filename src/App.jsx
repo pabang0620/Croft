@@ -11,13 +11,15 @@ import SingleFarmRTR from './pages/SingleFarm/SingleFarmRTR';
 import SingleFarmDLI from './pages/SingleFarm/SingleFarmDLI';
 import SingleFarmVPD from './pages/SingleFarm/SingleFarmVPD';
 import SingleFarmPP from './pages/SingleFarm/SingleFarmPP';
+import SingleSales from './pages/SingleSales';
+import SingleResource from './pages/SingleResource';
+import SingleReport from './pages/SingleReport';
 
 const queryClient = new QueryClient();
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      {/* <Layout> */}
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<GlobalDashBoard />} />
@@ -30,9 +32,11 @@ function App() {
           <Route path="/farm/environment/DLI" element={<SingleFarmDLI />} />
           <Route path="/farm/environment/VPD" element={<SingleFarmVPD />} />
           <Route path="/farm/environment/PP" element={<SingleFarmPP />} />
+          <Route path="/single-sales" element={<SingleSales />} />
+          <Route path="/single-resource" element={<SingleResource />} />
+          <Route path="/single-report" element={<SingleReport />} />
         </Route>
       </Routes>
-      {/* </Layout> */}
     </QueryClientProvider>
   );
 }

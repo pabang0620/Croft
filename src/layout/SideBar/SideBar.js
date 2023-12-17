@@ -9,6 +9,7 @@ const SideBar = () => {
   const location = useLocation();
   const [closeSide, setCloseSide] = useState(true); //기본적으로 접힌 상태이며, 페이지 이동 후에는 다시 접어야함
   const [clickedIcon, setClickedIcon] = useState('total'); //추후 클릭으로 색이 변경되는 것이 아닌 url에 따른 색 변경으로 코드 수정
+  //const 배열 혹은 변수는 util로 분리해도 될 것 같음
   const closeLogo = '/assets/images/Layout/OnlyLogo.png';
   const openLogo = '/assets/images/Layout/CroftAndLogo.png';
   //단일 온실이 아닌 기본 세팅의 경우
@@ -25,13 +26,35 @@ const SideBar = () => {
     '종합 보고서',
   ];
 
-  useEffect(() => {
-    if (location.pathname.includes('/farm')) {
-      setIsSingleFarm(true);
+  //추후 util로 분리하면 좋을 것 같음
+  const handleNav = (iconName) => {
+    if (iconName === 'home') {
       setClickedIcon('home');
+      navigate('/farm');
+    } else if (iconName === 'greenhouse') {
+      setClickedIcon('greenhouse');
+      navigate('/farm/environment/total');
+    } else if (iconName === 'sales') {
+      setClickedIcon('sales');
+      navigate('/single-sales');
+    } else if (iconName === 'resource') {
+      setClickedIcon('resource');
+      navigate('/single-resource');
+    } else if (iconName === 'report') {
+      setClickedIcon('report');
+      navigate('/single-report');
+    }
+  };
+
+  useEffect(() => {
+    if (location.pathname.includes('/farm') || location.pathname.includes('/single')) {
+      setIsSingleFarm(true);
     } else setIsSingleFarm(false);
     if (location.pathname === '/total-report') setClickedIcon('report');
     if (location.pathname === '/') setClickedIcon('total');
+    if (location.pathname === '/farm/environment/total')
+      setClickedIcon('greenhouse');
+    //그 외 url 상 이동들 어떻게 할지 논의 필요
   }, [location]);
 
   return (
@@ -88,7 +111,10 @@ const SideBar = () => {
               {iconName.map((item, idx) => (
                 <div
                   key={idx}
-                  onClick={() => setClickedIcon(item)} //추후 각 페이지로 이동하는 부분 추가 필요
+                  onClick={() => {
+                    setClickedIcon(item);
+                    handleNav(item);
+                  }} //추후 각 페이지로 이동하는 부분 추가 필요
                   className="flex items-center gap-[17px] "
                 >
                   <div>{SideBarIcon(item, clickedIcon)}</div>
@@ -155,7 +181,7 @@ const SideBar = () => {
         </div>
       </div>
 
-      <GreenHouseSide isOpen={clickedIcon === 'greenhouse'} />
+      <GreenHouseSide isOpen={clickedIcon === 'greenhouse'} currentUrl={location.pathname}/>
     </div>
   );
 };
