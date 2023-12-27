@@ -1,7 +1,7 @@
 import * as echarts from "echarts";
 import React, { useEffect, useRef } from "react";
 
-const MainBarLine2Chart = () => {
+const Line4ChartNone = () => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const MainBarLine2Chart = () => {
         axisPointer: { type: "cross" },
       },
       legend: {
-        data: ["온실습도점수", "온실온도점수", "외부온도점수"],
+        data: ["외부온도", "온실온도", "VENT 온도 셋팅", "Heating 온도 셋팅"],
         textStyle: {
           color: "#333", // 범례 텍스트 색상
           fontSize: 12, // 범례 텍스트 크기
@@ -24,7 +24,20 @@ const MainBarLine2Chart = () => {
       },
       xAxis: {
         type: "category",
-        data: ["10.21", "10.22", "10.23", "10.24", "10.25", "10.26"],
+        data: [
+          "0",
+          "2",
+          "4",
+          "6",
+          "8",
+          "10",
+          "12",
+          "14",
+          "16",
+          "18",
+          "20",
+          "22",
+        ],
       },
       yAxis: {
         axisLabel: {
@@ -33,53 +46,49 @@ const MainBarLine2Chart = () => {
         },
         type: "value",
         min: 0,
-        max: 35,
+        max: 25,
         interval: 5,
       },
       series: [
         {
-          name: "온실온도점수", // 온도를 가져온 뒤
-          type: "bar",
-          stack: "Total",
-          data: [14, 13, 12, 3, 2, 12],
-          itemStyle: {
-            borderColor: "transparent",
-            color: "transparent",
-          },
-          emphasis: {
-            itemStyle: {
-              borderColor: "transparent",
-              color: "transparent",
-            },
-          },
-        },
-        {
-          name: "온실온도점수", // 차이값만 가져오면 된다
-          type: "bar",
-          stack: "Total",
-          data: [10, 10, 10, 10, 10, 10],
-        },
-
-        {
-          name: "외부온도점수",
+          smooth: true,
+          name: "외부온도",
           type: "line",
-          data: [27, 20, 17, 28, 35, 20],
+          data: [14, 18, 17, 12, 17, 16],
           markArea: {
             itemStyle: {
               color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
             },
             data: [
               [
-                { yAxis: 20 }, // 시작 y축 값
-                { yAxis: 25 }, // 끝 y축 값 (차트 최대값까지)
+                { yAxis: 15 }, // 시작 y축 값
+                { yAxis: 20 }, // 끝 y축 값 (차트 최대값까지)
               ],
             ],
           },
         },
         {
-          name: "평균 점수",
+          smooth: true,
+          name: "온실온도",
           type: "line",
-          data: [22, 27, 20, 17, 28, 18],
+          data: [12, 17, 14, 18, 17, 12, 17, 16, 7, 18, 18],
+          markArea: {
+            itemStyle: {
+              color: "rgb(255, 0, 0 , 0.5)", // #4FFE234D와 유사한 RGBA 색상
+            },
+          },
+        },
+        {
+          smooth: true,
+          name: "VENT 온도 셋팅",
+          type: "line",
+          data: [14, 18, 17, 12, 17, 16, 7, 17, 20],
+        },
+        {
+          smooth: true,
+          name: "Heating 온도 셋팅",
+          type: "line",
+          data: [7, 18, 18, 22, 17, 12, 17, 14, 18, 17],
         },
       ],
       // grid 설정 및 기타 필요한 스타일 설정...
@@ -93,7 +102,7 @@ const MainBarLine2Chart = () => {
     };
   }, []);
 
-  return <div ref={chartRef} style={{ width: "480px", height: "380px" }} />;
+  return <div ref={chartRef} style={{ width: "600px", height: "380px" }} />;
 };
 
-export default MainBarLine2Chart;
+export default Line4ChartNone;
