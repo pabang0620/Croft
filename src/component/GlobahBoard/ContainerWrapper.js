@@ -1,11 +1,16 @@
-import MainBarChart from '../Charts/BarCharts/MainBarChart';
-import MainBarChartLine from '../Charts/BarCharts/MainBarChartLine';
-import MainSmoothedLineChart from '../Charts/LineCharts/MainSmoothedLineChart';
-import MainSmoothedLineChartAdd from '../Charts/LineCharts/MainSmoothedLineChartAdd';
-import MainBar2LineChart from '../Charts/MixCharts/MainBarLine2Chart';
-import MainLineAreaChart from '../Charts/MixCharts/MainLineAreaChart';
-import MainSliderDiv from '../Graphs/MainSliderDiv';
-import SingleContainer from './SingleContainer';
+import MainBarChart from "../Charts/BarCharts/MainBarChart";
+import MainBarChartLine from "../Charts/BarCharts/MainBarChartLine";
+import Line2Chart from "../Charts/LineCharts/Line2Chart";
+import Line4Chart from "../Charts/LineCharts/Line4Chart";
+import Line4ChartNone from "../Charts/LineCharts/Line4ChartNone";
+import MainFootLineChart from "../Charts/LineCharts/MainFootLineChart";
+import MainLineChart from "../Charts/LineCharts/MainLineChart";
+import MainSmoothedLineChart from "../Charts/LineCharts/MainSmoothedLineChart";
+import MainSmoothedLineChartAdd from "../Charts/LineCharts/MainSmoothedLineChartAdd";
+import MainBar2LineChart from "../Charts/MixCharts/MainBarLine2Chart";
+import MainLineAreaChart from "../Charts/MixCharts/MainLineAreaChart";
+import MainSliderDiv from "../Graphs/MainSliderDiv";
+import SingleContainer from "./SingleContainer";
 
 const ContainerWrapper = () => {
   return (
@@ -15,11 +20,11 @@ const ContainerWrapper = () => {
       <SingleContainer />
       <SingleContainer />
       <SingleContainer />
-      <div className='w-[320px] h-[220px] bg-white rounded-[10px] relative'>
+      <div className="w-[320px] h-[220px] bg-white rounded-[10px] relative">
         {/* 들어가는 데이터를 다르게 넣어줘야한다 ~  */}
-        <MainBarChart data={""}/>
+        <MainBarChart data={""} />
       </div>
-      <div className='w-[320px] h-[220px] bg-white rounded-[10px] relative'>
+      <div className="w-[320px] h-[220px] bg-white rounded-[10px] relative">
         <MainBarChartLine data={""} />
       </div>
       <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
@@ -35,7 +40,21 @@ const ContainerWrapper = () => {
         <MainLineAreaChart />
       </div>
       <div className="w-[485px] h-[450px] bg-white rounded-[10px]">
-        < MainBar2LineChart/>
+        <MainBar2LineChart />
+      </div>
+      <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
+        <MainLineChart />
+      </div>
+      <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
+        <MainFootLineChart />
+      </div>
+      <div className="w-[665px] h-[390px] bg-white rounded-[10px]">
+        <Line4Chart />
+      </div>
+      <div className="w-[665px] h-[390px] bg-white rounded-[10px]">
+        <Line4ChartNone />
+      </div>      <div className="w-[665px] h-[390px] bg-white rounded-[10px]">
+        <Line2Chart />
       </div>
     </div>
   );
