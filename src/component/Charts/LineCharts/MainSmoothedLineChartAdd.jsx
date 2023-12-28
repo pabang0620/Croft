@@ -103,9 +103,10 @@ const MainSmoothedLineChartAdd = () => {
   return (
     <>
       <div className="w-[320px] h-[240px]" ref={chartRef}></div>
-      <div className="absolute bottom-[0px] right-[0px] mb-2 mr-2 text-[#124946] text-xs font-normal leading-normal cursor-pointer">
+       {/* 챗봇 밑에 떠서 주석처리 해뒀엉~ */}
+      {/* <div className="absolute bottom-[0px] right-[0px] mb-2 mr-2 text-[#124946] text-xs font-normal leading-normal cursor-pointer">
         자세히 보기
-      </div>
+      </div> */}
     </>
   );
 };

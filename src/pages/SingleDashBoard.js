@@ -1,15 +1,16 @@
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useNavigate } from 'react-router-dom';
-import GreenhouseScore from '../component/Chart/GreenhouseScore';
-import CroftGuide from '../component/Chart/CroftGuide/CroftGuide';
+import { ComponentWrapper } from '../component/utils/DND/ComponentWrapper';
 
 const SingleDashBoard = () => {
-  const navigate = useNavigate();
-  //드래그 앤 드랍 추가 예정
+  // const navigate = useNavigate();
   return (
     <div>
       <div className="p-4 flex flex-row flex-wrap gap-[10px]">
-        <GreenhouseScore />
-        <CroftGuide />
+        <DndProvider backend={HTML5Backend}>
+          <ComponentWrapper />
+        </DndProvider>
       </div>
     </div>
   );

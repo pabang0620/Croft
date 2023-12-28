@@ -2,15 +2,12 @@ import { memo } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
 const style = {
-  border: '1px solid blue',
-  margin: '0.5rem',
-  padding: '0.5rem 1rem',
+  borderRadius: '10px',
   backgroundColor: 'white',
   cursor: 'pointer',
   flexShrink: '0',
 };
 
-//드래그 앤 드랍을 위한 임시 파일
 export const Card = memo(function Card({ id, text, width, height, moveCard, findCard }) {
   const originalIndex = findCard(id).index;
   const [{ isDragging }, dragRef] = useDrag(
