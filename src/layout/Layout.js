@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import SideBar from './SideBar/SideBar';
 import Navbar from './NavBar/NavBar';
 import ReportSubBar from './NavBar/SubNavBar/ReportSubBar';
+import DashSubBar from './NavBar/SubNavBar/DashSubBar';
 
 const Layout = ({ sub }) => {
   const SubNavBar = (sub) => {
@@ -13,7 +14,8 @@ const Layout = ({ sub }) => {
         return <ReportSubBar />;
       case 'sales':
         return <></>;
-
+      case 'dash':
+        return <DashSubBar />;
       default:
         break;
     }

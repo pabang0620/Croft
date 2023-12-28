@@ -22,7 +22,7 @@ function App() {
       <Routes>
         <Route element={<Layout sub="basic" />}>
           <Route path="/" element={<GlobalDashBoard />} />
-          <Route path="/farm" element={<SingleDashBoard />} />
+
           {/* 환경설정의 route 부분은 현재 기획에 포함되어 있지 않아 생략 */}
           <Route path="/farm/environment/total" element={<SingleFarmTotal />} />
           <Route path="/farm/environment/RTR" element={<SingleFarmRTR />} />
@@ -35,6 +35,9 @@ function App() {
         </Route>
         <Route element={<Layout sub="report" />}>
           <Route path="/global-report" element={<GlobalReport />} />
+        </Route>
+        <Route element={<Layout sub="dash" />}>
+          <Route path="/farm" element={<SingleDashBoard />} />
         </Route>
       </Routes>
     </QueryClientProvider>
