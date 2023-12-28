@@ -1,11 +1,13 @@
 import SingleContainer from './SingleContainer';
+import {
+  single1,
+  single2,
+  single3,
+  single4,
+  single5,
+} from '../utils/Data/ContainerData';
 
 const ContainerWrapper = () => {
-  const single1 = { critical: [1,2], warning: [] };
-  const single2 = { critical: [], warning: [1] };
-  const single3 = { critical: [], warning: [] };
-  const single4 = { critical: [], warning: [] };
-
   return (
     <div className="flex flex-wrap gap-[30px]">
       <SingleContainer
@@ -24,9 +26,14 @@ const ContainerWrapper = () => {
         warning={single3.warning}
       />
       <SingleContainer
-        disconnect={true}
+        disconnect={false}
         critical={single4.critical}
         warning={single4.warning}
+      />
+      <SingleContainer
+        disconnect={true}
+        critical={single5.critical}
+        warning={single5.warning}
       />
     </div>
   );
