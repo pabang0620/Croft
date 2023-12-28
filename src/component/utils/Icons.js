@@ -25,13 +25,16 @@ export const CriticalOrWarn = (disconnect, critical, warning) => {
     return <></>;
   }
 };
-
-export const TotalDashIcons = (icon, warning, disconnect) => {
+export const IconsColor = (warning, disconnect) => {
   let color = '';
   if (warning) color = '#FF0000';
   else if (disconnect) color = '#767676';
-  else color = 'black';
+  else color = '#000';
 
+  return color;
+};
+
+export const TotalDashIcons = (icon, color) => {
   switch (icon) {
     case 'temp':
       return (

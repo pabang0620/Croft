@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { CriticalOrWarn, TotalDashIcons } from '../utils/Icons';
+import { CriticalOrWarn, TotalDashIcons, IconsColor } from '../utils/Icons';
 import { CriticalSeq, iconSeq } from '../utils/Data/ContainerData';
 
 const SingleContainer = ({ disconnect, critical, warning }) => {
@@ -7,7 +7,6 @@ const SingleContainer = ({ disconnect, critical, warning }) => {
   const criticalSeq = CriticalSeq(critical);
   // api 연동 시 하단의 dataArray 수정 필요
   const dataArray = ['22 ℃', '51%', '629 w/m²', '285.3 ppm'];
-  
   return (
     <div
       className={`w-[240px] h-[240px] rounded-[10px] bg-white relative cursor-pointer ${
@@ -33,8 +32,18 @@ const SingleContainer = ({ disconnect, critical, warning }) => {
         <>
           {dataArray.map((items, idx) => (
             <div className="flex flex-row my-2 ml-8" key={idx}>
-              {TotalDashIcons(iconSeq[idx], criticalSeq[idx], disconnect)}
-              <div className="ml-[15px]">{items}</div>
+              {TotalDashIcons(
+                iconSeq[idx],
+                IconsColor(criticalSeq[idx], disconnect)
+              )}
+              <div
+                className={`ml-[15px] text-[${IconsColor(
+                  criticalSeq[idx],
+                  disconnect
+                )}]`}
+              >
+                {items}
+              </div>
             </div>
           ))}
         </>
