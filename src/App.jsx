@@ -11,6 +11,7 @@ import SingleFarmDLI from './pages/SingleFarm/SingleFarmDLI';
 import SingleFarmVPD from './pages/SingleFarm/SingleFarmVPD';
 import SingleFarmPP from './pages/SingleFarm/SingleFarmPP';
 import SingleSales from './pages/SingleSales';
+import SingleSales5Year from './pages/SingleSales5Year';
 import SingleResource from './pages/SingleResource';
 import SingleReport from './pages/SingleReport';
 
@@ -20,24 +21,20 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>
-        <Route element={<Layout sub="basic" />}>
+        <Route element={<Layout />}>
           <Route path="/" element={<GlobalDashBoard />} />
-
           {/* 환경설정의 route 부분은 현재 기획에 포함되어 있지 않아 생략 */}
-          <Route path="/farm/environment/total" element={<SingleFarmTotal />} />
-          <Route path="/farm/environment/RTR" element={<SingleFarmRTR />} />
-          <Route path="/farm/environment/DLI" element={<SingleFarmDLI />} />
-          <Route path="/farm/environment/VPD" element={<SingleFarmVPD />} />
-          <Route path="/farm/environment/PP" element={<SingleFarmPP />} />
+          <Route path="/dash" element={<SingleDashBoard />} />
+          <Route path="/dash/environment/total" element={<SingleFarmTotal />} />
+          <Route path="/dash/environment/RTR" element={<SingleFarmRTR />} />
+          <Route path="/dash/environment/DLI" element={<SingleFarmDLI />} />
+          <Route path="/dash/environment/VPD" element={<SingleFarmVPD />} />
+          <Route path="/dash/environment/PP" element={<SingleFarmPP />} />
+          <Route path="/global-report" element={<GlobalReport />} />
           <Route path="/single-sales" element={<SingleSales />} />
+          <Route path="/single-sales/5years" element={<SingleSales5Year />} />
           <Route path="/single-resource" element={<SingleResource />} />
           <Route path="/single-report" element={<SingleReport />} />
-        </Route>
-        <Route element={<Layout sub="report" />}>
-          <Route path="/global-report" element={<GlobalReport />} />
-        </Route>
-        <Route element={<Layout sub="dash" />}>
-          <Route path="/farm" element={<SingleDashBoard />} />
         </Route>
       </Routes>
     </QueryClientProvider>
