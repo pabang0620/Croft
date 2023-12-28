@@ -46,6 +46,7 @@ const SideBar = () => {
   };
 
   useEffect(() => {
+    setCloseSide(true);
     if (
       location.pathname.includes('/farm') ||
       location.pathname.includes('/single')
