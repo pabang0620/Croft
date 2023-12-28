@@ -45,7 +45,6 @@ const GlobalReportCalendar = ({ selectedDate, setSelectedDate }) => {
             <div className="flex justify-between items-center h-[28px] w-full">
               {/* 임시로 화살표를 넣어둠 */}
               <button
-                type="button"
                 onClick={decreaseMonth}
                 className="w-[34px] h-[34px] rounded-[50%] p-[5px] disabled:cursor-not-allowed disabled:bg-[#AEAEAE]"
                 disabled={prevMonthButtonDisabled}
@@ -60,7 +59,6 @@ const GlobalReportCalendar = ({ selectedDate, setSelectedDate }) => {
                 </span>
               </div>
               <button
-                type="button"
                 onClick={increaseMonth}
                 className="w-[34px] h-[34px] rounded-[50%] p-[5px] disabled:cursor-not-allowed"
                 disabled={nextMonthButtonDisabled}
