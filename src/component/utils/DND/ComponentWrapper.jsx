@@ -1,26 +1,26 @@
-import { memo, useCallback, useState } from 'react';
-import update from 'immutability-helper';
-import { Card } from './Card';
-import GreenhouseScore from '../../Chart/GreenhouseScore';
-import CroftGuide from '../../Chart/CroftGuide/CroftGuide';
+import { memo, useCallback, useState } from "react";
+import update from "immutability-helper";
+import { Card } from "./Card";
+import GreenhouseScore from "../../Chart/GreenhouseScore";
+import CroftGuide from "../../Chart/CroftGuide/CroftGuide";
 
-import MainBarChart from '../../Charts/BarCharts/MainBarChart';
-import MainBarChartLine from '../../Charts/BarCharts/MainBarChartLine';
-import Line2Chart from '../../Charts/LineCharts/Line2Chart';
-import Line4Chart from '../../Charts/LineCharts/Line4Chart';
-import Line4ChartNone from '../../Charts/LineCharts/Line4ChartNone';
-import MainFootLineChart from '../../Charts/LineCharts/MainFootLineChart';
-import MainLineChart from '../../Charts/LineCharts/MainLineChart';
-import MainSmoothedLineChart from '../../Charts/LineCharts/MainSmoothedLineChart';
-import MainSmoothedLineChartAdd from '../../Charts/LineCharts/MainSmoothedLineChartAdd';
-import MainBar2LineChart from '../../Charts/MixCharts/MainBarLine2Chart';
-import MainLineAreaChart from '../../Charts/MixCharts/MainLineAreaChart';
-import MainSliderDiv from '../../Graphs/MainSliderDiv';
+import MainBarChart from "../../Charts/BarCharts/MainBarChart";
+import MainBarChartLine from "../../Charts/BarCharts/MainBarChartLine";
+import Line2Chart from "../../Charts/LineCharts/Line2Chart";
+import Line4Chart from "../../Charts/LineCharts/Line4Chart";
+import Line4ChartNone from "../../Charts/LineCharts/Line4ChartNone";
+import MainFootLineChart from "../../Charts/LineCharts/MainFootLineChart";
+import MainLineChart from "../../Charts/LineCharts/MainLineChart";
+import MainSmoothedLineChart from "../../Charts/LineCharts/MainSmoothedLineChart";
+import MainSmoothedLineChartAdd from "../../Charts/LineCharts/MainSmoothedLineChartAdd";
+import MainBar2LineChart from "../../Charts/MixCharts/MainBarLine2Chart";
+import MainLineAreaChart from "../../Charts/MixCharts/MainLineAreaChart";
+import MainSliderDiv from "../../Graphs/MainSliderDiv";
 
 const style = {
-  display: 'flex',
-  flexWrap: 'wrap',
-  gap: '10px',
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "10px",
 };
 
 //드래그 앤 드랍을 위한 임시 파일
@@ -36,14 +36,14 @@ export const ComponentWrapper = memo(function ComponentWrapper() {
       id: 2,
       component: <CroftGuide />,
       width: 650,
-      height: 'fit-component',
+      height: "fit-component",
     },
     {
       id: 3,
       component: (
         <div className="w-[320px] h-[220px] bg-white rounded-[10px] relative">
           {/* 들어가는 데이터를 다르게 넣어줘야한다 ~  */}
-          <MainBarChart data={''} />
+          <MainBarChart data={""} />
         </div>
       ),
       width: 320,
@@ -53,7 +53,7 @@ export const ComponentWrapper = memo(function ComponentWrapper() {
       id: 4,
       component: (
         <div className="w-[320px] h-[220px] bg-white rounded-[10px] relative">
-          <MainBarChartLine data={''} />
+          <MainBarChartLine data={""} />
         </div>
       ),
       width: 320,
