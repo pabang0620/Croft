@@ -1,19 +1,24 @@
 import * as echarts from "echarts";
 import React, { useEffect, useRef } from "react";
 
-const Line4ChartNone = () => {
+const StackedChartLine2 = () => {
   const chartRef = useRef(null);
 
   useEffect(() => {
     const chartInstance = echarts.init(chartRef.current);
 
     const option = {
+      title: {
+        text: "평균 온도",
+        top: "5%",
+        left: "5%",
+      },
       tooltip: {
         trigger: "axis",
         axisPointer: { type: "cross" },
       },
       legend: {
-        data: ["외부온도", "온실온도", "VENT 온도 셋팅", "Heating 온도 셋팅"],
+        data: ["온실온도", "온실온도 편차", "외부온도"],
         textStyle: {
           color: "#333", // 범례 텍스트 색상
           fontSize: 12, // 범례 텍스트 크기
@@ -25,18 +30,14 @@ const Line4ChartNone = () => {
       xAxis: {
         type: "category",
         data: [
-          "0",
-          "2",
-          "4",
-          "6",
-          "8",
-          "10",
-          "12",
-          "14",
-          "16",
-          "18",
-          "20",
-          "22",
+          "10.19",
+          "10.20",
+          "10.21",
+          "10.22",
+          "10.23",
+          "10.24",
+          "10.25",
+          "10.26",
         ],
       },
       yAxis: {
@@ -51,44 +52,53 @@ const Line4ChartNone = () => {
       },
       series: [
         {
-          smooth: true,
+          name: "온실온도 편차", // 온도를 가져온 뒤
+          type: "bar",
+          stack: "Total",
+          data: [11, 9, 7, 6, 11, 16, 11, 16],
+          itemStyle: {
+            borderColor: "transparent",
+            color: "transparent",
+          },
+          emphasis: {
+            itemStyle: {
+              borderColor: "transparent",
+              color: "transparent",
+            },
+          },
+        },
+        {
+          name: "온실온도 편차", // 차이값만 가져오면 된다
+          type: "bar",
+          stack: "Total",
+          data: [10, 10, 10, 10, 10, 10, 10, 10],
+          itemStyle: {
+            color: "rgb(255, 0, 0 , 0.5)",
+          },
+        },
+
+        {
           name: "외부온도",
           type: "line",
-          data: [14, 18, 17, 12, 17, 16],
+          smooth: true,
+          data: [23, 20, 17, 22, 15, 20, 20, 17],
           markArea: {
             itemStyle: {
               color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
             },
             data: [
               [
-                { yAxis: 15 }, // 시작 y축 값
-                { yAxis: 20 }, // 끝 y축 값 (차트 최대값까지)
+                { yAxis: 14 }, // 시작 y축 값
+                { yAxis: 17 }, // 끝 y축 값 (차트 최대값까지)
               ],
             ],
           },
         },
         {
-          smooth: true,
           name: "온실온도",
-          type: "line",
-          data: [12, 17, 14, 18, 17, 12, 17, 16, 7, 18, 18],
-          markArea: {
-            itemStyle: {
-              color: "rgb(255, 0, 0 , 0.5)",
-            },
-          },
-        },
-        {
           smooth: true,
-          name: "VENT 온도 셋팅",
           type: "line",
-          data: [14, 18, 17, 12, 17, 16, 7, 17, 20],
-        },
-        {
-          smooth: true,
-          name: "Heating 온도 셋팅",
-          type: "line",
-          data: [7, 18, 18, 22, 17, 12, 17, 14, 18, 17],
+          data: [22, 17, 20, 17, 24, 18, 20, 11],
         },
       ],
       // grid 설정 및 기타 필요한 스타일 설정...
@@ -102,7 +112,11 @@ const Line4ChartNone = () => {
     };
   }, []);
 
-  return <div ref={chartRef} style={{ width: "600px", height: "380px" }} />;
+  return (
+    <>
+      <div ref={chartRef} style={{ width: "750px", height: "380px" }} />;
+    </>
+  );
 };
 
-export default Line4ChartNone;
+export default StackedChartLine2;

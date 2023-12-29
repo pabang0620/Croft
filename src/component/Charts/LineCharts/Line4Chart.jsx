@@ -74,7 +74,7 @@ const Line4Chart = () => {
           data: [12, 17, 14, 18, 17, 12, 17, 16, 7, 18, 18],
           markArea: {
             itemStyle: {
-              color: "rgb(255, 0, 0 , 0.5)", // #4FFE234D와 유사한 RGBA 색상
+              color: "rgb(255, 0, 0 , 0.5)", // 빨강
             },
             data: [
               [
