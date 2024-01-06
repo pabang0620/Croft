@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import SideBarIcon from './SideBarIcon';
 import GreenHouseSide from './GreenHouseSide';
 
-const SideBar = () => {
+const SideBar = ({ currentPath }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [closeSide, setCloseSide] = useState(true); //기본적으로 접힌 상태이며, 페이지 이동 후에는 다시 접어야함
@@ -29,10 +29,10 @@ const SideBar = () => {
   const handleNav = (iconName) => {
     if (iconName === 'home') {
       setClickedIcon('home');
-      navigate('/farm');
+      navigate('/dash');
     } else if (iconName === 'greenhouse') {
       setClickedIcon('greenhouse');
-      navigate('/farm/environment/total');
+      navigate('/dash/environment/total');
     } else if (iconName === 'sales') {
       setClickedIcon('sales');
       navigate('/single-sales');
@@ -47,17 +47,13 @@ const SideBar = () => {
 
   useEffect(() => {
     setCloseSide(true);
-    if (
-      location.pathname.includes('/farm') ||
-      location.pathname.includes('/single')
-    ) {
+    if (currentPath.includes('/dash') || currentPath.includes('/single')) {
       setIsSingleFarm(true);
     } else setIsSingleFarm(false);
-    if (location.pathname === '/global-report') setClickedIcon('report');
-    if (location.pathname === '/') setClickedIcon('total');
-    if (location.pathname === '/farm/environment/total')
-      setClickedIcon('greenhouse');
-    //그 외 url 상 이동들 어떻게 할지 논의 필요
+    if (currentPath === '/global-report') setClickedIcon('report');
+    if (currentPath === '/') setClickedIcon('total');
+    if (currentPath === '/dash') setClickedIcon('home');
+    if (currentPath === '/dash/environment/total') setClickedIcon('greenhouse');
   }, [location]);
 
   return (
@@ -122,7 +118,7 @@ const SideBar = () => {
                   onClick={() => {
                     setClickedIcon(item);
                     handleNav(item);
-                  }} //추후 각 페이지로 이동하는 부분 추가 필요
+                  }}
                   className="flex items-center gap-[17px] "
                 >
                   <div>{SideBarIcon(item, clickedIcon)}</div>
@@ -191,7 +187,7 @@ const SideBar = () => {
 
       <GreenHouseSide
         isOpen={clickedIcon === 'greenhouse'}
-        currentUrl={location.pathname}
+        currentUrl={currentPath}
       />
     </div>
   );

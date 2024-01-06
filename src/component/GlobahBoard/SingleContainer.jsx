@@ -50,7 +50,7 @@ const SingleContainer = ({ disconnect, critical, warning }) => {
       </div>
       <div
         className="text-accent font-bold absolute bottom-[21px] right-[16px]"
-        onClick={() => navigate("/farm")}
+        onClick={() => navigate("/dash")}
       >
         <img
           className="w-[20px]"

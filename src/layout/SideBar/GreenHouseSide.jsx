@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 const GreenHouseSide = ({ isOpen, currentUrl }) => {
   const navigate = useNavigate();
   const clickGreenHouse = [
-    { id: 1, text: '온실환경 종합', route: '/farm/environment/total' },
-    { id: 2, text: 'RTR', route: '/farm/environment/RTR' },
-    { id: 3, text: 'DLI', route: '/farm/environment/DLI' },
-    { id: 4, text: 'VPD', route: '/farm/environment/VPD' },
-    { id: 5, text: 'Photo Period', route: '/farm/environment/PP' },
+    { id: 1, text: '온실환경 종합', route: '/dash/environment/total' },
+    { id: 2, text: 'RTR', route: '/dash/environment/RTR' },
+    { id: 3, text: 'DLI', route: '/dash/environment/DLI' },
+    { id: 4, text: 'VPD', route: '/dash/environment/VPD' },
+    { id: 5, text: 'Photo Period', route: '/dash/environment/PP' },
   ];
   return (
     <div

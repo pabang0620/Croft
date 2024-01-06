@@ -7,6 +7,7 @@ import {
   startOfMonth,
   endOfMonth,
   startOfYear,
+  format,
 } from 'date-fns';
 
 export const PeriodData = [
@@ -21,7 +22,7 @@ export const PeriodData = [
     id: 2,
     text: '이번주',
     startDate: startOfWeek(new Date()),
-    endDate: endOfWeek(new Date()),
+    endDate: new Date(),
   },
   {
     id: 3,
@@ -33,7 +34,7 @@ export const PeriodData = [
     id: 4,
     text: '이번 달',
     startDate: startOfMonth(new Date()),
-    endDate: endOfMonth(new Date()),
+    endDate: new Date(),
   },
   {
     id: 5,
@@ -66,3 +67,19 @@ export const PeriodData = [
     endDate: new Date(),
   },
 ];
+
+export const CheckPriod = (startDate, endDate) => {
+  const today = format(new Date(), 'yyyy-MM-dd');
+  const start = startDate ? format(startDate, 'yyyy-MM-dd') : today;
+  const end = endDate ? format(endDate, 'yyyy-MM-dd') : today;
+  const array = PeriodData.filter((date) => {
+    if (
+      format(date.startDate, 'yyyy-MM-dd') === start &&
+      format(date.endDate, 'yyyy-MM-dd') === end
+    )
+      return date;
+  });
+  if (array[0]) {
+    return array[0].text;
+  } else return '';
+};

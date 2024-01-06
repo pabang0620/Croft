@@ -1,31 +1,18 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
-import SideBar from './SideBar/SideBar';
+import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './NavBar/NavBar';
-import ReportSubBar from './NavBar/SubNavBar/ReportSubBar';
-import DashSubBar from './NavBar/SubNavBar/DashSubBar';
+import SideBar from './SideBar/SideBar';
+import { SubNavBarTitle } from './NavBar/SubNavBar/SubNavBarTitle';
 
-const Layout = ({ sub }) => {
-  const SubNavBar = (sub) => {
-    switch (sub) {
-      case 'basic':
-        return <></>;
-      case 'report':
-        return <ReportSubBar />;
-      case 'sales':
-        return <></>;
-      case 'dash':
-        return <DashSubBar />;
-      default:
-        break;
-    }
-  };
+const Layout = () => {
+  const currentPath = useLocation().pathname;
+
   return (
     <div className="flex relative w-screen max-w-full h-screen max-h-full ">
-      <SideBar />
+      <SideBar currentPath={currentPath} />
       <div className="flex flex-col w-full h-full ">
         <Navbar />
-        {SubNavBar(sub)}
+        <>{SubNavBarTitle(currentPath)}</>
         <main className="bg-[#E9EBE180]/[0.5] w-full h-full overflow-auto">
           <Outlet />
           <div className="flex flex-col absolute bottom-[35px] right-[50px]">
@@ -37,7 +24,7 @@ const Layout = ({ sub }) => {
             <img
               className="mt-1 w-[50px] h-[50px]"
               src="/assets/images/Layout/FloatingChatbot.svg"
-              alt="todo"
+              alt="chatbot"
             ></img>
           </div>
         </main>
