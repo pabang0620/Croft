@@ -5,7 +5,6 @@ import Layout from './layout/Layout';
 import GlobalDashBoard from './pages/GlobalDashBoard';
 import GlobalReport from './pages/GlobalReport';
 import SingleDashBoard from './pages/SingleDashBoard';
-import TestDashBoard from './pages/TestDashBoard';
 import SingleFarmTotal from './pages/SingleFarm/SingleFarmTotal';
 import SingleFarmRTR from './pages/SingleFarm/SingleFarmRTR';
 import SingleFarmDLI from './pages/SingleFarm/SingleFarmDLI';
@@ -21,11 +20,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>
-        <Route element={<Layout />}>
+        <Route element={<Layout sub="basic" />}>
           <Route path="/" element={<GlobalDashBoard />} />
-          <Route path="/total-report" element={<GlobalReport />} />
-          <Route path="/farm" element={<SingleDashBoard />} />
-          <Route path="/test" element={<TestDashBoard />} />
+
           {/* 환경설정의 route 부분은 현재 기획에 포함되어 있지 않아 생략 */}
           <Route path="/farm/environment/total" element={<SingleFarmTotal />} />
           <Route path="/farm/environment/RTR" element={<SingleFarmRTR />} />
@@ -35,6 +32,12 @@ function App() {
           <Route path="/single-sales" element={<SingleSales />} />
           <Route path="/single-resource" element={<SingleResource />} />
           <Route path="/single-report" element={<SingleReport />} />
+        </Route>
+        <Route element={<Layout sub="report" />}>
+          <Route path="/global-report" element={<GlobalReport />} />
+        </Route>
+        <Route element={<Layout sub="dash" />}>
+          <Route path="/farm" element={<SingleDashBoard />} />
         </Route>
       </Routes>
     </QueryClientProvider>

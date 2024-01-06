@@ -1,7 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  content: [
+    './src/**/*.{js,jsx,ts,tsx}',
+    './node_modules/react-tailwindcss-datepicker/dist/index.esm.js',
+  ],
   theme: {
     extend: {
       colors: {
@@ -20,8 +23,10 @@ module.exports = {
         primary: '#3F9192',
         'lightest-gray': '#F1F1F1',
         'custom-color': '#F3ECDF',
+        success: '#2AAC73',
       },
     },
   },
-  plugins: [],
+  // 스크롤바 숨기기를 위함 사용 시 => scrollbar-hide 속성 추가
+  plugins: [require('tailwind-scrollbar-hide')],
 };

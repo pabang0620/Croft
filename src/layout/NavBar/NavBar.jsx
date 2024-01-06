@@ -27,7 +27,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="relative whitespace-nowrap">
+    <div className="relative whitespace-nowrap select-none">
       <div className="bg-[#737165] h-[55px] flex items-center justify-between px-4">
         <div className="flex-1 flex row text-custom-color items-center space-x-4">
           {/* AI제어 버튼에 클릭 이벤트 핸들러를 바인딩합니다 */}

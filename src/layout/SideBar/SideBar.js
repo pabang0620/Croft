@@ -26,7 +26,6 @@ const SideBar = () => {
     '종합 보고서',
   ];
 
-  //추후 util로 분리하면 좋을 것 같음
   const handleNav = (iconName) => {
     if (iconName === 'home') {
       setClickedIcon('home');
@@ -47,10 +46,14 @@ const SideBar = () => {
   };
 
   useEffect(() => {
-    if (location.pathname.includes('/farm') || location.pathname.includes('/single')) {
+    setCloseSide(true);
+    if (
+      location.pathname.includes('/farm') ||
+      location.pathname.includes('/single')
+    ) {
       setIsSingleFarm(true);
     } else setIsSingleFarm(false);
-    if (location.pathname === '/total-report') setClickedIcon('report');
+    if (location.pathname === '/global-report') setClickedIcon('report');
     if (location.pathname === '/') setClickedIcon('total');
     if (location.pathname === '/farm/environment/total')
       setClickedIcon('greenhouse');
@@ -58,7 +61,7 @@ const SideBar = () => {
   }, [location]);
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row select-none">
       <div
         className={`flex flex-col bg-base600 text-white ease-in-out duration-300 h-screen cursor-pointer ${
           closeSide ? 'w-[60px]' : 'w-[220px]'
@@ -72,7 +75,12 @@ const SideBar = () => {
           >
             {SideBarIcon(closeSide ? 'open' : 'close')}
           </div>
-          <div className="w-full font-bold p-[14px] text-center text-[24px]">
+          <div
+            className="w-full font-bold p-[14px] text-center text-[24px]"
+            onClick={() => {
+              navigate('/');
+            }}
+          >
             <img
               className="h-[32px]"
               src={`${closeSide ? closeLogo : openLogo}`}
@@ -139,7 +147,7 @@ const SideBar = () => {
                   key={idx}
                   onClick={() => {
                     setClickedIcon(item);
-                    navigate('/total-report');
+                    navigate('/global-report');
                   }}
                   className="flex items-center gap-[17px] "
                 >
@@ -181,7 +189,10 @@ const SideBar = () => {
         </div>
       </div>
 
-      <GreenHouseSide isOpen={clickedIcon === 'greenhouse'} currentUrl={location.pathname}/>
+      <GreenHouseSide
+        isOpen={clickedIcon === 'greenhouse'}
+        currentUrl={location.pathname}
+      />
     </div>
   );
 };

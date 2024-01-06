@@ -16,11 +16,11 @@ const NavBarModal7 = () => {
             !
           </div>
         </div>
-        <div className="flex flex-row w-[320px]">
-          <NavBarModalHeader detail="12℃" />
-          <NavBarModalHeader detail="51%" />
-          <NavBarModalHeader detail="629 w/m²" />
-          <NavBarModalHeader detail="285.3 ppm" />
+        <div className="w-[288px] h-[70px] grid grid-cols-4 gap-2">
+          <NavBarModalHeader imgName="Vector.png" detail="12℃" />
+          <NavBarModalHeader imgName="Humidity.png" detail="51%" />
+          <NavBarModalHeader imgName="Humidity.png" detail="629 w/m²" />
+          <NavBarModalHeader imgName="Humidity.png" detail="285.3 ppm" />
         </div>
         <NavBarModalVent />
         <NavBarModalScreen />
