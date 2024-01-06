@@ -1,16 +1,13 @@
-import React from "react";
+import React from 'react';
+import OnOffToggle from '../../layout/NavBar/NavBarModal6/OnOffToggle';
 
-const OnButton = ({ fontSize }) => {
+const OnButton = ({ fontSize, click, setClick }) => {
   return (
     <div className="flex flex-row">
       <div className={`${fontSize} mt-0.5 font-semibold leading-normal mr-2`}>
-        자동
+        {click ? '자동' : '수동'}
       </div>
-      <img
-        className="w-6 h-6"
-        src={`${process.env.PUBLIC_URL}/assets/images/Control/on_toggle.png`}
-        alt=""
-      />
+      <OnOffToggle click={click} setClick={setClick} type="small" />
     </div>
   );
 };

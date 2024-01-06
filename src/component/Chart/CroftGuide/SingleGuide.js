@@ -9,7 +9,7 @@ const SingleGuide = ({ id, text, currentGuide, setCurrentGuide }) => {
       <div className="flex text-xs  pl-[23px]">{text}</div>
 
       <div className="absolute right-[11px]" onClick={() => handleRemove(id)}>
-        <img src={imgSrc} alt=""></img>
+        <img src={imgSrc} alt="" />
       </div>
     </div>
   );
