@@ -2,8 +2,8 @@
   "name": "croft",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3000",
-  "dependencies": {
+  "proxy": "http://croft-ai.iptime.org:40401",
+    "dependencies": {
     "@tanstack/react-query": "^5.13.4",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

@@ -1,39 +1,28 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useChartData } from "../utils/api/Charts/BarChartAPI"; // API 호출용 훅을 가져옵니다.
 
 const MainSliderDiv = () => {
   const sliderRef = useRef(null);
+  const [hoverPosition, setHoverPosition] = useState(0);
 
-  const photoperiodData = {
-    current: 2.64,
-    min: 0,
-    max: 13,
-    optimalMin: 6,
-    optimalMax: 10,
-  };
+  // API로부터 RTR 수치 데이터를 불러옵니다.
+  const { data, isLoading, error } = useChartData('/api/v1/farms/photo_period/current', 'photoPeriod');
 
-  // 전체 트랙의 너비를 계산합니다.
-  const fullWidth = 100; // 100%로 가정
-
-  // 권장 범위의 너비를 계산합니다.
-  const optimalWidth =
-    ((photoperiodData.optimalMax - photoperiodData.optimalMin) /
-      (photoperiodData.max - photoperiodData.min)) *
-    fullWidth;
-
-  // 권장 범위의 왼쪽 위치를 계산합니다.
-  const optimalLeftOffset =
-    ((photoperiodData.optimalMin - photoperiodData.min) /
-      (photoperiodData.max - photoperiodData.min)) *
-    fullWidth;
-
-  // 현재 값의 위치를 계산합니다.
-  const currentOffset =
-    ((photoperiodData.current - photoperiodData.min) /
-      (photoperiodData.max - photoperiodData.min)) *
-    fullWidth;
+  console.log(data)
+  // data가 변경될 때, 값과 위치를 설정합니다.
+  // useEffect(() => {
+  //   if (!isLoading && !error && data) {
+  //     const fullWidth = 100; // 100%로 가정
+  //     const currentOffset =
+  //       ((data.current - data.min) /
+  //         (data.max - data.min)) *
+  //       fullWidth;
+  //     setValue(data.current);
+  //     setHoverPosition(currentOffset);
+  //   }
+  // }, [isLoading, error, data]);
 
   const [value, setValue] = useState(0); // 슬라이더의 현재 값
-  const [hoverPosition, setHoverPosition] = useState(0);
 
   const handleMouseMove = (e) => {
     if (!sliderRef.current) return;
@@ -44,13 +33,16 @@ const MainSliderDiv = () => {
     setValue(newValue);
     setHoverPosition(e.clientX - rect.left);
   };
-
   return (
     <div className="relative p-4">
+      {isLoading && <div>Loading...</div>}
+      {error && <div>Error fetching data.</div>}
       <div className="text-base font-bold mb-12">
-        Photo Period
-        <span className="text-[#124946] ml-4">{photoperiodData.current}</span>
-      </div>
+            Photo Period
+            <span className="text-[#124946] ml-4">
+              {/* {data.current} */}
+            </span>
+          </div>
       <div className="w-[288px] h-0.5 bg-gray-200 my-2 relative">
         <div className="bg-[#4FFE2350] absolute top-[-9px] left-1/3 h-5 w-1/3"></div>
         <div className="h-5 w-0.5 bg-gray-300 absolute left-0 top-[-9px]"></div>
@@ -65,7 +57,7 @@ const MainSliderDiv = () => {
         <input
           type="range"
           min="0"
-          max={photoperiodData.max}
+          // max={data.max}
           value={value}
           onMouseMove={handleMouseMove}
           ref={sliderRef}

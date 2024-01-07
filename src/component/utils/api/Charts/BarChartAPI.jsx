@@ -7,16 +7,10 @@ const fetchData = async (apiPath) => {
     return data;
   };
   
-//   export const useChartData = (apiPath) => {
-//     return useQuery({
-//       queryFn: () => fetchData(apiPath),
-//     });
-//   };
-  
   export const useChartData = (apiPath, queryKey) => {
     return useQuery({
       queryKey: [queryKey],
       queryFn: () => fetchData(apiPath),
     });
   };
-  
+

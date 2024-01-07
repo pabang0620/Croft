@@ -72,9 +72,17 @@ export const ComponentWrapper = memo(function ComponentWrapper() {
     {
       id: 6,
       component: (
-        <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
-          <MainSmoothedLineChart />
-        </div>
+        <>
+          <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
+            <MainSmoothedLineChart APIoption="198" ChartName="온실 온도" unit="℃" />
+          </div>
+          <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
+            <MainSmoothedLineChart APIoption="199" ChartName="온실 습도" unit="%"/>
+          </div>
+          <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
+            <MainSmoothedLineChart APIoption="225" ChartName="온실 CO2" unit="ppm"/>
+          </div>
+        </>
       ),
       width: 320,
       height: 220,
@@ -83,7 +91,7 @@ export const ComponentWrapper = memo(function ComponentWrapper() {
       id: 7,
       component: (
         <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
-          <MainSmoothedLineChartAdd />
+          <MainSmoothedLineChartAdd  APIoption="244" ChartName="외부 광량" unit="629 w/m²"/>
         </div>
       ),
       width: 320,
