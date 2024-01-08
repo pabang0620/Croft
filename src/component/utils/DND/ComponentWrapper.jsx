@@ -60,38 +60,90 @@ export const ComponentWrapper = memo(function ComponentWrapper() {
       height: 220,
     },
     {
+      // 데이터 작업 완료
       id: 5,
       component: (
-        <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
-          <MainSliderDiv />
-        </div>
-      ),
-      width: 320,
-      height: 220,
-    },
-    {
-      id: 6,
-      component: (
         <>
+          {/* queryName을 보내주면 프록시가 localhost로 변하는 오류가 있음  */}
+          {/* <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
+            <MainSliderDiv
+              queryName="RTR"
+              title="RTR"
+              absData1="0"
+              absData2="1.2"
+              absData3="1.5"
+              absData4="3"
+              absData5="영양"
+              absData6="균형"
+              absData7="생식"
+              absData8="생식생장, 꽃이 피고 열매가 맺혀요"
+            />
+          </div> */}
           <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
-            <MainSmoothedLineChart APIoption="198" ChartName="온실 온도" unit="℃" />
-          </div>
-          <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
-            <MainSmoothedLineChart APIoption="199" ChartName="온실 습도" unit="%"/>
-          </div>
-          <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
-            <MainSmoothedLineChart APIoption="225" ChartName="온실 CO2" unit="ppm"/>
-          </div>
+            <MainSliderDiv
+              queryName="photo_Period"
+              title="Photo Period"
+              absData1="0"
+              absData2="6"
+              absData3="10"
+              absData4="16"
+              absData5="최저권장"
+              absData6="권장"
+              absData7="고권장"
+              absData8="Photo Period 상태에 따른 메시지가 나옵니다."
+            />
+          </div>{" "}
+          {/* <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
+            <MainSliderDiv
+              queryName="vpd"
+              title="VPD"
+              absData2="1.2"
+              absData3="1.5"
+              absData4="3"
+              absData5="축적"
+              absData6="균형"
+              absData7="증산"
+              absData8="VPD 상태에 따른 메시지가 나옵니다."
+            />
+          </div> */}
         </>
       ),
       width: 320,
       height: 220,
     },
     {
+      // 데이터 작업 완료
+      id: 6,
+      component: (
+        <>
+          <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
+            <MainSmoothedLineChart
+              APIoption="198"
+              ChartName="온실 온도"
+              unit="℃"
+            />
+          </div>
+          {/* <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
+            <MainSmoothedLineChart APIoption="199" ChartName="온실 습도" unit="%"/>
+          </div>
+          <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
+            <MainSmoothedLineChart APIoption="225" ChartName="온실 CO2" unit="ppm"/>
+          </div> */}
+        </>
+      ),
+      width: 320,
+      height: 220,
+    },
+    {
+      // 데이터 작업 완료
       id: 7,
       component: (
         <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
-          <MainSmoothedLineChartAdd  APIoption="244" ChartName="외부 광량" unit="629 w/m²"/>
+          <MainSmoothedLineChartAdd
+            APIoption="244"
+            ChartName="외부 광량"
+            unit="629 w/m²"
+          />
         </div>
       ),
       width: 320,
@@ -121,7 +173,7 @@ export const ComponentWrapper = memo(function ComponentWrapper() {
       id: 10,
       component: (
         <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
-          <MainLineChart />
+          <MainLineChart APIoption="220" ChartName="DLI" />
         </div>
       ),
       width: 320,

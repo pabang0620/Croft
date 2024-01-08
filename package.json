@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://croft-ai.iptime.org:40401",
-    "dependencies": {
+  "dependencies": {
     "@tanstack/react-query": "^5.13.4",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.6.5",
     "date-fns": "^3.0.6",
     "echarts": "^5.4.3",
     "echarts-for-react": "^3.0.2",

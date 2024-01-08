@@ -1,11 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import * as echarts from "echarts";
-import { useChartData } from "../../utils/api/Charts/BarChartAPI";
+import { useChartData } from "../../utils/api/Charts/ChartAPI";
 
 const MainBarChart = () => {
   const chartRef = useRef(null);
   const dataType = 221; // 원하는 검측값 유형을 지정하세요.
-  const { data, isLoading, error } = useChartData(`/api/v1/farms/measurement/day?data_type=${dataType}`, `chartData-${dataType}`);
+  const { data, isLoading, error } = useChartData(
+    `/api/v1/farms/measurement/day?data_type=${dataType}`,
+    `chartData-${dataType}`
+  );
 
   // useEffect(() => {
   //   if (isLoading) return <div>Loading...</div>;
@@ -53,7 +56,7 @@ const MainBarChart = () => {
   //   //     chartInstance.dispose();
   //   //   }
   //   // };
-    
+
   //   }, [data, isLoading, error]);
 
   return (
