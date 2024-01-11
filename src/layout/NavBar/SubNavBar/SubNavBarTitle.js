@@ -4,12 +4,24 @@ import DashSubBar from './DashSubBar';
 import SalesSubBar from './SalesSubBar';
 import ResourceSubBar from './ResourceSubBar';
 
-export const SubNavBarTitle = (currentPath) => {
+export const SubNavBarTitle = (
+  currentPath,
+  setContainer,
+  container,
+  setTitle
+) => {
   switch (currentPath) {
     case 'basic':
       return <BasicSubBar title={''} />;
     case '/global-report':
-      return <ReportSubBar type="global" />;
+      return (
+        <ReportSubBar
+          type="global"
+          setContainer={setContainer}
+          container={container}
+          setTitle={setTitle}
+        />
+      );
     case '/dash':
       return <DashSubBar />;
     case '/dash/environment/total':

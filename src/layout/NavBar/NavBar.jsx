@@ -1,8 +1,12 @@
-import React, { useState } from "react";
-import AIControlModal from "./AIControlModal/AIControlModal.jsx";
-import NavBarModal7 from "./NavBarModal7/NavBarModal7.jsx";
+import React, { useState } from 'react';
+import AIControlModal from './AIControlModal/AIControlModal.jsx';
+import NavBarModal7 from './DeviceModal/NavBarModal7.jsx';
 
-const Navbar = () => {
+const Navbar = ({ title }) => {
+  //이미지 URl, 데이터
+  const ImgArray = ['NavTemperature', 'NavHumidity', 'NavLight'];
+  const ImgData = ['22 ℃', '51%', '629 w/m²'];
+
   // 모달 표시 상태를 관리하는 state
   const [isModal6Visible, setIsModal6Visible] = useState(false);
   const [isModal7Visible, setIsModal7Visible] = useState(false);
@@ -28,49 +32,40 @@ const Navbar = () => {
 
   return (
     <div className="relative whitespace-nowrap select-none">
-      <div className="bg-[#737165] h-[55px] flex items-center justify-between px-4">
-        <div className="flex-1 flex row text-custom-color items-center space-x-4">
+      <div className="bg-[#737165] h-[55px] flex items-center justify-between pl-[29px] pr-[18px]">
+        <div className="flex-1 flex row text-Secondary items-center space-x-4">
           {/* AI제어 버튼에 클릭 이벤트 핸들러를 바인딩합니다 */}
-          <button onClick={toggleModal6} className="text-lg font-semibold">
-            AI제어
+          <button
+            onClick={toggleModal6}
+            className="text-lg font-semibold flex gap-[2px]"
+          >
+            <div>AI제어</div>
+            <div className="text-primary-accent">활성</div>
           </button>
-          <div className="text-lg font-semibold">활성</div>
+
           <button onClick={toggleModal7} className="text-lg font-semibold">
             장치상태
           </button>
         </div>
         {/* 왼쪽 영역 */}
-        <div className="flex-1 text-center text-2xl font-semibold text-custom-color">
-          통합 대시보드
+        <div className="flex-1 text-center text-2xl font-semibold text-Secondary">
+          {title}
         </div>
         {/* 중앙 타이틀 */}
-        <div className="flex-1 flex justify-end items-center space-x-4 text-custom-color">
+        <div className="flex-1 flex justify-end items-center space-x-4 text-Secondary">
           {/* 오른쪽 영역 */}
           <div className="text-lg font-semibold">경기 이천시</div>
-          <div className="text-lg font-semibold flex flex-row">
-            <img
-              className="w-[9px] h-[18px] mt-1 mr-2"
-              src={`${process.env.PUBLIC_URL}/assets/images/Control/Vector.png`}
-              alt=""
-            />
-            22 ℃
-          </div>
-          <div className="text-lg font-semibold flex flex-row">
-            <img
-              className="w-5 h-5 mt-1 mr-2"
-              src={`${process.env.PUBLIC_URL}/assets/images/Control/Humidity.png`}
-              alt=""
-            />
-            51%
-          </div>
-          <div className="text-lg font-semibold flex flex-row">
-            <img
-              className="w-5 h-5 mt-1 mr-2"
-              src={`${process.env.PUBLIC_URL}/assets/images/Control/Humidity.png`}
-              alt=""
-            />
-            629 w/m²
-          </div>
+          {ImgArray.map((url, idx) => (
+            <div className="text-lg font-semibold flex flex-row" key={idx}>
+              <img
+                className="mt-1 mr-2"
+                src={`${process.env.PUBLIC_URL}/assets/images/Layout/${url}.svg`}
+                alt=""
+              />
+              {ImgData[idx]}
+            </div>
+          ))}
+          {/* 나가기 버튼 이미지 필요 */}
           <button className="text-lg font-semibold">
             <img
               className="w-5 h-5 mt-1 mr-2"

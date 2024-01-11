@@ -1,21 +1,21 @@
-import { useNavigate } from "react-router-dom";
-import { CriticalOrWarn, TotalDashIcons, IconsColor } from "../utils/Icons";
-import { CriticalSeq, iconSeq } from "../utils/Data/ContainerData";
+import { useNavigate } from 'react-router-dom';
+import { CriticalOrWarn, TotalDashIcons, IconsColor } from '../utils/Icons';
+import { CriticalSeq, iconSeq } from '../utils/Data/ContainerData';
 
 const SingleContainer = ({ disconnect, critical, warning }) => {
   const navigate = useNavigate();
   const criticalSeq = CriticalSeq(critical);
   // api 연동 시 하단의 dataArray 수정 필요
-  const dataArray = ["22 ℃", "51%", "629 w/m²", "285.3 ppm"];
+  const dataArray = ['22 ℃', '51%', '629 w/m²', '285.3 ppm'];
   return (
     <div
       className={`w-[240px] h-[240px] rounded-[10px] bg-white relative cursor-pointer select-none ${
-        disconnect ? 'text-base500' : 'text-info'
+        disconnect ? 'text-base500' : ''
       }`}
     >
       <div
         className={`absolute top-[80px] left-[70px] ${
-          disconnect ? "" : "hidden"
+          disconnect ? '' : 'hidden'
         }`}
       >
         <img
@@ -37,10 +37,13 @@ const SingleContainer = ({ disconnect, critical, warning }) => {
                 IconsColor(criticalSeq[idx], disconnect)
               )}
               <div
-                className={`ml-[15px] text-[${IconsColor(
-                  criticalSeq[idx],
-                  disconnect
-                )}]`}
+                className={`ml-[15px] 
+                ${
+                  IconsColor(criticalSeq[idx], disconnect) === '#FF0000'
+                    ? 'text-[#FF0000]'
+                    : ''
+                }
+                `}
               >
                 {items}
               </div>
@@ -50,7 +53,7 @@ const SingleContainer = ({ disconnect, critical, warning }) => {
       </div>
       <div
         className="text-accent font-bold absolute bottom-[21px] right-[16px]"
-        onClick={() => navigate("/dash")}
+        onClick={() => navigate('/dash')}
       >
         <img
           className="w-[20px]"

@@ -1,9 +1,15 @@
+import { useState, useEffect } from 'react';
+import { useOutletContext } from 'react-router';
 import ContainerWrapper from '../component/GlobahBoard/ContainerWrapper';
 
-import { useState } from 'react';
-
 const GlobalDashBoard = () => {
+  const { setTitle } = useOutletContext();
   const [toggle, setToggle] = useState(true);
+  
+  useEffect(() => {
+    setTitle('통합 대시보드');
+  }, []);
+
   return (
     <div className="flex flex-col py-[15px] px-[20px] gap-[12px]">
       <div className="flex gap-[7px] align-center h-fit">

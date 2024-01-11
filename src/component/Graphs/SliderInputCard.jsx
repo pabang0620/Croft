@@ -7,6 +7,7 @@ const SliderInputCard = ({ Whatfor, click, setClick }) => {
     <div className="w-[295px] h-[92px] shrink-0 rounded-lg bg-[#F1F1F1] my-5 flex flex-col justify-around items-center">
       <div className="w-[263px] h-[22px] flex justify-between">
         <div className="flex flex-row">
+          {/* 이미지 변경 필요 */}
           <img
             className="w-[9px] h-[18px] mt-0.5 mr-2"
             src={`${process.env.PUBLIC_URL}/assets/images/Control/Vector.png`}

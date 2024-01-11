@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GlobalReportCalendar from '../../../component/DatePicker/GlobalReportCalendar';
 
-const ReportSubBar = ({ type }) => {
-  const [container, setContainer] = useState('옥수수 재배 컨테이너');
+const ReportSubBar = ({ type, setContainer, container, setTitle }) => {
   const [containerToggle, setContainerToggle] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const containerArray = [
@@ -12,6 +11,9 @@ const ReportSubBar = ({ type }) => {
     { id: 3, text: '고구마 재배 컨테이너' },
     { id: 4, text: '감자 재배 컨테이너' },
   ];
+  useEffect(() => {
+    setTitle(container);
+  }, []);
   return (
     <div className="w-full h-[45px] pl-[29px] pt-[4px] flex items-center cursor-pointer select-none border-b-[1px] border-base400 bg-base200">
       <div className="text-lg font-bold mr-[11px]">종합 보고서</div>
@@ -30,7 +32,10 @@ const ReportSubBar = ({ type }) => {
               <li
                 key={item.id}
                 className="w-[145px] flex items-center flex-grow px-[13px] hover:bg-success/[0.2]"
-                onClick={() => setContainer(item.text)}
+                onClick={() => {
+                  setContainer(item.text);
+                  setTitle(item.text);
+                }}
               >
                 {item.text}
               </li>
