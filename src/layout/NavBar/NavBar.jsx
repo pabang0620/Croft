@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NavBarModal6 from "./NavBarModal6/NavBarModal6.jsx";
+import AIControlModal from "./AIControlModal/AIControlModal.jsx";
 import NavBarModal7 from "./NavBarModal7/NavBarModal7.jsx";
 
 const Navbar = () => {
@@ -80,7 +80,7 @@ const Navbar = () => {
           </button>
         </div>
         <div className="top-20 left-10 absolute flex-row flex">
-          {isModal6Visible && <NavBarModal6 />}
+          {isModal6Visible && <AIControlModal />}
           {isModal7Visible && <NavBarModal7 />}
         </div>
         {/* NavBar6 모달을 조건부로 렌더링합니다 */}

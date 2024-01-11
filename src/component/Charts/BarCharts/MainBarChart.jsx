@@ -1,83 +1,63 @@
 import React, { useEffect, useRef } from "react";
 import * as echarts from "echarts";
+import { useChartData } from "../../utils/api/Charts/ChartAPI";
 
 const MainBarChart = () => {
   const chartRef = useRef(null);
+  const dataType = 221; // 원하는 검측값 유형을 지정하세요.
+  const { data, isLoading, error } = useChartData(
+    `/api/v1/farms/measurement/day?data_type=${dataType}`,
+    `chartData-${dataType}`
+  );
 
-  // 현재 날짜를 기준으로 7일 전부터의 날짜를 구함
-  const generateDateLabels = () => {
-    const dates = [];
-    for (let i = 6; i >= 0; i--) {
-      const date = new Date();
-      date.setDate(date.getDate() - i);
-      dates.push(date.toLocaleDateString());
-    }
-    return dates;
-  };
+  // useEffect(() => {
+  //   if (isLoading) return <div>Loading...</div>;
+  //   if (error) return <div>Error loading data</div>;
 
-  // 더미 데이터 생성
+  //   const chartInstance = echarts.init(chartRef.current);
 
-  const generateDummyData = () => {
-    return [10, 11, 12, 13, 14, 13, 12]; // 고정된 데이터 값
-  };
+  //   const option = {
+  //     title: {
+  //       text: "Photo period",
+  //       top: "5%",
+  //       left: "2%",
+  //     },
+  //     tooltip: {
+  //       trigger: "axis",
+  //       axisPointer: {
+  //         type: "shadow",
+  //       },
+  //     },
+  //     xAxis: {
+  //       type: "category",
+  //       data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+  //       axisLabel: {
+  //         fontSize: 10, // 글꼴 크기를 10px로 설정
+  //       },
+  //     },
+  //     yAxis: {
+  //       type: "value",
+  //       axisLabel: {
+  //         fontSize: 10, // 글꼴 크기를 10px로 설정
+  //       },
+  //     },
+  //     series: [
+  //       {
+  //         name: 'Photoperiod',
+  //         type: 'bar',
+  //         data: data?.data, // API에서 받은 데이터 사용
+  //       },
+  //     ],
+  //   };
 
-  useEffect(() => {
-    // 기본 eCharts 인스턴스를 생성
-    const chartInstance = echarts.init(chartRef.current);
-    const dates = generateDateLabels();
-    const dummyData = generateDummyData();
+  //   chartInstance.setOption(option);
+  //   // return () => {
+  //   //   if (chartInstance) {
+  //   //     chartInstance.dispose();
+  //   //   }
+  //   // };
 
-    // eCharts 옵션 설정
-    const option = {
-      title: {
-        text: "Photo period",
-        top: "5%",
-        left: "2%",
-      },
-      tooltip: {
-        trigger: "axis",
-        axisPointer: {
-          type: "shadow",
-        },
-      },
-      xAxis: {
-        type: "category",
-        data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-        axisLabel: {
-          fontSize: 10, // 글꼴 크기를 10px로 설정
-        },
-      },
-      yAxis: {
-        type: "value",
-        axisLabel: {
-          fontSize: 10, // 글꼴 크기를 10px로 설정
-        },
-      },
-      series: [
-        {
-          name: "Photoperiod",
-          type: "bar",
-          data: dummyData,
-          markLine: {
-            silent: true,
-            symbol: "none",
-            lineStyle: {
-              color: "green",
-              type: "solid",
-            },
-          },
-        },
-      ],
-    };
-
-    // eCharts 인스턴스에 옵션을 적용
-    chartInstance.setOption(option);
-
-    // 컴포넌트 언마운트 시 차트 인스턴스 해제
-    return () => {
-      chartInstance.dispose();
-    };
-  }, []);
+  //   }, [data, isLoading, error]);
 
   return (
     <>
