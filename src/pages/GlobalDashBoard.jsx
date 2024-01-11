@@ -12,7 +12,9 @@ const GlobalDashBoard = () => {
           src={`${process.env.PUBLIC_URL}/assets/images/DashBoard/GreenPlus.svg`}
           alt=""
         />
-        <div className="text-primary font-bold text-base">스마트팜 추가</div>
+        <div className="text-primary font-bold text-base select-none">
+          스마트팜 추가
+        </div>
       </div>
       <ContainerWrapper />
     </div>

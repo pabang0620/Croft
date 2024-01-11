@@ -1,20 +1,25 @@
-// React 모달 컴포넌트
 import { useState, useEffect } from 'react';
 import SliderInputCard from '../../../component/Graphs/SliderInputCard';
 import OnOffToggle from './OnOffToggle';
-//추후 모달명 변경하면 좋을 것 같음
+
 const NavBarModal6 = () => {
   const [click1, setClick1] = useState(true);
   const [click2, setClick2] = useState(true);
   const [click3, setClick3] = useState(true);
   const [click4, setClick4] = useState(true);
+
   useEffect(() => {
-    if (!click1) {
+    if (click1) {
+      setClick2(true);
+      setClick3(true);
+      setClick4(true);
+    } else {
       setClick2(false);
       setClick3(false);
       setClick4(false);
     }
   }, [click1]);
+  
   return (
     <div className="z-10">
       <div className="bg-white shadow-md rounded-lg w-[320px] p-4">

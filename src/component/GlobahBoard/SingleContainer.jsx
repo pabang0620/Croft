@@ -9,8 +9,8 @@ const SingleContainer = ({ disconnect, critical, warning }) => {
   const dataArray = ["22 ℃", "51%", "629 w/m²", "285.3 ppm"];
   return (
     <div
-      className={`w-[240px] h-[240px] rounded-[10px] bg-white relative cursor-pointer ${
-        disconnect ? "text-base500" : "text-info"
+      className={`w-[240px] h-[240px] rounded-[10px] bg-white relative cursor-pointer select-none ${
+        disconnect ? 'text-base500' : 'text-info'
       }`}
     >
       <div
