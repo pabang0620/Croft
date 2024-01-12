@@ -151,10 +151,11 @@ export const ComponentWrapper = memo(function ComponentWrapper() {
       height: 220,
     },
     {
+      // 데이터 피커가 들어가야해 (클릭한 날짜+1이 today이고 yesterday에는 선택한 날짜-1이 되야함)
       id: 8,
       component: (
         <div className="w-[485px] h-[450px] bg-white rounded-[10px]">
-          <MainLineAreaChart />
+          <MainLineAreaChart APIoption="218" ChartName="급수 데이터" />
         </div>
       ),
       width: 480,

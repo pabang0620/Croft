@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useChartData } from "../utils/api/Charts/ChartAPI"; // API 호출용 훅을 가져옵니다.
 
 const MainSliderDiv = ({
-  // queryName,
+  // queryName,     // 오류
   title,
   absData1,
   absData2,
@@ -18,7 +18,7 @@ const MainSliderDiv = ({
   // API로부터 RTR 수치 데이터를 불러옵니다.
   const { data, isLoading, error } = useChartData(
     `/api/v1/farms/photo_period/current`,
-    // `/api/v1/farms/${queryName}/current`,
+    // `/api/v1/farms/${queryName}/current`,       // 오류
     "photoPeriod"
   );
 

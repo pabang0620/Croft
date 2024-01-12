@@ -1,17 +1,41 @@
-// 필요한 라이브러리를 임포트합니다.
-import * as echarts from "echarts";
 import React, { useEffect, useRef } from "react";
+import * as echarts from "echarts";
+import { useChartData } from "../../utils/api/Charts/ChartAPI";
 
-const MainLineAreaChart = () => {
+const MainLineAreaChart = ({ APIoption, ChartName }) => {
   const chartRef = useRef(null);
-  const generateDummyDataUnder40 = () => {
-    // 0과 40 사이에서 무작위 데이터를 생성합니다.
-    return Array.from({ length: 2 }, () => Math.floor(Math.random() * 40));
-  };
+
+  const today = new Date();
+  today.setDate(today.getDate() + 1);
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  const { data, isLoading, error } = useChartData(
+    `http://croft-ai.iptime.org:40401/api/v1/gh_data_item?start_time=${yesterday}&end_time=${today}&data_type=${APIoption}&group_by=5min`,
+    `chartData-218`
+  );
+
   useEffect(() => {
+    if (isLoading || error) {
+      return; // 로딩 중이거나 에러가 발생한 경우 바로 리턴합니다.
+    }
+
+    if (!data || !data.data) {
+      return; // 데이터가 없거나 형식이 잘못된 경우 바로 리턴합니다.
+    }
+
     const chartInstance = echarts.init(chartRef.current);
 
+    // API 데이터로부터 x축과 y축 데이터를 추출합니다.
+    const xData = data.data.map((item) => item.kr_time.substring(11, 16)); // "HH:MM" 포맷
+    const yData = data.data.map((item) => item.value); // 바꿔줘야함
+
     const option = {
+      title: {
+        text: ChartName,
+        top: "5%",
+        left: "2%",
+      },
       tooltip: {
         trigger: "axis",
         axisPointer: {
@@ -35,21 +59,7 @@ const MainLineAreaChart = () => {
         },
         type: "category",
         boundaryGap: false, // 선 차트에 대해 경계 간격을 없앰
-        data: [
-          "0시",
-          "2시",
-          "4시",
-          "6시",
-          "8시",
-          "10시",
-          "12시",
-          "14시",
-          "16시",
-          "18시",
-          "20시",
-          "22시",
-          "24시",
-        ], // x축 데이터
+        data: xData,
       },
       yAxis: {
         axisLabel: {
@@ -66,7 +76,7 @@ const MainLineAreaChart = () => {
         {
           name: "10.25",
           type: "line",
-          data: [0, 12, 25, 32, 41, 57, 61, 71, 79, 84, 86, 93, 100], // 10.25 데이터
+          data: yData, // 10.25 데이터
           lineStyle: {
             color: "#AEAEAE", // 라인 색상을 #AEAEAE로 설정
           },
@@ -108,7 +118,7 @@ const MainLineAreaChart = () => {
     return () => {
       chartInstance.dispose();
     };
-  }, []);
+  }, [data, isLoading, error]); // 의존성 배열에 API 응답 데이터를 포함합니다.
 
   return <div ref={chartRef} style={{ width: "480px", height: "380px" }} />;
 };
