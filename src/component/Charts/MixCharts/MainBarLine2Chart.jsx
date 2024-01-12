@@ -1,13 +1,47 @@
-import * as echarts from "echarts";
 import React, { useEffect, useRef } from "react";
+import * as echarts from "echarts";
+import { useChartData } from "../../utils/api/Charts/ChartAPI";
+import { format, subDays } from "date-fns";
 
-const MainBarLine2Chart = () => {
+const MainBarLine2Chart = ({ ChartName, APIoption }) => {
   const chartRef = useRef(null);
 
+  // 일주일 전과 내일 날짜를 계산
+  const startDate = format(subDays(new Date(), -6), "yyyy-MM-dd");
+  const endDate = format(subDays(new Date(), +1), "yyyy-MM-dd");
+
+  const { data, isLoading, error } = useChartData(
+    `http://croft-ai.iptime.org:40401/api/v1/gh_data_item?start_time=${startDate}&end_time=${endDate}&data_type=${APIoption}&group_by=day`,
+    `chartData-${APIoption}`
+  );
+
   useEffect(() => {
+    if (isLoading || error) {
+      // 데이터 로딩 중이거나 오류 발생시 처리
+      return;
+    }
+
+    if (!data || !data.data) {
+      // 데이터가 없거나 잘못된 형식일 경우 처리
+      return;
+    }
+
     const chartInstance = echarts.init(chartRef.current);
 
+    // 데이터에서 227과 198의 데이터를 분리하여 추출
+    const data227 = data.data
+      .filter((item) => item.data_type_id === 227)
+      .map((item) => item.avg);
+    const data198 = data.data
+      .filter((item) => item.data_type_id === 198)
+      .map((item) => item.avg);
+
     const option = {
+      title: {
+        text: ChartName,
+        top: "5%",
+        left: "2%",
+      },
       tooltip: {
         trigger: "axis",
         axisPointer: { type: "cross" },
@@ -63,7 +97,7 @@ const MainBarLine2Chart = () => {
         {
           name: "외부온도점수",
           type: "line",
-          data: [27, 20, 17, 28, 35, 20],
+          data: data198,
           markArea: {
             itemStyle: {
               color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
@@ -79,7 +113,7 @@ const MainBarLine2Chart = () => {
         {
           name: "평균 점수",
           type: "line",
-          data: [22, 27, 20, 17, 28, 18],
+          data: data227,
         },
       ],
       // grid 설정 및 기타 필요한 스타일 설정...

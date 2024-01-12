@@ -2,13 +2,18 @@
 import * as echarts from "echarts";
 import React, { useEffect, useRef } from "react";
 
-const Bar2Line1Chart = () => {
+const Bar2Line1Chart = ({ ChartName }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
     const chartInstance = echarts.init(chartRef.current);
 
     const option = {
+      title: {
+        text: ChartName,
+        top: "5%",
+        left: "2%",
+      },
       tooltip: {
         trigger: "axis",
         axisPointer: {
