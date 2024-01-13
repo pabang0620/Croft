@@ -3,16 +3,16 @@ import * as echarts from "echarts";
 import { useChartData } from "../../utils/api/Charts/ChartAPI";
 import { format, subDays } from "date-fns";
 
-const MainBarLine2Chart = ({ ChartName, APIoption }) => {
+const MainBarLine2Chart = ({ ChartName }) => {
   const chartRef = useRef(null);
 
   // 일주일 전과 내일 날짜를 계산
-  const startDate = format(subDays(new Date(), -6), "yyyy-MM-dd");
-  const endDate = format(subDays(new Date(), +1), "yyyy-MM-dd");
+  const startDate = format(subDays(new Date(), 5), "yyyy-MM-dd");
+  const endDate = format(subDays(new Date(), -1), "yyyy-MM-dd");
 
   const { data, isLoading, error } = useChartData(
-    `http://croft-ai.iptime.org:40401/api/v1/gh_data_item?start_time=${startDate}&end_time=${endDate}&data_type=${APIoption}&group_by=day`,
-    `chartData-${APIoption}`
+    `http://croft-ai.iptime.org:40401/api/v1/gh_data_item?start_time=${startDate}&end_time=${endDate}&data_type=227&data_type=198&group_by=day`,
+    `chartData`
   );
 
   useEffect(() => {
@@ -35,6 +35,8 @@ const MainBarLine2Chart = ({ ChartName, APIoption }) => {
     const data198 = data.data
       .filter((item) => item.data_type_id === 198)
       .map((item) => item.avg);
+
+    // console.log(data227, data198);
 
     const option = {
       title: {

@@ -1,18 +1,18 @@
 import React, { useEffect, useRef } from "react";
 import * as echarts from "echarts";
 import { useChartData } from "../../utils/api/Charts/ChartAPI";
+import { format, subDays } from "date-fns";
 
 const MainLineAreaChart = ({ APIoption, ChartName }) => {
   const chartRef = useRef(null);
 
-  const today = new Date();
-  today.setDate(today.getDate() + 1);
-  const yesterday = new Date(today);
-  yesterday.setDate(yesterday.getDate() - 1);
+  const startDate = format(subDays(new Date(), +1), "yyyy-MM-dd");
+  const endDate = format(subDays(new Date(), -1), "yyyy-MM-dd");
+  const today = format(new Date(), "yyyy-MM-dd");
 
   const { data, isLoading, error } = useChartData(
-    `http://croft-ai.iptime.org:40401/api/v1/gh_data_item?start_time=${yesterday}&end_time=${today}&data_type=${APIoption}&group_by=5min`,
-    `chartData-218`
+    `http://croft-ai.iptime.org:40401/api/v1/gh_data_item?start_time=${startDate}&end_time=${endDate}&data_type=${APIoption}&group_by=hour`,
+    `chartData0-218`
   );
 
   useEffect(() => {
@@ -26,10 +26,24 @@ const MainLineAreaChart = ({ APIoption, ChartName }) => {
 
     const chartInstance = echarts.init(chartRef.current);
 
-    // API 데이터로부터 x축과 y축 데이터를 추출합니다.
-    const xData = data.data.map((item) => item.kr_time.substring(11, 16)); // "HH:MM" 포맷
-    const yData = data.data.map((item) => item.value); // 바꿔줘야함
+    const yesterdayData = data.data.filter((item) =>
+      item.kr_time.startsWith(startDate)
+    );
+    const todayData = data.data.filter((item) =>
+      item.kr_time.startsWith(today)
+    );
 
+    const yesterdayAvg = yesterdayData.map((item) => item.avg);
+    const todayAvg = todayData.map((item) => item.avg);
+
+    const xLabels = yesterdayData.map((item) => {
+      const date = new Date(item.kr_time);
+      return `${date.getHours().toString().padStart(2, "0")}:${date
+        .getMinutes()
+        .toString()
+        .padStart(2, "0")}`;
+    });
+    console.log(today);
     const option = {
       title: {
         text: ChartName,
@@ -43,7 +57,7 @@ const MainLineAreaChart = ({ APIoption, ChartName }) => {
         },
       },
       legend: {
-        data: ["10.25", "10.26"],
+        data: ["yesterdayData", "todayData"],
         textStyle: {
           color: "#333", // 범례 텍스트 색상
           fontSize: 12, // 범례 텍스트 크기
@@ -59,7 +73,7 @@ const MainLineAreaChart = ({ APIoption, ChartName }) => {
         },
         type: "category",
         boundaryGap: false, // 선 차트에 대해 경계 간격을 없앰
-        data: xData,
+        data: xLabels,
       },
       yAxis: {
         axisLabel: {
@@ -67,25 +81,25 @@ const MainLineAreaChart = ({ APIoption, ChartName }) => {
           margin: "10",
         },
         type: "value",
-        min: 0,
-        max: 100,
-        interval: 10,
+        // min: 0,
+        // max: 100,
+        // interval: 10,
       },
 
       series: [
         {
-          name: "10.25",
+          name: "yesterdayData",
           type: "line",
-          data: yData, // 10.25 데이터
+          data: yesterdayAvg, // 10.25 데이터
           lineStyle: {
             color: "#AEAEAE", // 라인 색상을 #AEAEAE로 설정
           },
           showSymbol: false,
         },
         {
-          name: "10.26",
+          name: "todayData",
           type: "line",
-          data: [0, 17, 28, 38, 44, 52, 61, 57, 78, 84, 96, 99, 100], // 10.26 데이터 데이터가 13개가 들어오지 않을경우를 생각해야함
+          data: todayAvg,
           lineStyle: {
             color: "#AEAEAE", // 라인 색상을 #AEAEAE로 설정
           },
@@ -94,22 +108,22 @@ const MainLineAreaChart = ({ APIoption, ChartName }) => {
           },
           showSymbol: false,
         },
-        {
-          name: "바 데이터",
-          type: "bar",
-          data: [0, 34, 37, 24, 4, 40, 15, 25, 35, 5, 18, 22, 2], // 10.25 데이터
-          barWidth: "25%", // 막대 너비
-          color: "rgba(69, 69, 255, 0.8)", // 영역 색상을 blue의 30% 투명도로 설정
-          barGap: "0%", // 다른 시리즈의 막대와의 간격
-        },
-        {
-          name: "바 데이터",
-          type: "bar",
-          data: [0, 5, 12, 16, 18, 25, 29, 34, 37, 24, 40, 15, 20], // 10.25 데이터
-          barWidth: "25%", // 막대 너비
-          color: "#AEAEAE", // 라인 색상을 #AEAEAE로 설정
-          barGap: "0%", // 다른 시리즈의 막대와의 간격
-        },
+        // {
+        //   name: "바 데이터",
+        //   type: "bar",
+        //   data: [0, 34, 37, 24, 4, 40, 15, 25, 35, 5, 18, 22, 2], // 10.25 데이터
+        //   barWidth: "25%", // 막대 너비
+        //   color: "rgba(69, 69, 255, 0.8)", // 영역 색상을 blue의 30% 투명도로 설정
+        //   barGap: "0%", // 다른 시리즈의 막대와의 간격
+        // },
+        // {
+        //   name: "바 데이터",
+        //   type: "bar",
+        //   data: [0, 5, 12, 16, 18, 25, 29, 34, 37, 24, 40, 15, 20], // 10.25 데이터
+        //   barWidth: "25%", // 막대 너비
+        //   color: "#AEAEAE", // 라인 색상을 #AEAEAE로 설정
+        //   barGap: "0%", // 다른 시리즈의 막대와의 간격
+        // },
       ],
     };
 
