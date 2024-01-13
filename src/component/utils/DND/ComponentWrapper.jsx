@@ -162,6 +162,7 @@ export const ComponentWrapper = memo(function ComponentWrapper() {
       height: 450,
     },
     {
+      // 연동은 했으나 Stack 차트부분 추가설명이 없음
       id: 9,
       component: (
         <div className="w-[485px] h-[450px] bg-white rounded-[10px]">
@@ -172,6 +173,7 @@ export const ComponentWrapper = memo(function ComponentWrapper() {
       height: 450,
     },
     {
+      // DLI lineArea차트 연동 끝
       id: 10,
       component: (
         <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
@@ -182,10 +184,15 @@ export const ComponentWrapper = memo(function ComponentWrapper() {
       height: 220,
     },
     {
+      // 4개가 줄줄이 있는 라인 에리어 차트
       id: 11,
       component: (
         <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
-          <MainFootLineChart />
+          <MainFootLineChart
+            APIoption="218"
+            ChartName="물 사용량"
+            unit="liter"
+          />
         </div>
       ),
       width: 320,

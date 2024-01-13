@@ -9,6 +9,8 @@ const MainLineAreaChart = ({ APIoption, ChartName }) => {
   const startDate = format(subDays(new Date(), +1), "yyyy-MM-dd");
   const endDate = format(subDays(new Date(), -1), "yyyy-MM-dd");
   const today = format(new Date(), "yyyy-MM-dd");
+  const formattedStartDate = format(new Date(startDate), "MM.dd");
+  const formattedToday = format(new Date(today), "MM.dd");
 
   const { data, isLoading, error } = useChartData(
     `http://croft-ai.iptime.org:40401/api/v1/gh_data_item?start_time=${startDate}&end_time=${endDate}&data_type=${APIoption}&group_by=hour`,
@@ -57,7 +59,7 @@ const MainLineAreaChart = ({ APIoption, ChartName }) => {
         },
       },
       legend: {
-        data: [startDate, today],
+        data: [formattedStartDate, formattedToday],
         textStyle: {
           color: "#333", // 범례 텍스트 색상
           fontSize: 12, // 범례 텍스트 크기
@@ -65,6 +67,8 @@ const MainLineAreaChart = ({ APIoption, ChartName }) => {
         itemWidth: 10,
         itemHeight: 10,
         icon: "rect",
+        left: "12%", // 가로 중앙에 위치
+        top: "13%", // 타이틀 아래에 위치하도록 조정
       },
       xAxis: {
         axisLabel: {
@@ -88,16 +92,16 @@ const MainLineAreaChart = ({ APIoption, ChartName }) => {
 
       series: [
         {
-          name: startDate,
+          name: formattedStartDate,
           type: "line",
-          data: yesterdayAvg, // 10.25 데이터
+          data: yesterdayAvg, // 어제 데이터
           lineStyle: {
             color: "#AEAEAE", // 라인 색상을 #AEAEAE로 설정
           },
           showSymbol: false,
         },
         {
-          name: today,
+          name: formattedToday,
           type: "line",
           data: todayAvg,
           lineStyle: {

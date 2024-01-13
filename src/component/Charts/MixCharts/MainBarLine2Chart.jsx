@@ -15,7 +15,7 @@ const MainBarLine2Chart = ({ ChartName }) => {
     `chartData`
   );
 
-  console.log(data);
+  // console.log(data);
 
   useEffect(() => {
     if (isLoading || error) {
