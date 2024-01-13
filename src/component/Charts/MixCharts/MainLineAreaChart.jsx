@@ -43,7 +43,7 @@ const MainLineAreaChart = ({ APIoption, ChartName }) => {
         .toString()
         .padStart(2, "0")}`;
     });
-    console.log(today);
+
     const option = {
       title: {
         text: ChartName,
@@ -57,7 +57,7 @@ const MainLineAreaChart = ({ APIoption, ChartName }) => {
         },
       },
       legend: {
-        data: ["yesterdayData", "todayData"],
+        data: [startDate, today],
         textStyle: {
           color: "#333", // 범례 텍스트 색상
           fontSize: 12, // 범례 텍스트 크기
@@ -88,7 +88,7 @@ const MainLineAreaChart = ({ APIoption, ChartName }) => {
 
       series: [
         {
-          name: "yesterdayData",
+          name: startDate,
           type: "line",
           data: yesterdayAvg, // 10.25 데이터
           lineStyle: {
@@ -97,7 +97,7 @@ const MainLineAreaChart = ({ APIoption, ChartName }) => {
           showSymbol: false,
         },
         {
-          name: "todayData",
+          name: today,
           type: "line",
           data: todayAvg,
           lineStyle: {

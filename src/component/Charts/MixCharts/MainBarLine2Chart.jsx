@@ -15,6 +15,8 @@ const MainBarLine2Chart = ({ ChartName }) => {
     `chartData`
   );
 
+  console.log(data);
+
   useEffect(() => {
     if (isLoading || error) {
       // 데이터 로딩 중이거나 오류 발생시 처리
@@ -29,6 +31,9 @@ const MainBarLine2Chart = ({ ChartName }) => {
     const chartInstance = echarts.init(chartRef.current);
 
     // 데이터에서 227과 198의 데이터를 분리하여 추출
+    const dates = data.data.map((item) =>
+      format(new Date(item.kr_time), "MM.dd")
+    );
     const data227 = data.data
       .filter((item) => item.data_type_id === 227)
       .map((item) => item.avg);
@@ -37,6 +42,8 @@ const MainBarLine2Chart = ({ ChartName }) => {
       .map((item) => item.avg);
 
     // console.log(data227, data198);
+    const minYValue = Math.min(...data227, ...data198);
+    const maxYValue = Math.max(...data227, ...data198);
 
     const option = {
       title: {
@@ -49,7 +56,7 @@ const MainBarLine2Chart = ({ ChartName }) => {
         axisPointer: { type: "cross" },
       },
       legend: {
-        data: ["온실습도점수", "온실온도점수", "외부온도점수"],
+        data: ["온실온도편차", "온실평균온도", "외부평균온도"],
         textStyle: {
           color: "#333", // 범례 텍스트 색상
           fontSize: 12, // 범례 텍스트 크기
@@ -60,24 +67,32 @@ const MainBarLine2Chart = ({ ChartName }) => {
       },
       xAxis: {
         type: "category",
-        data: ["10.21", "10.22", "10.23", "10.24", "10.25", "10.26"],
+        data: dates,
+        splitLine: {
+          show: false, // Y축 분할선을 숨깁니다.
+        },
       },
       yAxis: {
         axisLabel: {
           fontSize: 10,
           margin: "10",
         },
-        type: "value",
-        min: 0,
-        max: 35,
-        interval: 5,
+        // splitLine: {
+        //   lineStyle: {
+        //     color: "#eee", // 분할선의 색상을 변경합니다.
+        //     type: "dashed", // 분할선을 점선으로 표시합니다.
+        //   },
+        // },
+        // type: "value",
+        // min: minYValue > 0 ? 0 : minYValue, // 데이터가 0보다 크면 0으로 설정, 아니면 최소값으로 설정
+        // max: maxYValue, // 최대값으로 설정
       },
       series: [
         {
-          name: "온실온도점수", // 온도를 가져온 뒤
+          name: "온실온도편차", // 온도를 가져온 뒤
           type: "bar",
           stack: "Total",
-          data: [14, 13, 12, 3, 2, 12],
+          data: [10],
           itemStyle: {
             borderColor: "transparent",
             color: "transparent",
@@ -90,14 +105,13 @@ const MainBarLine2Chart = ({ ChartName }) => {
           },
         },
         {
-          name: "온실온도점수", // 차이값만 가져오면 된다
+          name: "공백 데이터", // 차이값만 가져오면 된다
           type: "bar",
           stack: "Total",
-          data: [10, 10, 10, 10, 10, 10],
+          data: [5],
         },
-
         {
-          name: "외부온도점수",
+          name: "온실평균온도",
           type: "line",
           data: data198,
           markArea: {
@@ -113,7 +127,7 @@ const MainBarLine2Chart = ({ ChartName }) => {
           },
         },
         {
-          name: "평균 점수",
+          name: "외부평균온도",
           type: "line",
           data: data227,
         },
@@ -127,7 +141,7 @@ const MainBarLine2Chart = ({ ChartName }) => {
     return () => {
       chartInstance.dispose();
     };
-  }, []);
+  }, [data, isLoading, error]); // 의존성 배열에 API 응답 데이터를 포함합니다.
 
   return <div ref={chartRef} style={{ width: "480px", height: "380px" }} />;
 };
