@@ -31,9 +31,14 @@ const MainBarLine2Chart = ({ ChartName }) => {
     const chartInstance = echarts.init(chartRef.current);
 
     // 데이터에서 227과 198의 데이터를 분리하여 추출
-    const dates = data.data.map((item) =>
-      format(new Date(item.kr_time), "MM.dd")
-    );
+    const uniqueDates = new Set();
+    data.data.forEach((item) => {
+      const formattedDate = format(new Date(item.kr_time), "MM.dd");
+      uniqueDates.add(formattedDate);
+    });
+
+    const dates = Array.from(uniqueDates);
+
     const data227 = data.data
       .filter((item) => item.data_type_id === 227)
       .map((item) => item.avg);
@@ -44,6 +49,16 @@ const MainBarLine2Chart = ({ ChartName }) => {
     // console.log(data227, data198);
     const minYValue = Math.min(...data227, ...data198);
     const maxYValue = Math.max(...data227, ...data198);
+
+    const data198Max = data.data
+      .filter((item) => item.data_type_id === 198)
+      .map((item) => item.high);
+
+    const data198Min = data.data
+      .filter((item) => item.data_type_id === 198)
+      .map((item) => item.low);
+
+    // console.log(data198Max, data198Min);
 
     const option = {
       title: {
@@ -64,6 +79,8 @@ const MainBarLine2Chart = ({ ChartName }) => {
         itemWidth: 10,
         itemHeight: 10,
         icon: "rect",
+        left: "12%", // 가로 중앙에 위치
+        top: "10.5%", // 타이틀 아래에 위치하도록 조정
       },
       xAxis: {
         type: "category",
@@ -89,10 +106,10 @@ const MainBarLine2Chart = ({ ChartName }) => {
       },
       series: [
         {
-          name: "온실온도편차", // 온도를 가져온 뒤
+          name: "온실온도최소", // 최소 온도
           type: "bar",
           stack: "Total",
-          data: [10],
+          data: data198Min,
           itemStyle: {
             borderColor: "transparent",
             color: "transparent",
@@ -105,10 +122,13 @@ const MainBarLine2Chart = ({ ChartName }) => {
           },
         },
         {
-          name: "공백 데이터", // 차이값만 가져오면 된다
+          name: "온실온도편차", // 최대 온도
           type: "bar",
           stack: "Total",
-          data: [5],
+          data: data198Max,
+          itemStyle: {
+            color: "#FF3A3A", // 적당한 색상으로 설정
+          },
         },
         {
           name: "온실평균온도",
@@ -143,7 +163,7 @@ const MainBarLine2Chart = ({ ChartName }) => {
     };
   }, [data, isLoading, error]); // 의존성 배열에 API 응답 데이터를 포함합니다.
 
-  return <div ref={chartRef} style={{ width: "480px", height: "380px" }} />;
+  return <div ref={chartRef} style={{ width: "480px", height: "480px" }} />;
 };
 
 export default MainBarLine2Chart;

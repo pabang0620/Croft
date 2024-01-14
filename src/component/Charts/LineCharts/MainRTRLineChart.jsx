@@ -3,23 +3,34 @@ import * as echarts from "echarts";
 import { useChartData } from "../../utils/api/Charts/ChartAPI";
 import { format } from "date-fns";
 
-const MainBarChart = ({ ChartName }) => {
+const MainRTRLineChart = ({ ChartName, unit }) => {
   const chartRef = useRef(null);
 
+  // RTR 데이터를 가져오는 API 호출
   const { data, isLoading, error } = useChartData(
-    "http://croft-ai.iptime.org:40401/api/v1/farms/photo_period/aweek",
-    "chartData-PhotoPeriod"
+    "http://croft-ai.iptime.org:40401/api/v1/farms/rtr/aweek",
+    "chartData-RTR"
   );
 
   useEffect(() => {
     if (!isLoading && !error && data && data.data) {
       const chartInstance = echarts.init(chartRef.current);
-
-      // 날짜와 DLI 값을 추출
-      const dates = data.data.map((item) =>
-        format(new Date(item.kr_time), "EE")
+      const filteredData = data.data.filter((item) =>
+        Number.isFinite(item.day_rtr)
       );
-      const periodValue = data.data.map((item) => item.photo_period_hour);
+
+      // 맥스값 로직
+      const maxValue = Math.max(...filteredData.map((item) => item.day_rtr));
+      const interval = Math.ceil(maxValue / 10);
+      const maxRoundedUp = interval * 5;
+
+      // 날짜, RTR 및 평균 온도 데이터 추출
+      const xLabels = data.data.map((item) =>
+        format(new Date(item.date), "EE")
+      );
+
+      const rtrValues = data.data.map((item) => item.day_rtr);
+      console.log(rtrValues);
 
       const option = {
         title: {
@@ -48,29 +59,52 @@ const MainBarChart = ({ ChartName }) => {
           axisPointer: {
             type: "shadow",
           },
+          formatter: (params) => {
+            return `${params[0].name}<br/>${ChartName}: ${params[0].value} ${unit}`;
+          },
         },
         xAxis: {
           type: "category",
-          data: dates,
+          data: xLabels,
           axisLabel: {
-            fontSize: 10,
+            fontSize: 8, // 폰트 크기 조정
           },
         },
         yAxis: {
           type: "value",
+          max: maxRoundedUp, // 계산된 최대값
+          interval: interval, // 계산된 간격
           axisLabel: {
-            fontSize: 10,
+            fontSize: 9, // 글꼴 크기 조정
+            formatter: (value) => `${value}`, // props로 전달받은 단위를 사용
           },
         },
         series: [
           {
-            name: "DLI",
-            type: "bar",
-            data: periodValue,
+            name: ChartName,
+            type: "line",
+            smooth: true,
+            data: rtrValues, // y축 데이터
+            itemStyle: {
+              // 데이터 포인트 색상 설정
+              color: "tomato",
+              borderWidth: 2, // 포인트의 테두리 두께
+              borderColor: "tomato", // 포인트의 테두리 색상
+            },
+            markArea: {
+              itemStyle: {
+                color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
+              },
+              data: [
+                [
+                  { yAxis: 2 }, // 시작 y축 값
+                  { yAxis: 3 }, // 끝 y축 값 (차트 최대값까지)
+                ],
+              ],
+            },
           },
         ],
       };
-
       chartInstance.setOption(option);
 
       chartInstance.on("mouseover", function (params) {
@@ -100,4 +134,4 @@ const MainBarChart = ({ ChartName }) => {
   return <div ref={chartRef} className="w-[320px] h-[240px]" />;
 };
 
-export default MainBarChart;
+export default MainRTRLineChart;

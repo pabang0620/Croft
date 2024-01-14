@@ -88,7 +88,7 @@ const MainFootLineChart = ({ ChartName, APIoption, unit }) => {
           left: "center", // 차트 가운데에 위치
           top: 10, // 상단에서 10px 아래에 위치
           style: {
-            text: "초기값", // 초기 텍스트 설정
+            text: "0", // 초기 텍스트 설정
             fontSize: 16,
             fontWeight: "bold",
             fill: "#333", // 텍스트 색상

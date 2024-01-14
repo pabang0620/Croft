@@ -54,7 +54,7 @@ const MainSmoothedLineChartAdd = ({ APIoption, ChartName, unit }) => {
           left: "center", // 차트 가운데에 위치
           top: 10, // 상단에서 10px 아래에 위치
           style: {
-            text: "초기값", // 초기 텍스트 설정
+            text: "0", // 초기 텍스트 설정
             fontSize: 16,
             fontWeight: "bold",
             fill: "#333", // 텍스트 색상
@@ -134,7 +134,7 @@ const MainSmoothedLineChartAdd = ({ APIoption, ChartName, unit }) => {
           graphic: {
             // 그래픽 요소 업데이트
             style: {
-              text: `${dataValue}%`, // 동적으로 텍스트 설정
+              text: `${dataValue} ${unit}`, // 동적으로 텍스트 설정
             },
           },
         });

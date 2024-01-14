@@ -17,6 +17,7 @@ import MainSmoothedLineChartAdd from "../../Charts/LineCharts/MainSmoothedLineCh
 import MainBar2LineChart from "../../Charts/MixCharts/MainBarLine2Chart";
 import MainLineAreaChart from "../../Charts/MixCharts/MainLineAreaChart";
 import MainSliderDiv from "../../Graphs/MainSliderDiv";
+import MainRTRLineChart from "../../Charts/LineCharts/MainRTRLineChart";
 
 const style = {
   display: "flex",
@@ -44,7 +45,7 @@ export const ComponentWrapper = memo(function ComponentWrapper() {
       component: (
         <div className="w-[320px] h-[220px] bg-white rounded-[10px] relative">
           {/* 들어가는 데이터를 다르게 넣어줘야한다 ~  */}
-          <MainBarChart data={""} />
+          <MainBarChart ChartName="Photo Period" />
         </div>
       ),
       width: 320,
@@ -54,7 +55,7 @@ export const ComponentWrapper = memo(function ComponentWrapper() {
       id: 4,
       component: (
         <div className="w-[320px] h-[220px] bg-white rounded-[10px] relative">
-          <MainBarChartLine data={""} />
+          <MainBarChartLine ChartName="DLI" />
         </div>
       ),
       width: 320,
@@ -124,6 +125,9 @@ export const ComponentWrapper = memo(function ComponentWrapper() {
               unit="℃"
             />
           </div>
+          <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
+            <MainRTRLineChart ChartName="RTR" />
+          </div>
           {/* <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
             <MainSmoothedLineChart APIoption="199" ChartName="온실 습도" unit="%"/>
           </div>
@@ -143,7 +147,7 @@ export const ComponentWrapper = memo(function ComponentWrapper() {
           <MainSmoothedLineChartAdd
             APIoption="244"
             ChartName="외부 광량"
-            unit="629 w/m²"
+            unit="w/m²"
           />
         </div>
       ),
@@ -166,7 +170,7 @@ export const ComponentWrapper = memo(function ComponentWrapper() {
       id: 9,
       component: (
         <div className="w-[485px] h-[450px] bg-white rounded-[10px]">
-          <MainBar2LineChart />
+          <MainBar2LineChart ChartName="평균 온도" />
         </div>
       ),
       width: 480,

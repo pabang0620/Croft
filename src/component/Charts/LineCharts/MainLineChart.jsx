@@ -44,6 +44,22 @@ const MainLineChart = ({ APIoption, ChartName }) => {
         top: "5%",
         left: "2%",
       },
+      graphic: [
+        {
+          id: "hoverData",
+          type: "text",
+          left: "center", // 차트 가운데에 위치
+          top: 10, // 상단에서 10px 아래에 위치
+          style: {
+            text: "0", // 초기 텍스트 설정
+            fontSize: 16,
+            fontWeight: "bold",
+            fill: "#333", // 텍스트 색상
+            textAlign: "center", // 텍스트 정렬 방식
+          },
+          z: 100,
+        },
+      ],
       tooltip: {
         trigger: "axis",
         axisPointer: { type: "cross" },
@@ -94,6 +110,21 @@ const MainLineChart = ({ APIoption, ChartName }) => {
     };
 
     chartInstance.setOption(option);
+
+    chartInstance.on("mouseover", function (params) {
+      if (params.componentType === "series") {
+        const dataValue = params.value; // 호버된 데이터 포인트의 값
+        chartInstance.setOption({
+          graphic: {
+            // 그래픽 요소 업데이트
+            style: {
+              text: `${dataValue}`, // 동적으로 텍스트 설정
+            },
+          },
+        });
+      }
+    });
+
     return () => {
       chartInstance.dispose();
     };
