@@ -57,8 +57,9 @@ const SalesSubBar = ({ currentPath }) => {
       <div className="flex gap-[10px] items-center">
         <div className="h-[15px] w-[1px] bg-info mt-[3px] text-sm" />
         <div className="flex gap-[23px]">
-          {yearArray.map((item) => (
+          {yearArray.map((item, idx) => (
             <div
+              key={idx}
               onClick={() => handlePeriodClick(item)}
               className={`${period === item ? 'text-accent' : 'text-info'}`}
             >

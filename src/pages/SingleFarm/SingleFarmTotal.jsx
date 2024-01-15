@@ -12,7 +12,7 @@ const SingleFarmTotal = () => {
   const alert = [true, false, false, false];
   return (
     <div className="my-[11px] mx-[25px]">
-      <div className="w-full bg-white h-[52rem]">
+      <div className="w-full bg-white h-[52rem] rounded-[10px]">
         <GreenHouseTotal critical={critical} alert={alert} />
       </div>
     </div>
