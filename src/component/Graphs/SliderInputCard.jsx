@@ -1,18 +1,24 @@
 import React from 'react';
 import SliderInput from './SliderInput';
-import OnButton from '../OnOffButton/OnButton';
+import OnButton from '../utils/OnOffButton/OnButton';
+import ModalRTRIcon from '../utils/Icons/ModalRTRIcon';
 
-const SliderInputCard = ({ Whatfor, click, setClick }) => {
+const SliderInputCard = ({ Whatfor, click, setClick, src }) => {
   return (
     <div className="w-[295px] h-[92px] shrink-0 rounded-lg bg-[#F1F1F1] my-5 flex flex-col justify-around items-center">
       <div className="w-[263px] h-[22px] flex justify-between">
         <div className="flex flex-row">
           {/* 이미지 변경 필요 */}
-          <img
-            className="w-[9px] h-[18px] mt-0.5 mr-2"
-            src={`${process.env.PUBLIC_URL}/assets/images/Control/Vector.png`}
-            alt=""
-          />
+          {src === 'ModalRTRIcon' ? (
+            <ModalRTRIcon />
+          ) : (
+            <img
+              className="w-[20px] h-[20px] mt-0.5 mr-2"
+              src={`${process.env.PUBLIC_URL}/assets/images/Control/${src}`}
+              alt=""
+            />
+          )}
+
           <div className="text-base font-semibold leading-normal">
             {Whatfor}
           </div>
