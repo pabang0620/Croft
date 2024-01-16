@@ -1,9 +1,9 @@
 // React 모달 컴포넌트
-import React from 'react';
-import { NavBarModalVent } from './NavBarModalVent';
-import { NavBarModalScreen } from './NavBarModalScreen';
-import { NavBarModal7ETC } from './NavBarModal7ETC';
-import TotalReportChart from '../../../component/Charts/TotalReportChart/TotalReportChart';
+import React from "react";
+import { NavBarModalVent } from "./NavBarModalVent";
+import { NavBarModalScreen } from "./NavBarModalScreen";
+import { NavBarModal7ETC } from "./NavBarModal7ETC";
+import TotalReportChart from "../../../component/Charts/TotalReportChart/TotalReportChart";
 
 const NavBarModal7 = () => {
   return (

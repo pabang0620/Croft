@@ -11,6 +11,8 @@ const MainBarChart = ({ ChartName }) => {
     "chartData-PhotoPeriod"
   );
 
+  console.log(data);
+
   useEffect(() => {
     if (!isLoading && !error && data && data.data) {
       const chartInstance = echarts.init(chartRef.current);
