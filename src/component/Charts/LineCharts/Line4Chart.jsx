@@ -1,11 +1,47 @@
 import * as echarts from "echarts";
 import React, { useEffect, useRef } from "react";
+import { useChartData } from "../../utils/api/Charts/ChartAPI";
 
 const Line4Chart = () => {
   const chartRef = useRef(null);
 
+  const { data, isLoading, error } = useChartData(
+    `http://croft-ai.iptime.org:40401/api/v1/farms/measurement/day?data_type=227&data_type=198&data_type=205&data_type=241&data_type=204`,
+    `chartData-line4`
+  );
+
+  console.log("line", data);
+
   useEffect(() => {
+    if (isLoading || error) {
+      // 데이터 로딩 중이거나 오류 발생시 처리
+      return;
+    }
+
+    if (!data || !data.data) {
+      // 데이터가 없거나 잘못된 형식일 경우 처리
+      return;
+    }
+
     const chartInstance = echarts.init(chartRef.current);
+
+    const data227 = data.data
+      .filter((item) => item.data_type_id === 227)
+      .map((item) => item.value);
+    const data198 = data.data
+      .filter((item) => item.data_type_id === 198)
+      .map((item) => item.value);
+    const data205 = data.data
+      .filter((item) => item.data_type_id === 205)
+      .map((item) => item.value);
+    const data241 = data.data
+      .filter((item) => item.data_type_id === 241)
+      .map((item) => item.value);
+    const data204 = data.data
+      .filter((item) => item.data_type_id === 204)
+      .map((item) => item.value);
+
+    // const xLabels = data.data.map((item) => new Date(item.kr_time).getHours());
 
     const option = {
       tooltip: {
@@ -24,20 +60,7 @@ const Line4Chart = () => {
       },
       xAxis: {
         type: "category",
-        data: [
-          "0",
-          "2",
-          "4",
-          "6",
-          "8",
-          "10",
-          "12",
-          "14",
-          "16",
-          "18",
-          "20",
-          "22",
-        ],
+        // data: xLabels,
       },
       yAxis: {
         axisLabel: {
@@ -54,7 +77,7 @@ const Line4Chart = () => {
           smooth: true,
           name: "외부온도",
           type: "line",
-          data: [14, 18, 17, 12, 17, 16],
+          data: data227,
           markArea: {
             itemStyle: {
               color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
@@ -71,7 +94,7 @@ const Line4Chart = () => {
           smooth: true,
           name: "온실온도",
           type: "line",
-          data: [12, 17, 14, 18, 17, 12, 17, 16, 7, 18, 18],
+          data: data198,
           markArea: {
             itemStyle: {
               color: "rgb(255, 0, 0 , 0.5)", // 빨강
@@ -88,13 +111,19 @@ const Line4Chart = () => {
           smooth: true,
           name: "VENT 온도 셋팅",
           type: "line",
-          data: [14, 18, 17, 12, 17, 16, 7, 17, 20],
+          data: data205,
+        },
+        {
+          smooth: true,
+          name: "VENT 온도 셋팅",
+          type: "line",
+          data: data241,
         },
         {
           smooth: true,
           name: "Heating 온도 셋팅",
           type: "line",
-          data: [7, 18, 18, 22, 17, 12, 17, 14, 18, 17],
+          data: data204,
         },
       ],
       // grid 설정 및 기타 필요한 스타일 설정...
@@ -106,7 +135,7 @@ const Line4Chart = () => {
     return () => {
       chartInstance.dispose();
     };
-  }, []);
+  }, [data]); // 의존성 배열에 data 추가
 
   return (
     <>
