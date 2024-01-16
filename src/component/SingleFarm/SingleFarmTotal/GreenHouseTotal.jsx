@@ -25,7 +25,7 @@ const GreenHouseTotal = ({ critical, alert }) => {
           <div
             key={idx}
             className={`flex gap-[17px] flex-grow items-center pb-[12px] ${
-              toggle === idx ? 'border-solid border-b-[2px] border-accent' : ''
+              toggle === idx ? 'border-solid border-b-[3px] border-accent' : ''
             }`}
             onClick={() => setToggle(idx)}
           >

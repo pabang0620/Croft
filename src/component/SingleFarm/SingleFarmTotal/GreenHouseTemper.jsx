@@ -6,18 +6,22 @@ const GreenHouseTemper = () => {
   return (
     <div className="flex gap-[3.75rem] mt-6">
       <div className="flex flex-col flex-grow justify-end">
-        <div className="flex justify-around">
-          <div className="flex flex-col gap-5">
+        <div className="flex justify-between">
+          <div className="flex flex-col gap-5 ml-[29px] w-[10%]">
             <div className="flex flex-col">
               <div className="text-sm font-bold">2022.</div>
               <div className="font-bold text-lg">10.11</div>
+            </div>
+            <div className="flex flex-col">
+              <div className="text-sm">온도</div>
+              <div className="font-bold text-lg">22℃</div>
             </div>
             <div className="flex flex-col">
               <div className="text-sm">평균온도</div>
               <div className="font-bold text-lg">22℃</div>
             </div>
           </div>
-          <div className="w-[665px] h-[390px] bg-white rounded-[10px]">
+          <div className="w-[665px] h-[390px] ">
             <Line4Chart />
           </div>
         </div>
@@ -38,10 +42,10 @@ const GreenHouseTemper = () => {
           <div className="underline text-accent">2022.10.11</div>
           <div className="underline text-accent">2023.3.17</div>
           <div className="underline text-accent">2023.4.5</div>
-          <div>이 부분 어떤 데이터를 줘야하는지?</div>
         </div>
-        <div className="flex justify-around">
-          <div className="flex flex-col gap-5">
+        {/* 이 부분 데이터 넣는 방식으로 변경 예정 */}
+        <div className="flex justify-between">
+          <div className="flex flex-col gap-5 w-[10%]">
             <div className="flex flex-col">
               <div className="text-sm font-bold">2022.</div>
               <div className="font-bold text-lg">10.11</div>
@@ -51,7 +55,7 @@ const GreenHouseTemper = () => {
               <div className="font-bold text-lg">22℃</div>
             </div>
           </div>
-          <div className="w-[665px] h-[390px] bg-white rounded-[10px]">
+          <div className="w-[90%] h-[390px]">
             <Line4ChartNone />
           </div>
         </div>

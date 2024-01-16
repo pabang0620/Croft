@@ -5,8 +5,8 @@ const GreenHouseHumid = () => {
   return (
     <div className="flex gap-[3.75rem] mt-6">
       <div className="flex flex-col flex-grow justify-end">
-        <div className="flex justify-around">
-          <div className="flex flex-col gap-5">
+        <div className="flex justify-between">
+          <div className="flex flex-col gap-5 ml-[29px] w-[10%]">
             <div className="flex flex-col">
               <div className="text-sm font-bold">2022.</div>
               <div className="font-bold text-lg">10.11</div>
@@ -16,7 +16,7 @@ const GreenHouseHumid = () => {
               <div className="font-bold text-lg">22℃</div>
             </div>
           </div>
-          <div className="w-[665px] h-[390px] bg-white rounded-[10px]">
+          <div className="w-[90%] h-[390px] bg-white rounded-[10px]">
             <Line2Chart />
           </div>
         </div>
@@ -38,8 +38,8 @@ const GreenHouseHumid = () => {
           <div className="underline text-accent">2023.3.17</div>
           <div className="underline text-accent">2023.4.5</div>
         </div>
-        <div className="flex justify-around">
-          <div className="flex flex-col gap-5">
+        <div className="flex justify-between">
+          <div className="flex flex-col gap-5 w-[10%]">
             <div className="flex flex-col">
               <div className="text-sm font-bold">2022.</div>
               <div className="font-bold text-lg">10.11</div>
@@ -49,7 +49,7 @@ const GreenHouseHumid = () => {
               <div className="font-bold text-lg">22℃</div>
             </div>
           </div>
-          <div className="w-[665px] h-[390px] bg-white rounded-[10px]">
+          <div className="w-[90%] h-[390px] bg-white rounded-[10px]">
             <Line2Chart />
           </div>
         </div>

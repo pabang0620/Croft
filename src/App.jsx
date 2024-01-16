@@ -11,9 +11,10 @@ import SingleFarmDLI from './pages/SingleFarm/SingleFarmDLI';
 import SingleFarmVPD from './pages/SingleFarm/SingleFarmVPD';
 import SingleFarmPP from './pages/SingleFarm/SingleFarmPP';
 import SingleSales from './pages/SingleSales';
-import SingleSales5Year from './pages/SingleSales5Year';
+import SingleSalesNYear from './pages/SingleSalesNYear';
 import SingleResource from './pages/SingleResource';
 import SingleReport from './pages/SingleReport';
+import GridLayoutTest from './component/utils/DND/grid';
 
 const queryClient = new QueryClient();
 
@@ -32,9 +33,13 @@ function App() {
           <Route path="/dash/environment/PP" element={<SingleFarmPP />} />
           <Route path="/global-report" element={<GlobalReport />} />
           <Route path="/single-sales" element={<SingleSales />} />
-          <Route path="/single-sales/5years" element={<SingleSales5Year />} />
+          <Route
+            path="/single-sales/years/:year"
+            element={<SingleSalesNYear />}
+          />
           <Route path="/single-resource" element={<SingleResource />} />
           <Route path="/single-report" element={<SingleReport />} />
+          <Route path="/grid" element={<GridLayoutTest />} />
         </Route>
       </Routes>
     </QueryClientProvider>

@@ -7,7 +7,8 @@ const SalesSubBar = ({ currentPath }) => {
   const [container, setContainer] = useState(2023); //selectbox값 담아줌
   const [period, setPeriod] = useState(); //yearArray 값 담아줌
   const [containerToggle, setContainerToggle] = useState(false); //연도 selectbox on/off check
-  const containerArray = [ //기록이 있는 연도만 출력 array에 넣어주면 됨
+  const containerArray = [
+    //기록이 있는 연도만 출력 array에 넣어주면 됨
     { id: 0, text: 2023 },
     { id: 1, text: 2022 },
     { id: 2, text: 2021 },
@@ -19,12 +20,14 @@ const SalesSubBar = ({ currentPath }) => {
   const handleToggleClick = (text) => {
     setContainer(text);
     setPeriod(text);
-    if (currentPath === '/single-sales/5years') navigate('/single-sales');
+    if (currentPath !== '/single-sales') navigate('/single-sales');
   };
   // 연간 비교 보고서 #CROFT-CRM-SINGLE-SALES > 5 years(sample) 로 이동
   const handlePeriodClick = (text) => {
     setPeriod(text);
-    if (text === '5년') navigate('/single-sales/5years');
+    if (text === '3년') navigate('/single-sales/years/3');
+    if (text === '5년') navigate('/single-sales/years/5');
+    if (text === '10년') navigate('/single-sales/years/10');
   };
   return (
     <div className="w-full h-[45px] pl-[29px] pt-[4px] flex items-center cursor-pointer select-none border-b-[1px] border-base400 bg-base200">
