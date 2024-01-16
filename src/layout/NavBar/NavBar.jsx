@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import AIControlModal from './AIControlModal/AIControlModal.jsx';
-import NavBarModal7 from './DeviceModal/NavBarModal7.jsx';
+import React, { useState } from "react";
+import AIControlModal from "./AIControlModal/AIControlModal.jsx";
+import NavBarModal7 from "./DeviceModal/NavBarModal7.jsx";
 
 const Navbar = ({ title }) => {
   //이미지 URl, 데이터
-  const ImgArray = ['NavTemperature', 'NavHumidity', 'NavLight'];
-  const ImgData = ['22 ℃', '51%', '629 w/m²'];
+  const ImgArray = ["NavTemperature", "NavHumidity", "NavLight"];
+  const ImgData = ["22 ℃", "51%", "629 w/m²"];
+  // 227 Meteo_OutsideTemp
+  // 224 Meteo_RH
+  // 244 Meteo_Radiation
 
   // 모달 표시 상태를 관리하는 state
   const [isModal6Visible, setIsModal6Visible] = useState(false);
