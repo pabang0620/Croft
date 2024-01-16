@@ -68,11 +68,10 @@ const Navbar = ({ title }) => {
               {ImgData[idx]}
             </div>
           ))}
-          {/* 나가기 버튼 이미지 필요 */}
           <button className="text-lg font-semibold">
             <img
               className="w-5 h-5 mt-1 mr-2"
-              src={`${process.env.PUBLIC_URL}/assets/images/Control/Humidity.png`}
+              src={`${process.env.PUBLIC_URL}/assets/images/Layout/OutIcon.svg`}
               alt=""
             />
           </button>

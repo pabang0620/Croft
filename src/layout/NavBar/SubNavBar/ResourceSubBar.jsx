@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import PeriodCalendar from '../../../component/DatePicker/PeriodCalendar';
 import { CheckPriod } from '../../../component/utils/Data/CalendarData';
 
-const ResourceSubBar = () => {
-  const navigate = useNavigate();
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [specificDate, setSpecificDate] = useState('오늘');
+const ResourceSubBar = (props) => {
+  const {
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
+    specificDate,
+    setSpecificDate,
+  } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [formatStart, setFormatStart] = useState(
     format(new Date(), 'yyyy.MM.dd')

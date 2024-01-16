@@ -1,8 +1,8 @@
 import TotalCost from '../component/SingleSales/TotalCost';
 import TotalSales from '../component/SingleSales/TotalSales';
-import PieChart from '../component/Charts/PieCharts/PieChart';
+import StackedBarChartyx from '../component/Charts/MixCharts/StackedBarChartyx';
 
-const SingleSales = () => {
+const SingleSalesNYear = () => {
   return (
     <div className="my-[11px] mx-[25px]">
       <div>차트 사이즈 수정 예정</div>
@@ -11,7 +11,7 @@ const SingleSales = () => {
         <div className="flex flex-col gap-2">
           <TotalSales />
           <div className="w-[650px] h-[335px] bg-white rounded-[10px]">
-            <PieChart />
+            <StackedBarChartyx />
           </div>
         </div>
       </div>
@@ -19,4 +19,4 @@ const SingleSales = () => {
   );
 };
 
-export default SingleSales;
+export default SingleSalesNYear;

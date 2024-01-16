@@ -36,10 +36,14 @@ export const SubNavBarTitle = (
       return <BasicSubBar title={'PHOTOPERIOD'} />;
     case '/single-sales':
       return <SalesSubBar currentPath={currentPath} />;
-    case '/single-sales/5years':
+    case '/single-sales/years/3':
       return <SalesSubBar currentPath={currentPath} />;
-    case '/single-resource':
-      return <ResourceSubBar />;
+    case '/single-sales/years/5':
+      return <SalesSubBar currentPath={currentPath} />;
+    case '/single-sales/years/10':
+      return <SalesSubBar currentPath={currentPath} />;
+    // case '/single-resource':
+    //   return <ResourceSubBar />;
     case '/single-report':
       return <ReportSubBar type="single" />;
     default:

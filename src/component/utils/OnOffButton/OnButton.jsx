@@ -1,5 +1,5 @@
 import React from 'react';
-import OnOffToggle from '../../layout/NavBar/AIControlModal/OnOffToggle';
+import OnOffToggle from '../../../layout/NavBar/AIControlModal/OnOffToggle';
 
 const OnButton = ({ fontSize, click, setClick }) => {
   return (

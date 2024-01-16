@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import SliderInputCard from '../../../component/Graphs/SliderInputCard';
 import OnOffToggle from './OnOffToggle';
 import InnerCard from './InnerCard';
+import { AIModalData } from '../../../component/utils/Data/ModalData';
 
 const AIControlModal = () => {
   const [click1, setClick1] = useState(true);
@@ -36,25 +37,16 @@ const AIControlModal = () => {
         </div>
         {click1 ? (
           <>
-            <SliderInputCard
-              Whatfor="온도제어"
-              click1={click1}
-              click={click2}
-              setClick={setClick2}
-            />
-            {/* 피그마에 맞춰 내부 코드 변경 필요 */}
-            <SliderInputCard
-              Whatfor="습도제어"
-              click1={click1}
-              click={click3}
-              setClick={setClick3}
-            />
-            <SliderInputCard
-              Whatfor="RTR제어"
-              click1={click1}
-              click={click4}
-              setClick={setClick4}
-            />
+            {AIModalData.map((item) => (
+              <SliderInputCard
+                key={item.WhatFor}
+                Whatfor={item.WhatFor}
+                click1={click1}
+                click={click2}
+                setClick={setClick2}
+                src={item.src}
+              />
+            ))}
           </>
         ) : (
           <InnerCard />
