@@ -3,11 +3,11 @@ import { useOutletContext } from 'react-router';
 import ContainerWrapper from '../component/GlobahBoard/ContainerWrapper';
 
 const GlobalDashBoard = () => {
-  const { setTitle } = useOutletContext();
+  const { setContainer } = useOutletContext();
   const [toggle, setToggle] = useState(true);
-  
+
   useEffect(() => {
-    setTitle('통합 대시보드');
+    setContainer('통합 대시보드');
   }, []);
 
   return (

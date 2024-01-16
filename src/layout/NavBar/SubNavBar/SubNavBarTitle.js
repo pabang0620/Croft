@@ -13,15 +13,15 @@ export const SubNavBarTitle = (
   switch (currentPath) {
     case 'basic':
       return <BasicSubBar title={''} />;
-    case '/global-report':
-      return (
-        <ReportSubBar
-          type="global"
-          setContainer={setContainer}
-          container={container}
-          setTitle={setTitle}
-        />
-      );
+    // case '/global-report':
+    //   return (
+    //     <ReportSubBar
+    //       type="global"
+    //       setContainer={setContainer}
+    //       container={container}
+    //       setTitle={setTitle}
+    //     />
+    //   );
     case '/dash':
       return <DashSubBar />;
     case '/dash/environment/total':

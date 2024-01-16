@@ -29,11 +29,10 @@ const EditableGridLayout = ({ id, defaultLayout }) => {
     console.log('handleRemoveItem', i);
     console.log('state--handleRemoveItem -before');
     console.log(state);
-    // setState((prevState) => {
-    //   return { ...prevState, layout: _.reject(prevState.layout, { i: i }) };
-    // });
-    setState(...state.filter((item) => item.i !== i));
-    // setState(state.filter((item) => item.i !== i));
+    setState((prevState) => {
+      return { ...prevState, layout: _.reject(prevState.layout, { i: i }) };
+    });
+    // setState(...state.filter((item) => item.i !== i));
     console.log('state--handleRemoveItem -after');
     console.log(state);
   }, []);

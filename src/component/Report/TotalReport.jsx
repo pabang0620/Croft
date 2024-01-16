@@ -17,7 +17,7 @@ const TotalReport = ({
     return <div className="font-bold text-2xl">{text}</div>;
   };
   return (
-    <div className="w-[1200px] h-[1697px] mt-[21px] ml-[29px] flex flex-col px-[63px] pt-[45px] pb-[65px] font-sans bg-white">
+    <div className="w-[1200px] h-[1697px] flex flex-col px-[63px] pt-[45px] pb-[65px] font-sans bg-white">
       <div className="h-[57px]  flex items-center justify-between">
         <div className="flex gap-6">
           <div>{Title(`${container} 일일 종합보고서`)}</div>

@@ -30,7 +30,7 @@ const SingleResource = () => {
           {/* 자원 사용량 흰 박스 */}
           <div className="flex flex-col w-[61.25rem] h-[57rem] rounded-[10px] bg-white py-[12px] px-[17px]">
             <div className="flex gap-2 text-lg font-bold mb-[62px]">
-              <div>{format(new Date(), 'MM.dd')}</div>
+              <div>{format(startDate, 'MM.dd')}</div>
               <div>시간대별 자원 사용량</div>
             </div>
             <div className="flex gap-12">

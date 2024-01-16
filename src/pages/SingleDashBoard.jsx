@@ -6,9 +6,9 @@ import { ComponentWrapper } from '../component/utils/DND/ComponentWrapper';
 
 const SingleDashBoard = () => {
   // const navigate = useNavigate();
-  const { setTitle } = useOutletContext();
+  const { container, setContainer } = useOutletContext();
   useEffect(() => {
-    setTitle('옥수수 컨테이너');
+    setContainer('옥수수 컨테이너');
   }, []);
 
   return (
