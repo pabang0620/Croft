@@ -64,16 +64,6 @@ const MainLineChart = ({ APIoption, ChartName }) => {
         trigger: "axis",
         axisPointer: { type: "cross" },
       },
-      legend: {
-        data: ["온실습도점수", "온실온도점수", "외부온도점수"],
-        textStyle: {
-          color: "#333",
-          fontSize: 12,
-        },
-        itemWidth: 10,
-        itemHeight: 10,
-        icon: "rect",
-      },
       xAxis: {
         type: "category",
         data: xLabels,

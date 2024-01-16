@@ -108,7 +108,11 @@ const Line4Chart = () => {
     };
   }, []);
 
-  return <div ref={chartRef} style={{ width: "600px", height: "380px" }} />;
+  return (
+    <>
+      <div ref={chartRef} style={{ width: "600px", height: "380px" }} />;
+    </>
+  );
 };
 
 export default Line4Chart;

@@ -1,4 +1,4 @@
-import GreenHouseTotal from '../../component/SingleFarm/SingleFarmTotal/GreenHouseTotal';
+import GreenHouseTotal from "../../component/SingleFarm/SingleFarmTotal/GreenHouseTotal";
 
 const SingleFarmTotal = () => {
   //데이터 입출력
@@ -15,6 +15,7 @@ const SingleFarmTotal = () => {
       <div className="w-full bg-white h-[52rem] rounded-[10px]">
         <GreenHouseTotal critical={critical} alert={alert} />
       </div>
+      {/* // 작업해야되는곳  */}
     </div>
   );
 };

@@ -1,28 +1,28 @@
-import { memo, useCallback, useState } from 'react';
-import update from 'immutability-helper';
-import { Card } from './Card';
+import { memo, useCallback, useState } from "react";
+import update from "immutability-helper";
+import { Card } from "./Card";
 
-import GreenhouseScore from '../../Charts/GreenhouseScore';
-import CroftGuide from '../../Charts/CroftGuide/CroftGuide';
-import TotalReportChart from '../../Charts/TotalReportChart/TotalReportChart';
-import MainBarChart from '../../Charts/BarCharts/MainBarChart';
-import MainBarChartLine from '../../Charts/BarCharts/MainBarChartLine';
-import Line2Chart from '../../Charts/LineCharts/Line2Chart';
-import Line4Chart from '../../Charts/LineCharts/Line4Chart';
-import Line4ChartNone from '../../Charts/LineCharts/Line4ChartNone';
-import MainFootLineChart from '../../Charts/LineCharts/MainFootLineChart';
-import MainLineChart from '../../Charts/LineCharts/MainLineChart';
-import MainSmoothedLineChart from '../../Charts/LineCharts/MainSmoothedLineChart';
-import MainSmoothedLineChartAdd from '../../Charts/LineCharts/MainSmoothedLineChartAdd';
-import MainBar2LineChart from '../../Charts/MixCharts/MainBarLine2Chart';
-import MainLineAreaChart from '../../Charts/MixCharts/MainLineAreaChart';
-import MainSliderDiv from '../../Graphs/MainSliderDiv';
-// import MainRTRLineChart from '../../Charts/LineCharts/MainRTRLineChart';
+import GreenhouseScore from "../../Charts/GreenhouseScore";
+import CroftGuide from "../../Charts/CroftGuide/CroftGuide";
+import TotalReportChart from "../../Charts/TotalReportChart/TotalReportChart";
+import MainBarChart from "../../Charts/BarCharts/MainBarChart";
+import MainBarChartLine from "../../Charts/BarCharts/MainBarChartLine";
+import Line2Chart from "../../Charts/LineCharts/Line2Chart";
+import Line4Chart from "../../Charts/LineCharts/Line4Chart";
+import Line4ChartNone from "../../Charts/LineCharts/Line4ChartNone";
+import MainFootLineChart from "../../Charts/LineCharts/MainFootLineChart";
+import MainLineChart from "../../Charts/LineCharts/MainLineChart";
+import MainSmoothedLineChart from "../../Charts/LineCharts/MainSmoothedLineChart";
+import MainSmoothedLineChartAdd from "../../Charts/LineCharts/MainSmoothedLineChartAdd";
+import MainBar2LineChart from "../../Charts/MixCharts/MainBarLine2Chart";
+import MainLineAreaChart from "../../Charts/MixCharts/MainLineAreaChart";
+import MainSliderDiv from "../../Graphs/MainSliderDiv";
+import MainRTRLineChart from "../../Charts/LineCharts/MainRTRLineChart";
 
 const style = {
-  display: 'flex',
-  flexWrap: 'wrap',
-  gap: '10px',
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "10px",
 };
 
 //드래그 앤 드랍을 위한 임시 파일
@@ -38,7 +38,7 @@ export const ComponentWrapper = memo(function ComponentWrapper() {
       id: 2,
       component: <CroftGuide />,
       width: 650,
-      height: 'fit-component',
+      height: "fit-component",
     },
     {
       id: 3,
@@ -94,7 +94,7 @@ export const ComponentWrapper = memo(function ComponentWrapper() {
               absData7="고권장"
               absData8="Photo Period 상태에 따른 메시지가 나옵니다."
             />
-          </div>{' '}
+          </div>{" "}
           {/* <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
             <MainSliderDiv
               queryName="vpd"
