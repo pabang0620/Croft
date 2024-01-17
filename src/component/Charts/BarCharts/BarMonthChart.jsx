@@ -1,39 +1,24 @@
 import React, { useEffect, useRef } from "react";
 import * as echarts from "echarts";
+import { useChartData } from "../../utils/api/Charts/ChartAPI";
 
 const BarMonthChart = () => {
-  const chartRef = useRef(null);
-  // 더미용 데이터
-  const generateDummyDates = () => {
-    const dates = [];
-    for (let i = 0; i < 31; i++) {
-      const date = new Date(2023, 10, 25); // 2023년 9월 25일 시작
-      date.setDate(date.getDate() + i);
-      dates.push(
-        date
-          .toLocaleDateString("en-US", { month: "numeric", day: "2-digit" })
-          .replace(/\//g, ".")
-      );
-    }
-    return dates;
-  };
+  const { data, isLoading, error } = useChartData(
+    `http://croft-ai.iptime.org:40401/api/v1/farms/rtr/amonth`,
+    `chartData-barMonth`
+  );
 
-  const generateDummyValues = () => {
-    const values = [];
-    for (let i = 0; i < 31; i++) {
-      const value = Math.random() * 1.6; // 0에서 1.6 사이의 수치
-      values.push(+value.toFixed(2)); // 소수점 두 자리까지
-    }
-    return values;
-  };
+  const chartRef = useRef(null);
 
   // --------------------------------------------
   useEffect(() => {
-    // 데이터 생성
-    const dates = generateDummyDates();
-    const values = generateDummyValues();
+    const xLabels = data.data.map((item) => {
+      const date = new Date(item.date);
+      const formattedDate = `${date.getMonth() + 1}.${date.getDate()}`;
+      return formattedDate;
+    });
+    const seriesData = data.data.map((item) => item.day_rtr);
 
-    // 기본 eCharts 인스턴스를 생성
     const chartInstance = echarts.init(chartRef.current);
 
     // eCharts 옵션 설정
@@ -51,9 +36,10 @@ const BarMonthChart = () => {
       },
       xAxis: {
         type: "category",
-        data: dates,
+        data: xLabels,
         axisLabel: {
           fontSize: 10, // 글꼴 크기를 10px로 설정
+          interval: 0, // x축 라벨을 모두 표시
         },
       },
       yAxis: {
@@ -64,17 +50,17 @@ const BarMonthChart = () => {
       },
       series: [
         {
-          name: "Photoperiod",
+          name: "일자별 RTR",
           type: "bar",
-          data: values,
+          data: seriesData,
           markArea: {
             itemStyle: {
               color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
             },
             data: [
               [
-                { yAxis: 2.5 }, // 시작 y축 값
-                { yAxis: 2.9 }, // 끝 y축 값 (차트 최대값까지)
+                { yAxis: 5 }, // 시작 y축 값
+                { yAxis: 15 }, // 끝 y축 값 (차트 최대값까지)
               ],
             ],
           },
@@ -89,7 +75,7 @@ const BarMonthChart = () => {
     return () => {
       chartInstance.dispose();
     };
-  }, []);
+  }, [data]);
 
   return (
     <>

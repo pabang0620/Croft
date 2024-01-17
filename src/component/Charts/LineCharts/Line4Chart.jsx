@@ -47,7 +47,7 @@ const Line4Chart = () => {
 
     let xLabels;
 
-    if (uniqueTimes.length < 250) {
+    if (uniqueTimes.length < 300) {
       // uniqueTimes의 길이가 200개 미만일 경우, 시간과 분 정보를 포함
       xLabels = uniqueTimes.map((time) => {
         const date = new Date(time);
@@ -218,7 +218,7 @@ const Line4Chart = () => {
 
   return (
     <>
-      <div ref={chartRef} style={{ width: "600px", height: "380px" }} />;
+      <div ref={chartRef} style={{ width: "600px", height: "380px" }} />
     </>
   );
 };
