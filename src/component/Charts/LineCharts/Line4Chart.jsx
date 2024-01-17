@@ -10,8 +10,6 @@ const Line4Chart = () => {
     `chartData-line4`
   );
 
-  console.log("line", data);
-
   useEffect(() => {
     if (isLoading || error) {
       // 데이터 로딩 중이거나 오류 발생시 처리

@@ -1,15 +1,59 @@
 import React, { useEffect, useRef } from "react";
 import * as echarts from "echarts";
+import { useChartData } from "../../utils/api/Charts/ChartAPI";
 
-const BarOtherColorChart = () => {
+const BarOtherColorChart = ({ ChartName, APIoption }) => {
   const chartRef = useRef(null);
 
+  const { data, isLoading, error } = useChartData(
+    `http://croft-ai.iptime.org:40401/api/v1/farms/measurement/day?data_type=${APIoption}`,
+    `chartData-line4`
+  );
+
   useEffect(() => {
+    if (isLoading || error) {
+      // 데이터 로딩 중이거나 오류 발생시 처리
+      return;
+    }
+
+    if (!data || !data.data) {
+      // 데이터가 없거나 잘못된 형식일 경우 처리
+      return;
+    }
     // 기본 eCharts 인스턴스를 생성
     const chartInstance = echarts.init(chartRef.current);
 
+    const seenHours = new Set();
+    const filteredData = data.data.filter((item) => {
+      const date = new Date(item.kr_time);
+      const hour = date.getHours();
+
+      if (hour % 2 === 0 && !seenHours.has(hour)) {
+        seenHours.add(hour);
+        return true; // 해당 시간대의 첫 번째 데이터 항목만 포함
+      }
+
+      return false; // 이외의 데이터 항목은 제외
+    });
+
+    console.log(filteredData);
+    const xLabels = [];
+    for (let hour = 0; hour <= 24; hour += 2) {
+      xLabels.push(`${hour}시`); // "시" 추가
+    }
     // eCharts 옵션 설정
+
+    const seriesData = filteredData.map((item) => item.value);
+    const maxSeriesValue = Math.max(...seriesData);
+
+    // 최대값을 5의 배수로 올림
+    const maxYAxis = Math.ceil(maxSeriesValue / 5) * 5;
     const option = {
+      title: {
+        text: ChartName,
+        top: "5%",
+        left: "2%",
+      },
       tooltip: {
         trigger: "axis",
         axisPointer: {
@@ -18,22 +62,10 @@ const BarOtherColorChart = () => {
       },
       xAxis: {
         type: "category",
-        data: [
-          "0시",
-          "2시",
-          "4시",
-          "6시",
-          "8시",
-          "10시",
-          "12시",
-          "14시",
-          "16시",
-          "18시",
-          "20시",
-          "22시",
-        ],
+        data: xLabels,
         axisLabel: {
-          fontSize: 10, // 글꼴 크기를 10px로 설정
+          interval: 0, // 모든 라벨을 표시
+          fontSize: 9, // 글꼴 크기를 10px로 설정
         },
       },
       yAxis: {
@@ -42,18 +74,18 @@ const BarOtherColorChart = () => {
         },
         type: "value",
         min: 0,
-        max: 3.5,
-        interval: 0.5,
+        max: maxYAxis,
+        interval: 5,
       },
       series: [
         {
-          name: "Photoperiod",
+          name: ChartName,
           type: "bar",
-          data: [2.5, 0, 3.2, 2.7, 0, 2, 2.1, 2.5, 0, 3.2, 2.7, 0, 2],
+          data: seriesData,
           itemStyle: {
             color: function (params) {
               // 3.0 제한 되는 수치 데이터값을 넣으면 됨
-              return params.data > 3.0 ? "rgb(255, 100, 100 , 0.9)" : "#e2e2e2";
+              return params.data > 15 ? "#931E14" : "";
             },
           },
           markArea: {
@@ -62,8 +94,8 @@ const BarOtherColorChart = () => {
             },
             data: [
               [
-                { yAxis: 2.5 }, // 시작 y축 값
-                { yAxis: 2.9 }, // 끝 y축 값 (차트 최대값까지)
+                { yAxis: 12 }, // 시작 y축 값
+                { yAxis: 15 }, // 끝 y축 값 (차트 최대값까지)
               ],
             ],
           },
@@ -78,7 +110,7 @@ const BarOtherColorChart = () => {
     return () => {
       chartInstance.dispose();
     };
-  }, []);
+  }, [data]);
 
   return (
     <>

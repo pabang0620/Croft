@@ -1,3 +1,5 @@
+import BarOtherColorChart from "../../component/Charts/BarCharts/BarOtherColorChart";
+import Line2Chart from "../../component/Charts/LineCharts/Line2Chart";
 import GreenHouseTotal from "../../component/SingleFarm/SingleFarmTotal/GreenHouseTotal";
 
 const SingleFarmTotal = () => {
@@ -15,7 +17,9 @@ const SingleFarmTotal = () => {
       <div className="w-full bg-white h-[52rem] rounded-[10px]">
         <GreenHouseTotal critical={critical} alert={alert} />
       </div>
-      {/* // 작업해야되는곳  */}
+      <BarOtherColorChart ChartName="평균 EC" APIoption="230" />
+      <BarOtherColorChart ChartName="평균 PH" APIoption="250" />
+      <Line2Chart APIoption="199" APIoption2="224" />
     </div>
   );
 };
