@@ -84,7 +84,7 @@ const BarOtherColorChart = ({ ChartName, APIoption }) => {
           itemStyle: {
             color: function (params) {
               // 3.0 제한 되는 수치 데이터값을 넣으면 됨
-              return params.data > 15 ? "#931E14" : "";
+              return params.data > 15 ? "#931E14" : "#4472c4";
             },
           },
           markArea: {
