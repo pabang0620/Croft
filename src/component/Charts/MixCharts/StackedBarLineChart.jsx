@@ -1,5 +1,5 @@
-import * as echarts from "echarts";
-import React, { useEffect, useRef } from "react";
+import * as echarts from 'echarts';
+import React, { useEffect, useRef } from 'react';
 
 const StackedBarLineChart = () => {
   const chartRef = useRef(null);
@@ -21,66 +21,66 @@ const StackedBarLineChart = () => {
 
     const option = {
       tooltip: {
-        trigger: "axis",
-        axisPointer: { type: "cross" },
+        trigger: 'axis',
+        axisPointer: { type: 'cross' },
       },
       legend: {
-        data: ["매출액", "인건비", "고정비용", "자원비용", "순이익"],
+        data: ['매출액', '인건비', '고정비용', '자원비용', '순이익'],
       },
       xAxis: {
-        type: "category",
+        type: 'category',
         data: [
-          "23.1",
-          "23.2",
-          "23.3",
-          "23.4",
-          "23.5",
-          "23.6",
-          "23.7",
-          "23.8",
-          "23.9",
-          "23.10",
-          "23.11",
-          "23.12",
+          '23.1',
+          '23.2',
+          '23.3',
+          '23.4',
+          '23.5',
+          '23.6',
+          '23.7',
+          '23.8',
+          '23.9',
+          '23.10',
+          '23.11',
+          '23.12',
         ],
       },
       yAxis: {
         axisLabel: {
           fontSize: 10,
-          margin: "10",
+          margin: '10',
         },
-        type: "value",
+        type: 'value',
         min: 0,
         max: 1800,
         interval: 300,
       },
       series: [
         {
-          name: "매출액",
-          type: "bar",
+          name: '매출액',
+          type: 'bar',
           data: barData1,
         },
         {
-          name: "인건비",
-          type: "bar",
-          stack: "Total",
+          name: '인건비',
+          type: 'bar',
+          stack: 'Total',
           data: barData2,
         },
         {
-          name: "고정비용",
-          type: "bar",
-          stack: "Total",
+          name: '고정비용',
+          type: 'bar',
+          stack: 'Total',
           data: barData3,
         },
         {
-          name: "자원비용",
-          type: "bar",
-          stack: "Total",
+          name: '자원비용',
+          type: 'bar',
+          stack: 'Total',
           data: barData4,
         },
         {
-          name: "순이익",
-          type: "line",
+          name: '순이익',
+          type: 'line',
           data: lineData,
           // 스타일 설정은 이미지에 맞게 조정
         },
@@ -94,7 +94,8 @@ const StackedBarLineChart = () => {
     };
   }, []);
 
-  return <div ref={chartRef} style={{ width: "980px", height: "680px" }} />;
+  return <div ref={chartRef} style={{ width: '100%', height: '100%' }} />;
+  // return <div ref={chartRef} style={{ width: "980px", height: "680px" }} />;
 };
 
 export default StackedBarLineChart;

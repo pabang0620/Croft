@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useOutletContext } from 'react-router';
 
-const SalesSubBar = ({ currentPath }) => {
+const SalesSubBar = () => {
   const navigate = useNavigate();
+  const { currentPath } = useOutletContext();
 
-  const [container, setContainer] = useState(2023); //selectbox값 담아줌
+  const [years, setYears] = useState(2023); //selectbox값 담아줌
   const [period, setPeriod] = useState(); //yearArray 값 담아줌
-  const [containerToggle, setContainerToggle] = useState(false); //연도 selectbox on/off check
-  const containerArray = [
+  const [yearsToggle, setYearsToggle] = useState(false); //연도 selectbox on/off check
+  const yearsArray = [
     //기록이 있는 연도만 출력 array에 넣어주면 됨
     { id: 0, text: 2023 },
     { id: 1, text: 2022 },
@@ -18,7 +20,7 @@ const SalesSubBar = ({ currentPath }) => {
 
   //해당 연도 데이터를 보여주는 매출 보고서 페이지로 이동
   const handleToggleClick = (text) => {
-    setContainer(text);
+    setYears(text);
     setPeriod(text);
     if (currentPath !== '/single-sales') navigate('/single-sales');
   };
@@ -35,19 +37,19 @@ const SalesSubBar = ({ currentPath }) => {
       {/* selectbox/부분 */}
       <div
         className="mr-[22px] text-accent font-normal text-xs border-b border-accent relative"
-        onClick={() => setContainerToggle(!containerToggle)}
+        onClick={() => setYearsToggle(!yearsToggle)}
       >
-        {container}년▼
+        {years}년▼
         <ul
           className={`${
-            containerToggle ? 'h-[138px]' : 'h-[0px]'
+            yearsToggle ? 'h-[138px]' : 'h-[0px]'
           } flex flex-col w-[82px] border-solid border-base200 rounded-[10px] items-center justify-end text-xs absolute top-[25px] bg-white right-[-20px] overflow-hidden ease-in-out duration-200`}
         >
-          {containerArray.map((item) => (
+          {yearsArray.map((item) => (
             <li
               key={item.id}
               className={`w-full flex items-center flex-grow px-[13px] hover:bg-success/[0.2] ${
-                container === item.text ? 'text-accent' : 'text-info'
+                years === item.text ? 'text-accent' : 'text-info'
               }`}
               onClick={() => handleToggleClick(item.text)}
             >

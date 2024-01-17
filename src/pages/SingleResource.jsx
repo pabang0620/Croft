@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { format } from 'date-fns';
 import ResourceSubBar from '../layout/NavBar/SubNavBar/ResourceSubBar';
 import MainFootLineChart from '../component/Charts/LineCharts/MainFootLineChart';
+import Line2Chart from '../component/Charts/LineCharts/Line2Chart';
 import {
   PercentUpDown,
   ResourceIcon,
@@ -62,10 +63,18 @@ const SingleResource = () => {
               </div>
               <div className="flex flex-col gap-4">
                 <div className="text-lg font-bold">{ResourceTitle[toggle]}</div>
-                <div>차트</div>
+                <div className="w-[732px] h-[489px]">
+                  <Line2Chart />
+                </div>
+                <img
+                  className=""
+                  src={`${process.env.PUBLIC_URL}/assets/images/Temp/TempRunHistory.svg`}
+                  alt=""
+                />
               </div>
             </div>
           </div>
+          {/* 우측 차트 */}
           <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
             <MainFootLineChart
               APIoption="218"
@@ -73,6 +82,12 @@ const SingleResource = () => {
               unit="liter"
             />
           </div>
+
+          <img
+            className="mt-1 mr-2"
+            src={`${process.env.PUBLIC_URL}/assets/images/Temp/TimelyTodayResource.svg`}
+            alt=""
+          />
         </div>
       </div>
     </div>

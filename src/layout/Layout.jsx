@@ -19,7 +19,9 @@ const Layout = () => {
           {SubNavBarTitle(currentPath, setContainer, container, setContainer)}
         </>
         <main className="bg-[#E9EBE180]/[0.5] w-full h-full overflow-auto">
-          <Outlet context={{ container, setContainer, ContainerArray }} />
+          <Outlet
+            context={{ container, setContainer, ContainerArray, currentPath }}
+          />
           <div className="flex flex-col absolute bottom-[35px] right-[50px]">
             <img
               className="w-[50px] h-[50px]"

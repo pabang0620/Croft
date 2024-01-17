@@ -26,7 +26,7 @@ const TotalSales = () => {
           ))}
         </div>
 
-        <div className="w-[480px] h-[247px] bg-white rounded-[10px]">
+        <div className="w-[480px] h-[247px rounded-[10px]">
           <Bar2Line1Chart />
         </div>
       </div>

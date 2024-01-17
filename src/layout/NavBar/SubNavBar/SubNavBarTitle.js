@@ -13,15 +13,6 @@ export const SubNavBarTitle = (
   switch (currentPath) {
     case 'basic':
       return <BasicSubBar title={''} />;
-    // case '/global-report':
-    //   return (
-    //     <ReportSubBar
-    //       type="global"
-    //       setContainer={setContainer}
-    //       container={container}
-    //       setTitle={setTitle}
-    //     />
-    //   );
     case '/dash':
       return <DashSubBar />;
     case '/dash/environment/total':
@@ -34,16 +25,6 @@ export const SubNavBarTitle = (
       return <BasicSubBar title={'VPD'} />;
     case '/dash/environment/PP':
       return <BasicSubBar title={'PHOTOPERIOD'} />;
-    case '/single-sales':
-      return <SalesSubBar currentPath={currentPath} />;
-    case '/single-sales/years/3':
-      return <SalesSubBar currentPath={currentPath} />;
-    case '/single-sales/years/5':
-      return <SalesSubBar currentPath={currentPath} />;
-    case '/single-sales/years/10':
-      return <SalesSubBar currentPath={currentPath} />;
-    // case '/single-resource':
-    //   return <ResourceSubBar />;
     case '/single-report':
       return <ReportSubBar type="single" />;
     default:
