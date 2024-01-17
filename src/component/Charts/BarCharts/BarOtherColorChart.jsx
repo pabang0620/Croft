@@ -36,7 +36,6 @@ const BarOtherColorChart = ({ ChartName, APIoption }) => {
       return false; // 이외의 데이터 항목은 제외
     });
 
-    console.log(filteredData);
     const xLabels = [];
     for (let hour = 0; hour <= 24; hour += 2) {
       xLabels.push(`${hour}시`); // "시" 추가

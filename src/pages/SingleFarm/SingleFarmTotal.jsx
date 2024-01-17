@@ -19,7 +19,7 @@ const SingleFarmTotal = () => {
       </div>
       <BarOtherColorChart ChartName="평균 EC" APIoption="230" />
       <BarOtherColorChart ChartName="평균 PH" APIoption="250" />
-      <Line2Chart APIoption="199" APIoption2="224" />
+      <Line2Chart ChartName="평균 습도" APIoption="199" APIoption2="224" />
     </div>
   );
 };
