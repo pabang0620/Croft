@@ -85,8 +85,11 @@ const MainBarLine2Chart = ({ ChartName }) => {
       xAxis: {
         type: "category",
         data: dates,
-        splitLine: {
-          show: false, // Y축 분할선을 숨깁니다.
+        axisLine: {
+          show: false, // x축 라인 숨기기
+        },
+        axisTick: {
+          show: false,
         },
       },
       yAxis: {

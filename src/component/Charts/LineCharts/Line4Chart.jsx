@@ -41,13 +41,64 @@ const Line4Chart = () => {
       .filter((item) => item.data_type_id === 204)
       .map((item) => item.value);
 
-    // const xLabels = data.data.map((item) => new Date(item.kr_time).getHours());
+    const maxData198 = Math.ceil(Math.max(...data198) / 5) * 5;
+
+    const uniqueTimes = Array.from(
+      new Set(data.data.map((item) => item.kr_time))
+    );
+
+    let xLabels;
+
+    if (uniqueTimes.length < 250) {
+      // uniqueTimes의 길이가 200개 미만일 경우, 시간과 분 정보를 포함
+      xLabels = uniqueTimes.map((time) => {
+        const date = new Date(time);
+        return `${date.getHours()}:${
+          date.getMinutes() < 10 ? "0" : ""
+        }${date.getMinutes()}`;
+      });
+    } else {
+      // 길이가 200개 이상인 경우, 시간(시) 정보만 포함
+      xLabels = uniqueTimes.map((time) => new Date(time).getHours());
+    }
 
     const option = {
       tooltip: {
         trigger: "axis",
         axisPointer: { type: "cross" },
       },
+      graphic: [
+        {
+          type: "text",
+          left: "5%", // VENT 텍스트의 x 좌표
+          top: "30%", // VENT 텍스트의 y 좌표
+          style: {
+            text: "VENT", // 표시할 텍스트
+            fontSize: 10,
+            fontWeight: "bold",
+            fill: "#fff", // 글자색을 하얀색으로 설정
+            backgroundColor: "#f00", // 배경색을 빨간색으로 설정
+            borderRadius: 10, // 배경의 둥근 모서리
+            padding: 2,
+          },
+        },
+        {
+          type: "text",
+          left: "5%", // Heat 텍스트의 x 좌표
+          top: "34.5%", // Heat 텍스트의 y 좌표
+          style: {
+            text: "HEAT", // 표시할 텍스트
+            fontSize: 10,
+            fontWeight: "bold",
+            fill: "#fff", // 글자색을 하얀색으로 설정
+            backgroundColor: "black", // 배경색을 빨간색으로 설정
+            borderRadius: 10, // 배경의 둥근 모서리
+            padding: 2,
+          },
+        },
+        // 다른 그래픽 요소들...
+      ],
+
       legend: {
         data: ["외부온도", "온실온도", "VENT 온도 셋팅", "Heating 온도 셋팅"],
         textStyle: {
@@ -60,7 +111,13 @@ const Line4Chart = () => {
       },
       xAxis: {
         type: "category",
-        // data: xLabels,
+        data: xLabels,
+        axisLine: {
+          show: false, // x축 라인 숨기기
+        },
+        axisTick: {
+          show: false,
+        },
       },
       yAxis: {
         axisLabel: {
@@ -68,8 +125,8 @@ const Line4Chart = () => {
           margin: "10",
         },
         type: "value",
-        min: 0,
-        max: 25,
+        min: -5,
+        max: maxData198,
         interval: 5,
       },
       series: [
@@ -82,12 +139,12 @@ const Line4Chart = () => {
             itemStyle: {
               color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
             },
-            data: [
-              [
-                { yAxis: 15 }, // 시작 y축 값
-                { yAxis: 20 }, // 끝 y축 값 (차트 최대값까지)
-              ],
-            ],
+            // data: [
+            //   [
+            //     { yAxis: 15 }, // 시작 y축 값
+            //     { yAxis: 20 }, // 끝 y축 값 (차트 최대값까지)
+            //   ],
+            // ],
           },
         },
         {
@@ -97,14 +154,14 @@ const Line4Chart = () => {
           data: data198,
           markArea: {
             itemStyle: {
-              color: "rgb(255, 0, 0 , 0.5)", // 빨강
+              color: "rgb(255, 0, 0 , 0.2)", // 빨강
             },
-            data: [
-              [
-                { xAxis: 2 }, // 시작 y축 값
-                { xAxis: 3 }, // 끝 y축 값 (차트 최대값까지)
-              ],
-            ],
+            // data: [
+            //   [
+            //     { xAxis: 2 }, // 시작 y축 값
+            //     { xAxis: 6 }, // 끝 y축 값 (차트 최대값까지)
+            //   ],
+            // ],
           },
         },
         {
@@ -112,18 +169,42 @@ const Line4Chart = () => {
           name: "VENT 온도 셋팅",
           type: "line",
           data: data205,
+          lineStyle: {
+            type: "dashed", // 점선 스타일로 변경
+            color: "#FF0000", // 색상을 빨간색으로 설정
+          },
+          itemStyle: {
+            color: "#FF0000", // 선 및 포인트의 색상을 빨간색으로 설정
+          },
+          symbol: "none", // 데이터 포인트 위의 점 제거
         },
         {
           smooth: true,
           name: "VENT 온도 셋팅",
           type: "line",
           data: data241,
+          lineStyle: {
+            type: "dashed", // 점선 스타일로 변경
+            color: "#FF0000", // 색상을 빨간색으로 설정
+          },
+          itemStyle: {
+            color: "#FF0000", // 선 및 포인트의 색상을 빨간색으로 설정
+          },
+          symbol: "none", // 데이터 포인트 위의 점 제거
         },
         {
           smooth: true,
           name: "Heating 온도 셋팅",
           type: "line",
           data: data204,
+          lineStyle: {
+            type: "dashed", // 점선 스타일로 변경
+            color: "black", // 색상을 빨간색으로 설정
+          },
+          itemStyle: {
+            color: "black", // 선 및 포인트의 색상을 빨간색으로 설정
+          },
+          symbol: "none", // 데이터 포인트 위의 점 제거
         },
       ],
       // grid 설정 및 기타 필요한 스타일 설정...
