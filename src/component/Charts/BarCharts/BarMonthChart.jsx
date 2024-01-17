@@ -12,6 +12,16 @@ const BarMonthChart = () => {
 
   // --------------------------------------------
   useEffect(() => {
+    if (isLoading || error) {
+      // 데이터 로딩 중이거나 오류 발생시 처리
+      return;
+    }
+
+    if (!data || !data.data) {
+      // 데이터가 없거나 잘못된 형식일 경우 처리
+      return;
+    }
+
     const xLabels = data.data.map((item) => {
       const date = new Date(item.date);
       const formattedDate = `${date.getMonth() + 1}.${date.getDate()}`;
