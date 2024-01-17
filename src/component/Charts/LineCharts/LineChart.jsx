@@ -2,7 +2,7 @@ import * as echarts from "echarts";
 import React, { useEffect, useRef } from "react";
 import { useChartData } from "../../utils/api/Charts/ChartAPI";
 
-const Line2Chart = ({ ChartName, APIoption, APIoption2 }) => {
+const LineChart = ({ ChartName, APIoption }) => {
   const chartRef = useRef(null);
 
   // 오늘 날짜를 기준으로 날짜 계산
@@ -24,8 +24,8 @@ const Line2Chart = ({ ChartName, APIoption, APIoption2 }) => {
   const endDate = formatDateString(tomorrow);
 
   const { data, isLoading, error } = useChartData(
-    `http://croft-ai.iptime.org:40401/api/v1/gh_data_item?start_time=${startDate}&end_time=${endDate}&data_type=${APIoption}&data_type=${APIoption2}&group_by=day`,
-    `chartData-line2`
+    `http://croft-ai.iptime.org:40401/api/v1/gh_data_item?start_time=${startDate}&end_time=${endDate}&data_type=${APIoption}&group_by=day`,
+    `chartData-line`
   );
   useEffect(() => {
     if (isLoading || error) {
@@ -40,17 +40,13 @@ const Line2Chart = ({ ChartName, APIoption, APIoption2 }) => {
     const chartInstance = echarts.init(chartRef.current);
     // 평균습도
 
-    const data199 = data.data
-      .filter((item) => item.data_type_id === 199)
-      .map((item) => item.avg);
-    const data224 = data.data
-      .filter((item) => item.data_type_id === 224)
-      .map((item) => item.avg);
+    const dataValue = data.data.map((item) => item.avg);
 
-    // console.log(data);
+    // console.log(`${APIoption}`, data);
+    // console.log(dataValue);
 
-    const minSeriesValue = Math.floor(Math.min(...data199) / 5) * 5;
-    const maxSeriesValue = Math.ceil(Math.max(...data224) / 5) * 5;
+    const minSeriesValue = Math.floor(Math.min(...dataValue) / 5) * 5;
+    const maxSeriesValue = Math.ceil(Math.max(...dataValue) / 5) * 5;
     const uniqueDates = new Set();
 
     // x축 라벨 배열 생성
@@ -76,7 +72,7 @@ const Line2Chart = ({ ChartName, APIoption, APIoption2 }) => {
         axisPointer: { type: "cross" },
       },
       legend: {
-        data: ["외부습도1", "외부습도2"],
+        data: [ChartName],
         textStyle: {
           color: "#333", // 범례 텍스트 색상
           fontSize: 12, // 범례 텍스트 크기
@@ -84,6 +80,8 @@ const Line2Chart = ({ ChartName, APIoption, APIoption2 }) => {
         itemWidth: 10,
         itemHeight: 10,
         icon: "rect",
+        left: "3%",
+        top: "10%",
       },
       xAxis: {
         type: "category",
@@ -102,9 +100,9 @@ const Line2Chart = ({ ChartName, APIoption, APIoption2 }) => {
       series: [
         {
           smooth: true,
-          name: "외부습도1",
+          name: ChartName,
           type: "line",
-          data: data199,
+          data: dataValue,
           markArea: {
             itemStyle: {
               color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
@@ -116,12 +114,6 @@ const Line2Chart = ({ ChartName, APIoption, APIoption2 }) => {
               ],
             ],
           },
-        },
-        {
-          smooth: true,
-          name: "외부습도2",
-          type: "line",
-          data: data224,
         },
       ],
       // grid 설정 및 기타 필요한 스타일 설정...
@@ -135,8 +127,7 @@ const Line2Chart = ({ ChartName, APIoption, APIoption2 }) => {
     };
   }, [data]);
 
-  return <div ref={chartRef} style={{ width: "100%", height: "100%" }} />;
-  // return <div ref={chartRef} style={{ width: "600px", height: "380px" }} />;
+  return <div ref={chartRef} style={{ width: "600px", height: "380px" }} />;
 };
 
-export default Line2Chart;
+export default LineChart;

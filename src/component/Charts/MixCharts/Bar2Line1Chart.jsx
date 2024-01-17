@@ -1,11 +1,45 @@
 // 필요한 라이브러리를 임포트합니다.
-import * as echarts from 'echarts';
-import React, { useEffect, useRef } from 'react';
+import * as echarts from "echarts";
+import React, { useEffect, useRef } from "react";
+import { useChartData } from "../../utils/api/Charts/ChartAPI";
 
 const Bar2Line1Chart = ({ ChartName }) => {
   const chartRef = useRef(null);
+  const {
+    data: dataDLI,
+    isLoading: isLoadingDLI,
+    error: errorDLI,
+  } = useChartData(
+    "http://croft-ai.iptime.org:40401/api/v1/farms/dli/aweek",
+    "chartData-DLI"
+  );
+
+  const {
+    data: dataMeasurement,
+    isLoading: isLoadingMeasurement,
+    error: errorMeasurement,
+  } = useChartData(
+    "http://croft-ai.iptime.org:40401/api/v1/farms/measurement/day?data_type=219",
+    "chartData-Measurement219"
+  );
 
   useEffect(() => {
+    if (isLoadingDLI || errorDLI) {
+      // 데이터 로딩 중이거나 오류 발생시 처리
+      return;
+    }
+
+    if (!dataDLI || !dataDLI.data) {
+      // 데이터가 없거나 잘못된 형식일 경우 처리
+      return;
+    }
+
+    console.log(dataDLI);
+    console.log(dataMeasurement);
+
+    const dliValues = dataDLI.data.map((item) => item.dli);
+    const dataMeasurementValues = dataMeasurement.data.map((item) => item.dli);
+
     const chartInstance = echarts.init(chartRef.current);
 
     const option = {
@@ -68,9 +102,9 @@ const Bar2Line1Chart = ({ ChartName }) => {
           name: '외부 광량',
           type: 'bar',
           data: [0, 34, 37, 24, 4, 40, 15, 25, 35, 5, 18, 22, 2], // 10.25 데이터
-          barWidth: '25%', // 막대 너비
-          color: 'rgba(69, 69, 255, 0.8)',
-          barGap: '10%', // 다른 시리즈의 막대와의 간격
+          barWidth: "25%", // 막대 너비
+          color: "#4472c4",
+          barGap: "10%", // 다른 시리즈의 막대와의 간격
         },
         {
           name: '온실 광량',
@@ -110,7 +144,7 @@ const Bar2Line1Chart = ({ ChartName }) => {
     return () => {
       chartInstance.dispose();
     };
-  }, []);
+  }, [dataDLI, dataMeasurement]);
 
   return <div ref={chartRef} style={{ width: '100%', height: '100%' }} />;
   // return <div ref={chartRef} style={{ width: "480px", height: "380px" }} />;
