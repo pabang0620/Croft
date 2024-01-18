@@ -1,9 +1,9 @@
 import DatePicker from 'react-datepicker';
 import { getMonth, getYear, format } from 'date-fns';
-import { PeriodData, CheckPriod } from '../utils/Data/CalendarData';
+import { PeriodData, CheckPriod } from '../Data/CalendarData';
 import 'react-datepicker/dist/react-datepicker.css';
 import './period.css';
-import DateArrow from '../../layout/NavBar/SubNavBar/DateArrow';
+import DateArrow from '../../../layout/NavBar/SubNavBar/DateArrow';
 
 const PeriodCalendar = ({
   startDate,

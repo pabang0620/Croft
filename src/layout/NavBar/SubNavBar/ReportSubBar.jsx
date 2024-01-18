@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import GlobalReportCalendar from '../../../component/DatePicker/GlobalReportCalendar';
+import GlobalReportCalendar from '../../../component/utils/DatePicker/GlobalReportCalendar';
 
 const ReportSubBar = ({
   type,

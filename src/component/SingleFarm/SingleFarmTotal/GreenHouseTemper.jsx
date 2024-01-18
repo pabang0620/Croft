@@ -6,6 +6,7 @@ const GreenHouseTemper = () => {
   return (
     <div className="flex gap-[3.75rem] mt-6">
       <div className="flex flex-col flex-grow justify-end">
+        {/* 왼쪽 차트 */}
         <div className="flex justify-between">
           <div className="flex flex-col gap-5 ml-[29px] w-[10%]">
             <div className="flex flex-col">

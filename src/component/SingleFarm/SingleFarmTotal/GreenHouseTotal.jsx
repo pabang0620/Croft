@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { format } from 'date-fns';
 import GreenHouseSwitch from './GreenHouseSwitch';
 import { CriticalOrWarn } from '../../utils/Icons';
 import { ChartDashIcons, IconsColor } from '../../utils/Icons';
 import { SingleFarmRecommend, IconId } from '../../utils/Data/SingleFarmData';
 
-const GreenHouseTotal = ({ critical, alert }) => {
+const GreenHouseTotal = ({ critical, alert, date }) => {
   const [toggle, setToggle] = useState(0);
 
   return (
@@ -13,8 +14,7 @@ const GreenHouseTotal = ({ critical, alert }) => {
       <div className="flex justify-between mb-[26px]">
         <div className="flex gap-1 text-lg">
           <div className="font-bold">온실 환경 종합</div>
-          <div className="font-normal">10.26 18:00</div>
-          {/* 어떤 시간을 넣어야하는지? */}
+          <div className="font-normal">{format(date, 'MM.dd HH:mm')}</div>
         </div>
         <div>{CriticalOrWarn(true, critical, false)}</div>
       </div>

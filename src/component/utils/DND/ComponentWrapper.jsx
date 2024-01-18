@@ -94,7 +94,7 @@ export const ComponentWrapper = memo(function ComponentWrapper() {
               absData7="고권장"
               absData8="Photo Period 상태에 따른 메시지가 나옵니다."
             />
-          </div>{" "}
+          </div>
           {/* <div className="w-[320px] h-[220px] bg-white rounded-[10px]">
             <MainSliderDiv
               queryName="vpd"

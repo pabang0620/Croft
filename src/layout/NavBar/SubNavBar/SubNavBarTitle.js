@@ -25,8 +25,8 @@ export const SubNavBarTitle = (
       return <BasicSubBar title={'VPD'} />;
     case '/dash/environment/PP':
       return <BasicSubBar title={'PHOTOPERIOD'} />;
-    case '/single-report':
-      return <ReportSubBar type="single" />;
+    // case '/single-report':
+    //   return <ReportSubBar type="single" />;
     default:
       break;
   }

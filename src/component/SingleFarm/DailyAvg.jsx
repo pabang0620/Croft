@@ -1,18 +1,14 @@
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
-import PeriodCalendar from '../../../component/utils/DatePicker/PeriodCalendar';
-import { CheckPriod } from '../../../component/utils/Data/CalendarData';
+import PickPeriodDate from '../utils/DatePicker/PickPeriodDate';
+import PeriodCalendar from '../utils/DatePicker/PeriodCalendar';
+import { CheckPriod } from '../utils/Data/CalendarData';
 
-const ResourceSubBar = (props) => {
-  const {
-    startDate,
-    setStartDate,
-    endDate,
-    setEndDate,
-    specificDate,
-    setSpecificDate,
-  } = props;
+const DailyAvg = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [specificDate, setSpecificDate] = useState('오늘');
   const [formatStart, setFormatStart] = useState(
     format(new Date(), 'yyyy.MM.dd')
   );
@@ -30,8 +26,19 @@ const ResourceSubBar = (props) => {
   }, [startDate, endDate]);
 
   return (
-    <div className="w-full h-[45px] pl-[29px] pt-[4px] flex items-center cursor-pointer select-none border-b-[1px] border-base400 bg-base200">
-      <div className="text-lg font-bold mr-[17px]">자원사용량</div>
+    <div className="flex flex-col w-full px-[17px] py-[12px] select-none">
+      {/* 제목 부분 */}
+      <div className="flex justify-between mb-[26px]">
+        <div className="flex gap-1 text-lg">
+          <div className="font-bold">일자별 평균</div>
+          <div className="font-normal">
+            {format(startDate, 'MM.dd')} ~ {format(endDate, 'MM.dd')}
+          </div>
+        </div>
+      </div>
+      {/* 차트 부분 */}
+      <div className="flex justify-between pr-[51px]"></div>
+      {/* 하단의 날짜 선택 부분 */}
       <div
         className="flex gap-3 text-accent text-sm border-b border-accent"
         onClick={() => setIsOpen(!isOpen)}
@@ -76,4 +83,4 @@ const ResourceSubBar = (props) => {
   );
 };
 
-export default ResourceSubBar;
+export default DailyAvg;
