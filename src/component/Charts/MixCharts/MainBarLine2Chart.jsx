@@ -130,7 +130,7 @@ const MainBarLine2Chart = ({ ChartName }) => {
           stack: "Total",
           data: data198Max,
           itemStyle: {
-            color: "#FF3A3A", // 적당한 색상으로 설정
+            color: "#D95F5F", // 적당한 색상으로 설정
           },
         },
         {

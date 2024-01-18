@@ -19,18 +19,18 @@ const MainRTRLineChart = ({ ChartName, unit }) => {
         Number.isFinite(item.day_rtr)
       );
 
-      // 맥스값 로직
-      const maxValue = Math.max(...filteredData.map((item) => item.day_rtr));
-      const interval = Math.ceil(maxValue / 10);
-      const maxRoundedUp = interval * 5;
-
       // 날짜, RTR 및 평균 온도 데이터 추출
       const xLabels = data.data.map((item) =>
         format(new Date(item.date), "EE")
       );
 
       const rtrValues = data.data.map((item) => item.day_rtr);
-      console.log(rtrValues);
+
+      // console.log(rtrValues);
+
+      // 맥스값 로직
+      const maxValue = Math.max(...rtrValues);
+      const roundedValue = Math.ceil(maxValue / 5) * 5;
 
       const option = {
         title: {
@@ -72,8 +72,8 @@ const MainRTRLineChart = ({ ChartName, unit }) => {
         },
         yAxis: {
           type: "value",
-          max: maxRoundedUp, // 계산된 최대값
-          interval: interval, // 계산된 간격
+          max: roundedValue, // 계산된 최대값
+          interval: 5, // 계산된 간격
           axisLabel: {
             fontSize: 9, // 글꼴 크기 조정
             formatter: (value) => `${value}`, // props로 전달받은 단위를 사용
@@ -127,7 +127,6 @@ const MainRTRLineChart = ({ ChartName, unit }) => {
     }
   }, [data, isLoading, error]); // 의존성 배열에 API 응답 데이터를 포함합니다.
 
-  // 로딩 및 오류 상태 처리
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading data</div>;
 
