@@ -48,6 +48,7 @@ const SingleFarmTotal = () => {
       {/* <Bar2Line1Chart /> */}
       {/* 30일짜리 그래프에 기간을 넣는 url이 있나요? 데이터피커가 있어서 여쭤봅니다  */}
       <BarMonthChart />
+      <Bar2Line1Chart />
     </div>
   );
 };
