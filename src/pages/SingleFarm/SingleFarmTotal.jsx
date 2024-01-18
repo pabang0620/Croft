@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { format } from 'date-fns';
-import GreenHouseTotal from '../../component/SingleFarm/SingleFarmTotal/GreenHouseTotal';
-import WaterData from '../../component/SingleFarm/WaterData';
-import DailyAvg from '../../component/SingleFarm/DailyAvg';
-import BarMonthChart from '../../component/Charts/BarCharts/BarMonthChart';
-import BarOtherColorChart from '../../component/Charts/BarCharts/BarOtherColorChart';
-import Line2Chart from '../../component/Charts/LineCharts/Line2Chart';
-import Line4Chart from '../../component/Charts/LineCharts/Line4Chart';
-import LineChart from '../../component/Charts/LineCharts/LineChart';
-import Bar2Line1Chart from '../../component/Charts/MixCharts/Bar2Line1Chart';
-import MainSliderDiv from '../../component/Graphs/MainSliderDiv';
+import React, { useState } from "react";
+import { format } from "date-fns";
+import GreenHouseTotal from "../../component/SingleFarm/SingleFarmTotal/GreenHouseTotal";
+import WaterData from "../../component/SingleFarm/WaterData";
+import DailyAvg from "../../component/SingleFarm/DailyAvg";
+import BarMonthChart from "../../component/Charts/BarCharts/BarMonthChart";
+import BarOtherColorChart from "../../component/Charts/BarCharts/BarOtherColorChart";
+import Line2Chart from "../../component/Charts/LineCharts/Line2Chart";
+import Line4Chart from "../../component/Charts/LineCharts/Line4Chart";
+import LineChart from "../../component/Charts/LineCharts/LineChart";
+import Bar2Line1Chart from "../../component/Charts/MixCharts/Bar2Line1Chart";
+import MainSliderDiv from "../../component/Graphs/MainSliderDiv";
 
 const SingleFarmTotal = () => {
   //데이터 입출력
@@ -59,6 +59,7 @@ const SingleFarmTotal = () => {
       {/* <Bar2Line1Chart /> */}
       {/* 30일짜리 그래프에 기간을 넣는 url이 있나요? 데이터피커가 있어서 여쭤봅니다  */}
       {/* <BarMonthChart /> */}
+      <Bar2Line1Chart />
     </div>
   );
 };
