@@ -8,7 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 const PickSingleDate = ({ selectedDate, setSelectedDate }) => {
   const today = new Date();
   return (
-    <div className="flex items-center text-accent font-normal text-xs w-fit h-full cursor-pointer">
+    <div className="flex items-center text-accent font-normal text-xs w-fit h-fit cursor-pointer">
       <div className="relative cursor-pointer mx-1">
         <div className="absolute left-2">{CalendarIcon()}</div>
         <DatePicker

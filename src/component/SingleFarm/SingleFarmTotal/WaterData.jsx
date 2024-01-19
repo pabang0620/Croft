@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
-import BarOtherColorChart from '../Charts/BarCharts/BarOtherColorChart';
-import MainLineAreaChart from '../Charts/MixCharts/MainLineAreaChart';
-import PickSingleDate from '../utils/DatePicker/PickSingleDate';
+import BarOtherColorChart from '../../Charts/BarCharts/BarOtherColorChart';
+import MainLineAreaChart from '../../Charts/MixCharts/MainLineAreaChart';
+import PickSingleDate from '../../utils/DatePicker/PickSingleDate';
 
 const WaterData = ({ date, setDate }) => {
   return (
@@ -14,7 +14,7 @@ const WaterData = ({ date, setDate }) => {
         </div>
       </div>
       {/* 차트 부분 */}
-      <div className="flex justify-between pr-[51px]">
+      <div className="flex pr-[51px]">
         <div className="flex">
           {/* 차트 좌측의 글자 부분 */}
           <div className="flex flex-col gap-5 ml-[29px] w-[10%] min-w-[4rem]">
@@ -32,7 +32,7 @@ const WaterData = ({ date, setDate }) => {
             </div>
           </div>
           {/* 여기까지 글자 */}
-          <div className="w-[458px] h-[333px]">
+          <div className="w-[461px] h-[333px]">
             {/* 해당 부분 데이터 에러남 */}
             <MainLineAreaChart APIoption="218" ChartName="" />
           </div>
