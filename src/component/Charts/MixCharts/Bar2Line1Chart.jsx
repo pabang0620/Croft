@@ -2,27 +2,35 @@
 import * as echarts from "echarts";
 import React, { useEffect, useRef } from "react";
 import { useChartData } from "../../utils/api/Charts/ChartAPI";
-import { format } from "date-fns";
+import { format, addDays, subDays } from "date-fns";
 
 const Bar2Line1Chart = ({ ChartName }) => {
+  const today = new Date();
+  const tomorrow = addDays(today, 1);
+  const formattedTomorrow = format(tomorrow, "yyyy-MM-dd");
+
+  const twoDaysAgo = subDays(today, 2);
+  const formattedTwoDaysAgo = format(twoDaysAgo, "yyyy-MM-dd");
+
+  const realToday = format(today, "yyyy-MM-dd");
   const chartRef = useRef(null);
   const { data, isLoading, error } = useChartData(
-    `http://croft-ai.iptime.org:40401/api/v1/gh_data_item?start_time=2024-01-17&end_time=2024-01-19&data_type=220&data_type=219&group_by=hour`,
+    `http://croft-ai.iptime.org:40401/api/v1/gh_data_item?start_time=${formattedTwoDaysAgo}&end_time=${formattedTomorrow}&data_type=220&data_type=219&group_by=hour`,
     "chartData-mixDLI"
   );
 
   useEffect(() => {
     if (!isLoading && !error && data && data.data) {
-      const today = format(new Date(), "yyyy-MM-dd");
-
       const data219 = data.data
         .filter(
-          (item) => item.data_type_id === 219 && item.kr_time.startsWith(today)
+          (item) =>
+            item.data_type_id === 219 && item.kr_time.startsWith(realToday)
         )
         .map((item) => ({ time: item.kr_time, value: item.avg }));
       const data220 = data.data
         .filter(
-          (item) => item.data_type_id === 220 && item.kr_time.startsWith(today)
+          (item) =>
+            item.data_type_id === 220 && item.kr_time.startsWith(realToday)
         )
         .map((item) => ({ time: item.kr_time, value: item.high }));
 
@@ -48,7 +56,9 @@ const Bar2Line1Chart = ({ ChartName }) => {
         (item.value * 0.7).toFixed(2)
       );
 
-      // console.log(multipliedValues);
+      console.log(data);
+      console.log(data219);
+
       const chartInstance = echarts.init(chartRef.current);
       // 최대값 구하는 로직
 
