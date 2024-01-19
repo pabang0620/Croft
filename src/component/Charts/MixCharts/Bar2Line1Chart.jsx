@@ -2,151 +2,159 @@
 import * as echarts from "echarts";
 import React, { useEffect, useRef } from "react";
 import { useChartData } from "../../utils/api/Charts/ChartAPI";
+import { format, addDays, subDays } from "date-fns";
 
 const Bar2Line1Chart = ({ ChartName }) => {
-  const chartRef = useRef(null);
-  const {
-    data: dataDLI,
-    isLoading: isLoadingDLI,
-    error: errorDLI,
-  } = useChartData(
-    "http://croft-ai.iptime.org:40401/api/v1/farms/dli/aweek",
-    "chartData-DLI"
-  );
+  const today = new Date();
+  const tomorrow = addDays(today, 1);
+  const formattedTomorrow = format(tomorrow, "yyyy-MM-dd");
 
-  const {
-    data: dataMeasurement,
-    isLoading: isLoadingMeasurement,
-    error: errorMeasurement,
-  } = useChartData(
-    "http://croft-ai.iptime.org:40401/api/v1/farms/measurement/day?data_type=219",
-    "chartData-Measurement219"
+  const twoDaysAgo = subDays(today, 2);
+  const formattedTwoDaysAgo = format(twoDaysAgo, "yyyy-MM-dd");
+
+  const realToday = format(today, "yyyy-MM-dd");
+  const chartRef = useRef(null);
+  const { data, isLoading, error } = useChartData(
+    `http://croft-ai.iptime.org:40401/api/v1/gh_data_item?start_time=${formattedTwoDaysAgo}&end_time=${formattedTomorrow}&data_type=220&data_type=219&group_by=hour`,
+    "chartData-mixDLI"
   );
 
   useEffect(() => {
-    if (isLoadingDLI || errorDLI) {
-      // 데이터 로딩 중이거나 오류 발생시 처리
-      return;
-    }
+    if (!isLoading && !error && data && data.data) {
+      const data219 = data.data
+        .filter(
+          (item) =>
+            item.data_type_id === 219 && item.kr_time.startsWith(realToday)
+        )
+        .map((item) => ({ time: item.kr_time, value: item.avg }));
+      const data220 = data.data
+        .filter(
+          (item) =>
+            item.data_type_id === 220 && item.kr_time.startsWith(realToday)
+        )
+        .map((item) => ({ time: item.kr_time, value: item.high }));
 
-    if (!dataDLI || !dataDLI.data) {
-      // 데이터가 없거나 잘못된 형식일 경우 처리
-      return;
-    }
+      // X축 라벨 생성 (0시 ~ 24시, 2시간 간격)
+      const xLabels = [];
+      for (let i = 0; i <= 24; i += 2) {
+        xLabels.push(`${i}시`);
+      }
 
-    console.log(dataDLI);
-    console.log(dataMeasurement);
+      const values = data219.map((item) => item.value);
 
-    const dliValues = dataDLI.data.map((item) => item.dli);
-    const dataMeasurementValues = dataMeasurement.data.map((item) => item.dli);
+      // 최대값 찾기
+      const maxData220 = Math.max(...values);
 
-    const chartInstance = echarts.init(chartRef.current);
+      // 최대값의 10% 계산
+      const tenPercentOfMax = maxData220 * 0.1;
 
-    const option = {
-      title: {
-        text: ChartName,
-        top: '5%',
-        left: '2%',
-      },
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-          type: 'cross',
+      // 최대값에 10%를 더하고 5의 배수로 만들기
+      const adjustedValue = Math.ceil((maxData220 + tenPercentOfMax) / 50) * 50;
+
+      const intervalue = adjustedValue / 10;
+      const multipliedValues = data220.map((item) =>
+        (item.value * 0.7).toFixed(2)
+      );
+
+      console.log(data);
+      console.log(data219);
+
+      const chartInstance = echarts.init(chartRef.current);
+      // 최대값 구하는 로직
+
+      const option = {
+        title: {
+          text: ChartName,
+          top: "5%",
+          left: "2%",
         },
-      },
-      legend: {
-        data: ['외부 광량', '온실 광량', 'DLI'],
-        textStyle: {
-          color: '#333', // 범례 텍스트 색상
-          fontSize: 12, // 범례 텍스트 크기
-        },
-        itemWidth: 10,
-        itemHeight: 10,
-        icon: 'rect',
-      },
-      xAxis: {
-        axisLabel: {
-          fontSize: 10,
-          margin: '10',
-        },
-        type: 'category',
-        boundaryGap: false, // 선 차트에 대해 경계 간격을 없앰
-        data: [
-          '0시',
-          '2시',
-          '4시',
-          '6시',
-          '8시',
-          '10시',
-          '12시',
-          '14시',
-          '16시',
-          '18시',
-          '20시',
-          '22시',
-          '24시',
-        ], // x축 데이터
-      },
-      yAxis: {
-        axisLabel: {
-          fontSize: 10,
-          margin: '10',
-        },
-        type: 'value',
-        min: 0,
-        max: 80, // 범위가 안나와있음
-        interval: 10,
-      },
-      series: [
-        {
-          name: '외부 광량',
-          type: 'bar',
-          data: [0, 34, 37, 24, 4, 40, 15, 25, 35, 5, 18, 22, 2], // 10.25 데이터
-          barWidth: "25%", // 막대 너비
-          color: "#4472c4",
-          barGap: "10%", // 다른 시리즈의 막대와의 간격
-        },
-        {
-          name: '온실 광량',
-          type: 'bar',
-          data: [0, 5, 12, 16, 18, 25, 29, 34, 37, 24, 40, 15, 20],
-          barWidth: '25%', // 막대 너비
-          color: 'rgba(79, 254, 35, 0.5)', // #4FFE234D와 유사한 RGBA 색상
-          barGap: '10%', // 다른 시리즈의 막대와의 간격
-        },
-        {
-          name: 'DLI',
-          type: 'line',
-          data: [0, 17, 28, 38, 44, 52, 61, 57, 71, 77, 66, 61, 57],
-          lineStyle: {
-            color: 'rgb(255, 0, 0 , 0.5)', // 빨강
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "cross",
           },
-          itemStyle: {
-            color: 'rgb(255, 0, 0 , 0.5)', // 빨강
+        },
+        legend: {
+          data: ["외부 광량", "온실 광량", "DLI"],
+          textStyle: {
+            color: "#333", // 범례 텍스트 색상
+            fontSize: 12, // 범례 텍스트 크기
           },
-          markArea: {
-            itemStyle: {
-              color: 'rgba(79, 254, 35, 0.3)', // #4FFE234D와 유사한 RGBA 색상
+          itemWidth: 10,
+          itemHeight: 10,
+          icon: "rect",
+        },
+        xAxis: {
+          axisLabel: {
+            fontSize: 10,
+            margin: "10",
+          },
+          type: "category",
+          boundaryGap: false, // 선 차트에 대해 경계 간격을 없앰
+          data: xLabels,
+        },
+        yAxis: {
+          axisLabel: {
+            fontSize: 10,
+            margin: "10",
+          },
+          type: "value",
+          min: 0,
+          max: adjustedValue, // 범위가 안나와있음
+          interval: intervalue,
+        },
+        series: [
+          {
+            name: "외부 광량",
+            type: "bar",
+            data: data219, // 10.25 데이터
+            barWidth: "25%", // 막대 너비
+            color: "#4472c4",
+            barGap: "10%", // 다른 시리즈의 막대와의 간격
+          },
+          {
+            name: "온실 광량",
+            type: "bar",
+            data: multipliedValues,
+            barWidth: "25%", // 막대 너비
+            color: "rgba(79, 254, 35, 0.5)", // #4FFE234D와 유사한 RGBA 색상
+            barGap: "10%", // 다른 시리즈의 막대와의 간격
+          },
+          {
+            name: "DLI",
+            type: "line",
+            data: data220,
+
+            lineStyle: {
+              color: "rgb(255, 0, 0 , 0.5)", // 빨강
             },
-            data: [
-              [
-                { yAxis: 50 }, // 시작 y축 값
-                { yAxis: 70 }, // 끝 y축 값 (차트 최대값까지)
+            itemStyle: {
+              color: "rgb(255, 0, 0 , 0.5)", // 빨강
+            },
+            markArea: {
+              itemStyle: {
+                color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
+              },
+              data: [
+                [
+                  { yAxis: 50 }, // 시작 y축 값
+                  { yAxis: 70 }, // 끝 y축 값 (차트 최대값까지)
+                ],
               ],
-            ],
+            },
           },
-        },
-      ],
-    };
+        ],
+      };
 
-    chartInstance.setOption(option);
+      chartInstance.setOption(option);
 
-    return () => {
-      chartInstance.dispose();
-    };
-  }, [dataDLI, dataMeasurement]);
+      return () => {
+        chartInstance.dispose();
+      };
+    }
+  }, [data]);
 
-  return <div ref={chartRef} style={{ width: '100%', height: '100%' }} />;
+  return <div ref={chartRef} style={{ width: "100%", height: "100%" }} />;
   // return <div ref={chartRef} style={{ width: "480px", height: "380px" }} />;
 };
 

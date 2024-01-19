@@ -1,20 +1,20 @@
-import GreenhouseScore from '../../Charts/GreenhouseScore';
-import CroftGuide from '../../Charts/CroftGuide/CroftGuide';
-import TotalReportChart from '../../Charts/TotalReportChart/TotalReportChart';
-import TotalResourceChart from '../../Charts/TotalResourceChart/TotalResourceChart';
-import MainBarChart from '../../Charts/BarCharts/MainBarChart';
-import MainBarChartLine from '../../Charts/BarCharts/MainBarChartLine';
-import Line2Chart from '../../Charts/LineCharts/Line2Chart';
-import Line4Chart from '../../Charts/LineCharts/Line4Chart';
-import Line4ChartNone from '../../Charts/LineCharts/Line4ChartNone';
-import MainFootLineChart from '../../Charts/LineCharts/MainFootLineChart';
-import MainLineChart from '../../Charts/LineCharts/MainLineChart';
-import MainSmoothedLineChart from '../../Charts/LineCharts/MainSmoothedLineChart';
-import MainSmoothedLineChartAdd from '../../Charts/LineCharts/MainSmoothedLineChartAdd';
-import MainBar2LineChart from '../../Charts/MixCharts/MainBarLine2Chart';
-import MainLineAreaChart from '../../Charts/MixCharts/MainLineAreaChart';
-import MainSliderDiv from '../../Graphs/MainSliderDiv';
-import MainRTRLineChart from '../../Charts/LineCharts/MainRTRLineChart';
+import GreenhouseScore from "../../Charts/GreenhouseScore";
+import CroftGuide from "../../Charts/CroftGuide/CroftGuide";
+import TotalReportChart from "../../Charts/TotalReportChart/TotalReportChart";
+import TotalResourceChart from "../../Charts/TotalResourceChart/TotalResourceChart";
+import MainBarChart from "../../Charts/BarCharts/MainBarChart";
+import MainBarChartLine from "../../Charts/BarCharts/MainBarChartLine";
+import Line2Chart from "../../Charts/LineCharts/Line2Chart";
+import Line4Chart from "../../Charts/LineCharts/Line4Chart";
+import Line4ChartNone from "../../Charts/LineCharts/Line4ChartNone";
+import MainFootLineChart from "../../Charts/LineCharts/MainFootLineChart";
+import MainLineChart from "../../Charts/LineCharts/MainLineChart";
+import MainSmoothedLineChart from "../../Charts/LineCharts/MainSmoothedLineChart";
+import MainSmoothedLineChartAdd from "../../Charts/LineCharts/MainSmoothedLineChartAdd";
+import MainBar2LineChart from "../../Charts/MixCharts/MainBarLine2Chart";
+import MainLineAreaChart from "../../Charts/MixCharts/MainLineAreaChart";
+import MainSliderDiv from "../../Graphs/MainSliderDiv";
+import MainRTRLineChart from "../../Charts/LineCharts/MainRTRLineChart";
 
 const TempDashPage = () => {
   return (
