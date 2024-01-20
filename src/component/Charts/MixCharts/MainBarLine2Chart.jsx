@@ -166,7 +166,9 @@ const MainBarLine2Chart = ({ ChartName, registerChart, chartKey }) => {
     // eCharts 인스턴스에 옵션을 적용
     chartInstance.setOption(option);
 
-    registerChart(chartKey, chartInstance);
+    if (registerChart) {
+      registerChart(chartKey, chartInstance);
+    }
 
     return () => {
       chartInstance.dispose();

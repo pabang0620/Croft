@@ -93,7 +93,9 @@ const MainBarChart = ({ ChartName, registerChart, chartKey }) => {
         }
       });
 
-      registerChart(chartKey, chartInstance);
+      if (registerChart) {
+        registerChart(chartKey, chartInstance);
+      }
 
       return () => {
         chartInstance.dispose();

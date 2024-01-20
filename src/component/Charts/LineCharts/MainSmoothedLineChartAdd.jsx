@@ -151,7 +151,9 @@ const MainSmoothedLineChartAdd = ({
       }
     });
 
-    registerChart(chartKey, chartInstance);
+    if (registerChart) {
+      registerChart(chartKey, chartInstance);
+    }
 
     return () => {
       chartInstance.off("mouseover");

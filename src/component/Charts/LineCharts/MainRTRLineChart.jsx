@@ -125,7 +125,9 @@ const MainRTRLineChart = ({ ChartName, unit, registerChart, chartKey }) => {
         }
       });
 
-      registerChart(chartKey, chartInstance);
+      if (registerChart.length > 0) {
+        registerChart(chartKey, chartInstance);
+      }
 
       return () => {
         chartInstance.dispose();
