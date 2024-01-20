@@ -1,15 +1,16 @@
-import { useEffect } from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { useOutletContext } from 'react-router';
-import { ComponentWrapper } from '../component/utils/DND/ComponentWrapper';
-import TempDashPage from '../component/utils/DND/TempDashPage';
+import { useEffect } from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { useOutletContext } from "react-router";
+import { ComponentWrapper } from "../component/utils/DND/ComponentWrapper";
+import TempDashPage from "../component/utils/DND/TempDashPage";
+import WonhoGrid from "../component/utils/DND/WonhoGrid";
 
 const SingleDashBoard = () => {
   // const navigate = useNavigate();
   const { container, setContainer } = useOutletContext();
   useEffect(() => {
-    setContainer('옥수수 컨테이너');
+    setContainer("옥수수 컨테이너");
   }, []);
 
   return (
@@ -19,7 +20,8 @@ const SingleDashBoard = () => {
           <ComponentWrapper />
         </DndProvider>
       </div> */}
-      <TempDashPage />
+      {/* <TempDashPage /> */}
+      <WonhoGrid />
     </div>
   );
 };

@@ -2,7 +2,13 @@ import React, { useEffect, useRef } from "react";
 import * as echarts from "echarts";
 import { useChartData } from "../../utils/api/Charts/ChartAPI";
 
-const MainSmoothedLineChart = ({ APIoption, ChartName, unit }) => {
+const MainSmoothedLineChart = ({
+  APIoption,
+  ChartName,
+  unit,
+  registerChart,
+  chartKey,
+}) => {
   const chartRef = useRef(null);
   const dataType = APIoption;
   const {
@@ -42,6 +48,10 @@ const MainSmoothedLineChart = ({ APIoption, ChartName, unit }) => {
     // 모든 시간 라벨 생성
 
     const option = {
+      grid: {
+        // 다른 설정을 유지하면서 bottom만 조정
+        bottom: "20%", // 필요에 따라 이 값을 조정
+      },
       title: {
         text: ChartName,
         top: "5%",
@@ -132,6 +142,8 @@ const MainSmoothedLineChart = ({ APIoption, ChartName, unit }) => {
       }
     });
 
+    registerChart(chartKey, chartInstance);
+
     return () => {
       chartInstance.off("mouseover");
       chartInstance.dispose();
@@ -140,7 +152,7 @@ const MainSmoothedLineChart = ({ APIoption, ChartName, unit }) => {
 
   return (
     <>
-      <div className="w-[340px] h-[240px]" ref={chartRef}></div>
+      <div className="w-full h-full bg-white rounded-lg" ref={chartRef}></div>
       {/* 챗봇 밑에 떠서 주석처리 해뒀엉~ */}
       {/* <div className="absolute bottom-[0px] right-[0px] mb-2 mr-2 text-[#124946] text-xs font-normal leading-normal cursor-pointer">
         자세히 보기

@@ -8,6 +8,10 @@ const StackedChartLine2 = () => {
     const chartInstance = echarts.init(chartRef.current);
 
     const option = {
+      grid: {
+        // 다른 설정을 유지하면서 bottom만 조정
+        bottom: "20%", // 필요에 따라 이 값을 조정
+      },
       title: {
         text: "평균 온도",
         top: "5%",

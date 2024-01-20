@@ -3,7 +3,13 @@ import * as echarts from "echarts";
 import { useChartData } from "../../utils/api/Charts/ChartAPI";
 import { format, subDays } from "date-fns";
 
-const MainFootLineChart = ({ ChartName, APIoption, unit }) => {
+const MainFootLineChart = ({
+  ChartName,
+  APIoption,
+  unit,
+  registerChart,
+  chartKey,
+}) => {
   const chartRef = useRef(null);
 
   const startDate = format(subDays(new Date(), +1), "yyyy-MM-dd");
@@ -49,6 +55,10 @@ const MainFootLineChart = ({ ChartName, APIoption, unit }) => {
     });
 
     const option = {
+      grid: {
+        // 다른 설정을 유지하면서 bottom만 조정
+        bottom: "20%", // 필요에 따라 이 값을 조정
+      },
       title: {
         text: ChartName,
         top: "5%",
@@ -154,12 +164,15 @@ const MainFootLineChart = ({ ChartName, APIoption, unit }) => {
     });
 
     chartInstance.setOption(option);
+
+    registerChart(chartKey, chartInstance);
+
     return () => {
       chartInstance.dispose();
     };
   }, [data, isLoading, error]); // 의존성 배열에 API 응답 데이터를 포함합니다.
 
-  return <div ref={chartRef} className="w-[320px] h-[240px]" />;
+  return <div ref={chartRef} className="w-full h-full bg-white rounded-lg" />;
 };
 
 export default MainFootLineChart;
