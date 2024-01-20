@@ -3,13 +3,15 @@ import * as echarts from "echarts";
 import { useChartData } from "../../utils/api/Charts/ChartAPI";
 import { format, subDays } from "date-fns";
 
-const MainBarLine2Chart = ({ ChartName, registerChart, chartKey }) => {
+const MainBarLine2Chart = ({ ChartName, registerChart, chartKey, dateset }) => {
   const chartRef = useRef(null);
 
   // 일주일 전과 내일 날짜를 계산
-  const startDate = format(subDays(new Date(), 5), "yyyy-MM-dd");
+  const startDate = dateset
+    ? format(subDays(new Date(), 7), "yyyy-MM-dd")
+    : format(subDays(new Date(), 5), "yyyy-MM-dd");
   const endDate = format(subDays(new Date(), -1), "yyyy-MM-dd");
-
+  console.log(startDate);
   const { data, isLoading, error } = useChartData(
     `http://croft-ai.iptime.org:40401/api/v1/gh_data_item?start_time=${startDate}&end_time=${endDate}&data_type=227&data_type=198&group_by=day`,
     `chartData`

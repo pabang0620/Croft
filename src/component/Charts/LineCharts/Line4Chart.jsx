@@ -2,7 +2,7 @@ import * as echarts from "echarts";
 import React, { useEffect, useRef } from "react";
 import { useChartData } from "../../utils/api/Charts/ChartAPI";
 
-const Line4Chart = () => {
+const Line4Chart = ({ dataoff }) => {
   const chartRef = useRef(null);
 
   const { data, isLoading, error } = useChartData(
@@ -60,112 +60,45 @@ const Line4Chart = () => {
       xLabels = uniqueTimes.map((time) => new Date(time).getHours());
     }
 
-    const option = {
-      grid: {
-        // 다른 설정을 유지하면서 bottom만 조정
-        bottom: "20%", // 필요에 따라 이 값을 조정
-      },
-      tooltip: {
-        trigger: "axis",
-        axisPointer: { type: "cross" },
-      },
-      graphic: [
-        {
-          type: "text",
-          left: "5%", // VENT 텍스트의 x 좌표
-          top: "30%", // VENT 텍스트의 y 좌표
-          style: {
-            text: "VENT", // 표시할 텍스트
-            fontSize: 10,
-            fontWeight: "bold",
-            fill: "#fff", // 글자색을 하얀색으로 설정
-            backgroundColor: "#f00", // 배경색을 빨간색으로 설정
-            borderRadius: 10, // 배경의 둥근 모서리
-            padding: 2,
+    const series = [
+      {
+        smooth: true,
+        name: "외부온도",
+        type: "line",
+        data: data227,
+        markArea: {
+          itemStyle: {
+            color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
           },
-        },
-        {
-          type: "text",
-          left: "5%", // Heat 텍스트의 x 좌표
-          top: "34.5%", // Heat 텍스트의 y 좌표
-          style: {
-            text: "HEAT", // 표시할 텍스트
-            fontSize: 10,
-            fontWeight: "bold",
-            fill: "#fff", // 글자색을 하얀색으로 설정
-            backgroundColor: "black", // 배경색을 빨간색으로 설정
-            borderRadius: 10, // 배경의 둥근 모서리
-            padding: 2,
-          },
-        },
-        // 다른 그래픽 요소들...
-      ],
-
-      legend: {
-        data: ["외부온도", "온실온도", "VENT 온도 셋팅", "Heating 온도 셋팅"],
-        textStyle: {
-          color: "#333", // 범례 텍스트 색상
-          fontSize: 12, // 범례 텍스트 크기
-        },
-        itemWidth: 10,
-        itemHeight: 10,
-        icon: "rect",
-      },
-      xAxis: {
-        type: "category",
-        data: xLabels,
-        axisLine: {
-          show: false, // x축 라인 숨기기
-        },
-        axisTick: {
-          show: false,
+          // data: [
+          //   [
+          //     { yAxis: 15 }, // 시작 y축 값
+          //     { yAxis: 20 }, // 끝 y축 값 (차트 최대값까지)
+          //   ],
+          // ],
         },
       },
-      yAxis: {
-        axisLabel: {
-          fontSize: 10,
-          margin: "10",
+      {
+        smooth: true,
+        name: "온실온도",
+        type: "line",
+        data: data198,
+        markArea: {
+          itemStyle: {
+            color: "rgb(255, 0, 0 , 0.2)", // 빨강
+          },
+          // data: [
+          //   [
+          //     { xAxis: 2 }, // 시작 y축 값
+          //     { xAxis: 6 }, // 끝 y축 값 (차트 최대값까지)
+          //   ],
+          // ],
         },
-        type: "value",
-        min: -5,
-        max: maxData198,
-        interval: 5,
       },
-      series: [
-        {
-          smooth: true,
-          name: "외부온도",
-          type: "line",
-          data: data227,
-          markArea: {
-            itemStyle: {
-              color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
-            },
-            // data: [
-            //   [
-            //     { yAxis: 15 }, // 시작 y축 값
-            //     { yAxis: 20 }, // 끝 y축 값 (차트 최대값까지)
-            //   ],
-            // ],
-          },
-        },
-        {
-          smooth: true,
-          name: "온실온도",
-          type: "line",
-          data: data198,
-          markArea: {
-            itemStyle: {
-              color: "rgb(255, 0, 0 , 0.2)", // 빨강
-            },
-            // data: [
-            //   [
-            //     { xAxis: 2 }, // 시작 y축 값
-            //     { xAxis: 6 }, // 끝 y축 값 (차트 최대값까지)
-            //   ],
-            // ],
-          },
-        },
+    ];
+    // RTR 데이터 처리
+    if (!dataoff) {
+      series.push(
         {
           smooth: true,
           name: "VENT 온도 셋팅",
@@ -207,13 +140,95 @@ const Line4Chart = () => {
             color: "black", // 선 및 포인트의 색상을 빨간색으로 설정
           },
           symbol: "none", // 데이터 포인트 위의 점 제거
-        },
-      ],
-      // grid 설정 및 기타 필요한 스타일 설정...
-    };
-    // eCharts 옵션 설정
+        }
+      );
+    }
 
-    // eCharts 인스턴스에 옵션을 적용
+    // RTR 데이터 처리
+
+    const graphic = [];
+
+    if (!dataoff) {
+      series.push(
+        {
+          type: "text",
+          left: "5%", // VENT 텍스트의 x 좌표
+          top: "30%", // VENT 텍스트의 y 좌표
+          style: {
+            text: "VENT", // 표시할 텍스트
+            fontSize: 10,
+            fontWeight: "bold",
+            fill: "#fff", // 글자색을 하얀색으로 설정
+            backgroundColor: "#f00", // 배경색을 빨간색으로 설정
+            borderRadius: 10, // 배경의 둥근 모서리
+            padding: 2,
+          },
+        },
+        {
+          type: "text",
+          left: "5%", // Heat 텍스트의 x 좌표
+          top: "34.5%", // Heat 텍스트의 y 좌표
+          style: {
+            text: "HEAT", // 표시할 텍스트
+            fontSize: 10,
+            fontWeight: "bold",
+            fill: "#fff", // 글자색을 하얀색으로 설정
+            backgroundColor: "black", // 배경색을 빨간색으로 설정
+            borderRadius: 10, // 배경의 둥근 모서리
+            padding: 2,
+          },
+        }
+      );
+    }
+    const option = {
+      grid: {
+        // 다른 설정을 유지하면서 bottom만 조정
+        bottom: "20%", // 필요에 따라 이 값을 조정
+      },
+      title: {
+        text: "평균 온도",
+        top: "5%",
+        left: "2%",
+      },
+      tooltip: {
+        trigger: "axis",
+        axisPointer: { type: "cross" },
+      },
+      graphic: graphic,
+
+      legend: {
+        data: ["외부온도", "온실온도", "VENT 온도 셋팅", "Heating 온도 셋팅"],
+        textStyle: {
+          color: "#333", // 범례 텍스트 색상
+          fontSize: 12, // 범례 텍스트 크기
+        },
+        itemWidth: 10,
+        itemHeight: 10,
+        icon: "rect",
+      },
+      xAxis: {
+        type: "category",
+        data: xLabels,
+        axisLine: {
+          show: false, // x축 라인 숨기기
+        },
+        axisTick: {
+          show: false,
+        },
+      },
+      yAxis: {
+        axisLabel: {
+          fontSize: 10,
+          margin: "10",
+        },
+        type: "value",
+        min: -5,
+        max: maxData198,
+        interval: 5,
+      },
+      series: series, // 수정된 시리즈 배열 사용
+    };
+
     chartInstance.setOption(option);
     return () => {
       chartInstance.dispose();
@@ -222,7 +237,7 @@ const Line4Chart = () => {
 
   return (
     <>
-      <div ref={chartRef} style={{ width: "600px", height: "380px" }} />
+      <div ref={chartRef} className="w-full h-full" />
     </>
   );
 };
