@@ -7,6 +7,7 @@ import {
   ResourceIcon,
   TempResource,
 } from '../../utils/Data/SingleResourceData';
+import { handleDateChange } from "../../utils/handleDateChange";
 
 const TotalResourceChart = () => {
   const navigate = useNavigate();
@@ -28,13 +29,13 @@ const TotalResourceChart = () => {
             key={idx}
             className="flex flex-grow items-center justify-center flex-col bg-[#F1F1F1] mb-3 rounded-[10px]"
           >
-            <div>{ResourceIcon(39)[idx]}</div>
+            <div className="mt-4">{ResourceIcon(39)[idx]}</div>
             <div className="text-base font-bold mb-[.5625rem] mt-[.875rem]">
               {item.temp}
             </div>
             <div
               className={`font-semibold ${
-                item.percentUp ? 'text-error' : 'text-accent'
+                item.percentUp ? "text-error" : "text-accent"
               }`}
             >
               {PercentUpDown(item.percentUp)} {item.percentNum} %

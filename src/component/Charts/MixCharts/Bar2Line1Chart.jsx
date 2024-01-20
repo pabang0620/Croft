@@ -63,6 +63,10 @@ const Bar2Line1Chart = ({ ChartName }) => {
       // 최대값 구하는 로직
 
       const option = {
+        grid: {
+          // 다른 설정을 유지하면서 bottom만 조정
+          bottom: "20%", // 필요에 따라 이 값을 조정
+        },
         title: {
           text: ChartName,
           top: "5%",

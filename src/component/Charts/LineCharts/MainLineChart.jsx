@@ -2,7 +2,7 @@ import * as echarts from "echarts";
 import React, { useEffect, useRef } from "react";
 import { useChartData } from "../../utils/api/Charts/ChartAPI";
 
-const MainLineChart = ({ APIoption, ChartName }) => {
+const MainLineChart = ({ APIoption, ChartName, registerChart, chartKey }) => {
   const chartRef = useRef(null);
   const dataType = APIoption;
   const {
@@ -39,6 +39,10 @@ const MainLineChart = ({ APIoption, ChartName }) => {
         .padStart(2, "0")}`;
     });
     const option = {
+      grid: {
+        // 다른 설정을 유지하면서 bottom만 조정
+        bottom: "20%", // 필요에 따라 이 값을 조정
+      },
       title: {
         text: ChartName,
         top: "5%",
@@ -115,11 +119,15 @@ const MainLineChart = ({ APIoption, ChartName }) => {
       }
     });
 
+    if (registerChart) {
+      registerChart(chartKey, chartInstance);
+    }
+
     return () => {
       chartInstance.dispose();
     };
   }, [data, isLoading, error]);
-  return <div ref={chartRef} className="w-[320px] h-[240px]" />;
+  return <div ref={chartRef} className="w-full h-full bg-white rounded-lg" />;
 };
 
 export default MainLineChart;

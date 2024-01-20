@@ -48,6 +48,10 @@ const BarOtherColorChart = ({ ChartName, APIoption }) => {
     // 최대값을 5의 배수로 올림
     const maxYAxis = Math.ceil(maxSeriesValue / 5) * 5;
     const option = {
+      grid: {
+        // 다른 설정을 유지하면서 bottom만 조정
+        bottom: "20%", // 필요에 따라 이 값을 조정
+      },
       title: {
         text: ChartName,
         top: "5%",

@@ -3,7 +3,7 @@ import * as echarts from "echarts";
 import { useChartData } from "../../utils/api/Charts/ChartAPI";
 import { format, subDays } from "date-fns";
 
-const MainBarLine2Chart = ({ ChartName }) => {
+const MainBarLine2Chart = ({ ChartName, registerChart, chartKey }) => {
   const chartRef = useRef(null);
 
   // 일주일 전과 내일 날짜를 계산
@@ -61,6 +61,10 @@ const MainBarLine2Chart = ({ ChartName }) => {
     // console.log(data198Max, data198Min);
 
     const option = {
+      grid: {
+        // 다른 설정을 유지하면서 bottom만 조정
+        bottom: "20%", // 필요에 따라 이 값을 조정
+      },
       title: {
         text: ChartName,
         top: "5%",
@@ -161,12 +165,17 @@ const MainBarLine2Chart = ({ ChartName }) => {
 
     // eCharts 인스턴스에 옵션을 적용
     chartInstance.setOption(option);
+
+    if (registerChart) {
+      registerChart(chartKey, chartInstance);
+    }
+
     return () => {
       chartInstance.dispose();
     };
   }, [data, isLoading, error]); // 의존성 배열에 API 응답 데이터를 포함합니다.
 
-  return <div ref={chartRef} style={{ width: "480px", height: "480px" }} />;
+  return <div ref={chartRef} className="w-full h-full bg-white rounded-lg" />;
 };
 
 export default MainBarLine2Chart;

@@ -3,7 +3,7 @@ import * as echarts from "echarts";
 import { useChartData } from "../../utils/api/Charts/ChartAPI";
 import { format } from "date-fns";
 
-const MainBarChart = ({ ChartName }) => {
+const MainBarChart = ({ ChartName, registerChart, chartKey }) => {
   const chartRef = useRef(null);
 
   const { data, isLoading, error } = useChartData(
@@ -24,6 +24,10 @@ const MainBarChart = ({ ChartName }) => {
       const periodValue = data.data.map((item) => item.photo_period_hour);
 
       const option = {
+        grid: {
+          // 다른 설정을 유지하면서 bottom만 조정
+          bottom: "20%", // 필요에 따라 이 값을 조정
+        },
         title: {
           text: ChartName,
           top: "5%",
@@ -89,6 +93,10 @@ const MainBarChart = ({ ChartName }) => {
         }
       });
 
+      if (registerChart) {
+        registerChart(chartKey, chartInstance);
+      }
+
       return () => {
         chartInstance.dispose();
       };
@@ -99,7 +107,7 @@ const MainBarChart = ({ ChartName }) => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading data</div>;
 
-  return <div ref={chartRef} className="w-[320px] h-[240px]" />;
+  return <div ref={chartRef} className="w-full h-full bg-white rounded-lg" />;
 };
 
 export default MainBarChart;

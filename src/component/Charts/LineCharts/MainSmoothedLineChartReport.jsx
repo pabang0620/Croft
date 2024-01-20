@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import * as echarts from 'echarts';
+import React, { useEffect, useRef } from "react";
+import * as echarts from "echarts";
 
 const MainSmoothedLineChart = () => {
   const chartRef = useRef(null);
@@ -30,48 +30,52 @@ const MainSmoothedLineChart = () => {
 
     // eCharts 옵션 설정
     const option = {
+      grid: {
+        // 다른 설정을 유지하면서 bottom만 조정
+        bottom: "20%", // 필요에 따라 이 값을 조정
+      },
       // title: {
       //   text: '온실 온도',
       //   top: '5%',
       //   left: '2%',
       // },
       tooltip: {
-        trigger: 'axis',
+        trigger: "axis",
         axisPointer: {
-          type: 'shadow',
+          type: "shadow",
         },
       },
       xAxis: {
-        type: 'category',
-        data: ['04:00', '08:00', '12:00', '16:00', '20:00', '24:00'], // 4시간 간격의 시간 레이블
+        type: "category",
+        data: ["04:00", "08:00", "12:00", "16:00", "20:00", "24:00"], // 4시간 간격의 시간 레이블
         axisLabel: {
           fontSize: 9, // 글꼴 크기를 10px로 설정
         },
       },
       yAxis: {
-        type: 'value',
+        type: "value",
         axisLabel: {
           fontSize: 9, // 글꼴 크기를 10px로 설정
         },
       },
       lineStyle: {
-        color: 'tomato', // 라인 색상을 tomato로 설정
+        color: "tomato", // 라인 색상을 tomato로 설정
       },
       series: [
         {
-          name: '온실 온도',
-          type: 'line',
+          name: "온실 온도",
+          type: "line",
           smooth: true,
           data: dummyData,
           itemStyle: {
             // 데이터 포인트 색상 설정
-            color: 'tomato',
+            color: "tomato",
             borderWidth: 2, // 포인트의 테두리 두께
-            borderColor: 'tomato', // 포인트의 테두리 색상
+            borderColor: "tomato", // 포인트의 테두리 색상
           },
           markArea: {
             itemStyle: {
-              color: 'rgba(79, 254, 35, 0.3)', // #4FFE234D와 유사한 RGBA 색상
+              color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
             },
             data: [
               [

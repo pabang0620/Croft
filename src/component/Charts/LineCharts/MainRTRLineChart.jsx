@@ -3,7 +3,7 @@ import * as echarts from "echarts";
 import { useChartData } from "../../utils/api/Charts/ChartAPI";
 import { format } from "date-fns";
 
-const MainRTRLineChart = ({ ChartName, unit }) => {
+const MainRTRLineChart = ({ ChartName, unit, registerChart, chartKey }) => {
   const chartRef = useRef(null);
 
   // RTR 데이터를 가져오는 API 호출
@@ -33,6 +33,10 @@ const MainRTRLineChart = ({ ChartName, unit }) => {
       const roundedValue = Math.ceil(maxValue / 5) * 5;
 
       const option = {
+        grid: {
+          // 다른 설정을 유지하면서 bottom만 조정
+          bottom: "20%", // 필요에 따라 이 값을 조정
+        },
         title: {
           text: ChartName,
           top: "5%",
@@ -121,6 +125,10 @@ const MainRTRLineChart = ({ ChartName, unit }) => {
         }
       });
 
+      if (registerChart.length > 0) {
+        registerChart(chartKey, chartInstance);
+      }
+
       return () => {
         chartInstance.dispose();
       };
@@ -130,7 +138,7 @@ const MainRTRLineChart = ({ ChartName, unit }) => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading data</div>;
 
-  return <div ref={chartRef} className="w-[320px] h-[240px]" />;
+  return <div ref={chartRef} className="w-full h-full bg-white rounded-lg" />;
 };
 
 export default MainRTRLineChart;

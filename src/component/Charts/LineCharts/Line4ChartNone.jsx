@@ -8,6 +8,10 @@ const Line4ChartNone = () => {
     const chartInstance = echarts.init(chartRef.current);
 
     const option = {
+      grid: {
+        // 다른 설정을 유지하면서 bottom만 조정
+        bottom: "20%", // 필요에 따라 이 값을 조정
+      },
       tooltip: {
         trigger: "axis",
         axisPointer: { type: "cross" },
