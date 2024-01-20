@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.5",
     "date-fns": "^3.0.6",
+    "dotenv": "^16.3.2",
     "echarts": "^5.4.3",
     "echarts-for-react": "^3.0.2",
     "immutability-helper": "^3.1.1",

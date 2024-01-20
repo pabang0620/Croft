@@ -53,7 +53,8 @@ const SideBar = ({ currentPath }) => {
     if (currentPath === '/global-report') setClickedIcon('report');
     if (currentPath === '/') setClickedIcon('total');
     if (currentPath === '/dash') setClickedIcon('home');
-    if (currentPath === '/dash/environment/total') setClickedIcon('greenhouse');
+    if (currentPath.includes('/dash/environment/'))
+      setClickedIcon('greenhouse');
     if (currentPath === '/single-sales') setClickedIcon('sales');
     if (currentPath === '/single-resource') setClickedIcon('resource');
     if (currentPath === '/single-report') setClickedIcon('report');

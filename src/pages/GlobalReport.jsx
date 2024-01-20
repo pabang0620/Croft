@@ -7,7 +7,7 @@ import ReportSubBar from '../layout/NavBar/SubNavBar/ReportSubBar';
 import { DailyReport } from '../component/utils/Data/TempData';
 
 const GlobalReport = () => {
-  const { container, setContainer, ContainerArray } = useOutletContext();
+  const { container, setContainer } = useOutletContext();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const date = format(selectedDate, 'yyyy.MM.dd');
 
@@ -19,7 +19,6 @@ const GlobalReport = () => {
         container={container}
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
-        ContainerArray={ContainerArray}
       />
       <div className=" mt-[21px] ml-[29px]">
         <TotalReport

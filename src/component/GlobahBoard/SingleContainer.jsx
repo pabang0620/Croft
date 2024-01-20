@@ -1,24 +1,27 @@
-import { useNavigate } from "react-router-dom";
-import { CriticalOrWarn, TotalDashIcons, IconsColor } from "../utils/Icons";
-import { CriticalSeq, iconSeq } from "../utils/Data/ContainerData";
+import { useNavigate } from 'react-router-dom';
+import { CriticalOrWarn, TotalDashIcons, IconsColor } from '../utils/Icons';
+import { CriticalSeq, iconSeq } from '../utils/Data/ContainerData';
 
-const SingleContainer = ({ disconnect, critical, warning }) => {
+const SingleContainer = ({ data, disconnect, critical, warning }) => {
   const navigate = useNavigate();
   const criticalSeq = CriticalSeq(critical);
   // api 연동 시 하단의 dataArray 수정 필요
-  const dataArray = ["22 ℃", "51%", "629 w/m²", "285.3 ppm"];
-  // 227 Meteo_OutsideTemp
-  // 224 Meteo_RH
-  // 244 Meteo_Radiation
+  const dataArray = [
+    `${data.temp}℃`,
+    `${data.humidity}%`,
+    `${data.radiation}w/m²`,
+    `${data.co2}ppm`,
+  ];
+
   return (
     <div
       className={`w-[240px] h-[240px] rounded-[10px] bg-white relative cursor-pointer select-none ${
-        disconnect ? "text-base500" : ""
+        disconnect ? 'text-base500' : ''
       }`}
     >
       <div
         className={`absolute top-[80px] left-[70px] ${
-          disconnect ? "" : "hidden"
+          disconnect ? '' : 'hidden'
         }`}
       >
         <img
@@ -28,7 +31,7 @@ const SingleContainer = ({ disconnect, critical, warning }) => {
         />
       </div>
       <div className="h-[41px] font-sans text-base font-semibold ml-[8px] mr-[12px] pt-[10px] pl-[8px] border-b border-base400 flex justify-between">
-        <div>옥수수 재배 컨테이너</div>
+        <div>{data.name}</div>
         <div>{CriticalOrWarn(disconnect, critical, warning)}</div>
       </div>
       <div className="flex flex-col text-base font-semibold leading-normal justify-center pt-4">
@@ -42,9 +45,9 @@ const SingleContainer = ({ disconnect, critical, warning }) => {
               <div
                 className={`ml-[15px] 
                 ${
-                  IconsColor(criticalSeq[idx], disconnect) === "#FF0000"
-                    ? "text-[#FF0000]"
-                    : ""
+                  IconsColor(criticalSeq[idx], disconnect) === '#FF0000'
+                    ? 'text-[#FF0000]'
+                    : ''
                 }
                 `}
               >
@@ -56,7 +59,7 @@ const SingleContainer = ({ disconnect, critical, warning }) => {
       </div>
       <div
         className="text-accent font-bold absolute bottom-[21px] right-[16px]"
-        onClick={() => navigate("/dash")}
+        onClick={() => navigate('/dash')}
       >
         <img
           className="w-[20px]"
