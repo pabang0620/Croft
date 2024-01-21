@@ -14,7 +14,7 @@ const WaterData = ({ date, setDate }) => {
         </div>
       </div>
       {/* 차트 부분 */}
-      <div className="flex pr-[51px]">
+      <div className="flex pr-[51px] justify-between">
         <div className="flex">
           {/* 차트 좌측의 글자 부분 */}
           <div className="flex flex-col gap-5 ml-[29px] w-[10%] min-w-[4rem]">
@@ -37,21 +37,19 @@ const WaterData = ({ date, setDate }) => {
             <MainLineAreaChart APIoption="218" ChartName="" />
           </div>
         </div>
-        <div className="flex">
-          <div className="flex gap-[42px]">
-            <div className="mt-[-1rem] flex flex-col text-sm min-w-[56px]">
-              <div>평균 EC</div>
-              <div className="text-lg font-bold">2.89</div>
-            </div>
-            <BarOtherColorChart ChartName="" APIoption="230" />
+        <div className="flex gap-[42px]">
+          <div className="mt-[-1rem] flex flex-col text-sm min-w-[56px]">
+            <div>평균 EC</div>
+            <div className="text-lg font-bold">2.89</div>
           </div>
-          <div className="flex gap-[23px]">
-            <div className="mt-[-1rem] flex flex-col text-sm min-w-[56px]">
-              <div>평균 PH</div>
-              <div>6</div>
-            </div>
-            <BarOtherColorChart ChartName="" APIoption="250" />
+          <BarOtherColorChart ChartName="" APIoption="230" />
+        </div>
+        <div className="flex gap-[23px]">
+          <div className="mt-[-1rem] flex flex-col text-sm min-w-[56px]">
+            <div>평균 PH</div>
+            <div>6</div>
           </div>
+          <BarOtherColorChart ChartName="" APIoption="250" />
         </div>
       </div>
       {/* 하단의 날짜 선택 부분 */}

@@ -87,7 +87,7 @@ const WonhoGrid = () => {
   return (
     <>
       <button onClick={toggleEditMode}>
-        {editMode ? '수정 완료' : '레이아웃 수정'}
+        {editMode ? "수정 완료" : "레이아웃 수정"}
       </button>
       {/* <TotalResourceChart /> */}
       <GridLayout

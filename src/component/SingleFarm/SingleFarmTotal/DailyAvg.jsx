@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { format, startOfWeek } from 'date-fns';
 import PickPeriodDate from '../../utils/DatePicker/PickPeriodDate';
 import LineChart from '../../Charts/LineCharts/LineChart';
 import Line2Chart from '../../Charts/LineCharts/Line2Chart';
 import Line4Chart from '../../Charts/LineCharts/Line4Chart';
+import MainBarLine2Chart from '../../Charts/MixCharts/MainBarLine2Chart';
 
 const DailyAvg = () => {
   const [startDate, setStartDate] = useState(startOfWeek(new Date()));
@@ -23,12 +24,15 @@ const DailyAvg = () => {
       </div>
       {/* 차트 부분 */}
       <div className="flex flex-col gap-[31px] pr-[51px] w-full flex-wrap">
-        <div className="flex gap-[48px] flex-grow w-full">
+        <div className="flex gap-[48px] flex-grow min-h-[20rem]">
           {/* 평균온도 그래프인데 모양이 조금 다르네 ?  */}
-          <div className="w-[45%] h-full">
-            <Line4Chart ChartName="" />
+          <div className="w-[50%] h-full">
+            <MainBarLine2Chart key="7" ChartName="평균 온도" />
           </div>
-          <div className="w-[45%] min-h-full">
+          {/* <div className="w-[50%] h-full">
+            <Line4Chart ChartName="" />
+          </div> */}
+          <div className="w-[50%] min-h-full">
             <Line2Chart
               ChartName="평균 습도"
               APIoption="199"
@@ -37,10 +41,10 @@ const DailyAvg = () => {
           </div>
         </div>
         <div className="flex gap-[48px] flex-grow min-h-[20rem]">
-          <div className="w-[45%] min-h-full">
+          <div className="w-[50%] min-h-full">
             <LineChart ChartName="평균 DLI" APIoption="220" />
           </div>
-          <div className="w-[45%] min-h-full">
+          <div className="w-[50%] min-h-full">
             <LineChart ChartName="평균 CO2 농도" APIoption="225" />
           </div>
         </div>

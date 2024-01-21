@@ -12,8 +12,12 @@ const GreenHouseHumid = () => {
               <div className="font-bold text-lg">10.11</div>
             </div>
             <div className="flex flex-col">
-              <div className="text-sm">평균온도</div>
-              <div className="font-bold text-lg">22℃</div>
+              <div className="text-sm">습도</div>
+              <div className="font-bold text-lg">55%</div>
+            </div>
+            <div className="flex flex-col">
+              <div className="text-sm">평균습도</div>
+              <div className="font-bold text-lg">45%</div>
             </div>
           </div>
           <div className="w-[90%] h-[390px] bg-white rounded-[10px]">

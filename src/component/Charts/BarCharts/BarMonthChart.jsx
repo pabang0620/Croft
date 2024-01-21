@@ -51,10 +51,10 @@ const BarMonthChart = ({ queryname }) => {
     const option = {
       grid: {
         // 다른 설정을 유지하면서 bottom만 조정
-        bottom: "20%", // 필요에 따라 이 값을 조정
+        bottom: "10%", // 필요에 따라 이 값을 조정
       },
       title: {
-        text: queryname,
+        // text: queryname,
         top: "5%",
         left: "2%",
       },

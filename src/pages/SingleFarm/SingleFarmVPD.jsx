@@ -1,12 +1,9 @@
-import Line4Chart from "../../component/Charts/LineCharts/Line4Chart";
-import Bar2Line1Chart from "../../component/Charts/MixCharts/Bar2Line1Chart";
-import MainSliderDiv from "../../component/Graphs/MainSliderDiv";
-import BarMonthChart from "../../component/Charts/BarCharts/BarMonthChart";
+import DailyVPD from '../../component/SingleFarm/SingleFarmVPD/DailyVPD';
 
 const SingleFarmVPD = () => {
   return (
-    <div>
-      <div className="w-[320px] h-[210px] bg-white rounded-[10px]">
+    <div className="my-[11px] mx-[25px] flex flex-col gap-[10px] max-w-[100%]">
+      {/* <div className="w-[320px] h-[210px] bg-white rounded-[10px]">
         VPD 차트{" "}
       </div>
       <div className="w-[798px] h-[350px] bg-white rounded-[10px]">
@@ -14,10 +11,11 @@ const SingleFarmVPD = () => {
       </div>
       <div className="w-[798px] h-[350px] bg-white rounded-[10px]">
         <Line4Chart ChartName="평균 온도" dataoff="true" />
-      </div>
-      <div className="w-[1300px] h-[380px] bg-white rounded-[10px]">
-        {/* 데이터 바꿔줘야함(쿼리만) VPD는 라인차트로 바꿔달래...(?)  */}
-        <BarMonthChart queryname="vpd" />
+      </div> */}
+      <div>임시</div>
+      <img src="/assets/images/Temp/TempDailyVPD.svg" alt="" />
+      <div className="w-full bg-white  h-[28.125rem] rounded-[10px]">
+        <DailyVPD />
       </div>
     </div>
   );

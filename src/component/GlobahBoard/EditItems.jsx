@@ -1,24 +1,24 @@
-import { useState, useEffect } from 'react';
-import { ItemsCheck } from '../utils/Icons';
+import { useState, useEffect } from "react";
+import { ItemsCheck } from "../utils/Icons";
 import {
   checkboxDefault,
   itemArray,
   titleArray,
-} from '../utils/Data/ItemsData';
-const EditItems = ({ setOpenModal, removeComponent, addComponent }) => {
+} from "../utils/Data/ItemsData";
+const EditItems = ({ setOpenModal }) => {
   const [items, setItems] = useState();
   const [isChecked, setIsChecked] = useState(false);
   const [isCheckedTotal, setIsCheckedTotal] = useState(
-    checkboxDefault('total')
+    checkboxDefault("total")
   );
   const [isCheckedGreen, setIsCheckedGreen] = useState(
-    checkboxDefault('green')
+    checkboxDefault("green")
   );
   const [isCheckedGrowth, setIsCheckedGrowth] = useState(
-    checkboxDefault('growth')
+    checkboxDefault("growth")
   );
   const [isCheckedResource, setIsCheckedResource] = useState(
-    checkboxDefault('resource')
+    checkboxDefault("resource")
   );
   const stateArray = [
     isCheckedTotal,
@@ -33,12 +33,10 @@ const EditItems = ({ setOpenModal, removeComponent, addComponent }) => {
     setIsCheckedResource,
   ];
 
-  const handleCheckboxChange = (state, setState, idx, key) => {
+  const handleCheckboxChange = (state, setState, idx) => {
     let temp = state;
     temp[idx] = !temp[idx];
     setState(temp);
-    if (temp === true) removeComponent(key);
-    else addComponent(key);
   };
 
   useEffect(() => {
@@ -87,14 +85,13 @@ const EditItems = ({ setOpenModal, removeComponent, addComponent }) => {
                         handleCheckboxChange(
                           stateArray[i],
                           setStateArray[i],
-                          idx,
-                          item.chartKey
+                          idx
                         )
                       }
                     />
                     <div>
                       {/* {ItemsCheck(isCheckedTotal[idx] ? 'black' : '#B7B7B7')} */}
-                      {ItemsCheck(stateArray[i][idx] ? 'black' : '#B7B7B7')}
+                      {ItemsCheck(stateArray[i][idx] ? "black" : "#B7B7B7")}
                     </div>
                     <span className="text-xs">{item.text}</span>
                   </label>
