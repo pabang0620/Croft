@@ -7,7 +7,7 @@ import { handleDateChange } from "../../utils/handleDateChange";
 
 const TotalResourceChart = () => {
   return (
-    <div className="bg-white w-[650px] h-[220px] rounded-lg flex flex-col p-4">
+    <div className="bg-white w-[650px] h-[210px] rounded-lg flex flex-col p-4">
       <div className="text-base font-semibold flex items-center gap-2">
         <div>자원 사용량 총합</div>
         <div>몇월 몇 주차</div>

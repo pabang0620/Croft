@@ -13,11 +13,20 @@ import MainSmoothedLineChartAdd from "../../Charts/LineCharts/MainSmoothedLineCh
 
 import MainLineAreaChart from "../../Charts/MixCharts/MainLineAreaChart";
 import MainBar2LineChart from "../../Charts/MixCharts/MainBarLine2Chart";
+
+import TotalReportChart from "../../Charts/TotalReportChart/TotalReportChart";
+import GreenhouseScore from "../../Charts/GreenhouseScore";
+import CroftGuide from "../../Charts/CroftGuide/CroftGuide";
 import TotalResourceChart from "../../Charts/TotalResourceChart/TotalResourceChart";
 
 const GridData = [
+  <TotalReportChart key="1" title="온실 환경 종합" time="10:25" size={50} />,
+  <GreenhouseScore key="2" />,
+  <CroftGuide key="3" />,
+  <TotalResourceChart key="4" />, //자원사용량 n월 n주차
+
   <MainSliderDiv
-    key="1"
+    key="5"
     queryName="rtr"
     title="RTR"
     absData1="0"
@@ -30,7 +39,7 @@ const GridData = [
     absData8="생식생장, 꽃이 피고 열매가 맺혀요"
   />,
   <MainSliderDiv
-    key="2"
+    key="6"
     queryName="photo_period"
     title="Photo Period"
     absData1="0"
@@ -42,11 +51,11 @@ const GridData = [
     absData7="고권장"
     absData8="Photo Period 상태에 따른 메시지가 나옵니다."
   />,
-  <MainLineAreaChart key="3" APIoption="218" ChartName="급수 데이터" />,
-  <MainBar2LineChart key="4" ChartName="평균 온도" />,
-  <MainLineChart key="5" APIoption="220" ChartName="DLI" />,
+  <MainLineAreaChart key="7" APIoption="218" ChartName="급수 데이터" />,
+  <MainBar2LineChart key="8" ChartName="평균 온도" />,
+  <MainLineChart key="9" APIoption="220" ChartName="DLI" />,
   <MainSliderDiv
-    key="6"
+    key="10"
     queryName="vpd"
     title="VPD"
     absData2="1.2"
@@ -58,30 +67,30 @@ const GridData = [
     absData8="VPD 상태에 따른 메시지가 나옵니다."
   />,
   // 완벽한데
-  <MainBarChartLine key="7" ChartName="DLI" />,
-  <MainBarChart key="8" ChartName="Photo Period" />,
-  <MainRTRLineChart key="9" ChartName="RTR" />,
+  <MainBarChartLine key="11" ChartName="DLI" />,
+  <MainBarChart key="12" ChartName="Photo Period" />,
+  <MainRTRLineChart key="13" ChartName="RTR" />,
   // 다음줄
   <MainSmoothedLineChart
-    key="10"
+    key="14"
     APIoption="198"
     ChartName="온실 온도"
     unit="℃"
   />,
   <MainSmoothedLineChart
-    key="11"
+    key="15"
     APIoption="199"
     ChartName="온실 습도"
     unit="%"
   />,
   <MainSmoothedLineChart
-    key="12"
+    key="16"
     APIoption="225"
     ChartName="온실 CO2"
     unit="ppm"
   />,
   <MainSmoothedLineChartAdd
-    key="13"
+    key="17"
     APIoption="244"
     ChartName="외부 광량"
     unit="w/m²"
@@ -89,7 +98,7 @@ const GridData = [
 
   // 다음줄
   <MainFootLineChart
-    key="14"
+    key="18"
     APIoption="218"
     ChartName="물 사용량"
     unit="liter"
