@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useChartData } from "../utils/api/Charts/ChartAPI"; // API 호출용 훅을 가져옵니다.
+import React, { useState, useRef, useEffect } from 'react';
+import { useChartData } from '../utils/api/Charts/ChartAPI'; // API 호출용 훅을 가져옵니다.
 
 const MainSliderDiv = ({
   queryName, // 오류
@@ -18,8 +18,8 @@ const MainSliderDiv = ({
   // API로부터 RTR 수치 데이터를 불러옵니다.
   const { data, isLoading, error } = useChartData(
     // `/api/v1/farms/photo_period/current`,
-    `http://croft-ai.iptime.org:40401/api/v1/farms/${queryName}/current`, // 오류
-    `photoPeriod-${queryName}`
+    `${process.env.REACT_APP_BASE_API_KEY}/v1/farms/${queryName}/current`, // 오류
+    `${queryName}-current`
   );
 
   useEffect(() => {

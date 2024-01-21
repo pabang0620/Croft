@@ -14,7 +14,6 @@ import SingleSales from './pages/SingleSales';
 import SingleSalesNYear from './pages/SingleSalesNYear';
 import SingleResource from './pages/SingleResource';
 import SingleReport from './pages/SingleReport';
-import GridLayoutTest from './component/utils/DND/grid';
 
 const queryClient = new QueryClient();
 
@@ -39,7 +38,6 @@ function App() {
           />
           <Route path="/single-resource" element={<SingleResource />} />
           <Route path="/single-report" element={<SingleReport />} />
-          <Route path="/grid" element={<GridLayoutTest />} />
         </Route>
       </Routes>
     </QueryClientProvider>

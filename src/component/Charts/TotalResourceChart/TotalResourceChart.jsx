@@ -7,7 +7,6 @@ import {
   ResourceIcon,
   TempResource,
 } from '../../utils/Data/SingleResourceData';
-import { handleDateChange } from "../../utils/handleDateChange";
 
 const TotalResourceChart = () => {
   const navigate = useNavigate();
@@ -35,7 +34,7 @@ const TotalResourceChart = () => {
             </div>
             <div
               className={`font-semibold ${
-                item.percentUp ? "text-error" : "text-accent"
+                item.percentUp ? 'text-error' : 'text-accent'
               }`}
             >
               {PercentUpDown(item.percentUp)} {item.percentNum} %

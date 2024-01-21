@@ -1,8 +1,8 @@
 import BasicSubBar from './BasicSubBar';
-import ReportSubBar from './ReportSubBar';
-import DashSubBar from './DashSubBar';
-import SalesSubBar from './SalesSubBar';
-import ResourceSubBar from './ResourceSubBar';
+// import ReportSubBar from './ReportSubBar';
+// import DashSubBar from './DashSubBar';
+// import SalesSubBar from './SalesSubBar';
+// import ResourceSubBar from './ResourceSubBar';
 
 export const SubNavBarTitle = (
   currentPath,
@@ -13,8 +13,8 @@ export const SubNavBarTitle = (
   switch (currentPath) {
     case 'basic':
       return <BasicSubBar title={''} />;
-    case '/dash':
-      return <DashSubBar />;
+    // case '/dash':
+    //   return <DashSubBar />;
     case '/dash/environment/total':
       return <BasicSubBar title={'온실환경 종합'} />;
     case '/dash/environment/RTR':

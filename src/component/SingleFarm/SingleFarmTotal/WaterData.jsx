@@ -32,7 +32,7 @@ const WaterData = ({ date, setDate }) => {
             </div>
           </div>
           {/* 여기까지 글자 */}
-          <div className="w-[461px] h-[333px]">
+          <div className="w-[461px] h-[340px]">
             {/* 해당 부분 데이터 에러남 */}
             <MainLineAreaChart APIoption="218" ChartName="" />
           </div>
@@ -43,7 +43,7 @@ const WaterData = ({ date, setDate }) => {
               <div>평균 EC</div>
               <div className="text-lg font-bold">2.89</div>
             </div>
-            <BarOtherColorChart ChartName="평균 EC" APIoption="230" />
+            <BarOtherColorChart ChartName="" APIoption="230" />
           </div>
           <div className="flex gap-[23px]">
             <div className="mt-[-1rem] flex flex-col text-sm min-w-[56px]">

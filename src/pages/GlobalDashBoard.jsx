@@ -22,7 +22,7 @@ const GlobalDashBoard = () => {
           스마트팜 추가
         </div>
       </div>
-      <ContainerWrapper />
+      <ContainerWrapper setContainer={setContainer}/>
     </div>
   );
 };

@@ -1,12 +1,11 @@
-// WonhoGrid.jsx
 import React, { useState } from 'react';
 import GridLayout from 'react-grid-layout';
+import DashSubBar from '../../../layout/NavBar/SubNavBar/DashSubBar';
 import GridData from './GridData';
-import TotalResourceChart from '../../Charts/TotalResourceChart/TotalResourceChart';
+// import TotalResourceChart from '../../Charts/TotalResourceChart/TotalResourceChart';
 
-const WonhoGrid = () => {
-  const [wonhoGridData, setWonhoGridData] = useState(GridData); // 상태로 관리
-  const [editMode, setEditMode] = useState(false); // 수정 모드 상태
+const EditLayout = ({ editMode, setEditMode }) => {
+  const [gridLayoutData, setGridLayoutData] = useState(GridData); // 상태로 관리
 
   const calculateLayoutForComponent = (index) => {
     const positionMap = {
@@ -24,6 +23,16 @@ const WonhoGrid = () => {
       11: { x: 4, y: 3 },
       12: { x: 6, y: 3 },
       13: { x: 0, y: 4 },
+
+      14: { x: 0, y: 1 },
+      15: { x: 2, y: 1 },
+      16: { x: 0, y: 2 },
+      17: { x: 2, y: 2 },
+      18: { x: 4, y: 2 },
+      19: { x: 0, y: 3 },
+      20: { x: 2, y: 3 },
+      21: { x: 4, y: 3 },
+      22: { x: 6, y: 3 },
     };
 
     const position = positionMap[index];
@@ -44,21 +53,37 @@ const WonhoGrid = () => {
     calculateLayoutForComponent(index)
   );
 
-  const addComponent = (newComponent) => {
-    setWonhoGridData([...wonhoGridData, newComponent]);
-    // 필요하면 여기서 layout도 업데이트
-  };
-  const removeComponent = (componentKey) => {
-    const newWonhoGridData = wonhoGridData.filter(
-      (_, index) => index.toString() !== componentKey
+  // const addComponent = (newComponent) => {
+  const addComponent = (componentKey) => {
+    // GridData
+    const newComponent = GridData.filter(
+      (_, index) => index.toString() === componentKey
     );
-    setWonhoGridData(newWonhoGridData);
-
+    setGridLayoutData([...gridLayoutData, newComponent]);
+    // 필요하면 여기서 layout도 업데이트
     // 레이아웃을 새롭게 계산합니다. 이 때, 삭제된 컴포넌트의 인덱스를 고려합니다.
-    const newLayout = newWonhoGridData.map((_, index) => {
+    const newLayout = gridLayoutData.map((_, index) => {
       // 여기서 'index'는 새로운 배열의 인덱스이므로, 실제 'positionMap'에서 사용되어야 할
       // 인덱스와 일치하지 않을 수 있습니다. 이를 매핑하기 위해 원본 배열을 참조합니다.
-      const originalIndex = wonhoGridData.findIndex(
+      const originalIndex = gridLayoutData.findIndex(
+        (component, compIndex) => compIndex.toString() === index.toString()
+      );
+      return calculateLayoutForComponent(originalIndex);
+    });
+
+    setLayout(newLayout);
+  };
+  const removeComponent = (componentKey) => {
+    const newGridData = gridLayoutData.filter(
+      (_, index) => index.toString() !== componentKey
+    );
+    setGridLayoutData(newGridData);
+
+    // 레이아웃을 새롭게 계산합니다. 이 때, 삭제된 컴포넌트의 인덱스를 고려합니다.
+    const newLayout = newGridData.map((_, index) => {
+      // 여기서 'index'는 새로운 배열의 인덱스이므로, 실제 'positionMap'에서 사용되어야 할
+      // 인덱스와 일치하지 않을 수 있습니다. 이를 매핑하기 위해 원본 배열을 참조합니다.
+      const originalIndex = gridLayoutData.findIndex(
         (component, compIndex) => compIndex.toString() === index.toString()
       );
       return calculateLayoutForComponent(originalIndex);
@@ -88,23 +113,23 @@ const WonhoGrid = () => {
   };
 
   return (
-    <>
-      {' '}
+    <div className="select-none h-full w-full overflow-hidden">
       <button onClick={toggleEditMode}>
         {editMode ? '수정 완료' : '레이아웃 수정'}
       </button>
       {/* <TotalResourceChart /> */}
+      <div className="pr-[12rem] pt-[45px] pl-[25px] overflow-y-auto h-fit"></div>
       <GridLayout
         className="layout"
         layout={layout}
         cols={10}
         rowHeight={100}
-        width={1660}
+        width={1650}
         onLayoutChange={onLayoutChange}
         isDraggable={editMode}
         isResizable={editMode} // 전체 레이아웃에 대한 isResizable 설정
       >
-        {wonhoGridData.map((Component, i) => (
+        {gridLayoutData.map((Component, i) => (
           <div
             key={i.toString()}
             data-grid={{
@@ -128,8 +153,13 @@ const WonhoGrid = () => {
           </div>
         ))}
       </GridLayout>
-    </>
+      {/* <DashSubBar
+        setEditMode={setEditMode}
+        removeComponent={removeComponent}
+        addComponent={addComponent}
+      /> */}
+    </div>
   );
 };
 
-export default WonhoGrid;
+export default EditLayout;

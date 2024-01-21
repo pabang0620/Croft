@@ -2,7 +2,13 @@ import { useNavigate } from 'react-router-dom';
 import { CriticalOrWarn, TotalDashIcons, IconsColor } from '../utils/Icons';
 import { CriticalSeq, iconSeq } from '../utils/Data/ContainerData';
 
-const SingleContainer = ({ data, disconnect, critical, warning }) => {
+const SingleContainer = ({
+  data,
+  disconnect,
+  critical,
+  warning,
+  setContainer,
+}) => {
   const navigate = useNavigate();
   const criticalSeq = CriticalSeq(critical);
   // api 연동 시 하단의 dataArray 수정 필요
@@ -59,7 +65,10 @@ const SingleContainer = ({ data, disconnect, critical, warning }) => {
       </div>
       <div
         className="text-accent font-bold absolute bottom-[21px] right-[16px]"
-        onClick={() => navigate('/dash')}
+        onClick={() => {
+          navigate('/dash');
+          setContainer(data.name);
+        }}
       >
         <img
           className="w-[20px]"

@@ -1,28 +1,22 @@
-import { useEffect } from "react";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import { useOutletContext } from "react-router";
-import { ComponentWrapper } from "../component/utils/DND/ComponentWrapper";
-import TempDashPage from "../component/utils/DND/TempDashPage";
-import WonhoGrid from "../component/utils/DND/WonhoGrid";
+import { useState } from 'react';
+import { useOutletContext } from 'react-router';
+import WonhoGrid from '../component/utils/DND/WonhoGrid';
+import DashSubBar from '../layout/NavBar/SubNavBar/DashSubBar';
+import EditLayout from '../component/utils/DND/EditLayout';
 
 const SingleDashBoard = () => {
-  // const navigate = useNavigate();
-  const { container, setContainer } = useOutletContext();
-  useEffect(() => {
-    setContainer("옥수수 컨테이너");
-  }, []);
+  const [editMode, setEditMode] = useState(false); // 수정 모드 상태
 
   return (
-    <div className="pr-[12rem]">
-      {/* <div className="p-4 flex flex-row flex-wrap gap-[10px]">
-        <DndProvider backend={HTML5Backend}>
-          <ComponentWrapper />
-        </DndProvider>
-      </div> */}
-      {/* <TempDashPage /> */}
-      <WonhoGrid />
+    <div className="flex flex-col w-full h-full ">
+      <div className="w-full max-h-full ">
+        <EditLayout editMode={editMode} setEditMode={setEditMode} />
+      </div>
+      {/* <DashSubBar setEditMode={setEditMode} /> */}
     </div>
+    // <div className="pr-[12rem]">
+    //   <WonhoGrid />
+    // </div>
   );
 };
 
