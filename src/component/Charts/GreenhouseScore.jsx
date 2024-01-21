@@ -10,7 +10,7 @@ const GreenhouseScore = () => {
     'GreenhouseScore'
   );
   return (
-    <div className="flex flex-col w-[320px] h-[220px] p-[21px] gap-[17px] rounded-[10px] bg-white relative cursor-pointer">
+    <div className="flex flex-col w-[320px] h-[210px] p-[21px] gap-[17px] rounded-[10px] bg-white relative cursor-pointer">
       {!isLoading ? (
         <>
           <div className="flex justify-center">{ScoreImg(data.data.score)}</div>

@@ -1,20 +1,7 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
 import GreenHouseTotal from '../../component/SingleFarm/SingleFarmTotal/GreenHouseTotal';
 import WaterData from '../../component/SingleFarm/SingleFarmTotal/WaterData';
 import DailyAvg from '../../component/SingleFarm/SingleFarmTotal/DailyAvg';
-=======
-import React, { useState } from "react";
-import { format } from "date-fns";
-
-import GreenHouseTotal from "../../component/SingleFarm/SingleFarmTotal/GreenHouseTotal";
-import WaterData from "../../component/SingleFarm/WaterData";
-import DailyAvg from "../../component/SingleFarm/DailyAvg";
-import Line2Chart from "../../component/Charts/LineCharts/Line2Chart";
-import LineChart from "../../component/Charts/LineCharts/LineChart";
-import MainSliderDiv from "../../component/Graphs/MainSliderDiv";
-import MainBarLine2Chart from "../../component/Charts/MixCharts/MainBarLine2Chart";
->>>>>>> origin/chart
 
 const SingleFarmTotal = () => {
   //데이터 입출력
@@ -39,23 +26,6 @@ const SingleFarmTotal = () => {
       <div className="w-full bg-white h-[56.875rem] rounded-[10px]">
         <DailyAvg />
       </div>
-<<<<<<< HEAD
-=======
-      <div className="w-[798px] h-[350px] bg-white rounded-[10px]">
-        <MainBarLine2Chart ChartName="평균 온도" dateset="on" />
-      </div>
-      <div className="w-[798px] h-[350px] bg-white rounded-[10px]">
-        <Line2Chart ChartName="평균 습도" APIoption="199" APIoption2="224" />
-      </div>
-      <div className="w-[798px] h-[350px] bg-white rounded-[10px]">
-        <LineChart ChartName="평균 DLI" APIoption="220" />
-      </div>
-      <div className="w-[798px] h-[350px] bg-white rounded-[10px]">
-        <LineChart ChartName="평균 CO2 농도" APIoption="225" />
-      </div>
-
-      {/* 여기까지가 라인 끝이고 피그마상 아래쪽 차트들 정리하기쉽게 빼왔어  */}
->>>>>>> origin/chart
     </div>
   );
 };
