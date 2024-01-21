@@ -2,10 +2,10 @@ import React, { useEffect, useRef } from "react";
 import * as echarts from "echarts";
 import { useChartData } from "../../utils/api/Charts/ChartAPI";
 
-const BarMonthChart = () => {
+const BarMonthChart = ({ queryname }) => {
   const { data, isLoading, error } = useChartData(
-    `http://croft-ai.iptime.org:40401/api/v1/farms/rtr/amonth`,
-    `chartData-barMonth`
+    `http://croft-ai.iptime.org:40401/api/v1/farms/${queryname}/amonth`,
+    `chartData-barMonth-${queryname}`
   );
 
   const chartRef = useRef(null);
@@ -21,13 +21,29 @@ const BarMonthChart = () => {
       // 데이터가 없거나 잘못된 형식일 경우 처리
       return;
     }
-
+    let date;
     const xLabels = data.data.map((item) => {
-      const date = new Date(item.date);
+      if ((queryname === "dli", "photo_period")) {
+        date = new Date(item.kr_time);
+      } else {
+        date = new Date(item.date);
+      }
       const formattedDate = `${date.getMonth() + 1}.${date.getDate()}`;
       return formattedDate;
     });
-    const seriesData = data.data.map((item) => item.day_rtr);
+
+    let seriesData;
+
+    if (queryname === "dli") {
+      seriesData = data.data.map((item) => item[queryname]);
+    }
+    if (queryname === "photo_period") {
+      seriesData = data.data.map((item) => item.photo_period_hour);
+    } else {
+      seriesData = data.data.map((item) => item["day_" + queryname]);
+    }
+    // console.log("#######################", `${queryname}`, data);
+    // console.log("#######################", seriesData);
 
     const chartInstance = echarts.init(chartRef.current);
 
@@ -38,7 +54,7 @@ const BarMonthChart = () => {
         bottom: "20%", // 필요에 따라 이 값을 조정
       },
       title: {
-        text: "일자별 RTR",
+        text: queryname,
         top: "5%",
         left: "2%",
       },
@@ -93,7 +109,7 @@ const BarMonthChart = () => {
 
   return (
     <>
-      <div className="w-[1250px] h-[380px]" ref={chartRef}></div>
+      <div className="w-full h-full" ref={chartRef}></div>
     </>
   );
 };

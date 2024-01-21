@@ -131,8 +131,12 @@ const LineChart = ({ ChartName, APIoption }) => {
     };
   }, [data]);
 
+<<<<<<< HEAD
   // return <div ref={chartRef} style={{ width: "600px", height: "380px" }} />;
   return <div ref={chartRef} style={{ width: "100%", height: "100%" }} />;
+=======
+  return <div ref={chartRef} className="w-full h-full" />;
+>>>>>>> origin/chart
 };
 
 export default LineChart;

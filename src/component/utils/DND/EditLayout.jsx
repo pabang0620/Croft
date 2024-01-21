@@ -153,11 +153,11 @@ const EditLayout = ({ editMode, setEditMode }) => {
           </div>
         ))}
       </GridLayout>
-      {/* <DashSubBar
+      <DashSubBar
         setEditMode={setEditMode}
         removeComponent={removeComponent}
         addComponent={addComponent}
-      /> */}
+      />
     </div>
   );
 };

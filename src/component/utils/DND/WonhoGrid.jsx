@@ -11,24 +11,35 @@ const WonhoGrid = () => {
   const calculateLayoutForComponent = (index) => {
     const positionMap = {
       0: { x: 0, y: 0 },
-      1: { x: 2, y: 0 },
-      2: { x: 4, y: 0 },
-      3: { x: 8, y: 0 },
+      1: { x: 4, y: 0 },
+      2: { x: 6, y: 0 },
+      3: { x: 0, y: 5 },
       4: { x: 0, y: 1 },
       5: { x: 2, y: 1 },
-      6: { x: 0, y: 2 },
-      7: { x: 2, y: 2 },
-      8: { x: 4, y: 2 },
-      9: { x: 0, y: 3 },
-      10: { x: 2, y: 3 },
-      11: { x: 4, y: 3 },
-      12: { x: 6, y: 3 },
+      6: { x: 4, y: 1 },
+      7: { x: 8, y: 1 },
+      8: { x: 0, y: 2 },
+      9: { x: 2, y: 2 },
+      10: { x: 0, y: 3 },
+      11: { x: 2, y: 3 },
+      12: { x: 4, y: 3 },
       13: { x: 0, y: 4 },
+      14: { x: 2, y: 4 },
+      15: { x: 4, y: 4 },
+      16: { x: 6, y: 4 },
+      17: { x: 0, y: 6 },
     };
 
     const position = positionMap[index];
-    const width = index === 2 || index === 3 ? 3 : 2;
-    const height = index === 2 || index === 3 ? 4 : 2;
+    let width;
+    if (index === 6 || index === 7) {
+      width = 3;
+    } else if (index === 0 || index === 2 || index === 3) {
+      width = 4;
+    } else {
+      width = 2;
+    }
+    const height = index === 6 || index === 7 ? 4 : 2;
 
     return {
       i: index.toString(),
