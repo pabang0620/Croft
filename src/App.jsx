@@ -25,7 +25,10 @@ function App() {
           <Route path="/" element={<GlobalDashBoard />} />
           {/* 환경설정의 route 부분은 현재 기획에 포함되어 있지 않아 생략 */}
           <Route path="/dash" element={<SingleDashBoard />} />
-          <Route path="/dash/environment/total" element={<SingleFarmTotal />} />
+          <Route
+            path="/dash/environment/total/:id"
+            element={<SingleFarmTotal />}
+          />
           <Route path="/dash/environment/RTR" element={<SingleFarmRTR />} />
           <Route path="/dash/environment/DLI" element={<SingleFarmDLI />} />
           <Route path="/dash/environment/VPD" element={<SingleFarmVPD />} />

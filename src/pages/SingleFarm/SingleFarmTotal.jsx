@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import BasicSubBar from '../../layout/NavBar/SubNavBar/BasicSubBar';
 import GreenHouseTotal from '../../component/SingleFarm/SingleFarmTotal/GreenHouseTotal';
 import WaterData from '../../component/SingleFarm/SingleFarmTotal/WaterData';
 import DailyAvg from '../../component/SingleFarm/SingleFarmTotal/DailyAvg';
@@ -16,15 +17,18 @@ const SingleFarmTotal = () => {
   const [date, setDate] = useState(new Date());
 
   return (
-    <div className="my-[11px] mx-[25px] flex flex-col gap-[10px] max-w-[100%]">
-      <div className="w-full bg-white h-[52rem] rounded-[10px]">
-        <GreenHouseTotal critical={critical} alert={alert} date={date} />
-      </div>
-      <div className="w-full bg-white h-[28.125rem] rounded-[10px]">
-        <WaterData date={date} setDate={setDate} />
-      </div>
-      <div className="w-full bg-white h-[56.875rem] rounded-[10px]">
-        <DailyAvg />
+    <div>
+      <BasicSubBar title={'온실환경 종합'} />
+      <div className="my-[11px] mx-[25px] flex flex-col gap-[10px] max-w-[100%]">
+        <div className="w-full bg-white h-[52rem] rounded-[10px]">
+          <GreenHouseTotal critical={critical} alert={alert} date={date} />
+        </div>
+        <div className="w-full bg-white h-[28.125rem] rounded-[10px]">
+          <WaterData date={date} setDate={setDate} />
+        </div>
+        <div className="w-full bg-white h-[56.875rem] rounded-[10px]">
+          <DailyAvg />
+        </div>
       </div>
     </div>
   );

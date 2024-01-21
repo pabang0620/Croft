@@ -32,7 +32,7 @@ const SideBar = ({ currentPath }) => {
       navigate('/dash');
     } else if (iconName === 'greenhouse') {
       setClickedIcon('greenhouse');
-      navigate('/dash/environment/total');
+      navigate('/dash/environment/total/temp');
     } else if (iconName === 'sales') {
       setClickedIcon('sales');
       navigate('/single-sales');

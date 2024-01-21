@@ -1,22 +1,24 @@
-import React from "react";
-import MainSliderDiv from "../../Graphs/MainSliderDiv";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import MainSliderDiv from '../../Graphs/MainSliderDiv';
 
-import MainBarChartLine from "../../Charts/BarCharts/MainBarChartLine";
-import MainBarChart from "../../Charts/BarCharts/MainBarChart";
+import MainBarChartLine from '../../Charts/BarCharts/MainBarChartLine';
+import MainBarChart from '../../Charts/BarCharts/MainBarChart';
 
-import MainRTRLineChart from "../../Charts/LineCharts/MainRTRLineChart";
-import MainLineChart from "../../Charts/LineCharts/MainLineChart";
-import MainFootLineChart from "../../Charts/LineCharts/MainFootLineChart";
-import MainSmoothedLineChart from "../../Charts/LineCharts/MainSmoothedLineChart";
-import MainSmoothedLineChartAdd from "../../Charts/LineCharts/MainSmoothedLineChartAdd";
+import MainRTRLineChart from '../../Charts/LineCharts/MainRTRLineChart';
+import MainLineChart from '../../Charts/LineCharts/MainLineChart';
+import MainFootLineChart from '../../Charts/LineCharts/MainFootLineChart';
+import MainSmoothedLineChart from '../../Charts/LineCharts/MainSmoothedLineChart';
+import MainSmoothedLineChartAdd from '../../Charts/LineCharts/MainSmoothedLineChartAdd';
 
-import MainLineAreaChart from "../../Charts/MixCharts/MainLineAreaChart";
-import MainBar2LineChart from "../../Charts/MixCharts/MainBarLine2Chart";
+import MainLineAreaChart from '../../Charts/MixCharts/MainLineAreaChart';
+import MainBar2LineChart from '../../Charts/MixCharts/MainBarLine2Chart';
 
-import TotalReportChart from "../../Charts/TotalReportChart/TotalReportChart";
-import GreenhouseScore from "../../Charts/GreenhouseScore";
-import CroftGuide from "../../Charts/CroftGuide/CroftGuide";
-import TotalResourceChart from "../../Charts/TotalResourceChart/TotalResourceChart";
+import TotalReportChart from '../../Charts/TotalReportChart/TotalReportChart';
+import GreenhouseScore from '../../Charts/GreenhouseScore';
+import CroftGuide from '../../Charts/CroftGuide/CroftGuide';
+import TotalResourceChart from '../../Charts/TotalResourceChart/TotalResourceChart';
+
 
 const GridData = [
   <TotalReportChart key="1" title="온실 환경 종합" time="10:25" size={50} />,
@@ -66,8 +68,14 @@ const GridData = [
     absData8="VPD 상태에 따른 메시지가 나옵니다."
   />,
   // 완벽한데
-  <MainBarChartLine key="11" ChartName="DLI" />,
-  <MainBarChart key="12" ChartName="Photo Period" />,
+  <div className="relative">
+    <MainBarChartLine key="11" ChartName="DLI" />
+  </div>,
+  <MainBarChart
+    key="12"
+    ChartName="Photo Period"
+    atDetail={'/dash/environment/PP'}
+  />,
   <MainRTRLineChart key="13" ChartName="RTR" />,
   // 다음줄
   <MainSmoothedLineChart
@@ -75,24 +83,28 @@ const GridData = [
     APIoption="198"
     ChartName="온실 온도"
     unit="℃"
+    atDetail={'/dash/environment/total/temp'}
   />,
   <MainSmoothedLineChart
     key="15"
     APIoption="199"
     ChartName="온실 습도"
     unit="%"
+    atDetail={'/dash/environment/total/humidity'}
   />,
   <MainSmoothedLineChart
     key="16"
     APIoption="225"
     ChartName="온실 CO2"
     unit="ppm"
+    atDetail={'/dash/environment/total/co2'}
   />,
   <MainSmoothedLineChartAdd
     key="17"
     APIoption="244"
     ChartName="외부 광량"
     unit="w/m²"
+    atDetail={'/dash/environment/total/solar'}
   />,
 
   // 다음줄

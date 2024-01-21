@@ -15,8 +15,8 @@ export const SubNavBarTitle = (
       return <BasicSubBar title={''} />;
     // case '/dash':
     //   return <DashSubBar />;
-    case '/dash/environment/total':
-      return <BasicSubBar title={'온실환경 종합'} />;
+    // case '/dash/environment/total':
+    //   return <BasicSubBar title={'온실환경 종합'} />;
     case '/dash/environment/RTR':
       return <BasicSubBar title={'RTR'} />;
     case '/dash/environment/DLI':

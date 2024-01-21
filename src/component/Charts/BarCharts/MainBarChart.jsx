@@ -1,14 +1,14 @@
-import React, { useEffect, useRef } from "react";
-import * as echarts from "echarts";
-import { useChartData } from "../../utils/api/Charts/ChartAPI";
-import { format } from "date-fns";
+import React, { useEffect, useRef } from 'react';
+import * as echarts from 'echarts';
+import { useChartData } from '../../utils/api/Charts/ChartAPI';
+import { format } from 'date-fns';
 
-const MainBarChart = ({ ChartName, registerChart, chartKey }) => {
+const MainBarChart = ({ ChartName, registerChart, chartKey, atDetail }) => {
   const chartRef = useRef(null);
 
   const { data, isLoading, error } = useChartData(
-    "http://croft-ai.iptime.org:40401/api/v1/farms/photo_period/aweek",
-    "chartData-PhotoPeriod"
+    `${process.env.REACT_APP_BASE_API_KEY}/v1/farms/photo_period/aweek`,
+    'chartData-PhotoPeriod'
   );
 
   // console.log(data);
@@ -19,59 +19,59 @@ const MainBarChart = ({ ChartName, registerChart, chartKey }) => {
 
       // 날짜와 DLI 값을 추출
       const dates = data.data.map((item) =>
-        format(new Date(item.kr_time), "EE")
+        format(new Date(item.kr_time), 'EE')
       );
       const periodValue = data.data.map((item) => item.photo_period_hour);
 
       const option = {
         grid: {
           // 다른 설정을 유지하면서 bottom만 조정
-          bottom: "20%", // 필요에 따라 이 값을 조정
+          bottom: '20%', // 필요에 따라 이 값을 조정
         },
         title: {
           text: ChartName,
-          top: "5%",
-          left: "2%",
+          top: '5%',
+          left: '2%',
         },
         graphic: [
           {
-            id: "hoverData",
-            type: "text",
-            left: "center", // 차트 가운데에 위치
+            id: 'hoverData',
+            type: 'text',
+            left: 'center', // 차트 가운데에 위치
             top: 10, // 상단에서 10px 아래에 위치
             style: {
-              text: "0", // 초기 텍스트 설정
+              text: '0', // 초기 텍스트 설정
               fontSize: 16,
-              fontWeight: "bold",
-              fill: "#333", // 텍스트 색상
-              textAlign: "center", // 텍스트 정렬 방식
+              fontWeight: 'bold',
+              fill: '#333', // 텍스트 색상
+              textAlign: 'center', // 텍스트 정렬 방식
             },
             z: 100,
           },
         ],
         tooltip: {
-          trigger: "axis",
+          trigger: 'axis',
           axisPointer: {
-            type: "shadow",
+            type: 'shadow',
           },
         },
         xAxis: {
-          type: "category",
+          type: 'category',
           data: dates,
           axisLabel: {
             fontSize: 10,
           },
         },
         yAxis: {
-          type: "value",
+          type: 'value',
           axisLabel: {
             fontSize: 10,
           },
         },
         series: [
           {
-            name: "DLI",
-            type: "bar",
+            name: 'DLI',
+            type: 'bar',
             data: periodValue,
           },
         ],
@@ -79,8 +79,8 @@ const MainBarChart = ({ ChartName, registerChart, chartKey }) => {
 
       chartInstance.setOption(option);
 
-      chartInstance.on("mouseover", function (params) {
-        if (params.componentType === "series") {
+      chartInstance.on('mouseover', function (params) {
+        if (params.componentType === 'series') {
           const dataValue = params.value; // 호버된 데이터 포인트의 값
           chartInstance.setOption({
             graphic: {

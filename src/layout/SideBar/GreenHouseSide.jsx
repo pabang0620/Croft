@@ -4,11 +4,36 @@ import { useNavigate } from 'react-router-dom';
 const GreenHouseSide = ({ isOpen, currentUrl }) => {
   const navigate = useNavigate();
   const clickGreenHouse = [
-    { id: 1, text: '온실환경 종합', route: '/dash/environment/total' },
-    { id: 2, text: 'RTR', route: '/dash/environment/RTR' },
-    { id: 3, text: 'DLI', route: '/dash/environment/DLI' },
-    { id: 4, text: 'VPD', route: '/dash/environment/VPD' },
-    { id: 5, text: 'Photo Period', route: '/dash/environment/PP' },
+    {
+      id: 1,
+      text: '온실환경 종합',
+      route: '/dash/environment/total',
+      route2: '/dash/environment/total/temp',
+    },
+    {
+      id: 2,
+      text: 'RTR',
+      route: '/dash/environment/RTR',
+      route2: '/dash/environment/RTR',
+    },
+    {
+      id: 3,
+      text: 'DLI',
+      route: '/dash/environment/DLI',
+      route2: '/dash/environment/DLI',
+    },
+    {
+      id: 4,
+      text: 'VPD',
+      route: '/dash/environment/VPD',
+      route2: '/dash/environment/VPD',
+    },
+    {
+      id: 5,
+      text: 'Photo Period',
+      route: '/dash/environment/PP',
+      route2: '/dash/environment/PP',
+    },
   ];
   return (
     <div
@@ -19,9 +44,9 @@ const GreenHouseSide = ({ isOpen, currentUrl }) => {
       {clickGreenHouse.map((item) => (
         <div
           key={item.id}
-          onClick={() => navigate(item.route)}
+          onClick={() => navigate(item.route2)}
           className={`${
-            currentUrl === item.route ? 'text-white' : 'text-base500'
+            currentUrl.includes(item.route) ? 'text-white' : 'text-base500'
           } ${isOpen ? '' : 'hidden'}`}
         >
           {item.text}

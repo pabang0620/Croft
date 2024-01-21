@@ -4,4 +4,4 @@ export const SingleFarmRecommend = [
   { recommend: '권장 DLI : 12', temp: '629 w/m², 8DLI' },
   { recommend: '권장 농도 : 120 ~ 300 ppm', temp: '285.3 ppm' },
 ];
-export const IconId = ['temp', ' humidity', 'solar', 'co2'];
+export const IconId = ['temp', 'humidity', 'solar', 'co2'];

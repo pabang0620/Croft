@@ -7,12 +7,12 @@ const SingleDashBoard = () => {
   const [editMode, setEditMode] = useState(false); // 수정 모드 상태
 
   return (
-    // <div className="pr-[12rem]">
-    //   <WonhoGrid />
-    // </div>
     <div className="pr-[12rem]">
-      <EditLayout editMode={editMode} setEditMode={setEditMode} />
+      <WonhoGrid />
     </div>
+    // <div className="pr-[12rem]">
+    //   <EditLayout editMode={editMode} setEditMode={setEditMode} />
+    // </div>
   );
 };
 
