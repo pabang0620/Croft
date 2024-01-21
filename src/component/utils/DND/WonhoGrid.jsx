@@ -10,9 +10,35 @@ const WonhoGrid = () => {
     const storedData = localStorage.getItem("wonhoGridComponents");
     if (storedData) {
       setWonhoGridData(JSON.parse(storedData));
+      // 로컬 스토리지에 따라 뿌려주기
     } else {
-      setWonhoGridData(GridData.filter((item) => [1, 2, 3].includes(item.id)));
+      setWonhoGridData(
+        GridData.filter((item) =>
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18, // 보여야하는 차트의 ID 값
+          ].includes(item.id)
+        )
+      );
     }
+    // console.log(wonhoGridData);
   }, []);
 
   const calculateLayoutForComponent = (item) => {
