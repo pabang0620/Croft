@@ -41,8 +41,8 @@ const MainLineAreaChart = ({
 
     const yesterdayAvg = yesterdayData.map((item) => item.avg);
     const todayAvg = todayData.map((item) => item.avg);
-    console.log(yesterdayAvg);
-    console.log(todayAvg);
+    // console.log(yesterdayAvg);
+    // console.log(todayAvg);
 
     const xLabels = yesterdayData.map((item) => {
       const date = new Date(item.kr_time);
