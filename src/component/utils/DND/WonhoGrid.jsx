@@ -1,5 +1,4 @@
-// WonhoGrid.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import GridLayout from "react-grid-layout";
 import GridData from "./GridData";
 import TotalResourceChart from "../../Charts/TotalResourceChart/TotalResourceChart";
@@ -7,6 +6,18 @@ import TotalResourceChart from "../../Charts/TotalResourceChart/TotalResourceCha
 const WonhoGrid = () => {
   const [wonhoGridData, setWonhoGridData] = useState(GridData); // 상태로 관리
   const [editMode, setEditMode] = useState(false); // 수정 모드 상태
+
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 실행됩니다.
+    // 각 차트의 key 값을 로컬 스토리지에 저장하고 콘솔에 출력합니다.
+    wonhoGridData.forEach((Component, index) => {
+      const key = Component.key || index.toString();
+      localStorage.setItem(`chartKey_${index}`, key);
+
+      // 저장된 키 값을 콘솔에 출력합니다.
+      console.log(`Chart ${index}: Key stored in localStorage is ${key}`);
+    });
+  }, [wonhoGridData]);
 
   const calculateLayoutForComponent = (index) => {
     const positionMap = {
@@ -55,10 +66,6 @@ const WonhoGrid = () => {
     calculateLayoutForComponent(index)
   );
 
-  const addComponent = (newComponent) => {
-    setWonhoGridData([...wonhoGridData, newComponent]);
-    // 필요하면 여기서 layout도 업데이트
-  };
   const removeComponent = (componentKey) => {
     const newWonhoGridData = wonhoGridData.filter(
       (_, index) => index.toString() !== componentKey
@@ -78,25 +85,24 @@ const WonhoGrid = () => {
     setLayout(newLayout);
   };
 
-  // 삭제 추가 로직 끝 --------------
-  // 초기 레이아웃 설정
-
   const [layout, setLayout] = useState(initialLayout);
   const [chartInstances, setChartInstances] = useState({});
-
-  const onLayoutChange = (newLayout) => {
-    setLayout(newLayout);
-    Object.values(chartInstances).forEach((chart) => chart.resize());
-  };
 
   const registerChart = (key, instance) => {
     setChartInstances((prev) => ({ ...prev, [key]: instance }));
   };
 
-  // 수정모드 토글 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   const toggleEditMode = () => {
     setEditMode(!editMode); // 수정 모드 토글
   };
+  useEffect(() => {
+    const filteredData = wonhoGridData.filter((_, index) => {
+      const storedKey = localStorage.getItem(`chartKey_${index}`);
+      return storedKey !== null;
+    });
+
+    setWonhoGridData(filteredData);
+  }, []);
 
   return (
     <>
