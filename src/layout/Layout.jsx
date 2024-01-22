@@ -18,9 +18,9 @@ const Layout = () => {
     }
   }, []);
   return (
-    <div className="flex relative w-screen h-full max-w-full ">
+    <div className="flex relative w-screen min-h-full max-w-full ">
       <SideBar currentPath={currentPath} />
-      <div className="flex flex-col w-full h-full ">
+      <div className="flex flex-col w-full min-h-screen ">
         <Navbar title={container} />
         <>
           {SubNavBarTitle(currentPath, setContainer, container, setContainer)}
