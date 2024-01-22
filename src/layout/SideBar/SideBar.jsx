@@ -61,7 +61,7 @@ const SideBar = ({ currentPath }) => {
   }, [location]);
 
   return (
-    <div className="flex flex-row select-none h-full">
+    <div className="flex flex-row select-none min-h-full">
       <div
         className={`flex flex-col h-full bg-base600 text-white ease-in-out duration-300 cursor-pointer ${
           closeSide ? 'w-[60px]' : 'w-[220px]'
