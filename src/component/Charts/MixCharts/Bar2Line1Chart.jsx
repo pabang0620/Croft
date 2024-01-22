@@ -41,17 +41,23 @@ const Bar2Line1Chart = ({ ChartName }) => {
       }
 
       const values = data219.map((item) => item.value);
+      const values2 = data220.map((item) => item.value);
 
       // 최대값 찾기
       const maxData220 = Math.max(...values);
+      const maxData221 = Math.max(...values2);
 
       // 최대값의 10% 계산
       const tenPercentOfMax = maxData220 * 0.1;
+      const tenPercentOfMax2 = maxData221 * 0.1;
 
       // 최대값에 10%를 더하고 5의 배수로 만들기
       const adjustedValue = Math.ceil((maxData220 + tenPercentOfMax) / 50) * 50;
+      const adjustedValue2 = Math.ceil((maxData221 + tenPercentOfMax2) / 5) * 5;
 
       const intervalue = adjustedValue / 10;
+      const intervalue2 = adjustedValue2 / 10;
+
       const multipliedValues = data220.map((item) =>
         (item.value * 0.7).toFixed(2)
       );
@@ -64,7 +70,7 @@ const Bar2Line1Chart = ({ ChartName }) => {
 
       const option = {
         grid: {
-          // 다른 설정을 유지하면서 bottom만 조정
+          right: "8%", // 차트의 오른쪽 여백을 줄임
           bottom: "20%", // 필요에 따라 이 값을 조정
         },
         title: {
@@ -97,24 +103,51 @@ const Bar2Line1Chart = ({ ChartName }) => {
           boundaryGap: false, // 선 차트에 대해 경계 간격을 없앰
           data: xLabels,
         },
-        yAxis: {
-          axisLabel: {
-            fontSize: 10,
-            margin: "10",
+        yAxis: [
+          {
+            axisLabel: {
+              fontSize: 10,
+              margin: "10",
+            },
+            type: "value",
+            min: 0,
+            max: adjustedValue, // 범위가 안나와있음
+            interval: intervalue,
+            name: "외부 광량",
           },
-          type: "value",
-          min: 0,
-          max: adjustedValue, // 범위가 안나와있음
-          interval: intervalue,
-        },
+          {
+            // 두 번째 Y축 (새로운 설정)
+            axisLabel: {
+              fontSize: 10,
+              margin: "10",
+            },
+            type: "value",
+            min: 0,
+            max: adjustedValue2, // 범위가 안나와있음
+            interval: intervalue2,
+            name: "DLI",
+          },
+        ],
         series: [
           {
             name: "외부 광량",
             type: "bar",
+            yAxisIndex: 0, // 첫 번째 Y축 사용
             data: data219, // 10.25 데이터
             barWidth: "25%", // 막대 너비
             color: "#4472c4",
             barGap: "10%", // 다른 시리즈의 막대와의 간격
+            markArea: {
+              itemStyle: {
+                color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
+              },
+              data: [
+                [
+                  { yAxis: 50 }, // 시작 y축 값
+                  { yAxis: 70 }, // 끝 y축 값 (차트 최대값까지)
+                ],
+              ],
+            },
           },
           {
             name: "온실 광량",
@@ -127,24 +160,13 @@ const Bar2Line1Chart = ({ ChartName }) => {
           {
             name: "DLI",
             type: "line",
+            yAxisIndex: 1, // 두 번째 Y축 사용
             data: data220,
-
             lineStyle: {
               color: "rgb(255, 0, 0 , 0.5)", // 빨강
             },
             itemStyle: {
               color: "rgb(255, 0, 0 , 0.5)", // 빨강
-            },
-            markArea: {
-              itemStyle: {
-                color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
-              },
-              data: [
-                [
-                  { yAxis: 50 }, // 시작 y축 값
-                  { yAxis: 70 }, // 끝 y축 값 (차트 최대값까지)
-                ],
-              ],
             },
           },
         ],
