@@ -18,7 +18,7 @@ const Layout = () => {
     }
   }, []);
   return (
-    <div className="flex relative w-screen max-w-full h-screen max-h-full ">
+    <div className="flex relative w-screen h-full max-w-full ">
       <SideBar currentPath={currentPath} />
       <div className="flex flex-col w-full h-full ">
         <Navbar title={container} />
