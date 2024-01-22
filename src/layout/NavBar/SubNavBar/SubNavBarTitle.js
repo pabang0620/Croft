@@ -1,6 +1,6 @@
 import BasicSubBar from './BasicSubBar';
 // import ReportSubBar from './ReportSubBar';
-// import DashSubBar from './DashSubBar';
+import DashSubBar from './DashSubBar';
 // import SalesSubBar from './SalesSubBar';
 // import ResourceSubBar from './ResourceSubBar';
 

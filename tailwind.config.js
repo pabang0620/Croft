@@ -27,6 +27,9 @@ module.exports = {
         'custom-color': '#F3ECDF',
         'primary-accent': '#87DFCA',
       },
+      fontFamily: {
+        Pretendard: ['Pretendard'],
+      },
     },
   },
   // 스크롤바 숨기기를 위함 사용 시 => scrollbar-hide 속성 추가

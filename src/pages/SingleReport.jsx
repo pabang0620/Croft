@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import { useState } from 'react';
 import { useOutletContext } from 'react-router';
+import DailyReportPage from '../component/Report/DailyReport';
 import TotalReport from '../component/Report/TotalReport';
 import { TotalReportGreenhouseText as Desc } from '../component/utils/Data/TempData';
 import ReportSubBar from '../layout/NavBar/SubNavBar/ReportSubBar';
@@ -20,7 +21,7 @@ const SingleReport = () => {
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
       />
-      <div className=" mt-[21px] ml-[29px]">
+      {/* <div className=" mt-[21px] ml-[29px]">
         <TotalReport
           container={container}
           date={date}
@@ -28,6 +29,12 @@ const SingleReport = () => {
           comment1={DailyReport}
           comment2={DailyReport}
           comment3={DailyReport}
+        />
+      </div> */}
+      <div className=" mt-[21px] ml-[29px]">
+        <DailyReportPage
+          container={container}
+          date={date}
         />
       </div>
     </div>

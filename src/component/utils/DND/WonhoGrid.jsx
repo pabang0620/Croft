@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import GridLayout from "react-grid-layout";
-import GridData from "./GridData";
+import React, { useState, useEffect } from 'react';
+import GridLayout from 'react-grid-layout';
+import GridData from './GridData';
 
-const WonhoGrid = () => {
+const WonhoGrid = ({ editMode, setEditMode }) => {
   const [wonhoGridData, setWonhoGridData] = useState([]);
-  const [editMode, setEditMode] = useState(false); // 수정 모드 상태
+  // const [editMode, setEditMode] = useState(false); // 수정 모드 상태
 
   useEffect(() => {
-    const storedData = localStorage.getItem("wonhoGridComponents");
+    const storedData = localStorage.getItem('wonhoGridComponents');
     if (storedData) {
       setWonhoGridData(JSON.parse(storedData));
       // 로컬 스토리지에 따라 뿌려주기
@@ -87,7 +87,7 @@ const WonhoGrid = () => {
   return (
     <>
       <button onClick={toggleEditMode}>
-        {editMode ? "수정 완료" : "레이아웃 수정"}
+        {editMode ? '수정 완료' : '레이아웃 수정'}
       </button>
       {/* <TotalResourceChart /> */}
       <GridLayout

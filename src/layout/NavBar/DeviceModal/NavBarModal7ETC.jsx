@@ -3,8 +3,8 @@ import NavBarModal7ETCItem from "./NavBarModal7ETCItem";
 
 export function NavBarModal7ETC() {
   const fansData = [
-    { id: 1, name: "Fan", isOn: true },
-    { id: 2, name: "FCU", isOn: false },
+    { id: 1, name: "Fan", isOn: true }, //"PadFan5_Pump_Active"
+    { id: 2, name: "FCU", isOn: false }, //"HeatingFCU5_Pump_Actuation"
     { id: 3, name: "Fogging", isOn: true },
     { id: 4, name: "LED", isOn: false },
     { id: 5, name: "CO2 Valve", isOn: true },
