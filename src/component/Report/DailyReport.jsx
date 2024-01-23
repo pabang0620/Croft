@@ -2,6 +2,7 @@ import React from 'react';
 import ReportLayout from './ReportLayout';
 import GreenhouseScore from '../Charts/GreenhouseScore';
 import { TotalReportGreenhouseText as Desc } from '../utils/Data/TempData';
+import { DailyReport as text } from '../utils/Data/TempData';
 
 const DailyReport = ({ container, date }) => {
   return (
@@ -194,22 +195,432 @@ const DailyReport = ({ container, date }) => {
         <ReportLayout
           container={container}
           date={date}
-          currentPage={3}
+          currentPage={4}
           totalPage={10}
-        ></ReportLayout>
+        >
+          <div className="text-[28px] font-bold font-Pretendard mt-[26px]">
+            온실 환경 보고
+          </div>
+          <div className="px-[24px]">
+            <div className="py-[24px] text-[24px] font-bold">1. 온도</div>
+            <div className="flex gap-[15px]">
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">
+                  평균 온실 온도
+                </div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  24℃
+                </div>
+              </div>
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">
+                  온실 온도 범위
+                </div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  12 ~ 28℃
+                </div>
+              </div>
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">
+                  평균 외부 온도
+                </div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  18℃
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="mt-[53px] mb-[46px] text-[24px] font-bold">
+              시간대별 온도
+            </div>
+            <div className="w-[60.75rem] h-[33.375rem] mb-[22px]">
+              vent chart
+            </div>
+            <div className="w-[64.8125rem] h-[9.375rem]">time graph chart</div>
+            <div className="flex w-full m-h-[90px] h-fit py-[10px] mt-[3.25rem]">
+              <img
+                className="ml-[12px] mr-[23px] w-[31px] h-[31px]"
+                src={`${process.env.PUBLIC_URL}/assets/images/Report/CommentIcon.svg`}
+                alt=""
+              />
+              <div className="w-[949px] text-wrap whitespace-pre-wrap text-base font-normal">
+                {text}
+              </div>
+            </div>
+          </div>
+        </ReportLayout>
       </div>
       {/* 5페이지 */}
-      <div></div>
+      <div>
+        <ReportLayout
+          container={container}
+          date={date}
+          currentPage={5}
+          totalPage={10}
+        >
+          <div className="text-[28px] font-bold font-Pretendard mt-[26px]">
+            온실 환경 보고
+          </div>
+          <div className="px-[24px]">
+            <div className="py-[24px] text-[24px] font-bold">2. 습도</div>
+            <div className="flex gap-[15px]">
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">
+                  평균 온실 습도
+                </div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  45%
+                </div>
+              </div>
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">
+                  온실 습도 범위
+                </div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  40 ~ 55%
+                </div>
+              </div>
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">
+                  평균 외부 습도
+                </div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  50%
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="mt-[53px] mb-[46px] text-[24px] font-bold">
+              시간대별 습도
+            </div>
+            <div className="w-[60.75rem] h-[33.375rem] mb-[22px]">chart</div>
+            <div className="w-[64.8125rem] h-[9.375rem]">time graph chart</div>
+            <div className="flex w-full m-h-[90px] h-fit py-[10px] mt-[3.25rem]">
+              <img
+                className="ml-[12px] mr-[23px] w-[31px] h-[31px]"
+                src={`${process.env.PUBLIC_URL}/assets/images/Report/CommentIcon.svg`}
+                alt=""
+              />
+              <div className="w-[949px] text-wrap whitespace-pre-wrap text-base font-normal">
+                {text}
+              </div>
+            </div>
+          </div>
+        </ReportLayout>
+      </div>
       {/* 6페이지 */}
-      <div></div>
+      <div>
+        <ReportLayout
+          container={container}
+          date={date}
+          currentPage={6}
+          totalPage={10}
+        >
+          <div className="text-[28px] font-bold font-Pretendard mt-[26px]">
+            온실 환경 보고
+          </div>
+          <div className="px-[24px]">
+            <div className="py-[24px] text-[24px] font-bold">3. 광량</div>
+            <div className="flex gap-[15px]">
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">
+                  총 온실 광량
+                </div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  4,281 w/m²
+                </div>
+              </div>
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">DLI</div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  8
+                </div>
+              </div>
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">
+                  PHOTOPERIOD
+                </div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  9H
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="mt-[53px] mb-[46px] text-[24px] font-bold">
+              시간대별 광량, DLI
+            </div>
+            <div className="w-[60.75rem] h-[33.375rem] mb-[22px]">chart</div>
+            <div className="w-[64.8125rem] h-[9.375rem]">time graph chart</div>
+            <div className="flex w-full m-h-[90px] h-fit py-[10px] mt-[3.25rem]">
+              <img
+                className="ml-[12px] mr-[23px] w-[31px] h-[31px]"
+                src={`${process.env.PUBLIC_URL}/assets/images/Report/CommentIcon.svg`}
+                alt=""
+              />
+              <div className="w-[949px] text-wrap whitespace-pre-wrap text-base font-normal">
+                {text}
+              </div>
+            </div>
+          </div>
+        </ReportLayout>
+      </div>
       {/* 7페이지 */}
-      <div></div>
+      <div>
+        <ReportLayout
+          container={container}
+          date={date}
+          currentPage={7}
+          totalPage={10}
+        >
+          <div className="text-[28px] font-bold font-Pretendard mt-[26px]">
+            온실 환경 보고
+          </div>
+          <div className="px-[24px]">
+            <div className="py-[24px] text-[24px] font-bold">4. CO2</div>
+            <div className="flex gap-[15px]">
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">
+                  평균 CO2 농도
+                </div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  512 ppm
+                </div>
+              </div>
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">
+                  CO2 농도 범위
+                </div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  250 ~ 894 ppm
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="mt-[53px] mb-[46px] text-[24px] font-bold">
+              시간대별 CO2 농도
+            </div>
+            <div className="w-[60.75rem] h-[33.375rem] mb-[22px]">chart</div>
+            <div className="w-[64.8125rem] h-[9.375rem]">time graph chart</div>
+            <div className="flex w-full m-h-[90px] h-fit py-[10px] mt-[3.25rem]">
+              <img
+                className="ml-[12px] mr-[23px] w-[31px] h-[31px]"
+                src={`${process.env.PUBLIC_URL}/assets/images/Report/CommentIcon.svg`}
+                alt=""
+              />
+              <div className="w-[949px] text-wrap whitespace-pre-wrap text-base font-normal">
+                {text}
+              </div>
+            </div>
+          </div>
+        </ReportLayout>
+      </div>
       {/* 8페이지 */}
-      <div></div>
+      <div>
+        <ReportLayout
+          container={container}
+          date={date}
+          currentPage={8}
+          totalPage={10}
+        >
+          <div className="text-[28px] font-bold font-Pretendard mt-[26px]">
+            온실 환경 보고
+          </div>
+          <div className="px-[24px]">
+            <div className="py-[24px] text-[24px] font-bold">5. 급수 상태</div>
+            <div className="flex gap-[15px]">
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">
+                  총 공급량
+                </div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  50 L
+                </div>
+              </div>
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">
+                  공급횟수
+                </div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  10
+                </div>
+              </div>
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">
+                  평균 EC
+                </div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  2.89
+                </div>
+              </div>
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">
+                  평균 PH
+                </div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  6
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="mt-[53px] mb-[46px] text-[24px] font-bold">
+              시간대별 CO2 농도
+            </div>
+            <div className="w-[60.75rem] h-[33.375rem] mb-[22px]">chart</div>
+            <div className="w-[64.8125rem] h-[9.375rem]">time graph chart</div>
+            <div className="flex w-full m-h-[90px] h-fit py-[10px] mt-[3.25rem]">
+              <img
+                className="ml-[12px] mr-[23px] w-[31px] h-[31px]"
+                src={`${process.env.PUBLIC_URL}/assets/images/Report/CommentIcon.svg`}
+                alt=""
+              />
+              <div className="w-[949px] text-wrap whitespace-pre-wrap text-base font-normal">
+                {text}
+              </div>
+            </div>
+          </div>
+        </ReportLayout>
+      </div>
       {/* 9페이지 */}
-      <div></div>
+      <div>
+        <ReportLayout
+          container={container}
+          date={date}
+          currentPage={9}
+          totalPage={10}
+        >
+          <div className="text-[28px] font-bold font-Pretendard mt-[26px]">
+            자원 사용량 보고
+          </div>
+          <div className="px-[24px]">
+            <div className="py-[24px] text-[24px] font-bold">
+              장시 상태 및 자원 사용량
+            </div>
+            <div className="flex gap-[15px]">
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">
+                  전기 사용량
+                </div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  9,999 Kwh
+                </div>
+              </div>
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">
+                  가스 사용량
+                </div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  9,999 MJ
+                </div>
+              </div>
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">
+                  물 사용량
+                </div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  9,999 L
+                </div>
+              </div>
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">
+                  CO2 사용량
+                </div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  9,999 L
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="mt-[53px] mb-[46px] text-[24px] font-bold">
+              시간대별 CO2 농도
+            </div>
+            <div className="w-[60.75rem] h-[33.375rem] mb-[22px]">chart</div>
+            <div className="w-[64.8125rem] h-[9.375rem]">time graph chart</div>
+            <div className="flex w-full m-h-[90px] h-fit py-[10px] mt-[3.25rem]">
+              <img
+                className="ml-[12px] mr-[23px] w-[31px] h-[31px]"
+                src={`${process.env.PUBLIC_URL}/assets/images/Report/CommentIcon.svg`}
+                alt=""
+              />
+              <div className="w-[949px] text-wrap whitespace-pre-wrap text-base font-normal">
+                {text}
+              </div>
+            </div>
+          </div>
+        </ReportLayout>
+      </div>
       {/* 10페이지 */}
-      <div></div>
+      <div>
+        <ReportLayout
+          container={container}
+          date={date}
+          currentPage={10}
+          totalPage={10}
+        >
+          <div className="text-[28px] font-bold font-Pretendard mt-[26px]">
+            생장 보고
+          </div>
+          <div className="px-[24px]">
+            <div className="py-[24px] text-[24px] font-bold">
+              작물 생장 방향
+            </div>
+            <div className="flex gap-[15px]">
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">RTR</div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  1.7
+                </div>
+              </div>
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">DLI</div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  12
+                </div>
+              </div>
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">
+                  PHOTOPERIOD
+                </div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  8H
+                </div>
+              </div>
+              <div className="flex flex-col w-[260px] h-[95px] rounded-[10px] bg-base200 pt-[10px] pb-[18px] text-right">
+                <div className="text-left text-lg ml-[20px] font-bold">VPD</div>
+                <div className="text-right text-[28px] mr-[14px] font-bold">
+                  1.2
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="w-[60.75rem] h-[33.375rem] mb-[22px]">chart</div>
+            <div className="w-[64.8125rem] h-[9.375rem]">time graph chart</div>
+            <div className="mt-[53px] mb-[46px] text-[24px] font-bold">
+              종합 생장 방향
+            </div>
+            <div className="font-bold text-[30px] text-center">
+              과성장, 잎이 지나치게 빨리 자랄 수 있습니다.
+              <br /> 광량을 낮추어 광합성 시간을 줄여주세요.
+            </div>
+            <div className="flex w-full m-h-[90px] h-fit py-[10px] mt-[3.25rem]">
+              <img
+                className="ml-[12px] mr-[23px] w-[31px] h-[31px]"
+                src={`${process.env.PUBLIC_URL}/assets/images/Report/CommentIcon.svg`}
+                alt=""
+              />
+              <div className="w-[949px] text-wrap whitespace-pre-wrap text-base font-normal">
+                {text}
+              </div>
+            </div>
+          </div>
+        </ReportLayout>
+      </div>
     </div>
   );
 };
