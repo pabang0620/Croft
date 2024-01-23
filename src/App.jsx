@@ -1,20 +1,20 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Layout from './layout/Layout';
-import GlobalDashBoard from './pages/GlobalDashBoard';
-import GlobalReport from './pages/GlobalReport';
-import SingleDashBoard from './pages/SingleDashBoard';
-import SingleFarmTotal from './pages/SingleFarm/SingleFarmTotal';
-import SingleFarmRTR from './pages/SingleFarm/SingleFarmRTR';
-import SingleFarmDLI from './pages/SingleFarm/SingleFarmDLI';
-import SingleFarmVPD from './pages/SingleFarm/SingleFarmVPD';
-import SingleFarmPP from './pages/SingleFarm/SingleFarmPP';
-import SingleSales from './pages/SingleSales';
-import SingleSalesNYear from './pages/SingleSalesNYear';
-import SingleResource from './pages/SingleResource';
-import SingleReport from './pages/SingleReport';
-import GridLayoutTest from './component/utils/DND/grid';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Layout from "./layout/Layout";
+import GlobalDashBoard from "./pages/GlobalDashBoard";
+import GlobalReport from "./pages/GlobalReport";
+import SingleDashBoard from "./pages/SingleDashBoard";
+import SingleFarmTotal from "./pages/SingleFarm/SingleFarmTotal";
+import SingleFarmRTR from "./pages/SingleFarm/SingleFarmRTR";
+import SingleFarmDLI from "./pages/SingleFarm/SingleFarmDLI";
+import SingleFarmVPD from "./pages/SingleFarm/SingleFarmVPD";
+import SingleFarmPP from "./pages/SingleFarm/SingleFarmPP";
+import SingleSales from "./pages/SingleSales";
+import SingleSalesNYear from "./pages/SingleSalesNYear";
+import SingleResource from "./pages/SingleResource";
+import SingleReport from "./pages/SingleReport";
+import GridLayoutTest from "./component/utils/DND/grid";
 
 const queryClient = new QueryClient();
 
