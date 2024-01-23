@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import GridLayout from "react-grid-layout";
 import GridData from "./GridData";
 
-const WonhoGrid = () => {
+const WonhoGrid = ({ editMode, setEditMode }) => {
   const [wonhoGridData, setWonhoGridData] = useState([]);
-  const [editMode, setEditMode] = useState(false); // 수정 모드 상태
+  // const [editMode, setEditMode] = useState(false); // 수정 모드 상태
 
   useEffect(() => {
     const storedData = localStorage.getItem("wonhoGridComponents");
@@ -105,7 +105,7 @@ const WonhoGrid = () => {
             data-grid={{
               ...item.layout, // item의 layout 정보를 사용
               isResizable:
-                editMode && !(item.id === 0 || item.id === 1 || item.id === 5), // 조건에 따른 isResizable 설정
+                editMode && !(item.id === 4 || item.id === 5 || item.id === 9), // 조건에 따른 isResizable 설정
             }}
           >
             {React.cloneElement(item.component, {
