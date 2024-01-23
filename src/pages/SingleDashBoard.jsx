@@ -4,6 +4,8 @@ import DashSubBar from "../layout/NavBar/SubNavBar/DashSubBar";
 
 const SingleDashBoard = () => {
   const [editMode, setEditMode] = useState(false); // 수정 모드 상태
+  const [removeComponent, setRemoveComponent] = useState(false); // 수정 모드 상태
+  const [addComponent, setAddComponent] = useState(false); // 수정 모드 상태
 
   return (
     <div className="flex flex-col scrollbar-hide">
