@@ -18,7 +18,7 @@ const SingleFarmTotal = () => {
 
   return (
     <div>
-      {/* <BasicSubBar title={'온실환경 종합'} />
+      <BasicSubBar title={'온실환경 종합'} />
       <div className="my-[11px] mx-[25px] flex flex-col gap-[10px] max-w-[100%]">
         <div className="w-full bg-white h-[52rem] rounded-[10px]">
           <GreenHouseTotal critical={critical} alert={alert} date={date} />
@@ -29,7 +29,7 @@ const SingleFarmTotal = () => {
         <div className="w-full bg-white h-[56.875rem] rounded-[10px]">
           <DailyAvg />
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

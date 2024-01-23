@@ -18,14 +18,14 @@ const Layout = () => {
     }
   }, []);
   return (
-    <div className="flex relative w-screen min-h-full max-w-full ">
+    <div className="flex relative w-screen h-full min-h-screen max-w-full ">
       <SideBar currentPath={currentPath} />
-      <div className="flex flex-col w-full min-h-screen ">
+      <div className="flex flex-col w-full h-full ">
         <Navbar title={container} />
         <>
           {SubNavBarTitle(currentPath, setContainer, container, setContainer)}
         </>
-        <main className="bg-[#E9EBE180]/[0.5] w-full h-full overflow-auto">
+        <main className="bg-[#E9EBE180]/[0.5] w-full min-h-[95vh] h-full max-h-full overflow-auto">
           <Outlet context={{ container, setContainer, currentPath }} />
           <div className="flex flex-col absolute bottom-[35px] right-[50px]">
             <img

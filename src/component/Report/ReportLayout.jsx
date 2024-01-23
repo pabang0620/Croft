@@ -1,11 +1,10 @@
-import BarOtherColorChart from '../Charts/BarCharts/BarOtherColorChart';
-import CommentBox from './CommentBox';
-import GreenhouseScore from '../Charts/GreenhouseScore';
-import MainSmoothedLineChart from '../Charts/LineCharts/MainSmoothedLineChartReport';
-import MainSliderDiv from '../Graphs/MainSliderDivReport';
-import { DailyChartTitle, DailyChartData } from '../utils/Data/TempData';
-
-const ReportLayout = ({ container, date, currentPage, totalPage }) => {
+const ReportLayout = ({
+  container,
+  date,
+  currentPage,
+  totalPage,
+  children,
+}) => {
   const Title = (text) => {
     return <div className="font-bold text-2xl">{text}</div>;
   };
@@ -18,7 +17,7 @@ const ReportLayout = ({ container, date, currentPage, totalPage }) => {
         </div>
         <div className="text-right text-[32px] font-bold">CROFT.AI</div>
       </div>
-      <div className="w-full flex flex-col"></div>
+      {children}
       <div className="absolute w-full flex justify-center left-0 bottom-[42px] text-lg">
         {currentPage} / {totalPage}
       </div>

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import GridLayout from 'react-grid-layout';
 import GridData from './GridData';
+import 'react-grid-layout/css/styles.css';
+import 'react-resizable/css/styles.css';
 
-const WonhoGrid = ({ editMode, setEditMode }) => {
+const WonhoGrid = () => {
   const [wonhoGridData, setWonhoGridData] = useState([]);
-  // const [editMode, setEditMode] = useState(false); // 수정 모드 상태
+  const [editMode, setEditMode] = useState(false); // 수정 모드 상태
 
   useEffect(() => {
     const storedData = localStorage.getItem('wonhoGridComponents');

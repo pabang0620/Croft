@@ -55,8 +55,7 @@ const MainLineAreaChart = ({
     const option = {
       grid: {
         // 다른 설정을 유지하면서 bottom만 조정
-        top: "25%",
-        bottom: "15%", // 필요에 따라 이 값을 조정
+        bottom: "20%", // 필요에 따라 이 값을 조정
       },
       title: {
         text: ChartName,
@@ -79,7 +78,7 @@ const MainLineAreaChart = ({
         itemHeight: 10,
         icon: "rect",
         left: "12%", // 가로 중앙에 위치
-        top: "16%", // 타이틀 아래에 위치하도록 조정
+        top: "13%", // 타이틀 아래에 위치하도록 조정
       },
       xAxis: {
         axisLabel: {

@@ -1,6 +1,6 @@
-import * as echarts from 'echarts';
-import React, { useEffect, useRef } from 'react';
-import { useChartData } from '../../utils/api/Charts/ChartAPI';
+import * as echarts from "echarts";
+import React, { useEffect, useRef } from "react";
+import { useChartData } from "../../utils/api/Charts/ChartAPI";
 
 const LineChart = ({ ChartName, APIoption }) => {
   const chartRef = useRef(null);
@@ -15,8 +15,8 @@ const LineChart = ({ ChartName, APIoption }) => {
   // 날짜를 'YYYY-MM-DD' 형식으로 변환
   const formatDateString = (date) => {
     const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
 
@@ -64,39 +64,39 @@ const LineChart = ({ ChartName, APIoption }) => {
     const option = {
       grid: {
         // 다른 설정을 유지하면서 bottom만 조정
-        bottom: '20%', // 필요에 따라 이 값을 조정
+        bottom: "20%", // 필요에 따라 이 값을 조정
       },
       title: {
         text: ChartName,
-        top: '5%',
-        left: '2%',
+        top: "5%",
+        left: "2%",
       },
       tooltip: {
-        trigger: 'axis',
-        axisPointer: { type: 'cross' },
+        trigger: "axis",
+        axisPointer: { type: "cross" },
       },
       legend: {
         data: [ChartName],
         textStyle: {
-          color: '#333', // 범례 텍스트 색상
+          color: "#333", // 범례 텍스트 색상
           fontSize: 12, // 범례 텍스트 크기
         },
         itemWidth: 10,
         itemHeight: 10,
-        icon: 'rect',
-        left: '3%',
-        top: '10%',
+        icon: "rect",
+        left: "3%",
+        top: "10%",
       },
       xAxis: {
-        type: 'category',
+        type: "category",
         data: xLabels,
       },
       yAxis: {
         axisLabel: {
           fontSize: 10,
-          margin: '10',
+          margin: "10",
         },
-        type: 'value',
+        type: "value",
         min: minSeriesValue,
         max: maxSeriesValue,
         interval: 5,
@@ -105,11 +105,11 @@ const LineChart = ({ ChartName, APIoption }) => {
         {
           smooth: true,
           name: ChartName,
-          type: 'line',
+          type: "line",
           data: dataValue,
           markArea: {
             itemStyle: {
-              color: 'rgba(79, 254, 35, 0.3)', // #4FFE234D와 유사한 RGBA 색상
+              color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
             },
             data: [
               [
