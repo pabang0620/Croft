@@ -3,6 +3,13 @@ import ReportLayout from './ReportLayout';
 import GreenhouseScore from '../Charts/GreenhouseScore';
 import { TotalReportGreenhouseText as Desc } from '../utils/Data/TempData';
 import { DailyReport as text } from '../utils/Data/TempData';
+import Line2Chart from '../Charts/LineCharts/Line2Chart';
+import Line4Chart from '../Charts/LineCharts/Line4Chart';
+import Line4ChartNone from '../Charts/LineCharts/Line4ChartNone';
+import Bar2Line1Chart from '../Charts/MixCharts/Bar2Line1Chart';
+import MainLineAreaChart from '../Charts/MixCharts/MainLineAreaChart';
+import BarOtherColorChart from '../Charts/BarCharts/BarOtherColorChart';
+import MainSliderDiv from '../Graphs/MainSliderDiv';
 
 const DailyReport = ({ container, date }) => {
   return (
@@ -235,7 +242,7 @@ const DailyReport = ({ container, date }) => {
               시간대별 온도
             </div>
             <div className="w-[60.75rem] h-[33.375rem] mb-[22px]">
-              vent chart
+              <Line4Chart />
             </div>
             <div className="w-[64.8125rem] h-[9.375rem]">time graph chart</div>
             <div className="flex w-full m-h-[90px] h-fit py-[10px] mt-[3.25rem]">
@@ -295,7 +302,9 @@ const DailyReport = ({ container, date }) => {
             <div className="mt-[53px] mb-[46px] text-[24px] font-bold">
               시간대별 습도
             </div>
-            <div className="w-[60.75rem] h-[33.375rem] mb-[22px]">chart</div>
+            <div className="w-[60.75rem] h-[33.375rem] mb-[22px]">
+              <Line2Chart />
+            </div>
             <div className="w-[64.8125rem] h-[9.375rem]">time graph chart</div>
             <div className="flex w-full m-h-[90px] h-fit py-[10px] mt-[3.25rem]">
               <img
@@ -352,7 +361,9 @@ const DailyReport = ({ container, date }) => {
             <div className="mt-[53px] mb-[46px] text-[24px] font-bold">
               시간대별 광량, DLI
             </div>
-            <div className="w-[60.75rem] h-[33.375rem] mb-[22px]">chart</div>
+            <div className="w-[60.75rem] h-[33.375rem] mb-[22px]">
+              <Bar2Line1Chart />
+            </div>
             <div className="w-[64.8125rem] h-[9.375rem]">time graph chart</div>
             <div className="flex w-full m-h-[90px] h-fit py-[10px] mt-[3.25rem]">
               <img
@@ -403,7 +414,10 @@ const DailyReport = ({ container, date }) => {
             <div className="mt-[53px] mb-[46px] text-[24px] font-bold">
               시간대별 CO2 농도
             </div>
-            <div className="w-[60.75rem] h-[33.375rem] mb-[22px]">chart</div>
+            <div className="w-[60.75rem] h-[33.375rem] mb-[22px] flex items-center justify-center">
+              <Line4ChartNone />
+              {/* <Line4Chart /> */}
+            </div>
             <div className="w-[64.8125rem] h-[9.375rem]">time graph chart</div>
             <div className="flex w-full m-h-[90px] h-fit py-[10px] mt-[3.25rem]">
               <img
@@ -468,10 +482,20 @@ const DailyReport = ({ container, date }) => {
           </div>
           <div className="flex flex-col items-center">
             <div className="mt-[53px] mb-[46px] text-[24px] font-bold">
-              시간대별 CO2 농도
+              시간대별 급수량
             </div>
-            <div className="w-[60.75rem] h-[33.375rem] mb-[22px]">chart</div>
-            <div className="w-[64.8125rem] h-[9.375rem]">time graph chart</div>
+            <div className="w-[63.125rem] h-[33.375rem] mb-[22px]">
+              {/* 해당 부분 데이터 에러남 */}
+              <MainLineAreaChart APIoption="218" ChartName="" />
+            </div>
+            <div className="w-[63.125rem] h-[29.625rem] flex justify-between">
+              <div className="w-[441px]">
+                <BarOtherColorChart ChartName="" APIoption="230" />
+              </div>
+              <div className="w-[441px]">
+                <BarOtherColorChart ChartName="" APIoption="250" />
+              </div>
+            </div>
             <div className="flex w-full m-h-[90px] h-fit py-[10px] mt-[3.25rem]">
               <img
                 className="ml-[12px] mr-[23px] w-[31px] h-[31px]"
@@ -537,10 +561,29 @@ const DailyReport = ({ container, date }) => {
           </div>
           <div className="flex flex-col items-center">
             <div className="mt-[53px] mb-[46px] text-[24px] font-bold">
-              시간대별 CO2 농도
+              시간대별 전기 사용량
             </div>
-            <div className="w-[60.75rem] h-[33.375rem] mb-[22px]">chart</div>
-            <div className="w-[64.8125rem] h-[9.375rem]">time graph chart</div>
+            <div className="px-[24px]">
+              <div className="flex flex-col gap-[38px]">
+                <div className="flex justify-between">
+                  <div className="w-[527px] h-[339px]">
+                    <Line2Chart />
+                  </div>
+                  <div className="w-[527px] h-[339px]">
+                    <Line2Chart />
+                  </div>
+                </div>
+                <div className="flex justify-between">
+                  <div className="w-[527px] h-[339px]">
+                    <Line2Chart />
+                  </div>
+                  <div className="w-[527px] h-[339px]">
+                    <Line2Chart />
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div className="flex w-full m-h-[90px] h-fit py-[10px] mt-[3.25rem]">
               <img
                 className="ml-[12px] mr-[23px] w-[31px] h-[31px]"
@@ -598,9 +641,109 @@ const DailyReport = ({ container, date }) => {
               </div>
             </div>
           </div>
+          <div className="px-[24px] flex flex-col">
+            <div className="flex justify-between">
+              <div className="flex flex-col w-[340px]">
+                <MainSliderDiv
+                  queryName="rtr"
+                  title="RTR"
+                  absData1="0"
+                  absData2="1.2"
+                  absData3="1.5"
+                  absData4="3"
+                  absData5="영양"
+                  absData6="균형"
+                  absData7="생식"
+                  absData8="생식생장, 꽃이 피고 열매가 맺혀요"
+                />
+                <div className="flex w-full m-h-[90px] h-fit py-[10px] mt-[3.25rem]">
+                  <img
+                    className="ml-[12px] mr-[23px] w-[31px] h-[31px]"
+                    src={`${process.env.PUBLIC_URL}/assets/images/Report/CommentIcon.svg`}
+                    alt=""
+                  />
+                  <div className="w-[949px] text-wrap whitespace-pre-wrap text-base font-normal">
+                    {text}
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col w-[340px]">
+                <MainSliderDiv
+                  queryName="rtr"
+                  title="RTR"
+                  absData1="0"
+                  absData2="1.2"
+                  absData3="1.5"
+                  absData4="3"
+                  absData5="영양"
+                  absData6="균형"
+                  absData7="생식"
+                  absData8="생식생장, 꽃이 피고 열매가 맺혀요"
+                />
+                <div className="flex w-full m-h-[90px] h-fit py-[10px] mt-[3.25rem]">
+                  <img
+                    className="ml-[12px] mr-[23px] w-[31px] h-[31px]"
+                    src={`${process.env.PUBLIC_URL}/assets/images/Report/CommentIcon.svg`}
+                    alt=""
+                  />
+                  <div className="w-[949px] text-wrap whitespace-pre-wrap text-base font-normal">
+                    {text}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-between">
+              <div className="flex flex-col w-[340px]">
+                <MainSliderDiv
+                  queryName="rtr"
+                  title="RTR"
+                  absData1="0"
+                  absData2="1.2"
+                  absData3="1.5"
+                  absData4="3"
+                  absData5="영양"
+                  absData6="균형"
+                  absData7="생식"
+                  absData8="생식생장, 꽃이 피고 열매가 맺혀요"
+                />
+                <div className="flex w-full m-h-[90px] h-fit py-[10px] mt-[3.25rem]">
+                  <img
+                    className="ml-[12px] mr-[23px] w-[31px] h-[31px]"
+                    src={`${process.env.PUBLIC_URL}/assets/images/Report/CommentIcon.svg`}
+                    alt=""
+                  />
+                  <div className="w-[949px] text-wrap whitespace-pre-wrap text-base font-normal">
+                    {text}
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col w-[340px]">
+                <MainSliderDiv
+                  queryName="rtr"
+                  title="RTR"
+                  absData1="0"
+                  absData2="1.2"
+                  absData3="1.5"
+                  absData4="3"
+                  absData5="영양"
+                  absData6="균형"
+                  absData7="생식"
+                  absData8="생식생장, 꽃이 피고 열매가 맺혀요"
+                />
+                <div className="flex w-full m-h-[90px] h-fit py-[10px] mt-[3.25rem]">
+                  <img
+                    className="ml-[12px] mr-[23px] w-[31px] h-[31px]"
+                    src={`${process.env.PUBLIC_URL}/assets/images/Report/CommentIcon.svg`}
+                    alt=""
+                  />
+                  <div className="w-[949px] text-wrap whitespace-pre-wrap text-base font-normal">
+                    {text}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="flex flex-col items-center">
-            <div className="w-[60.75rem] h-[33.375rem] mb-[22px]">chart</div>
-            <div className="w-[64.8125rem] h-[9.375rem]">time graph chart</div>
             <div className="mt-[53px] mb-[46px] text-[24px] font-bold">
               종합 생장 방향
             </div>
