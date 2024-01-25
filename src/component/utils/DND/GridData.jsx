@@ -49,6 +49,7 @@ const GridData = [
     id: 4,
     component: (
       <MainSliderDiv
+        dataName="avg_temp"
         queryName="rtr"
         title="RTR"
         absData1="0"
@@ -67,6 +68,7 @@ const GridData = [
     id: 5,
     component: (
       <MainSliderDiv
+        dataName="photo_period_hour"
         queryName="photo_period"
         title="Photo Period"
         absData1="0"
@@ -100,6 +102,7 @@ const GridData = [
     id: 9,
     component: (
       <MainSliderDiv
+        dataName="vpd"
         queryName="vpd"
         title="VPD"
         absData2="1.2"

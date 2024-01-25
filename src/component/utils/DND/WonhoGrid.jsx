@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import GridLayout from 'react-grid-layout';
-import GridData from './GridData';
-import 'react-grid-layout/css/styles.css';
-import 'react-resizable/css/styles.css';
+import React, { useState, useEffect } from "react";
+import GridLayout from "react-grid-layout";
+import GridData from "./GridData";
+import "react-grid-layout/css/styles.css";
+import "react-resizable/css/styles.css";
 
 const WonhoGrid = () => {
   const [wonhoGridData, setWonhoGridData] = useState([]);
   const [editMode, setEditMode] = useState(false); // 수정 모드 상태
 
   useEffect(() => {
-    const storedData = localStorage.getItem('wonhoGridComponents');
+    const storedData = localStorage.getItem("wonhoGridComponents");
     if (storedData) {
       setWonhoGridData(JSON.parse(storedData));
       // 로컬 스토리지에 따라 뿌려주기
@@ -89,7 +89,7 @@ const WonhoGrid = () => {
   return (
     <>
       <button onClick={toggleEditMode}>
-        {editMode ? '수정 완료' : '레이아웃 수정'}
+        {editMode ? "수정 완료" : "레이아웃 수정"}
       </button>
       {/* <TotalResourceChart /> */}
       <GridLayout
@@ -107,7 +107,7 @@ const WonhoGrid = () => {
             data-grid={{
               ...item.layout, // item의 layout 정보를 사용
               isResizable:
-                editMode && !(item.id === 0 || item.id === 1 || item.id === 5), // 조건에 따른 isResizable 설정
+                editMode && !(item.id === 0 || item.id === 1 || item.id === 2), // 조건에 따른 isResizable 설정
             }}
           >
             {React.cloneElement(item.component, {
