@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import SingleGuide from "./SingleGuide";
 import { GuideText, TotalGuideText } from "./GuideText";
 
-const CroftGuide = () => {
-  const [showDetail, setShowDetail] = useState(false);
+const CroftGuide = ({ showDetail, setShowDetail }) => {
+  // const [showDetail, setShowDetail] = useState(false);
   const [currentGuide, setCurrentGuide] = useState(GuideText);
   useEffect(() => {
     if (showDetail) setCurrentGuide(TotalGuideText);

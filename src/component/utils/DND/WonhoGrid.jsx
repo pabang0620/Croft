@@ -3,10 +3,26 @@ import GridLayout from "react-grid-layout";
 import GridData from "./GridData";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
+import CroftGuide from "../../Charts/CroftGuide/CroftGuide";
 
 const WonhoGrid = () => {
   const [wonhoGridData, setWonhoGridData] = useState([]);
   const [editMode, setEditMode] = useState(false); // 수정 모드 상태
+  const [showDetail, setShowDetail] = useState(false);
+
+  useEffect(() => {
+    setWonhoGridData((prevData) =>
+      prevData.map((item) => {
+        if (item.id === 2) {
+          return {
+            ...item,
+            layout: { ...item.layout, h: showDetail ? 6 : 2 },
+          };
+        }
+        return item;
+      })
+    );
+  }, [showDetail]);
 
   useEffect(() => {
     const storedData = localStorage.getItem("wonhoGridComponents");
@@ -103,18 +119,22 @@ const WonhoGrid = () => {
       >
         {wonhoGridData.map((item) => (
           <div
-            key={item.id.toString()} // 고유한 key로 item의 id를 사용
-            data-grid={{
-              ...item.layout, // item의 layout 정보를 사용
-              isResizable:
-                editMode && !(item.id === 0 || item.id === 1 || item.id === 2), // 조건에 따른 isResizable 설정
-            }}
+            key={item.id.toString()}
+            data-grid={{ ...item.layout, isResizable: editMode }}
           >
-            {React.cloneElement(item.component, {
-              registerChart: registerChart,
-              chartKey: item.id.toString(),
-              layout: item.layout, // item의 layout 정보 전달
-            })}
+            {item.id === 2 ? (
+              <CroftGuide
+                showDetail={showDetail}
+                setShowDetail={setShowDetail}
+                // 다른 필요한 props
+              />
+            ) : (
+              React.cloneElement(item.component, {
+                registerChart: registerChart,
+                chartKey: item.id.toString(),
+                layout: item.layout,
+              })
+            )}
           </div>
         ))}
       </GridLayout>
