@@ -56,7 +56,7 @@ const GridData = [
     layout: positionMap[2],
   },
   {
-    chartID: "ResouceTotal",
+    chartID: "ResourceTotal",
     id: 3,
     component: <TotalResourceChart />,
     layout: positionMap[3],

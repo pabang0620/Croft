@@ -34,35 +34,35 @@ const WonhoGrid = () => {
       setWonhoGridData(
         GridData.filter((item) => filteredGridData.includes(item.id))
       ); // 로컬 스토리지에 따라 뿌려주기
-    } else {
-      setWonhoGridData(
-        GridData.filter((item) =>
-          [
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13,
-            14,
-            15,
-            16,
-            17,
-            18, // 보여야하는 차트의 ID 값
-          ].includes(item.id)
-        )
-      );
+      // } else {
+      //   setWonhoGridData(
+      //     GridData.filter((item) =>
+      //       [
+      //         0,
+      //         1,
+      //         2,
+      //         3,
+      //         4,
+      //         5,
+      //         6,
+      //         7,
+      //         8,
+      //         9,
+      //         10,
+      //         11,
+      //         12,
+      //         13,
+      //         14,
+      //         15,
+      //         16,
+      //         17,
+      //         18, // 보여야하는 차트의 ID 값
+      //       ].includes(item.id)
+      //     )
+      //   );
     }
     // console.log(wonhoGridData);
-  }, [wonhoGridData]);
+  }, []); // 여기
 
   const calculateLayoutForComponent = (item) => {
     return {
