@@ -36,16 +36,33 @@ const positionMap = {
 
 const GridData = [
   {
+    chartID: "GreenhouseTotal",
     id: 0,
     component: (
       <TotalReportChart title="온실 환경 종합" time="10:25" size={50} />
     ),
     layout: positionMap[0],
   },
-  { id: 1, component: <GreenhouseScore />, layout: positionMap[1] },
-  { id: 2, component: <CroftGuide />, layout: positionMap[2] },
-  { id: 3, component: <TotalResourceChart />, layout: positionMap[3] },
   {
+    chartID: "TotalScore",
+    id: 1,
+    component: <GreenhouseScore />,
+    layout: positionMap[1],
+  },
+  {
+    chartID: "CroftGuide",
+    id: 2,
+    component: <CroftGuide />,
+    layout: positionMap[2],
+  },
+  {
+    chartID: "ResouceTotal",
+    id: 3,
+    component: <TotalResourceChart />,
+    layout: positionMap[3],
+  },
+  {
+    chartID: "RTR",
     id: 4,
     component: (
       <MainSliderDiv
@@ -65,6 +82,7 @@ const GridData = [
     layout: positionMap[4],
   },
   {
+    chartID: "PHOTOPERIOD",
     id: 5,
     component: (
       <MainSliderDiv
@@ -84,21 +102,25 @@ const GridData = [
     layout: positionMap[5],
   },
   {
+    chartID: "DailyWaterSupply",
     id: 6,
     component: <MainLineAreaChart APIoption="218" ChartName="급수 데이터" />,
     layout: positionMap[6],
   },
   {
+    chartID: "DailyTempChange",
     id: 7,
     component: <MainBarLine2Chart ChartName="평균 온도" />,
     layout: positionMap[7],
   },
   {
+    chartID: "DLI",
     id: 8,
     component: <MainLineChart APIoption="220" ChartName="DLI" />,
     layout: positionMap[8],
   },
   {
+    chartID: "VPD",
     id: 9,
     component: (
       <MainSliderDiv
@@ -117,21 +139,25 @@ const GridData = [
     layout: positionMap[9],
   },
   {
+    chartID: "WeeklyDLI",
     id: 10,
     component: <MainBarChartLine ChartName="DLI" />,
     layout: positionMap[10],
   },
   {
+    chartID: "WeeklyPHOTOPERIOD",
     id: 11,
     component: <MainBarChart ChartName="Photo Period" />,
     layout: positionMap[11],
   },
   {
+    chartID: "DailyRTR",
     id: 12,
     component: <MainRTRLineChart ChartName="RTR" />,
     layout: positionMap[12],
   },
   {
+    chartID: "DailyTempChange",
     id: 13,
     component: (
       <MainSmoothedLineChart APIoption="198" ChartName="온실 온도" unit="℃" />
@@ -139,6 +165,7 @@ const GridData = [
     layout: positionMap[13],
   },
   {
+    chartID: "DailyHumidityChange",
     id: 14,
     component: (
       <MainSmoothedLineChart APIoption="199" ChartName="온실 습도" unit="%" />
@@ -146,6 +173,7 @@ const GridData = [
     layout: positionMap[14],
   },
   {
+    chartID: "DailyCO2Change",
     id: 15,
     component: (
       <MainSmoothedLineChart APIoption="225" ChartName="온실 CO2" unit="ppm" />
@@ -153,6 +181,7 @@ const GridData = [
     layout: positionMap[15],
   },
   {
+    chartID: "DailySolarChange",
     id: 16,
     component: (
       <MainSmoothedLineChartAdd
@@ -164,6 +193,7 @@ const GridData = [
     layout: positionMap[16],
   },
   {
+    chartID: "DailyWaterUse",
     id: 17,
     component: (
       <MainFootLineChart APIoption="218" ChartName="물 사용량" unit="liter" />

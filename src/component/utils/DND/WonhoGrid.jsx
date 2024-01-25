@@ -25,10 +25,15 @@ const WonhoGrid = () => {
   }, [showDetail]);
 
   useEffect(() => {
-    const storedData = localStorage.getItem("wonhoGridComponents");
+    const storedData = localStorage.getItem("checkedItems");
     if (storedData) {
-      setWonhoGridData(JSON.parse(storedData));
-      // 로컬 스토리지에 따라 뿌려주기
+      const storedDataArray = JSON.parse(storedData);
+      const filteredGridData = GridData.filter((item) =>
+        storedDataArray.includes(item.chartID)
+      ).map((item) => item.id);
+      setWonhoGridData(
+        GridData.filter((item) => filteredGridData.includes(item.id))
+      ); // 로컬 스토리지에 따라 뿌려주기
     } else {
       setWonhoGridData(
         GridData.filter((item) =>
@@ -57,7 +62,7 @@ const WonhoGrid = () => {
       );
     }
     // console.log(wonhoGridData);
-  }, []);
+  }, [wonhoGridData]);
 
   const calculateLayoutForComponent = (item) => {
     return {
@@ -109,7 +114,7 @@ const WonhoGrid = () => {
       </button>
       {/* <TotalResourceChart /> */}
       <GridLayout
-        className="layout"
+        className="layout select-none" // 여기에 select-none 클래스 추가
         cols={10}
         rowHeight={100}
         width={1660}
