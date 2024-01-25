@@ -16,7 +16,7 @@ const WonhoGrid = () => {
         if (item.id === 2) {
           return {
             ...item,
-            layout: { ...item.layout, h: showDetail ? 6 : 2 },
+            layout: { ...item.layout, h: showDetail ? 5 : 2 },
           };
         }
         return item;
