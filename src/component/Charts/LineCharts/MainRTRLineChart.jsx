@@ -30,7 +30,7 @@ const MainRTRLineChart = ({ ChartName, unit, registerChart, chartKey }) => {
 
       // 맥스값 로직
       const maxValue = Math.max(...rtrValues);
-      const roundedValue = Math.ceil(maxValue / 5) * 5;
+      const roundedValue = Math.ceil(maxValue / 10) * 10;
 
       const option = {
         grid: {
@@ -77,7 +77,7 @@ const MainRTRLineChart = ({ ChartName, unit, registerChart, chartKey }) => {
         yAxis: {
           type: "value",
           max: roundedValue, // 계산된 최대값
-          interval: 5, // 계산된 간격
+          interval: 10, // 계산된 간격
           axisLabel: {
             fontSize: 9, // 글꼴 크기 조정
             formatter: (value) => `${value}`, // props로 전달받은 단위를 사용

@@ -70,7 +70,7 @@ const MainBarChart = ({ ChartName, registerChart, chartKey }) => {
         },
         series: [
           {
-            name: "DLI",
+            name: "Photo Period",
             type: "bar",
             data: periodValue,
           },

@@ -1,63 +1,60 @@
-import React, { useState, useEffect } from 'react';
-import GridLayout from 'react-grid-layout';
-import GridData from './GridData';
-import 'react-grid-layout/css/styles.css';
-import 'react-resizable/css/styles.css';
+import React, { useState, useEffect } from "react";
+import GridLayout from "react-grid-layout";
+import GridData from "./GridData";
+import "react-grid-layout/css/styles.css";
+import "react-resizable/css/styles.css";
+import CroftGuide from "../../Charts/CroftGuide/CroftGuide";
 
-const WonhoGrid = () => {
+const WonhoGrid = ({ editMode, setEditMode }) => {
   const [wonhoGridData, setWonhoGridData] = useState([]);
-  const [editMode, setEditMode] = useState(false); // 수정 모드 상태
+  const [showDetail, setShowDetail] = useState(false);
 
   useEffect(() => {
-    const storedData = localStorage.getItem('wonhoGridComponents');
+    setWonhoGridData((prevData) =>
+      prevData.map((item) => {
+        if (item.id === 2) {
+          return {
+            ...item,
+            layout: { ...item.layout, h: showDetail ? 5 : 2 },
+          };
+        }
+        return item;
+      })
+    );
+  }, [showDetail]);
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("checkedItems");
     if (storedData) {
-      setWonhoGridData(JSON.parse(storedData));
-      // 로컬 스토리지에 따라 뿌려주기
-    } else {
+      const storedDataArray = JSON.parse(storedData);
+      const filteredGridData = GridData.filter((item) =>
+        storedDataArray.includes(item.chartID)
+      ).map((item) => item.id);
       setWonhoGridData(
-        GridData.filter((item) =>
-          [
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13,
-            14,
-            15,
-            16,
-            17,
-            18, // 보여야하는 차트의 ID 값
-          ].includes(item.id)
-        )
+        GridData.filter((item) => filteredGridData.includes(item.id))
       );
     }
-    // console.log(wonhoGridData);
-  }, []);
+  }, []); // 여기
 
-  const calculateLayoutForComponent = (item) => {
-    return {
-      i: item.id.toString(), // 여기에서 id를 문자열로 변환
-      x: item.layout.x,
-      y: item.layout.y,
-      w: item.layout.w,
-      h: item.layout.h,
-      isResizable: true,
-    };
-  };
-
-  const [layout, setLayout] = useState(() =>
-    GridData.map((item) => calculateLayoutForComponent(item))
-  );
+  const [layout, setLayout] = useState();
   const [chartInstances, setChartInstances] = useState({});
+
+  useEffect(() => {
+    // 로컬 스토리지에서 레이아웃 데이터 불러오기
+    const savedLayout = localStorage.getItem("wonhoGridLayout");
+
+    if (savedLayout) {
+      setLayout(JSON.parse(savedLayout));
+    } else {
+      // 로컬 스토리지에 데이터가 없을 경우 기본 레이아웃 사용
+      setLayout(
+        GridData.map((item) => ({
+          ...item.layout,
+          i: item.id.toString(),
+        }))
+      );
+    }
+  }, []);
 
   const onLayoutChange = (newLayout) => {
     if (JSON.stringify(newLayout) !== JSON.stringify(layout)) {
@@ -83,17 +80,32 @@ const WonhoGrid = () => {
   };
 
   const toggleEditMode = () => {
-    setEditMode(!editMode); // 수정 모드 토글
+    if (editMode) {
+      localStorage.setItem("wonhoGridLayout", JSON.stringify(layout));
+    }
+    setEditMode(!editMode);
   };
 
   return (
     <>
-      <button onClick={toggleEditMode}>
-        {editMode ? '수정 완료' : '레이아웃 수정'}
-      </button>
+      <div className="absolute top-[72px] left-[240px] w-[28px] h-[14px]">
+        <button
+          type="button"
+          onClick={toggleEditMode}
+          className={`${
+            editMode ? "bg-[#3F9192]" : "bg-gray-200"
+          } absolute inset-0 w-full h-full rounded-full transition-colors`}
+        >
+          <span
+            className={`${
+              editMode ? "translate-x-[2px]" : "translate-x-[-10px]"
+            } absolute left-[12px] top-[1px] w-[12px] h-[12px] transform bg-white rounded-full transition-transform`}
+          />
+        </button>
+      </div>
       {/* <TotalResourceChart /> */}
       <GridLayout
-        className="layout"
+        className="layout select-none" // 여기에 select-none 클래스 추가
         cols={10}
         rowHeight={100}
         width={1660}
@@ -103,18 +115,22 @@ const WonhoGrid = () => {
       >
         {wonhoGridData.map((item) => (
           <div
-            key={item.id.toString()} // 고유한 key로 item의 id를 사용
-            data-grid={{
-              ...item.layout, // item의 layout 정보를 사용
-              isResizable:
-                editMode && !(item.id === 0 || item.id === 1 || item.id === 5), // 조건에 따른 isResizable 설정
-            }}
+            key={item.id.toString()}
+            data-grid={{ ...item.layout, isResizable: editMode }}
           >
-            {React.cloneElement(item.component, {
-              registerChart: registerChart,
-              chartKey: item.id.toString(),
-              layout: item.layout, // item의 layout 정보 전달
-            })}
+            {item.id === 2 ? (
+              <CroftGuide
+                showDetail={showDetail}
+                setShowDetail={setShowDetail}
+                // 다른 필요한 props
+              />
+            ) : (
+              React.cloneElement(item.component, {
+                registerChart: registerChart,
+                chartKey: item.id.toString(),
+                layout: item.layout,
+              })
+            )}
           </div>
         ))}
       </GridLayout>

@@ -5,47 +5,24 @@ import {
   itemArray,
   titleArray,
 } from "../utils/Data/ItemsData";
+
 const EditItems = ({ setOpenModal }) => {
-  const [items, setItems] = useState();
-  const [isChecked, setIsChecked] = useState(false);
-  const [isCheckedTotal, setIsCheckedTotal] = useState(
-    checkboxDefault("total")
-  );
-  const [isCheckedGreen, setIsCheckedGreen] = useState(
-    checkboxDefault("green")
-  );
-  const [isCheckedGrowth, setIsCheckedGrowth] = useState(
-    checkboxDefault("growth")
-  );
-  const [isCheckedResource, setIsCheckedResource] = useState(
-    checkboxDefault("resource")
-  );
-  const stateArray = [
-    isCheckedTotal,
-    isCheckedGreen,
-    isCheckedGrowth,
-    isCheckedResource,
-  ];
-  const setStateArray = [
-    setIsCheckedTotal,
-    setIsCheckedGreen,
-    setIsCheckedGrowth,
-    setIsCheckedResource,
-  ];
+  const [checkedItems, setCheckedItems] = useState(() => {
+    const savedItems = localStorage.getItem("checkedItems");
+    const parsedItems = savedItems ? JSON.parse(savedItems) : [];
+    console.log("초기 로컬 스토리지 데이터:", parsedItems); // 초기 데이터 출력
+    return parsedItems;
+  });
+  const handleCheckboxChange = (item) => {
+    const newCheckedItems = checkedItems.includes(item.id)
+      ? checkedItems.filter((id) => id !== item.id)
+      : [...checkedItems, item.id];
 
-  const handleCheckboxChange = (state, setState, idx) => {
-    let temp = state;
-    temp[idx] = !temp[idx];
-    setState(temp);
+    setCheckedItems(newCheckedItems);
+    localStorage.setItem("checkedItems", JSON.stringify(newCheckedItems));
+    console.log("업데이트된 로컬 스토리지 데이터:", newCheckedItems); // 업데이트된 데이터 출력
   };
-
-  useEffect(() => {
-    setIsCheckedTotal(isCheckedTotal);
-    setIsCheckedGreen(isCheckedGreen);
-    setIsCheckedGrowth(isCheckedGrowth);
-    setIsCheckedResource(isCheckedResource);
-  }, [isChecked]);
-
+  // -------------------------------------------------
   const handleTitle = (title) => {
     return <div className=" text-base font-semibold mb-[5px]">{title}</div>;
   };
@@ -65,13 +42,12 @@ const EditItems = ({ setOpenModal }) => {
             onClick={() => setOpenModal(false)}
           />
         </div>
-
-        <div className="flex flex-col overflow-auto scrollbar-hide pl-[16px] pr-[13px] mt-[20px] ">
+        <div className="flex flex-col overflow-auto scrollbar-hide pl-[16px] pr-[13px] mt-[20px]">
           {titleArray.map((title, i) => (
             <div className="mb-[24px]">
-              <>{handleTitle(title)}</>
+              {handleTitle(title)}
               <div className="flex flex-col gap-[8px]">
-                {itemArray[i].map((item, idx) => (
+                {itemArray[i].map((item) => (
                   <label
                     className="flex items-center space-x-2 cursor-pointer rounded-[10px] bg-base200 w-[327px] h-[38px]"
                     key={item.id}
@@ -79,19 +55,13 @@ const EditItems = ({ setOpenModal }) => {
                     <input
                       type="checkbox"
                       className="hidden"
-                      checked={isChecked}
-                      onClick={() => setIsChecked(!isChecked)}
-                      onChange={() =>
-                        handleCheckboxChange(
-                          stateArray[i],
-                          setStateArray[i],
-                          idx
-                        )
-                      }
+                      checked={checkedItems.includes(item.id)}
+                      onChange={() => handleCheckboxChange(item)}
                     />
                     <div>
-                      {/* {ItemsCheck(isCheckedTotal[idx] ? 'black' : '#B7B7B7')} */}
-                      {ItemsCheck(stateArray[i][idx] ? "black" : "#B7B7B7")}
+                      {ItemsCheck(
+                        checkedItems.includes(item.id) ? "black" : "#B7B7B7"
+                      )}
                     </div>
                     <span className="text-xs">{item.text}</span>
                   </label>
@@ -99,7 +69,7 @@ const EditItems = ({ setOpenModal }) => {
               </div>
             </div>
           ))}
-        </div>
+        </div>{" "}
       </div>
     </div>
   );
