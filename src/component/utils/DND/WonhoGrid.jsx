@@ -5,9 +5,8 @@ import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import CroftGuide from "../../Charts/CroftGuide/CroftGuide";
 
-const WonhoGrid = () => {
+const WonhoGrid = ({ editMode, setEditMode }) => {
   const [wonhoGridData, setWonhoGridData] = useState([]);
-  const [editMode, setEditMode] = useState(false); // 수정 모드 상태
   const [showDetail, setShowDetail] = useState(false);
 
   useEffect(() => {
@@ -89,9 +88,21 @@ const WonhoGrid = () => {
 
   return (
     <>
-      <button onClick={toggleEditMode}>
-        {editMode ? "수정 완료" : "레이아웃 수정"}
-      </button>
+      <div className="absolute top-[72px] left-[240px] w-[28px] h-[14px]">
+        <button
+          type="button"
+          onClick={toggleEditMode}
+          className={`${
+            editMode ? "bg-[#3F9192]" : "bg-gray-200"
+          } absolute inset-0 w-full h-full rounded-full transition-colors`}
+        >
+          <span
+            className={`${
+              editMode ? "translate-x-[2px]" : "translate-x-[-10px]"
+            } absolute left-[12px] top-[1px] w-[12px] h-[12px] transform bg-white rounded-full transition-transform`}
+          />
+        </button>
+      </div>
       {/* <TotalResourceChart /> */}
       <GridLayout
         className="layout select-none" // 여기에 select-none 클래스 추가

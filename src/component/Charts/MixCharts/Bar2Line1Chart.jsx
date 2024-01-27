@@ -113,6 +113,7 @@ const Bar2Line1Chart = ({ ChartName }) => {
             axisLabel: {
               fontSize: 10,
               margin: "10",
+              show: false, // 두 번째 Y축 라벨 숨김
             },
             type: "value",
             min: 0,
@@ -125,6 +126,7 @@ const Bar2Line1Chart = ({ ChartName }) => {
             axisLabel: {
               fontSize: 10,
               margin: "10",
+              show: false, // 두 번째 Y축 라벨 숨김
             },
             type: "value",
             min: 0,

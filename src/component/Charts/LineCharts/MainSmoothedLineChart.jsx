@@ -35,8 +35,8 @@ const MainSmoothedLineChart = ({
     const chartInstance = echarts.init(chartRef.current);
 
     const maxValue = Math.max(...data.data.map((item) => item.value));
-    const max = Math.ceil(maxValue + maxValue / 10);
-    const interval = Math.ceil(maxValue / 10);
+    const max = Math.ceil((maxValue + maxValue / 10) / 10) * 10;
+    const interval = Math.ceil(maxValue / 5);
 
     const xLabels = data.data.map((item) => {
       const date = new Date(item.kr_time);

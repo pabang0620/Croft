@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
-import Navbar from './NavBar/NavBar';
-import SideBar from './SideBar/SideBar';
-import { SubNavBarTitle } from './NavBar/SubNavBar/SubNavBarTitle';
-import { useChartData } from '../component/utils/api/Charts/ChartAPI';
+import React, { useState, useEffect } from "react";
+import { Outlet, useLocation } from "react-router-dom";
+import Navbar from "./NavBar/NavBar";
+import SideBar from "./SideBar/SideBar";
+import { SubNavBarTitle } from "./NavBar/SubNavBar/SubNavBarTitle";
+import { useChartData } from "../component/utils/api/Charts/ChartAPI";
 
 const Layout = () => {
   const currentPath = useLocation().pathname;
-  const [container, setContainer] = useState('옥수수 재배 컨테이너');
+  const [container, setContainer] = useState("옥수수 재배 컨테이너");
   const { data, isLoading } = useChartData(
     `${process.env.REACT_APP_BASE_API_KEY}/v1/farms/container-list`,
-    'container-list'
+    "container-list"
   );
   useEffect(() => {
     if (data && !isLoading) {

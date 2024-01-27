@@ -29,7 +29,7 @@ const MainLineChart = ({ APIoption, ChartName, registerChart, chartKey }) => {
 
     const maxValue = Math.max(...data.data.map((item) => item.value));
     const max = Math.ceil(maxValue + maxValue / 10);
-    const interval = Math.ceil(maxValue / 10);
+    const interval = Math.ceil(maxValue / 5);
 
     const xLabels = data.data.map((item) => {
       const date = new Date(item.kr_time);
