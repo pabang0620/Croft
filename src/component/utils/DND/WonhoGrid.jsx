@@ -33,52 +33,29 @@ const WonhoGrid = () => {
       ).map((item) => item.id);
       setWonhoGridData(
         GridData.filter((item) => filteredGridData.includes(item.id))
-      ); // 로컬 스토리지에 따라 뿌려주기
-      // } else {
-      //   setWonhoGridData(
-      //     GridData.filter((item) =>
-      //       [
-      //         0,
-      //         1,
-      //         2,
-      //         3,
-      //         4,
-      //         5,
-      //         6,
-      //         7,
-      //         8,
-      //         9,
-      //         10,
-      //         11,
-      //         12,
-      //         13,
-      //         14,
-      //         15,
-      //         16,
-      //         17,
-      //         18, // 보여야하는 차트의 ID 값
-      //       ].includes(item.id)
-      //     )
-      //   );
+      );
     }
-    // console.log(wonhoGridData);
   }, []); // 여기
 
-  const calculateLayoutForComponent = (item) => {
-    return {
-      i: item.id.toString(), // 여기에서 id를 문자열로 변환
-      x: item.layout.x,
-      y: item.layout.y,
-      w: item.layout.w,
-      h: item.layout.h,
-      isResizable: true,
-    };
-  };
-
-  const [layout, setLayout] = useState(() =>
-    GridData.map((item) => calculateLayoutForComponent(item))
-  );
+  const [layout, setLayout] = useState();
   const [chartInstances, setChartInstances] = useState({});
+
+  useEffect(() => {
+    // 로컬 스토리지에서 레이아웃 데이터 불러오기
+    const savedLayout = localStorage.getItem("wonhoGridLayout");
+
+    if (savedLayout) {
+      setLayout(JSON.parse(savedLayout));
+    } else {
+      // 로컬 스토리지에 데이터가 없을 경우 기본 레이아웃 사용
+      setLayout(
+        GridData.map((item) => ({
+          ...item.layout,
+          i: item.id.toString(),
+        }))
+      );
+    }
+  }, []);
 
   const onLayoutChange = (newLayout) => {
     if (JSON.stringify(newLayout) !== JSON.stringify(layout)) {
@@ -104,7 +81,10 @@ const WonhoGrid = () => {
   };
 
   const toggleEditMode = () => {
-    setEditMode(!editMode); // 수정 모드 토글
+    if (editMode) {
+      localStorage.setItem("wonhoGridLayout", JSON.stringify(layout));
+    }
+    setEditMode(!editMode);
   };
 
   return (
