@@ -37,7 +37,7 @@ const TotalReportChart = ({ title, time, size }) => {
           </div>
           <div
             className="text-accent text-xs absolute bottom-[9px] right-7"
-            onClick={() => navigate('/dash/environment/total')}
+            onClick={() => navigate('/dash/environment/total/temp')}
           >
             자세히보기
           </div>

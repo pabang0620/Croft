@@ -5,11 +5,16 @@ import GreenHouseSwitch from './GreenHouseSwitch';
 import { CriticalOrWarn } from '../../utils/Icons';
 import { ChartDashIcons, IconsColor } from '../../utils/Icons';
 import { SingleFarmRecommend, IconId } from '../../utils/Data/SingleFarmData';
+import { useChartData } from '../../utils/api/Charts/ChartAPI';
 
 const GreenHouseTotal = ({ critical, alert, date }) => {
   const navigate = useNavigate();
   const currentPath = useLocation().pathname;
   const [toggle, setToggle] = useState(0);
+  const { data, isLoading } = useChartData(
+    `${process.env.REACT_APP_BASE_API_KEY}/v1/farms/measurement/current`,
+    'Current5MinData'
+  );
   useEffect(() => {
     if (currentPath === '/dash/environment/total/temp') setToggle(0);
     else if (currentPath === '/dash/environment/total/humidity') setToggle(1);
@@ -17,6 +22,12 @@ const GreenHouseTotal = ({ critical, alert, date }) => {
     else if (currentPath === '/dash/environment/total/co2') setToggle(3);
     else setToggle(0);
   }, [currentPath]);
+  const dataArray = [
+    `${data?.data.obj_data.Climate5_GreenhouseTemp}℃`,
+    `${data?.data.obj_data.Climate5_RH}%`,
+    `${data?.data.obj_data.Meteo_Radiation}w/m²`,
+    `${data?.data.obj_data.Co2Control5_Measurement}ppm`,
+  ];
   return (
     <div className="flex flex-col w-full px-[17px] py-[12px] select-none">
       {/* 제목 부분 */}
@@ -50,7 +61,7 @@ const GreenHouseTotal = ({ critical, alert, date }) => {
                 false
               )}]`}
             >
-              <div className="text-sm font-bold">{item.temp}</div>
+              <div className="text-sm font-bold">{dataArray[idx]}</div>
               <div className="text-[10px]">{item.recommend}</div>
             </div>
           </div>

@@ -16,7 +16,7 @@ const ReportSubBar = ({
     'container-list'
   );
   useEffect(() => {
-    if (data?.data[0] && !isLoading) {
+    if (data?.data[0] && !isLoading && type === 'global') {
       setContainer(data?.data[0].name);
       setContainerArray(
         data?.data.map((item, idx) => ({
@@ -26,7 +26,7 @@ const ReportSubBar = ({
       );
     }
   }, [data]);
-  
+
   return (
     <>
       {!isLoading && ContainerArray[0] && (

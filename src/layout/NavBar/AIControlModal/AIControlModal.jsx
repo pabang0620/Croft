@@ -21,6 +21,8 @@ const AIControlModal = () => {
       setClick4(false);
     }
   }, [click1]);
+  const stateArray = [click2, click3, click4];
+  const setStateArray = [setClick2, setClick3, setClick4];
 
   return (
     <div className="z-10">
@@ -37,13 +39,13 @@ const AIControlModal = () => {
         </div>
         {click1 ? (
           <>
-            {AIModalData.map((item) => (
+            {AIModalData.map((item, idx) => (
               <SliderInputCard
                 key={item.WhatFor}
                 Whatfor={item.WhatFor}
                 click1={click1}
-                click={click2}
-                setClick={setClick2}
+                click={stateArray[idx]}
+                setClick={setStateArray[idx]}
                 src={item.src}
               />
             ))}
