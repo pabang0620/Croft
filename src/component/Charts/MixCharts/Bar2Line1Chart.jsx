@@ -24,13 +24,18 @@ const Bar2Line1Chart = ({ ChartName }) => {
       const data219 = data.data
         .filter(
           (item) =>
-            item.data_type_id === 219 && item.kr_time.startsWith(realToday)
+            item.data_type_id === 219 &&
+            item.kr_time.startsWith(realToday) &&
+            new Date(item.kr_time).getHours() % 2 === 0
         )
         .map((item) => ({ time: item.kr_time, value: item.avg }));
+
       const data220 = data.data
         .filter(
           (item) =>
-            item.data_type_id === 220 && item.kr_time.startsWith(realToday)
+            item.data_type_id === 220 &&
+            item.kr_time.startsWith(realToday) &&
+            new Date(item.kr_time).getHours() % 2 === 0
         )
         .map((item) => ({ time: item.kr_time, value: item.high }));
 
@@ -62,7 +67,7 @@ const Bar2Line1Chart = ({ ChartName }) => {
         (item.value * 0.7).toFixed(2)
       );
 
-      console.log(data);
+      console.log(xLabels);
       console.log(data219);
 
       const chartInstance = echarts.init(chartRef.current);

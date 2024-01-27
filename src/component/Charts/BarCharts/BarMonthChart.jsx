@@ -22,10 +22,12 @@ const BarMonthChart = ({ queryname }) => {
       return;
     }
     let date;
+    console.log(data);
     const xLabels = data.data.map((item) => {
       if ((queryname === "dli", "photo_period")) {
         date = new Date(item.kr_time);
-      } else {
+      }
+      if (queryname === "rtr") {
         date = new Date(item.date);
       }
       const formattedDate = `${date.getMonth() + 1}.${date.getDate()}`;
