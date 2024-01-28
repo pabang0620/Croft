@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { format, startOfWeek } from 'date-fns';
-import PickPeriodDate from '../../utils/DatePicker/PickPeriodDate';
+import PickPeriodDate2 from '../../utils/DatePicker/PickPeriodDate2';
 import LineChart from '../../Charts/LineCharts/LineChart';
 import Line2Chart from '../../Charts/LineCharts/Line2Chart';
 import Line4Chart from '../../Charts/LineCharts/Line4Chart';
@@ -17,8 +17,10 @@ const DailyAvg = () => {
       <div className="flex justify-between mb-[26px]">
         <div className="flex gap-1 text-lg">
           <div className="font-bold">일자별 평균</div>
-          <div className="font-normal">
-            {format(startDate, 'MM.dd')} ~ {format(endDate, 'MM.dd')}
+          <div className="font-normal flex gap-1">
+            <div>{startDate ? format(startDate, 'MM.dd') : ''}</div>
+            <div>~</div>
+            <div>{endDate ? format(endDate, 'MM.dd') : ''}</div>
           </div>
         </div>
       </div>
@@ -51,7 +53,7 @@ const DailyAvg = () => {
       </div>
       {/* 하단의 날짜 선택 부분 */}
       <div className="pb-[6px] pt-[2.37rem]">
-        <PickPeriodDate
+        <PickPeriodDate2
           startDate={startDate}
           setStartDate={setStartDate}
           endDate={endDate}

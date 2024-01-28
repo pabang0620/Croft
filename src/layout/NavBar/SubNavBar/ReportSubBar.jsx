@@ -29,7 +29,7 @@ const ReportSubBar = ({
 
   return (
     <>
-      {!isLoading && ContainerArray[0] && (
+      {!isLoading && (
         <div className="w-full h-[45px] pl-[29px] pt-[4px] flex items-center cursor-pointer select-none border-b-[1px] border-base400 bg-base200">
           <div className="text-lg font-bold mr-[11px]">종합 보고서</div>
           {type === 'global' && (

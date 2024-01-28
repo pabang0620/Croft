@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import PeriodCalendar from './PeriodCalendar';
 import { CheckPriod } from '../Data/CalendarData';
 
-const PickPeriodDate = ({
+const PickPeriodDate3 = ({
   startDate,
   setStartDate,
   endDate,
@@ -51,8 +51,9 @@ const PickPeriodDate = ({
       {/* 모달 외부 클릭 시 닫히게 설정 */}
       {isOpen ? (
         // 임의로 위치 조절
-        <div className="w-screen h-screen absolute top-0 left-0 pt-[7vw] pl-[13vw] flex">
-          <div className="z-20 w-fit h-fit">
+
+        <div className={`absolute top-[-11rem] left-[41rem] flex z-30`}>
+          <div className="w-fit h-fit ">
             <PeriodCalendar
               startDate={startDate}
               setStartDate={setStartDate}
@@ -62,10 +63,10 @@ const PickPeriodDate = ({
               setIsOpen={setIsOpen}
             />
           </div>
-          <div
+          {/* <div
             className="w-screen h-screen z-10 absolute top-0 left-0"
             onClick={() => setIsOpen(false)}
-          />
+          /> */}
         </div>
       ) : (
         <></>
@@ -74,4 +75,4 @@ const PickPeriodDate = ({
   );
 };
 
-export default PickPeriodDate;
+export default PickPeriodDate3;

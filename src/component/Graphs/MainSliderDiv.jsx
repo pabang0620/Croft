@@ -90,9 +90,10 @@ const MainSliderDiv = ({
         <div className="text-xs font-normal leading-normal text-center w-full mt-4 absolute top-[45px]">
           {absData8}
         </div>
-        <button className="text-[#124946] text-xs font-normal leading-normal absolute right-[0px] bottom-[-110px]">
+        {/* 아직 기능없는 것 같고 리포트에서는 필요없어서 일단은 주석해뒀어...! */}
+        {/* <button className="text-[#124946] text-xs font-normal leading-normal absolute right-[0px] bottom-[-110px]">
           자세히 보기
-        </button>
+        </button> */}
       </div>
 
       <div className="flex justify-between text-xs"></div>

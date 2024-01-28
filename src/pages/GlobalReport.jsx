@@ -20,7 +20,7 @@ const GlobalReport = () => {
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
       />
-      <div className=" mt-[21px] ml-[29px]">
+      <div className=" my-[21px] mx-[29px]">
         <TotalReport
           container={container}
           date={date}

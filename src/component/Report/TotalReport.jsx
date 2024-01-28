@@ -17,13 +17,17 @@ const TotalReport = ({
     return <div className="font-bold text-2xl">{text}</div>;
   };
   return (
-    <div className="w-[1200px] h-[1697px] flex flex-col px-[63px] pt-[45px] pb-[65px] font-sans bg-white">
-      <div className="h-[57px]  flex items-center justify-between">
+    <div className="my-print-container w-[1200px] h-[1650px] flex flex-col px-[63px] pt-[45px] pb-[65px] font-sans bg-white">
+      <div className="flex items-center justify-between mb-[22px]">
         <div className="flex gap-6">
           <div>{Title(`${container} 일일 종합보고서`)}</div>
           <div>{Title(date)}</div>
         </div>
-        <div className="text-right text-[32px]">CROFT.AI</div>
+        <img
+          className="w-[120px] h-[32px]"
+          src={`/assets/images/Layout/CroftAndLogo.png`}
+          alt="Logo"
+        />
       </div>
       <div className="h-[307px] w-full border-y border-solid border-b-base400 border-t-black px-[35px] flex items-center justify-between">
         <GreenhouseScore />

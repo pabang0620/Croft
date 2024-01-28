@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { format, startOfWeek } from 'date-fns';
-import PickPeriodDate from '../../utils/DatePicker/PickPeriodDate';
+import PickPeriodDate2 from '../../utils/DatePicker/PickPeriodDate2';
 import BarMonthChart from '../../Charts/BarCharts/BarMonthChart';
 
 const DailyPP = () => {
@@ -39,7 +39,7 @@ const DailyPP = () => {
       </div>
       {/* 하단의 날짜 선택 부분 */}
       <div className="pb-[6px] pt-[2.37rem]">
-        <PickPeriodDate
+        <PickPeriodDate2
           startDate={startDate}
           setStartDate={setStartDate}
           endDate={endDate}

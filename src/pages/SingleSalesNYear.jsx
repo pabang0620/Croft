@@ -1,14 +1,24 @@
+import { useState } from 'react';
 import SalesSubBar from '../layout/NavBar/SubNavBar/SalesSubBar';
 import TotalCost from '../component/SingleSales/TotalCost';
 import TotalSales from '../component/SingleSales/TotalSales';
 import StackedBarChartyx from '../component/Charts/MixCharts/StackedBarChartyx';
+import { useChartData } from '../component/utils/api/Charts/ChartAPI';
 
 const SingleSalesNYear = () => {
   const tempTable = ['YearlySalesTable', 'YearlyCostTable'];
+  const [years, setYears] = useState(2023); //selectbox값 담아줌
+  const [period, setPeriod] = useState(); //yearArray 값 담아줌
+
 
   return (
     <div className="flex flex-col">
-      <SalesSubBar />
+      <SalesSubBar
+        years={years}
+        setYears={setYears}
+        period={period}
+        setPeriod={setPeriod}
+      />
       <div className="my-[11px] mx-[25px]">
         <div>차트 사이즈 수정 예정</div>
         <div className="flex w-full rounded-[10px] flex-wrap gap-2">

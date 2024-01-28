@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getMonth, getISOWeek, startOfWeek } from 'date-fns';
-import PickPeriodDate2 from '../../utils/DatePicker/PickPeriodDate2';
+import PickPeriodDate3 from '../../utils/DatePicker/PickPeriodDate3';
 import {
   PercentUpDown,
   ResourceIcon,
@@ -43,7 +43,7 @@ const TotalResourceChart = () => {
         ))}
       </div>
       <div className="flex w-[93%] justify-between text-accent text-xs absolute bottom-[9px] right-7 cursor-pointer">
-        <PickPeriodDate2
+        <PickPeriodDate3
           startDate={startDate}
           setStartDate={setStartDate}
           endDate={endDate}
@@ -51,6 +51,7 @@ const TotalResourceChart = () => {
           specificDate={specificDate}
           setSpecificDate={setSpecificDate}
         />
+
         <div onClick={() => navigate('/single-resource')}>전체 사용량 보기</div>
       </div>
     </div>
