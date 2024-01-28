@@ -1,6 +1,7 @@
 import * as echarts from "echarts";
 import React, { useEffect, useRef } from "react";
 import { useChartData } from "../../utils/api/Charts/ChartAPI";
+import MeasureName from "./MeasureName";
 
 const LineAreaMeasure = ({ APIoption, ChartName, registerChart, chartKey }) => {
   const chartRef = useRef(null);
@@ -40,10 +41,6 @@ const LineAreaMeasure = ({ APIoption, ChartName, registerChart, chartKey }) => {
         bottom: "0%", // 필요에 따라 이 값을 조정
         right: "1%",
         top: "0%",
-      },
-      tooltip: {
-        trigger: "axis",
-        axisPointer: { type: "cross" },
       },
       xAxis: {
         type: "category",
@@ -92,7 +89,15 @@ const LineAreaMeasure = ({ APIoption, ChartName, registerChart, chartKey }) => {
       chartInstance.dispose();
     };
   }, [data, isLoading, error]);
-  return <div ref={chartRef} className="w-full h-full bg-white rounded-lg" />;
+  return (
+    <div className="flex flex-row">
+      <MeasureName ChartName={ChartName} />
+      <div
+        ref={chartRef}
+        className="w-[554px] h-[25px] bg-white border-b-[1px] border-gray-400"
+      />
+    </div>
+  );
 };
 
 export default LineAreaMeasure;
