@@ -21,14 +21,14 @@ export const PeriodData = [
   {
     id: 2,
     text: '이번주',
-    startDate: startOfWeek(new Date()),
+    startDate: startOfWeek(new Date(), { weekStartsOn: 1 }),
     endDate: new Date(),
   },
   {
     id: 3,
     text: '지난 주',
-    startDate: startOfWeek(subWeeks(new Date(), 1)),
-    endDate: endOfWeek(subWeeks(new Date(), 1)),
+    startDate: startOfWeek(subWeeks(new Date(), 1), { weekStartsOn: 1 }),
+    endDate: endOfWeek(subWeeks(new Date(), 1), { weekStartsOn: 1 }),
   },
   {
     id: 4,
@@ -46,7 +46,7 @@ export const PeriodData = [
     id: 6,
     text: '지난 7일',
     startDate: subDays(new Date(), 7),
-    endDate: new Date(),
+    endDate: subDays(new Date(), 1),
   },
   {
     id: 7,

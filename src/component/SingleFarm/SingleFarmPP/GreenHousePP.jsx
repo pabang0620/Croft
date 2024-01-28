@@ -63,7 +63,9 @@ const GreenHousePP = () => {
         </div>
       </div>
       {/* 하단의 날짜 선택 부분 */}
-      <PickSingleDate selectedDate={date} setSelectedDate={setDate} />
+      <div className="relative">
+        <PickSingleDate selectedDate={date} setSelectedDate={setDate} />
+      </div>
     </div>
   );
 };

@@ -96,13 +96,13 @@
   border-radius: 5px !important;
 }
 .react-datepicker__day {
-  width: 24px !important;
+  width: 30px !important;
 }
 .react-datepicker__week {
   gap: 0px;
 }
 .react-datepicker__day--selected {
-  width: 24px !important;
+  width: 30px !important;
   height: 24px;
   border-radius: 4px;
 }
