@@ -14,7 +14,7 @@ const GreenHouseDLI = () => {
       <div className="flex justify-between mb-[26px]">
         <div className="flex gap-1 text-lg">
           <div className="font-bold">DLI</div>
-          <div className="font-normal">{format(date, 'MM.dd')}</div>
+          <div className="font-normal">{format(date, 'MM.dd HH:mm')}</div>
         </div>
       </div>
       {/* 차트 부분 */}

@@ -12,7 +12,7 @@ const GreenHouseRTR = ({ date, setDate }) => {
       <div className="flex justify-between mb-[26px]">
         <div className="flex gap-1 text-lg">
           <div className="font-bold">RTR</div>
-          <div className="font-normal">{format(date, 'MM.dd')}</div>
+          <div className="font-normal">{format(date, 'MM.dd HH:mm')}</div>
         </div>
       </div>
       {/* 차트 부분 */}
