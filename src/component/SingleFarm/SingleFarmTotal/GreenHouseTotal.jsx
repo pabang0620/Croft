@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { format } from 'date-fns';
-import GreenHouseSwitch from './GreenHouseSwitch';
-import { CriticalOrWarn } from '../../utils/Icons';
-import { ChartDashIcons, IconsColor } from '../../utils/Icons';
-import { SingleFarmRecommend, IconId } from '../../utils/Data/SingleFarmData';
-import { useChartData } from '../../utils/api/Charts/ChartAPI';
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { format } from "date-fns";
+import GreenHouseSwitch from "./GreenHouseSwitch";
+import { CriticalOrWarn } from "../../utils/Icons";
+import { ChartDashIcons, IconsColor } from "../../utils/Icons";
+import { SingleFarmRecommend, IconId } from "../../utils/Data/SingleFarmData";
+import { useChartData } from "../../utils/api/Charts/ChartAPI";
 
 const GreenHouseTotal = ({ critical, alert, date }) => {
   const navigate = useNavigate();
@@ -13,13 +13,13 @@ const GreenHouseTotal = ({ critical, alert, date }) => {
   const [toggle, setToggle] = useState(0);
   const { data, isLoading } = useChartData(
     `${process.env.REACT_APP_BASE_API_KEY}/v1/farms/measurement/current`,
-    'Current5MinData'
+    "Current5MinData"
   );
   useEffect(() => {
-    if (currentPath === '/dash/environment/total/temp') setToggle(0);
-    else if (currentPath === '/dash/environment/total/humidity') setToggle(1);
-    else if (currentPath === '/dash/environment/total/solar') setToggle(2);
-    else if (currentPath === '/dash/environment/total/co2') setToggle(3);
+    if (currentPath === "/dash/environment/total/temp") setToggle(0);
+    else if (currentPath === "/dash/environment/total/humidity") setToggle(1);
+    else if (currentPath === "/dash/environment/total/solar") setToggle(2);
+    else if (currentPath === "/dash/environment/total/co2") setToggle(3);
     else setToggle(0);
   }, [currentPath]);
   const dataArray = [
@@ -34,7 +34,7 @@ const GreenHouseTotal = ({ critical, alert, date }) => {
       <div className="flex justify-between mb-[26px]">
         <div className="flex gap-1 text-lg">
           <div className="font-bold">온실 환경 종합</div>
-          <div className="font-normal">{format(date, 'MM.dd HH:mm')}</div>
+          <div className="font-normal">{format(date, "MM.dd HH:mm")}</div>
         </div>
         <div>{CriticalOrWarn(true, critical, false)}</div>
       </div>
@@ -45,7 +45,7 @@ const GreenHouseTotal = ({ critical, alert, date }) => {
           <div
             key={idx}
             className={`flex gap-[17px] flex-grow items-center pb-[12px] ${
-              toggle === idx ? 'border-solid border-b-[3px] border-accent' : ''
+              toggle === idx ? "border-solid border-b-[3px] border-accent" : ""
             }`}
             onClick={() => {
               setToggle(idx);

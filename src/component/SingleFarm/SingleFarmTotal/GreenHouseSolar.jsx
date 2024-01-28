@@ -1,5 +1,6 @@
-import React from 'react';
-import Bar2Line1Chart from '../../Charts/MixCharts/Bar2Line1Chart';
+import React from "react";
+import Bar2Line1Chart from "../../Charts/MixCharts/Bar2Line1Chart";
+import Measurement from "../../Charts/Measurement/Measurement";
 
 const GreenHouseSolar = () => {
   return (
@@ -21,11 +22,9 @@ const GreenHouseSolar = () => {
           </div>
         </div>
         {/* temp 이미지 */}
-        <img
-          className="w-[90%] h-[150px] ml-2"
-          src={`${process.env.PUBLIC_URL}/assets/images/Temp/TempRunHistory.svg`}
-          alt=""
-        />
+        <div className="">
+          <Measurement />
+        </div>
       </div>
       <div className="flex flex-col flex-grow gap-7">
         <div className="flex w-full h-[2.1875rem] rounded-[10px] px-4 bg-lightest-gray items-center text-xs gap-7">
@@ -54,11 +53,9 @@ const GreenHouseSolar = () => {
           </div>
         </div>
         {/* temp 이미지 */}
-        <img
-          className="w-[90%] h-[100px] ml-2"
-          src={`${process.env.PUBLIC_URL}/assets/images/Temp/TempRunHistoryPast.svg`}
-          alt=""
-        />
+        <div className="">
+          <Measurement />
+        </div>
       </div>
     </div>
   );

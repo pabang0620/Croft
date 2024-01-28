@@ -81,7 +81,6 @@ const WaterLine2Chart = ({
         itemHeight: 10,
         icon: "rect",
         left: "12%", // 가로 중앙에 위치
-        top: "15%", // 타이틀 아래에 위치하도록 조정
       },
       xAxis: {
         type: "category",

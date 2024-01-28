@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
 import { ItemsCheck } from "../utils/Icons";
-import {
-  checkboxDefault,
-  itemArray,
-  titleArray,
-} from "../utils/Data/ItemsData";
+import { itemArray, titleArray } from "../utils/Data/ItemsData";
 
 const EditItems = ({ setOpenModal }) => {
   const [checkedItems, setCheckedItems] = useState(() => {

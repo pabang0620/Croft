@@ -2,55 +2,36 @@ import React, { useEffect, useRef } from "react";
 import * as echarts from "echarts";
 import { useChartData } from "../../utils/api/Charts/ChartAPI";
 
-const BarMonthChart = ({ queryname }) => {
+const LineMonthChart = ({ queryname }) => {
   const { data, isLoading, error } = useChartData(
     `http://croft-ai.iptime.org:40401/api/v1/farms/${queryname}/amonth`,
     `chartData-barMonth-${queryname}`
   );
 
   const chartRef = useRef(null);
-  console.log(data);
+  //   console.log(data);
   // --------------------------------------------
   useEffect(() => {
     if (isLoading || error) {
-      // 데이터 로딩 중이거나 오류 발생시 처리
       return;
     }
 
     if (!data || !data.data) {
-      // 데이터가 없거나 잘못된 형식일 경우 처리
       return;
     }
-    let date;
-    console.log(data);
-    const xLabels = data.data.map((item) => {
-      if ((queryname === "dli", "photo_period", "rtr")) {
-        date = new Date(item.kr_time);
-      }
-      if (queryname === "rtr") {
-        date = new Date(item.date);
-      }
-
-      const formattedDate = `${date.getMonth() + 1}.${date.getDate()}`;
-      return formattedDate;
-    });
-
-    let seriesData;
-
-    if (queryname === "dli") {
-      seriesData = data.data.map((item) => item[queryname]);
-    }
-    if (queryname === "photo_period") {
-      seriesData = data.data.map((item) => item.photo_period_hour);
-    } else {
-      seriesData = data.data.map((item) => item["day_" + queryname]);
-    }
-    // console.log("#######################", `${queryname}`, data);
-    // console.log("#######################", seriesData);
 
     const chartInstance = echarts.init(chartRef.current);
 
-    // eCharts 옵션 설정
+    // 차트 데이터 생성
+    const chartData = data.data.map((item) => {
+      return {
+        // kr_time 값을 x축 값으로 변환 (예: 날짜 시간 형식)
+        name: item.kr_time,
+        // vpd 값을 y축 값으로 사용
+        value: item.vpd,
+      };
+    });
+
     const option = {
       grid: {
         // 다른 설정을 유지하면서 bottom만 조정
@@ -69,10 +50,12 @@ const BarMonthChart = ({ queryname }) => {
       },
       xAxis: {
         type: "category",
-        data: xLabels,
+        data: data.data.map((item) => {
+          const date = new Date(item.kr_time);
+          return `${date.getMonth() + 1}.${date.getDate()}`; // '월.일' 형식으로 변환
+        }),
         axisLabel: {
-          fontSize: 10, // 글꼴 크기를 10px로 설정
-          interval: 0, // x축 라벨을 모두 표시
+          fontSize: 10,
         },
       },
       yAxis: {
@@ -85,18 +68,18 @@ const BarMonthChart = ({ queryname }) => {
         {
           name: `일자별 ${queryname}`,
           type: "bar",
-          data: seriesData,
-          markArea: {
-            itemStyle: {
-              color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
-            },
-            data: [
-              [
-                { yAxis: 5 }, // 시작 y축 값
-                { yAxis: 15 }, // 끝 y축 값 (차트 최대값까지)
-              ],
-            ],
-          },
+          data: chartData, // 시리즈 데이터를 chartData로 설정
+          //   markArea: {
+          //     itemStyle: {
+          //       color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
+          //     },
+          //     data: [
+          //       [
+          //         { yAxis: 5 }, // 시작 y축 값
+          //         { yAxis: 15 }, // 끝 y축 값 (차트 최대값까지)
+          //       ],
+          //     ],
+          //   },
         },
       ],
     };
@@ -117,4 +100,4 @@ const BarMonthChart = ({ queryname }) => {
   );
 };
 
-export default BarMonthChart;
+export default LineMonthChart;

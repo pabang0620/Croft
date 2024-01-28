@@ -5,11 +5,12 @@ import DashSubBar from "../layout/NavBar/SubNavBar/DashSubBar";
 const SingleDashBoard = () => {
   const [editMode, setEditMode] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const [gridKey, setGridKey] = useState(0);
+  const [gridKey, setGridKey] = useState(0); // WonhoGrid 컴포넌트의 key를 위한 상태
 
   useEffect(() => {
+    // openModal 상태가 변경될 때마다 gridKey를 업데이트하여 WonhoGrid 재렌더링 유도
+    console.log(openModal);
     if (!openModal) {
-      // openModal이 false일 때 WonhoGrid 컴포넌트를 새로고침
       setGridKey((prevKey) => prevKey + 1);
     }
   }, [openModal]);
@@ -17,12 +18,12 @@ const SingleDashBoard = () => {
   return (
     <div className="flex flex-col scrollbar-hide">
       <DashSubBar
-        editMode={editMode}
         setEditMode={setEditMode}
         openModal={openModal}
         setOpenModal={setOpenModal}
       />
       <div className="pr-[12rem] overflow-auto">
+        {/* key 속성을 사용하여 WonhoGrid 컴포넌트 재렌더링 유도 */}
         <WonhoGrid
           key={gridKey}
           editMode={editMode}

@@ -13,6 +13,7 @@ import TotalReportChart from "../../Charts/TotalReportChart/TotalReportChart";
 import GreenhouseScore from "../../Charts/GreenhouseScore";
 import CroftGuide from "../../Charts/CroftGuide/CroftGuide";
 import TotalResourceChart from "../../Charts/TotalResourceChart/TotalResourceChart";
+import VPDChart from "../../Charts/Measurement/VPDChart";
 const positionMap = {
   0: { x: 0, y: 0, w: 4, h: 2 }, // width 4, height 2
   1: { x: 4, y: 0, w: 2, h: 2 }, // width 2, height 2
@@ -32,6 +33,7 @@ const positionMap = {
   15: { x: 4, y: 4, w: 2, h: 2 }, // width 2, height 2
   16: { x: 6, y: 4, w: 2, h: 2 }, // width 2, height 2
   17: { x: 0, y: 6, w: 2, h: 2 }, // width 2, height 2
+  18: { x: 8, y: 3, w: 2, h: 3 }, // width 2, height 3
 };
 
 const GridData = [
@@ -199,6 +201,12 @@ const GridData = [
       <MainFootLineChart APIoption="218" ChartName="물 사용량" unit="liter" />
     ),
     layout: positionMap[17],
+  },
+  {
+    chartID: "VPD",
+    id: 18,
+    component: <VPDChart />,
+    layout: positionMap[18],
   },
 ];
 

@@ -1,6 +1,7 @@
-import React from 'react';
-import Line4ChartNone from '../../Charts/LineCharts/Line4ChartNone';
-import Line4Chart from '../../Charts/LineCharts/Line4Chart';
+import React from "react";
+import Line4ChartNone from "../../Charts/LineCharts/Line4ChartNone";
+import Line4Chart from "../../Charts/LineCharts/Line4Chart";
+import Measurement from "../../Charts/Measurement/Measurement";
 
 const GreenHouseTemper = () => {
   return (
@@ -23,15 +24,13 @@ const GreenHouseTemper = () => {
             </div>
           </div>
           <div className="w-[665px] h-[390px] ">
-            <Line4Chart />
+            <Line4Chart dataoff="dataoff" />
           </div>
         </div>
         {/* temp 이미지 */}
-        <img
-          className="w-[90%] h-[150px] ml-2"
-          src={`${process.env.PUBLIC_URL}/assets/images/Temp/TempRunHistory.svg`}
-          alt=""
-        />
+        <div className="">
+          <Measurement />
+        </div>
       </div>
       <div className="flex flex-col flex-grow gap-7">
         <div className="flex w-full h-[2.1875rem] rounded-[10px] px-4 bg-lightest-gray items-center text-xs gap-7">
@@ -56,16 +55,14 @@ const GreenHouseTemper = () => {
               <div className="font-bold text-lg">22℃</div>
             </div>
           </div>
-          <div className="w-[90%] h-[390px]">
-            <Line4ChartNone />
+          <div className="w-[665px] h-[390px] ">
+            <Line4Chart />
           </div>
         </div>
         {/* temp 이미지 */}
-        <img
-          className="w-[90%] h-[150px] ml-2"
-          src={`${process.env.PUBLIC_URL}/assets/images/Temp/TempRunHistoryPast.svg`}
-          alt=""
-        />
+        <div className="">
+          <Measurement />
+        </div>
       </div>
     </div>
   );

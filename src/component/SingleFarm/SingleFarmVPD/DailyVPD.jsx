@@ -1,12 +1,13 @@
-import { useState } from 'react';
-import { format, startOfWeek } from 'date-fns';
-import PickPeriodDate from '../../utils/DatePicker/PickPeriodDate';
-import BarMonthChart from '../../Charts/BarCharts/BarMonthChart';
+import { useState } from "react";
+import { format, startOfWeek } from "date-fns";
+import PickPeriodDate from "../../utils/DatePicker/PickPeriodDate";
+import BarMonthChart from "../../Charts/BarCharts/BarMonthChart";
+import LineMonthChart from "../../Charts/LineCharts/LineMonthChart";
 
 const DailyVPD = () => {
   const [startDate, setStartDate] = useState(startOfWeek(new Date()));
   const [endDate, setEndDate] = useState(new Date());
-  const [specificDate, setSpecificDate] = useState('이번주');
+  const [specificDate, setSpecificDate] = useState("이번주");
 
   return (
     <div className="flex flex-col w-full h-full justify-between px-[17px] py-[12px] select-none">
@@ -30,9 +31,7 @@ const DailyVPD = () => {
             <div className="absolute top-[40%]  w-[150px] pt-[10px] border-t border-base400 flex flex-col" />
           </div>
         </div>
-        <div>데이터 바꿔줘야함</div>
-        {/* 데이터 바꿔줘야함(쿼리만) VPD는 라인차트로 바꿔달래...(?)  */}
-        <BarMonthChart queryname="vpd" />
+        <LineMonthChart queryname="vpd" />
       </div>
       {/* 하단의 날짜 선택 부분 */}
       <div className="pb-[6px] pt-[2.37rem]">
