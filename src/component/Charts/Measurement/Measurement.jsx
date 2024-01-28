@@ -1,3 +1,4 @@
+import WaterLine2Chart from "../LineCharts/WaterLine2Chart";
 import LineAreaMeasure from "./LineAreaMeasure";
 import TimeMeasure from "./TimeMeasure";
 

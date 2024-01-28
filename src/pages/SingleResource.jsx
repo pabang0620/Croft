@@ -1,20 +1,22 @@
-import { useState } from 'react';
-import { format } from 'date-fns';
-import ResourceSubBar from '../layout/NavBar/SubNavBar/ResourceSubBar';
-import MainFootLineChart from '../component/Charts/LineCharts/MainFootLineChart';
-import Line2Chart from '../component/Charts/LineCharts/Line2Chart';
+import { useState } from "react";
+import { format } from "date-fns";
+import ResourceSubBar from "../layout/NavBar/SubNavBar/ResourceSubBar";
+import MainFootLineChart from "../component/Charts/LineCharts/MainFootLineChart";
+import Line2Chart from "../component/Charts/LineCharts/Line2Chart";
 import {
   PercentUpDown,
   ResourceIcon,
   ResourceTitle,
   TempResource,
-} from '../component/utils/Data/SingleResourceData';
+} from "../component/utils/Data/SingleResourceData";
+import WaterLine2Chart from "../component/Charts/LineCharts/WaterLine2Chart";
+import Measurement from "../component/Charts/Measurement/Measurement";
 
 const SingleResource = () => {
   const [toggle, setToggle] = useState(0);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [specificDate, setSpecificDate] = useState('오늘');
+  const [specificDate, setSpecificDate] = useState("오늘");
 
   return (
     <div className="flex flex-col">
@@ -31,7 +33,7 @@ const SingleResource = () => {
           {/* 자원 사용량 흰 박스 */}
           <div className="flex flex-col w-[61.25rem] h-[57rem] rounded-[10px] bg-white py-[12px] px-[17px]">
             <div className="flex gap-2 text-lg font-bold mb-[62px]">
-              <div>{format(startDate, 'MM.dd')}</div>
+              <div>{format(startDate, "MM.dd")}</div>
               <div>시간대별 자원 사용량</div>
             </div>
             <div className="flex gap-12">
@@ -42,8 +44,8 @@ const SingleResource = () => {
                     key={idx}
                     className={`flex gap-[17px] w-[8.625rem] items-center pb-[12px] ${
                       toggle === idx
-                        ? 'border-solid border-b-[3px] border-accent'
-                        : ''
+                        ? "border-solid border-b-[3px] border-accent"
+                        : ""
                     }`}
                     onClick={() => setToggle(idx)}
                   >
@@ -52,7 +54,7 @@ const SingleResource = () => {
                       <div className="text-sm font-bold">{item.temp}</div>
                       <div
                         className={`text-[10px] ${
-                          item.percentUp ? 'text-error' : 'text-accent'
+                          item.percentUp ? "text-error" : "text-accent"
                         }`}
                       >
                         {PercentUpDown(item.percentUp)} {item.percentNum} %
@@ -63,14 +65,16 @@ const SingleResource = () => {
               </div>
               <div className="flex flex-col gap-4">
                 <div className="text-lg font-bold">{ResourceTitle[toggle]}</div>
-                <div className="w-[732px] h-[489px]">
-                  <Line2Chart />
+                <div className="m-[2px] w-[732px] h-[489px]">
+                  <WaterLine2Chart
+                    APIoption="218"
+                    ChartName="물 사용량"
+                    unit="Liter"
+                  />
+                  <div className="ml-[-100px]">
+                    <Measurement />
+                  </div>
                 </div>
-                <img
-                  className=""
-                  src={`${process.env.PUBLIC_URL}/assets/images/Temp/TempRunHistory.svg`}
-                  alt=""
-                />
               </div>
             </div>
           </div>

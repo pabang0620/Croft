@@ -42,7 +42,6 @@ function App() {
           />
           <Route path="/single-resource" element={<SingleResource />} />
           <Route path="/single-report" element={<SingleReport />} />
-          <Route path="/Measurement" element={<Measurement />} />
         </Route>
       </Routes>
     </QueryClientProvider>
