@@ -3,15 +3,13 @@ import { format } from 'date-fns';
 import PeriodCalendar from './PeriodCalendar';
 import { CheckPriod } from '../Data/CalendarData';
 
-const PickPeriodDatePositionProps = ({
+const PickPeriodDate3 = ({
   startDate,
   setStartDate,
   endDate,
   setEndDate,
   specificDate,
   setSpecificDate,
-  top,
-  left,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [formatStart, setFormatStart] = useState(
@@ -54,7 +52,7 @@ const PickPeriodDatePositionProps = ({
       {isOpen ? (
         // 임의로 위치 조절
 
-        <div className={`absolute top-[${top}] left-[${left}] flex z-30`}>
+        <div className={`absolute top-[-11rem] left-[41rem] flex z-30`}>
           <div className="w-fit h-fit ">
             <PeriodCalendar
               startDate={startDate}
@@ -77,4 +75,4 @@ const PickPeriodDatePositionProps = ({
   );
 };
 
-export default PickPeriodDatePositionProps;
+export default PickPeriodDate3;

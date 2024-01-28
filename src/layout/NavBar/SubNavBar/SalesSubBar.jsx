@@ -2,12 +2,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useOutletContext } from 'react-router';
 
-const SalesSubBar = () => {
+const SalesSubBar = ({ years, setYears, period, setPeriod }) => {
   const navigate = useNavigate();
   const { currentPath } = useOutletContext();
 
-  const [years, setYears] = useState(2023); //selectbox값 담아줌
-  const [period, setPeriod] = useState(); //yearArray 값 담아줌
   const [yearsToggle, setYearsToggle] = useState(false); //연도 selectbox on/off check
   const yearsArray = [
     //기록이 있는 연도만 출력 array에 넣어주면 됨
@@ -16,7 +14,7 @@ const SalesSubBar = () => {
     { id: 2, text: 2021 },
     { id: 3, text: 2020 },
   ];
-  const yearArray = ['3년', '5년', '10년'];
+  const yearArray = ['3', '5', '10'];
 
   //해당 연도 데이터를 보여주는 매출 보고서 페이지로 이동
   const handleToggleClick = (text) => {
@@ -27,9 +25,9 @@ const SalesSubBar = () => {
   // 연간 비교 보고서 #CROFT-CRM-SINGLE-SALES > 5 years(sample) 로 이동
   const handlePeriodClick = (text) => {
     setPeriod(text);
-    if (text === '3년') navigate('/single-sales/years/3');
-    if (text === '5년') navigate('/single-sales/years/5');
-    if (text === '10년') navigate('/single-sales/years/10');
+    if (text === '3') navigate('/single-sales/years/3');
+    if (text === '5') navigate('/single-sales/years/5');
+    if (text === '10') navigate('/single-sales/years/10');
   };
   return (
     <div className="w-full h-[45px] pl-[29px] pt-[4px] flex items-center cursor-pointer select-none border-b-[1px] border-base400 bg-base200">
@@ -68,7 +66,7 @@ const SalesSubBar = () => {
               onClick={() => handlePeriodClick(item)}
               className={`${period === item ? 'text-accent' : 'text-info'}`}
             >
-              {item}
+              {item}년
             </div>
           ))}
         </div>
