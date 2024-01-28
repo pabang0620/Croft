@@ -15,9 +15,13 @@ const DailyReport = ({ container, date }) => {
   return (
     <div className="flex flex-col gap-[25px] font-Pretendard">
       {/* 1페이지 */}
-      <div className="w-[1200px] h-[1697px] relative bg-white rounded-[10px]">
+      <div className="w-[1200px] h-[1660px] relative bg-white rounded-[10px]">
         <div className="absolute top-[53px] left-[74px] flex flex-col">
-          <div className="text-4xl font-bold">CROFT.AI</div>
+          <img
+            className="w-[120px] h-[32px]"
+            src={`/assets/images/Layout/CroftAndLogo.png`}
+            alt="Logo"
+          />
           <div className="text-lg font-bold">Smart Farm Comprehensive AI</div>
         </div>
         <div className="absolute flex flex-col items-center w-full top-[308px]">
@@ -112,7 +116,16 @@ const DailyReport = ({ container, date }) => {
             </div>
             <div className="flex flex-col gap-12 ml-[99px]">
               <div className="flex gap-8">
-                <div className="w-[142px] h-[152px]">차트</div>
+                <div className="w-[142px] h-[152px] relative">
+                  <img
+                    className="h-[152px] absolute top-0 left-0"
+                    src={`/assets/images/Temp/TempReportResourceScore.svg`}
+                    alt="chart"
+                  />
+                  <div className="w-[142px] h-[152px] absolute top-0 left-0 text-[28px] font-bold flex items-center justify-center">
+                    95
+                  </div>
+                </div>
                 <div className="flex flex-col gap-[18px]">
                   <div className="text-[22px] font-bold">
                     온실환경 : PERFECT
@@ -126,7 +139,16 @@ const DailyReport = ({ container, date }) => {
                 </div>
               </div>
               <div className="flex gap-8">
-                <div className="w-[142px] h-[152px]">차트</div>
+                <div className="w-[142px] h-[152px] relative">
+                  <img
+                    className="h-[152px] absolute top-0 left-0"
+                    src={`/assets/images/Temp/TempReportGreenhouseScore.svg`}
+                    alt="chart"
+                  />
+                  <div className="w-[142px] h-[152px] absolute top-0 left-0 text-[28px] font-bold flex items-center justify-center">
+                    57
+                  </div>
+                </div>
                 <div className="flex flex-col gap-[18px]">
                   <div className="text-[22px] font-bold font-bold">
                     자원사용 : Weak
@@ -643,7 +665,7 @@ const DailyReport = ({ container, date }) => {
           </div>
           <div className="px-[24px] flex flex-col">
             <div className="flex justify-between">
-              <div className="flex flex-col w-[340px]">
+              <div className="flex flex-col w-[340px] gap-5">
                 <MainSliderDiv
                   queryName="rtr"
                   title="RTR"
@@ -662,12 +684,12 @@ const DailyReport = ({ container, date }) => {
                     src={`${process.env.PUBLIC_URL}/assets/images/Report/CommentIcon.svg`}
                     alt=""
                   />
-                  <div className="w-[949px] text-wrap whitespace-pre-wrap text-base font-normal">
-                    {text}
+                  <div className="w-[949px] text-wrap whitespace-pre-wrap text-base font-normal bg-white">
+                    {`RTR 은 24시간 평균온도/총DLI 로 RTR의 정도에 따라 식물의 줄기성장, 과육 성장등에 성장 방향성에 영향을 미칩니다.\n현재 RTR 은 1.3으로 식물에 잎이 달리고 꽃이 피게됩니다.`}
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col w-[340px]">
+              <div className="flex flex-col w-[340px]  gap-5">
                 <MainSliderDiv
                   queryName="rtr"
                   title="RTR"
@@ -687,13 +709,13 @@ const DailyReport = ({ container, date }) => {
                     alt=""
                   />
                   <div className="w-[949px] text-wrap whitespace-pre-wrap text-base font-normal">
-                    {text}
+                    {`더미 텍스트를 표시합니다. 해당 인자에 대한 간략한 가이드와 함께 현재 포인트의 의미를 기재합니다.`}
                   </div>
                 </div>
               </div>
             </div>
             <div className="flex justify-between">
-              <div className="flex flex-col w-[340px]">
+              <div className="flex flex-col w-[340px]  gap-5">
                 <MainSliderDiv
                   queryName="rtr"
                   title="RTR"
@@ -713,11 +735,11 @@ const DailyReport = ({ container, date }) => {
                     alt=""
                   />
                   <div className="w-[949px] text-wrap whitespace-pre-wrap text-base font-normal">
-                    {text}
+                    {`더미 텍스트를 표시합니다. 해당 인자에 대한 간략한 가이드와 함께 현재 포인트의 의미를 기재합니다.`}
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col w-[340px]">
+              <div className="flex flex-col w-[340px]  gap-5">
                 <MainSliderDiv
                   queryName="rtr"
                   title="RTR"
@@ -737,7 +759,7 @@ const DailyReport = ({ container, date }) => {
                     alt=""
                   />
                   <div className="w-[949px] text-wrap whitespace-pre-wrap text-base font-normal">
-                    {text}
+                    {`더미 텍스트를 표시합니다. 해당 인자에 대한 간략한 가이드와 함께 현재 포인트의 의미를 기재합니다.`}
                   </div>
                 </div>
               </div>

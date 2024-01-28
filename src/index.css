@@ -61,3 +61,13 @@ input[type='range']::-webkit-slider-thumb {
       format('truetype');
   font-display: swap;
 }
+
+@media print {
+  .print-container {
+    /* 특정 컴포넌트에만 적용될 프린트 스타일 */
+    size: A4; /* A4 크기의 페이지 */
+    margin: 0; /* 페이지 여백 제거 */
+    padding: 0;
+    break-after: page;
+  }
+}
