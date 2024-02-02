@@ -53,9 +53,9 @@ const VPDChart = ({ APIoption, ChartName, registerChart, chartKey }) => {
       .filter((item) => item.data_type_id === 198)
       .map((item) => item.value);
 
-    console.log(humidityData);
-    console.log(temperatureData);
-    console.log(tempHumidityData);
+    // console.log(humidityData);
+    // console.log(temperatureData);
+    // console.log(tempHumidityData);
 
     const option = {
       grid: {
@@ -208,9 +208,9 @@ const VPDChart = ({ APIoption, ChartName, registerChart, chartKey }) => {
     if (registerChart) {
       registerChart(chartKey, chartInstance);
     }
-    console.log("Humidity Data:", humidityData);
-    console.log("Temperature Data:", temperatureData);
-    console.log("Chart Option:", option);
+    // console.log("Humidity Data:", humidityData);
+    // console.log("Temperature Data:", temperatureData);
+    // console.log("Chart Option:", option);
     return () => {
       chartInstance.dispose();
     };

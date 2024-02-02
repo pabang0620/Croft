@@ -5,7 +5,7 @@ import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import CroftGuide from "../../Charts/CroftGuide/CroftGuide";
 
-const WonhoGrid = ({ editMode, setEditMode }) => {
+const WonhoGrid = ({ editMode, layout, setLayout }) => {
   const [wonhoGridData, setWonhoGridData] = useState([]);
   const [showDetail, setShowDetail] = useState(false);
 
@@ -23,36 +23,67 @@ const WonhoGrid = ({ editMode, setEditMode }) => {
     );
   }, [showDetail]);
 
-  useEffect(() => {
-    const storedData = localStorage.getItem("checkedItems");
-    if (storedData) {
-      const storedDataArray = JSON.parse(storedData);
-      const filteredGridData = GridData.filter((item) =>
-        storedDataArray.includes(item.chartID)
-      ).map((item) => item.id);
-      setWonhoGridData(
-        GridData.filter((item) => filteredGridData.includes(item.id))
-      );
-    }
-  }, []); // 여기
+  // useEffect(() => {
+  //   const storedData = localStorage.getItem("checkedItems");
+  //   if (storedData) {
+  //     const storedDataArray = JSON.parse(storedData);
+  //     const filteredGridData = GridData.filter((item) =>
+  //       storedDataArray.includes(item.chartID)
+  //     );
+  //     setWonhoGridData(filteredGridData);
+  //   } else {
+  //     // 로컬 스토리지에 'checkedItems'가 없을 경우
+  //     // chartID가 1부터 9까지인 항목만 보여주도록 설정
+  //     const defaultGridData = GridData.filter(
+  //       (item) => item.chartID >= 1 && item.chartID <= 9
+  //     );
+  //     setWonhoGridData(defaultGridData);
+  //   }
+  // }, []);
 
-  const [layout, setLayout] = useState();
+  // const [layout, setLayout] = useState();
   const [chartInstances, setChartInstances] = useState({});
 
   useEffect(() => {
-    // 로컬 스토리지에서 레이아웃 데이터 불러오기
     const savedLayout = localStorage.getItem("wonhoGridLayout");
+    const storedData = localStorage.getItem("checkedItems");
+    let storedDataArray = [];
+
+    if (storedData) {
+      storedDataArray = JSON.parse(storedData);
+    }
 
     if (savedLayout) {
-      setLayout(JSON.parse(savedLayout));
+      const parsedLayout = JSON.parse(savedLayout);
+      setLayout(parsedLayout);
+      // 로컬 스토리지에서 불러온 레이아웃을 기반으로 wonhoGridData 업데이트
+      const updatedWonhoGridData = GridData.filter((item) =>
+        storedDataArray.length > 0
+          ? storedDataArray.includes(item.chartID)
+          : true
+      ).map((item) => {
+        const newItemLayout = parsedLayout.find(
+          (layoutItem) => layoutItem.i === item.id.toString()
+        );
+        return newItemLayout ? { ...item, layout: newItemLayout } : item;
+      });
+
+      setWonhoGridData(updatedWonhoGridData);
     } else {
-      // 로컬 스토리지에 데이터가 없을 경우 기본 레이아웃 사용
-      setLayout(
-        GridData.map((item) => ({
-          ...item.layout,
-          i: item.id.toString(),
-        }))
+      // 로컬 스토리지에 레이아웃 데이터가 없을 경우
+      const defaultLayout = GridData.map((item) => ({
+        ...item.layout,
+        i: item.id.toString(),
+      }));
+      setLayout(defaultLayout);
+
+      // checkedItems 기반으로 필터링 적용
+      const defaultFilteredGridData = GridData.filter((item) =>
+        storedDataArray.length > 0
+          ? storedDataArray.includes(item.chartID)
+          : true
       );
+      setWonhoGridData(defaultFilteredGridData); // 이 경우 GridData는 이미 positionMap을 사용하여 구성됨
     }
   }, []);
 
@@ -79,30 +110,8 @@ const WonhoGrid = ({ editMode, setEditMode }) => {
     setChartInstances((prev) => ({ ...prev, [key]: instance }));
   };
 
-  const toggleEditMode = () => {
-    if (editMode) {
-      localStorage.setItem("wonhoGridLayout", JSON.stringify(layout));
-    }
-    setEditMode(!editMode);
-  };
-
   return (
     <>
-      <div className="absolute top-[72px] left-[240px] w-[28px] h-[14px]">
-        <button
-          type="button"
-          onClick={toggleEditMode}
-          className={`${
-            editMode ? "bg-[#3F9192]" : "bg-gray-200"
-          } absolute inset-0 w-full h-full rounded-full transition-colors`}
-        >
-          <span
-            className={`${
-              editMode ? "translate-x-[2px]" : "translate-x-[-10px]"
-            } absolute left-[12px] top-[1px] w-[12px] h-[12px] transform bg-white rounded-full transition-transform`}
-          />
-        </button>
-      </div>
       {/* <TotalResourceChart /> */}
       <GridLayout
         className="layout select-none" // 여기에 select-none 클래스 추가

@@ -22,6 +22,7 @@ const EditItems = ({ setOpenModal }) => {
   const handleTitle = (title) => {
     return <div className=" text-base font-semibold mb-[5px]">{title}</div>;
   };
+
   return (
     <div className="w-screen h-screen bg-black/20 flex items-center justify-center relative">
       <div
