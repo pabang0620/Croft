@@ -107,7 +107,7 @@ const MainBarChart = ({ ChartName, registerChart, chartKey, route }) => {
         chartInstance.dispose();
       };
     }
-  }, [data, isLoading, error]); // 의존성 배열에 API 응답 데이터를 포함합니다.
+  }, [data, isLoading, error, chartKey, registerChart, ChartName]); // 의존성 배열에 API 응답 데이터를 포함합니다.
 
   // 로딩 및 오류 상태 처리
   if (isLoading) return <div>Loading...</div>;

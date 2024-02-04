@@ -19,39 +19,41 @@ const GreenHousePP = () => {
       </div>
       {/* 차트 부분 */}
       <div className="flex pr-[51px]">
-        <div className="flex">
+        <div className="flex justify-between w-full">
           {/* TIME차트 */}
-          <div className="flex gap-[42px] flex-grow">
+          <div className="flex gap-3 flex-grow w-[20%]">
             <div className="mt-[-1rem] flex flex-col text-sm min-w-[56px]">
               <div>TIME</div>
               <div className="text-lg font-bold">4</div>
             </div>
-            <MainSliderDiv
-              queryName="photo_period"
-              title="Photo Period"
-              absData1="0"
-              absData2="6"
-              absData3="10"
-              absData4="16"
-              absData5="최저권장"
-              absData6="권장"
-              absData7="고권장"
-              absData8="Photo Period 상태에 따른 메시지가 나옵니다."
-            />
+            <div className="h-[80%]">
+              <MainSliderDiv
+                queryName="photo_period"
+                title="Photo Period"
+                absData1="0"
+                absData2="6"
+                absData3="10"
+                absData4="16"
+                absData5="최저권장"
+                absData6="권장"
+                absData7="고권장"
+                absData8="Photo Period 상태에 따른 메시지가 나옵니다."
+              />
+            </div>
           </div>
           {/* DLI 차트 */}
-          <div className="flex gap-[23px] flex-grow">
+          <div className="flex gap-3 flex-grow w-[40%]">
             <div className="mt-[-1rem] flex flex-col text-sm min-w-[56px]">
               <div>DLI</div>
               <div className="text-lg font-bold">6</div>
             </div>
-            <div className="w-full h-full min-w-[29.125rem] min-h-[21.1875rem]">
+            <div className="w-full h-full  min-h-[21.1875rem]">
               {/* 문제있으니 답장 기다려야됨 */}
               <Bar2Line1Chart />
             </div>
           </div>
           {/* 예상 일조시간 차트 */}
-          <div className="flex flex-col gap-3 flex-grow">
+          <div className="flex flex-col gap-3 flex-grow w-[30%]">
             <div className="flex gap-[23px] flex-grow">
               <div className="mt-[-1rem] flex flex-col text-sm min-w-[100px]">
                 <div>예상 일조 시간</div>

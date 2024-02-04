@@ -10,6 +10,7 @@ import MonthlyCost from '../component/SingleSales/MonthlyCost';
 const SingleSales = () => {
   const [years, setYears] = useState(2023); //selectbox값 담아줌
   const [period, setPeriod] = useState(); //yearArray 값 담아줌
+  const [pieYears, setPieYears] = useState(2023); //selectbox값 담아줌
 
   return (
     <div className="flex flex-col">
@@ -25,8 +26,11 @@ const SingleSales = () => {
           <TotalCost />
           <div className="flex flex-col gap-2">
             <TotalSales />
-            <div className="w-[650px] h-[335px] bg-white rounded-[10px]">
-              <PieChart years={years} />
+            <div className="w-[650px] h-[335px] bg-white rounded-[10px] ">
+              <PieChart years={pieYears} setYears={setPieYears} />
+              <div>
+                {/* <YearSelectBox years={pieYears} setYears={setPieYears} /> */}
+              </div>
             </div>
           </div>
 

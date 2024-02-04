@@ -25,7 +25,7 @@ const BarOtherColorChart = ({ ChartName, APIoption, date }) => {
 
     const seenHours = new Set();
     const filteredData = data.data.filter((item) => {
-      const hour = date ? date.getHours() : 0;
+      const hour = date ? date?.getHours() : new Date().getHours();
 
       if (hour % 2 === 0 && !seenHours.has(hour)) {
         seenHours.add(hour);

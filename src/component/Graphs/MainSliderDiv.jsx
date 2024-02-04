@@ -39,7 +39,7 @@ const MainSliderDiv = ({
         setPhotoPeriodHour(data.data.avg_temp);
       }
     }
-  }, [data]);
+  }, [data, dataName]);
   const componentStyle = {
     width: `${layout ? layout.w * (1750 / 11) : 288}px`, // 너비 계산
     height: `${layout ? layout.h * 105 : 'auto'}px`, // 높이 계산 (auto로 설정하거나 필요한 높이를 계산하여 설정)

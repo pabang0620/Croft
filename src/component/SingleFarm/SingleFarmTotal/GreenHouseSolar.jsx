@@ -13,7 +13,7 @@ const GreenHouseSolar = () => {
   const [selectedDate, setSelectedDate] = useState(today);
   useEffect(() => {
     setSelectedDate(data?.data[0].pastday);
-  }, [data]);
+  }, [data, isLoading]);
   return (
     <div className="flex gap-[3.75rem] mt-6 w-full">
       <div className="flex flex-col flex-grow justify-end w-[40%]">
@@ -45,7 +45,7 @@ const GreenHouseSolar = () => {
             오늘과 유사했던 환경에서 종합 평가가 좋았던 장비운용 이력을
             확인해보세요.
           </div>
-          <div className="flex gap-7 h-[1.8rem] flex items-center">
+          <div className="flex gap-7 h-[1.8rem] items-center">
             <div
               className="underline text-accent"
               onClick={() => setSelectedDate(data?.data[0].pastday)}

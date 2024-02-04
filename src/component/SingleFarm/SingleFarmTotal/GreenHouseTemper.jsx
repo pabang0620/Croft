@@ -14,7 +14,7 @@ const GreenHouseTemper = () => {
   const [selectedDate, setSelectedDate] = useState(today);
   useEffect(() => {
     setSelectedDate(data?.data[0].pastday);
-  }, [data]);
+  }, [data, isLoading]);
   return (
     <div className="flex gap-[3.75rem] mt-6 w-full">
       <div className="flex flex-col flex-grow justify-end w-[40%]">
@@ -52,7 +52,7 @@ const GreenHouseTemper = () => {
             확인해보세요.
           </div>
           {/* temp 추후 코드 수정 예정 219, 224, 227,249*/}
-          <div className="flex gap-7 h-[1.8rem] flex items-center">
+          <div className="flex gap-7 h-[1.8rem] items-center">
             <div
               className="underline text-accent"
               onClick={() => setSelectedDate(data?.data[0].pastday)}

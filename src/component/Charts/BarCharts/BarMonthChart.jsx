@@ -19,7 +19,7 @@ const BarMonthChart = ({ queryname }) => {
 
     if (!data || !data.data) {
       // 데이터가 없거나 잘못된 형식일 경우 처리
-      return ;
+      return;
     }
     let date;
     console.log(data);
@@ -113,19 +113,58 @@ const BarMonthChart = ({ queryname }) => {
 
   return (
     <div className="flex flex-col gap-[31px] w-full h-full px-[3.3125rem] relative">
-      <div className="absolute top-[15%] h-full w-[150px]">
-        <div className="relative h-full w-full flex flex-col">
-          <div className="absolute top-0 flex flex-col">
-            <div className="text-sm mb-1">과성장</div>
-          </div>
-          <div className="absolute top-[25%]  w-[150px] pt-[10px] border-t border-base400 flex flex-col">
-            <div className="text-sm mb-1">권장</div>
-          </div>
-          <div className="absolute top-[50%]  w-[150px] pt-[10px] border-t border-base400 flex flex-col">
-            <div className="text-sm mb-1">성장부족</div>
+      {queryname === 'photo_period' && (
+        <div className="absolute top-[15%] h-full w-[150px]">
+          <div className="relative h-full w-full flex flex-col">
+            <div className="absolute top-0 flex flex-col">
+              <div className="text-sm mb-1">과성장</div>
+            </div>
+            <div className="absolute top-[25%]  w-[150px] pt-[10px] border-t border-base400 flex flex-col">
+              <div className="text-sm mb-1">권장</div>
+            </div>
+            <div className="absolute top-[50%]  w-[150px] pt-[10px] border-t border-base400 flex flex-col">
+              <div className="text-sm mb-1">성장부족</div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
+      {queryname === 'rtr' && (
+        <div className="absolute top-[15%] h-full w-[150px]">
+          <div className="relative h-full w-full flex flex-col">
+            <div className="absolute top-0 flex flex-col">
+              <div className="text-sm mb-1">생식생장</div>
+              <div className="text-xs text-base400">
+                꽃이 피고
+                <br />
+                열매가 맺혀요
+              </div>
+            </div>
+            <div className="absolute top-[25%]  w-[150px] pt-[10px] border-t border-base400 flex flex-col">
+              <div className="text-sm mb-1">균형</div>
+              <div className="text-xs text-base400">균형을 유지해요</div>
+            </div>
+            <div className="absolute top-[50%]  w-[150px] pt-[10px] border-t border-base400 flex flex-col">
+              <div className="text-sm mb-1">영양생장</div>
+              <div className="text-xs text-base400">잎이 커져요</div>
+            </div>
+          </div>
+        </div>
+      )}
+      {queryname === 'dli' && (
+        <div className="absolute top-[15%] h-full w-[150px]">
+          <div className="relative h-full w-full flex flex-col">
+            <div className="absolute top-0 flex flex-col">
+              <div className="text-sm mb-1">과공급</div>
+            </div>
+            <div className="absolute top-[25%]  w-[150px] pt-[10px] border-t border-base400 flex flex-col">
+              <div className="text-sm mb-1">권장 DLI</div>
+            </div>
+            <div className="absolute top-[50%]  w-[150px] pt-[10px] border-t border-base400 flex flex-col">
+              <div className="text-sm mb-1">광부족</div>
+            </div>
+          </div>
+        </div>
+      )}
       <div
         className="w-[95%] h-full absolute top-2 left-[160px]"
         ref={chartRef}

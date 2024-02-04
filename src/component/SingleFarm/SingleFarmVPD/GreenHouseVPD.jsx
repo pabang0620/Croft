@@ -9,7 +9,7 @@ const GreenHouseVPD = () => {
   const [date, setDate] = useState(new Date());
 
   return (
-    <div className="flex flex-col w-full h-full px-[17px] py-[12px] select-none">
+    <div className="flex flex-col w-full h-full px-[17px] py-[12px] justify-between select-none">
       {/* 제목 부분 */}
       <div className="flex justify-between mb-[26px]">
         <div className="flex gap-1 text-lg">
@@ -18,9 +18,9 @@ const GreenHouseVPD = () => {
         </div>
       </div>
       {/* 차트 부분 */}
-      <div className="flex pr-[51px] mt-[35px] gap-[40px]">
-        <div className="flex flex-col">
-          <div className="flex gap-[42px]">
+      <div className="flex pr-[51px] mt-[35px] gap-7">
+        <div className="flex flex-col w-[25%] flex-grow">
+          <div className="flex gap-4">
             <div className="mt-[-1rem] flex flex-col text-sm min-w-[56px]">
               <div>VPD</div>
               <div className="text-lg font-bold">1.4</div>
@@ -30,8 +30,8 @@ const GreenHouseVPD = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col">
-          <div className="flex gap-[42px]">
+        <div className="flex flex-col w-[30%] flex-grow">
+          <div className="flex gap-4">
             <div className="mt-[-1rem] flex flex-col text-sm min-w-[56px]">
               <div>온도</div>
               <div className="text-lg font-bold">22℃</div>
@@ -44,8 +44,8 @@ const GreenHouseVPD = () => {
             <Measurement />
           </div>
         </div>
-        <div className="flex flex-col">
-          <div className="flex gap-[42px]">
+        <div className="flex flex-col w-[30%] flex-grow">
+          <div className="flex gap-4">
             <div className="mt-[-1rem] flex flex-col text-sm min-w-[56px]">
               <div>습도</div>
               <div className="text-lg font-bold">55%</div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { format, subDays } from 'date-fns';
 import MainSliderDiv from '../../Graphs/MainSliderDiv';
 import MainBarChartLine from '../../Charts/BarCharts/MainBarChartLine';
 import MainBarChart from '../../Charts/BarCharts/MainBarChart';
@@ -13,7 +14,7 @@ import TotalReportChart from '../../Charts/TotalReportChart/TotalReportChart';
 import GreenhouseScore from '../../Charts/GreenhouseScore';
 import CroftGuide from '../../Charts/CroftGuide/CroftGuide';
 import TotalResourceChart from '../../Charts/TotalResourceChart/TotalResourceChart';
-import VPDChart from '../../Charts/Measurement/VPDChart';
+import VPDChart from '../../Charts/Measurement/VPDChart2';
 const positionMap = {
   0: { x: 0, y: 0, w: 4, h: 2 }, // width 4, height 2
   1: { x: 4, y: 0, w: 2, h: 2 }, // width 2, height 2
@@ -124,6 +125,9 @@ const GridData = [
       <MainBarLine2Chart
         ChartName="평균 온도"
         route="/dash/environment/total/temp"
+        locate="dash"
+        startDate={format(subDays(new Date(), 7), 'yyyy-MM-dd')}
+        endDate={format(subDays(new Date(), -1), 'yyyy-MM-dd')}
       />
     ),
     layout: positionMap[7],
@@ -252,7 +256,7 @@ const GridData = [
   {
     chartID: 'VPD',
     id: 18,
-    component: <VPDChart />,
+    component: <VPDChart route="/dash/environment/VPD"/>,
     layout: positionMap[18],
   },
 ];

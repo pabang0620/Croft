@@ -10,6 +10,9 @@ const MainBarLine2Chart = ({
   chartKey,
   dateset,
   route,
+  locate,
+  startDate,
+  endDate,
 }) => {
   const chartRef = useRef(null);
   const navigate = useNavigate();
@@ -18,15 +21,9 @@ const MainBarLine2Chart = ({
     window.scrollTo(0, 0);
   };
 
-  // 일주일 전과 내일 날짜를 계산
-  const startDate = dateset
-    ? format(subDays(new Date(), 7), 'yyyy-MM-dd')
-    : format(subDays(new Date(), 5), 'yyyy-MM-dd');
-  const endDate = format(subDays(new Date(), -1), 'yyyy-MM-dd');
-  // console.log(startDate);
   const { data, isLoading, error } = useChartData(
     `http://croft-ai.iptime.org:40401/api/v1/gh_data_item?start_time=${startDate}&end_time=${endDate}&data_type=227&data_type=198&group_by=day`,
-    `chartData`
+    `chartData-${startDate}-${endDate}`
   );
 
   // console.log(data);
@@ -78,11 +75,11 @@ const MainBarLine2Chart = ({
       grid: {
         // 필요에 따라 이 값을 조정(차트 사이즈 조절)
         top: '25%',
-        bottom: '5%', 
+        bottom: '8%',
       },
       title: {
         text: ChartName,
-        top: '5%',
+        top: '0%',
         left: '2%',
       },
       tooltip: {
@@ -92,7 +89,7 @@ const MainBarLine2Chart = ({
       legend: {
         data: ['온실온도편차', '온실평균온도', '외부평균온도'],
         textStyle: {
-          color: '#333', // 범례 텍스트 색상
+          color: '#000', // 범례 텍스트 색상
           fontSize: 12, // 범례 텍스트 크기
         },
         itemWidth: 10,
@@ -188,19 +185,21 @@ const MainBarLine2Chart = ({
     return () => {
       chartInstance.dispose();
     };
-  }, [data, isLoading, error]); // 의존성 배열에 API 응답 데이터를 포함합니다.
+  }, [data, isLoading, error, startDate, endDate]); // 의존성 배열에 API 응답 데이터를 포함합니다.
 
   return (
     <div className="relative bg-white rounded-lg w-full h-full">
       <div ref={chartRef} className="absolute top-1 left-1 w-[95%] h-[90%]" />
-      <div className="flex w-full h-fit justify-end absolute bottom-[9px] right-4">
-        <button
-          className="text-[#124946] text-xs font-normal leading-normal"
-          onClick={() => handleRoute(route)}
-        >
-          자세히 보기
-        </button>
-      </div>
+      {locate !== 'avg' && (
+        <div className="flex w-full h-fit justify-end absolute bottom-[9px] right-4">
+          <button
+            className="text-[#124946] text-xs font-normal leading-normal"
+            onClick={() => handleRoute(route)}
+          >
+            자세히 보기
+          </button>
+        </div>
+      )}
     </div>
   );
 };

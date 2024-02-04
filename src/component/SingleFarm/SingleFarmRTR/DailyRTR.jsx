@@ -22,26 +22,6 @@ const DailyRTR = () => {
       {/* 차트 부분 */}
       <div className="flex flex-col gap-[31px] w-full  h-[380px] px-[3.3125rem] relative">
         {/* 권장 수치 기입 부분 어떤것을 원하는지 모르겠어서 다음과 같이 임의로 설정 */}
-        <div className="absolute top-[15%] h-full w-[150px]">
-          <div className="relative h-full w-full flex flex-col">
-            <div className="absolute top-0 flex flex-col">
-              <div className="text-sm mb-1">생식생장</div>
-              <div className="text-xs text-base400">
-                꽃이 피고
-                <br />
-                열매가 맺혀요
-              </div>
-            </div>
-            <div className="absolute top-[25%]  w-[150px] pt-[10px] border-t border-base400 flex flex-col">
-              <div className="text-sm mb-1">균형</div>
-              <div className="text-xs text-base400">균형을 유지해요</div>
-            </div>
-            <div className="absolute top-[50%]  w-[150px] pt-[10px] border-t border-base400 flex flex-col">
-              <div className="text-sm mb-1">영양생장</div>
-              <div className="text-xs text-base400">잎이 커져요</div>
-            </div>
-          </div>
-        </div>
         <BarMonthChart queryname="rtr" />
       </div>
       {/* 하단의 날짜 선택 부분 */}

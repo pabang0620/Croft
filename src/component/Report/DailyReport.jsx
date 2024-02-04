@@ -150,7 +150,7 @@ const DailyReport = ({ container, date }) => {
                   </div>
                 </div>
                 <div className="flex flex-col gap-[18px]">
-                  <div className="text-[22px] font-bold font-bold">
+                  <div className="text-[22px] font-bold">
                     자원사용 : Weak
                   </div>
                   <div className="text-lg">
