@@ -1,5 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useChartData } from "../utils/api/Charts/ChartAPI"; // API 호출용 훅을 가져옵니다.
+import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useChartData } from '../utils/api/Charts/ChartAPI'; // API 호출용 훅을 가져옵니다.
 
 const MainSliderDiv = ({
   layout,
@@ -14,7 +15,9 @@ const MainSliderDiv = ({
   absData6,
   absData7,
   absData8,
+  route,
 }) => {
+  const navigate = useNavigate();
   const [photoPeriodHour, setPhotoPeriodHour] = useState(0);
   const sliderRef = useRef(null);
   // API로부터 RTR 수치 데이터를 불러옵니다.
@@ -26,20 +29,24 @@ const MainSliderDiv = ({
 
   useEffect(() => {
     if (data && data.data) {
-      if (dataName === "vpd") {
+      if (dataName === 'vpd') {
         setPhotoPeriodHour(data.data.vpd);
       }
-      if (dataName === "photo_period_hour") {
+      if (dataName === 'photo_period_hour') {
         setPhotoPeriodHour(data.data.photo_period_hour);
       }
-      if (dataName === "avg_temp") {
+      if (dataName === 'avg_temp') {
         setPhotoPeriodHour(data.data.avg_temp);
       }
     }
   }, [data]);
   const componentStyle = {
     width: `${layout ? layout.w * (1750 / 11) : 288}px`, // 너비 계산
-    height: `${layout ? layout.h * 105 : "auto"}px`, // 높이 계산 (auto로 설정하거나 필요한 높이를 계산하여 설정)
+    height: `${layout ? layout.h * 105 : 'auto'}px`, // 높이 계산 (auto로 설정하거나 필요한 높이를 계산하여 설정)
+  };
+  const handleRoute = (route) => {
+    if (route) navigate(route);
+    window.scrollTo(0, 0);
   };
   if (isLoading) {
     return <div>isLoading...</div>;
@@ -90,13 +97,13 @@ const MainSliderDiv = ({
         <div className="text-xs font-normal leading-normal text-center w-full mt-4 absolute top-[45px]">
           {absData8}
         </div>
-        {/* 아직 기능없는 것 같고 리포트에서는 필요없어서 일단은 주석해뒀어...! */}
-        {/* <button className="text-[#124946] text-xs font-normal leading-normal absolute right-[0px] bottom-[-110px]">
+        <button
+          className="text-[#124946] text-xs font-normal leading-normal absolute right-[0px] bottom-[-110px]"
+          onClick={() => handleRoute(route)}
+        >
           자세히 보기
-        </button> */}
+        </button>
       </div>
-
-      <div className="flex justify-between text-xs"></div>
     </div>
   );
 };

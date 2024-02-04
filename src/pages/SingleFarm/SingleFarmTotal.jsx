@@ -17,9 +17,9 @@ const SingleFarmTotal = () => {
   const [date, setDate] = useState(new Date());
 
   return (
-    <div>
+    <div className="flex flex-col">
       <BasicSubBar title={'온실환경 종합'} />
-      <div className="my-[11px] mx-[25px] flex flex-col gap-[10px] max-w-[100%]">
+      <div className="my-[11px] mx-[25px] flex flex-col gap-[10px] max-w-[90%]">
         <div className="w-full bg-white h-[52rem] rounded-[10px]">
           <GreenHouseTotal critical={critical} alert={alert} date={date} />
         </div>

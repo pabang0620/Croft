@@ -1,24 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as echarts from 'echarts';
 import { format, subDays } from 'date-fns';
-import { useNavigate } from 'react-router-dom';
 import { useChartData } from '../../utils/api/Charts/ChartAPI';
-import PickSingleDate from '../../utils/DatePicker/PickSingleDate';
 
-const MainLineAreaChart = ({
-  APIoption,
-  ChartName,
-  registerChart,
-  chartKey,
-  route,
-}) => {
+const MainLineAreaChart = ({ APIoption, registerChart, chartKey, date }) => {
   const chartRef = useRef(null);
-  const navigate = useNavigate();
-  const handleRoute = (route) => {
-    if (route) navigate(route);
-    window.scrollTo(0, 0);
-  };
-  const [date, setDate] = useState(new Date());
+
   const [startDate, setStartDate] = useState(
     format(subDays(date, +1), 'yyyy-MM-dd')
   );
@@ -42,7 +29,6 @@ const MainLineAreaChart = ({
   useEffect(() => {
     setFormattedStartDate(format(startDate, 'MM.dd'));
   }, [startDate]);
-
   useEffect(() => {
     if (isLoading || error) {
       return; // 로딩 중이거나 에러가 발생한 경우 바로 리턴합니다.
@@ -75,13 +61,13 @@ const MainLineAreaChart = ({
       grid: {
         // 다른 설정을 유지하면서 bottom만 조정
         // 필요에 따라 이 값을 조정
-        top: '30%',
+        top: '15%',
         bottom: '8%',
         left: '15%',
         right: '2%',
       },
       title: {
-        text: `${ChartName}  ${formattedDay}`,
+        text: '',
         top: '5%',
         left: '2%',
       },
@@ -101,7 +87,7 @@ const MainLineAreaChart = ({
         itemHeight: 10,
         icon: 'rect',
         left: '15%', // 가로 중앙에 위치
-        top: '18%', // 타이틀 아래에 위치하도록 조정
+        top: '0%', // 타이틀 아래에 위치하도록 조정
       },
       xAxis: {
         axisLabel: {
@@ -173,23 +159,12 @@ const MainLineAreaChart = ({
     return () => {
       chartInstance.dispose();
     };
-  }, [data, isLoading, error]); // 의존성 배열에 API 응답 데이터를 포함합니다.
+  }, [data, isLoading, error, date]); // 의존성 배열에 API 응답 데이터를 포함합니다.
 
   // return <div ref={chartRef} style={{ width: "480px", height: "380px" }} />;
   return (
     <div className="relative bg-white rounded-lg w-full h-full">
       <div ref={chartRef} className="absolute top-1 left-1 w-[95%] h-[90%]" />
-      {ChartName && (
-        <div className="flex w-full h-fit justify-between absolute bottom-[9px] pr-5 pl-2">
-          <PickSingleDate selectedDate={date} setSelectedDate={setDate} />
-          <button
-            className="text-[#124946] text-xs font-normal leading-normal"
-            onClick={() => handleRoute(route)}
-          >
-            자세히 보기
-          </button>
-        </div>
-      )}
     </div>
   );
 };

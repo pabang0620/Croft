@@ -39,7 +39,7 @@ const Navbar = ({ title }) => {
     ];
   }
   return (
-    <div className="relative whitespace-nowrap select-none">
+    <div className="max-w-full relative whitespace-nowrap select-none">
       <div className="bg-[#737165] h-[55px] flex items-center justify-between pl-[29px] pr-[18px]">
         {!isLoading && data && (
           <>

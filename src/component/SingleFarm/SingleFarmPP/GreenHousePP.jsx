@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { format } from 'date-fns';
 import PickSingleDate from '../../utils/DatePicker/PickSingleDate';
 import MainSliderDiv from '../../Graphs/MainSliderDiv';
-import Line4Chart from '../../Charts/LineCharts/Line4Chart';
+// import Line4Chart from '../../Charts/LineCharts/Line4Chart';
 import Bar2Line1Chart from '../../Charts/MixCharts/Bar2Line1Chart';
-import BarMonthChart from '../../Charts/BarCharts/BarMonthChart';
+// import BarMonthChart from '../../Charts/BarCharts/BarMonthChart';
 
 const GreenHousePP = () => {
   const [date, setDate] = useState(new Date());
@@ -51,13 +51,20 @@ const GreenHousePP = () => {
             </div>
           </div>
           {/* 예상 일조시간 차트 */}
-          <div className="flex gap-[23px] flex-grow">
-            <div className="mt-[-1rem] flex flex-col text-sm min-w-[56px]">
-              <div>DLI</div>
-              <div className="text-lg font-bold">8.4</div>
+          <div className="flex flex-col gap-3 flex-grow">
+            <div className="flex gap-[23px] flex-grow">
+              <div className="mt-[-1rem] flex flex-col text-sm min-w-[100px]">
+                <div>예상 일조 시간</div>
+                <div className="text-lg font-bold">12</div>
+              </div>
+              <div className="w-full h-ful">예상 일조 시간 그래프</div>
             </div>
-            <div className="w-[798px] h-[350px] bg-white rounded-[10px]">
-              예상 일조 시간{' '}
+            <div className="flex gap-[23px] flex-grow">
+              <div className="mt-[-1rem] flex flex-col text-sm min-w-[100px]">
+                <div>일조 시간</div>
+                <div className="text-lg font-bold">4</div>
+              </div>
+              <div className="w-full h-ful">예상 일조 시간 그래프</div>
             </div>
           </div>
         </div>

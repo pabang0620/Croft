@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ItemsCheck } from "../utils/Icons";
 import { itemArray, titleArray } from "../utils/Data/ItemsData";
 

@@ -11,8 +11,8 @@ export const SubNavBarTitle = (
   setTitle
 ) => {
   switch (currentPath) {
-    case 'basic':
-      return <BasicSubBar title={''} />;
+    // case 'basic':
+    //   return <BasicSubBar title={''} />;
     // case '/dash':
     //   return <DashSubBar />;
     // case '/dash/environment/total':

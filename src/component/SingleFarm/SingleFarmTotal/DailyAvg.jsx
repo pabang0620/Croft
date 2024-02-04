@@ -3,7 +3,7 @@ import { format, startOfWeek } from 'date-fns';
 import PickPeriodDate2 from '../../utils/DatePicker/PickPeriodDate2';
 import LineChart from '../../Charts/LineCharts/LineChart';
 import Line2Chart from '../../Charts/LineCharts/Line2Chart';
-import Line4Chart from '../../Charts/LineCharts/Line4Chart';
+// import Line4Chart from '../../Charts/LineCharts/Line4Chart';
 import MainBarLine2Chart from '../../Charts/MixCharts/MainBarLine2Chart';
 
 const DailyAvg = () => {

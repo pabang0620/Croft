@@ -51,8 +51,7 @@ const PickPeriodDate3 = ({
       {/* 모달 외부 클릭 시 닫히게 설정 */}
       {isOpen ? (
         // 임의로 위치 조절
-
-        <div className={`absolute top-[-11rem] left-[41rem] flex z-30`}>
+        <div className={`absolute top-9 left-[0rem] flex z-30`}>
           <div className="w-fit h-fit ">
             <PeriodCalendar
               startDate={startDate}

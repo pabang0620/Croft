@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from "react";
-import * as echarts from "echarts";
-import { useChartData } from "../../utils/api/Charts/ChartAPI";
-import { format, subDays } from "date-fns";
+import React, { useEffect, useRef } from 'react';
+import * as echarts from 'echarts';
+import { format, subDays } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
+import { useChartData } from '../../utils/api/Charts/ChartAPI';
 
 const MainFootLineChart = ({
   ChartName,
@@ -9,15 +10,21 @@ const MainFootLineChart = ({
   unit,
   registerChart,
   chartKey,
+  route,
 }) => {
   const chartRef = useRef(null);
+  const navigate = useNavigate();
 
-  const startDate = format(subDays(new Date(), +1), "yyyy-MM-dd");
-  const endDate = format(subDays(new Date(), -1), "yyyy-MM-dd");
-  const today = format(new Date(), "yyyy-MM-dd");
-  const formattedStartDate = format(new Date(startDate), "MM.dd");
-  const formattedToday = format(new Date(today), "MM.dd");
+  const startDate = format(subDays(new Date(), +1), 'yyyy-MM-dd');
+  const endDate = format(subDays(new Date(), -1), 'yyyy-MM-dd');
+  const today = format(new Date(), 'yyyy-MM-dd');
+  const formattedStartDate = format(new Date(startDate), 'MM.dd');
+  const formattedToday = format(new Date(today), 'MM.dd');
 
+  const handleRoute = (route) => {
+    if (route) navigate(route);
+    window.scrollTo(0, 0);
+  };
   const { data, isLoading, error } = useChartData(
     `http://croft-ai.iptime.org:40401/api/v1/gh_data_item?start_time=${startDate}&end_time=${endDate}&data_type=${APIoption}&group_by=hour`,
     `chartData0-218`
@@ -48,26 +55,26 @@ const MainFootLineChart = ({
 
     const xLabels = yesterdayData.map((item) => {
       const date = new Date(item.kr_time);
-      return `${date.getHours().toString().padStart(2, "0")}:${date
+      return `${date.getHours().toString().padStart(2, '0')}:${date
         .getMinutes()
         .toString()
-        .padStart(2, "0")}`;
+        .padStart(2, '0')}`;
     });
 
     const option = {
       grid: {
         // 다른 설정을 유지하면서 bottom만 조정
-        bottom: "20%", // 필요에 따라 이 값을 조정
+        bottom: '20%', // 필요에 따라 이 값을 조정
       },
       title: {
         text: ChartName,
-        top: "5%",
-        left: "2%",
+        top: '5%',
+        left: '2%',
       },
       tooltip: {
-        trigger: "axis",
+        trigger: 'axis',
         axisPointer: {
-          type: "shadow",
+          type: 'shadow',
         },
         // triggerOn: "mousemove", // 마우스 움직임에 반응하도록 설정
         formatter: function (params) {
@@ -82,39 +89,39 @@ const MainFootLineChart = ({
       legend: {
         data: [formattedStartDate, formattedToday],
         textStyle: {
-          color: "#333", // 범례 텍스트 색상
+          color: '#333', // 범례 텍스트 색상
           fontSize: 12, // 범례 텍스트 크기
         },
         itemWidth: 10,
         itemHeight: 10,
-        icon: "rect",
-        left: "12%", // 가로 중앙에 위치
-        top: "15%", // 타이틀 아래에 위치하도록 조정
+        icon: 'rect',
+        left: '12%', // 가로 중앙에 위치
+        top: '15%', // 타이틀 아래에 위치하도록 조정
       },
       graphic: [
         {
-          id: "hoverData",
-          type: "text",
-          left: "center", // 차트 가운데에 위치
+          id: 'hoverData',
+          type: 'text',
+          left: 'center', // 차트 가운데에 위치
           top: 10, // 상단에서 10px 아래에 위치
           style: {
-            text: "0", // 초기 텍스트 설정
+            text: '0', // 초기 텍스트 설정
             fontSize: 16,
-            fontWeight: "bold",
-            fill: "#333", // 텍스트 색상
-            textAlign: "center", // 텍스트 정렬 방식
+            fontWeight: 'bold',
+            fill: '#333', // 텍스트 색상
+            textAlign: 'center', // 텍스트 정렬 방식
           },
           z: 100,
         },
       ],
       xAxis: {
-        type: "category",
+        type: 'category',
         data: xLabels,
       },
       yAxis: {
         axisLabel: {
           fontSize: 10,
-          margin: "0",
+          margin: '0',
         },
         // type: "value",
         // min: 0,
@@ -124,33 +131,33 @@ const MainFootLineChart = ({
       series: [
         {
           name: formattedStartDate,
-          type: "line",
+          type: 'line',
           data: yesterdayAvg, // 어제 데이터
           lineStyle: {
-            color: "#AEAEAE00", // 라인 색상을 #AEAEAE로 설정
+            color: '#AEAEAE00', // 라인 색상을 #AEAEAE로 설정
           },
           areaStyle: {
-            color: "#AEAEAE90",
+            color: '#AEAEAE90',
           },
           showSymbol: false,
         },
         {
           name: formattedToday,
-          type: "line",
+          type: 'line',
           data: todayAvg,
           areaStyle: {
-            color: "rgba(69, 69, 255)", // 영역 색상을 blue의 30% 투명도로 설정
+            color: 'rgba(69, 69, 255)', // 영역 색상을 blue의 30% 투명도로 설정
           },
           lineStyle: {
-            color: "#AEAEAE00", // 색상 없음
+            color: '#AEAEAE00', // 색상 없음
           },
           showSymbol: false,
         },
       ],
     };
 
-    chartInstance.on("mouseover", function (params) {
-      if (params.componentType === "series") {
+    chartInstance.on('mouseover', function (params) {
+      if (params.componentType === 'series') {
         const dataValue = params.value; // 호버된 데이터 포인트의 값
         chartInstance.setOption({
           graphic: {
@@ -174,7 +181,19 @@ const MainFootLineChart = ({
     };
   }, [data, isLoading, error]); // 의존성 배열에 API 응답 데이터를 포함합니다.
 
-  return <div ref={chartRef} className="w-full h-full bg-white rounded-lg" />;
+  return (
+    <div className="relative bg-white rounded-lg w-full h-full">
+      <div ref={chartRef} className="absolute top-1 left-1 w-[95%] h-[90%]" />
+      <div className="flex w-full h-fit justify-end absolute bottom-[9px] right-4">
+        <button
+          className="text-[#124946] text-xs font-normal leading-normal"
+          onClick={() => handleRoute(route)}
+        >
+          자세히 보기
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default MainFootLineChart;

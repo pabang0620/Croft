@@ -7,7 +7,7 @@ import GreenHouseSide from './GreenHouseSide';
 const SideBar = ({ currentPath }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [closeSide, setCloseSide] = useState(true); //기본적으로 접힌 상태이며, 페이지 이동 후에는 다시 접어야함
+  const [closeSide, setCloseSide] = useState(false); //기본적으로 접힌 상태이며, 페이지 이동 후에는 다시 접어야함
   const [clickedIcon, setClickedIcon] = useState('total'); //추후 클릭으로 색이 변경되는 것이 아닌 url에 따른 색 변경으로 코드 수정
   //const 배열 혹은 변수는 util로 분리해도 될 것 같음
   const closeLogo = '/assets/images/Layout/OnlyLogo.png';
@@ -46,7 +46,7 @@ const SideBar = ({ currentPath }) => {
   };
 
   useEffect(() => {
-    setCloseSide(true);
+    setCloseSide(false);
     if (currentPath.includes('/dash') || currentPath.includes('/single')) {
       setIsSingleFarm(true);
     } else setIsSingleFarm(false);
@@ -61,7 +61,7 @@ const SideBar = ({ currentPath }) => {
   }, [location]);
 
   return (
-    <div className="flex flex-row select-none min-h-full">
+    <div className="flex flex-row select-none min-h-full w-fit">
       <div
         className={`flex flex-col h-full bg-base600 text-white ease-in-out duration-300 cursor-pointer ${
           closeSide ? 'w-[60px]' : 'w-[220px]'
