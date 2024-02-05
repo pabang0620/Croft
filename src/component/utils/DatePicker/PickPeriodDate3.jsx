@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { format } from 'date-fns';
-import PeriodCalendar from './PeriodCalendar';
-import { CheckPriod } from '../Data/CalendarData';
+import { useState, useEffect } from "react";
+import { format } from "date-fns";
+import PeriodCalendar from "./PeriodCalendar";
+import { CheckPriod } from "../Data/CalendarData";
 
 const PickPeriodDate3 = ({
   startDate,
@@ -10,20 +10,22 @@ const PickPeriodDate3 = ({
   setEndDate,
   specificDate,
   setSpecificDate,
+  isOpen,
+  setIsOpen,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   const [formatStart, setFormatStart] = useState(
-    format(new Date(), 'yyyy.MM.dd')
+    format(new Date(), "yyyy.MM.dd")
   );
-  const [formatEnd, setFormatEnd] = useState(format(new Date(), 'yyyy.MM.dd'));
+  const [formatEnd, setFormatEnd] = useState(format(new Date(), "yyyy.MM.dd"));
   useEffect(() => {
     setFormatStart(
       startDate
-        ? format(startDate, 'yyyy.MM.dd')
-        : format(new Date(), 'yyyy.MM.dd')
+        ? format(startDate, "yyyy.MM.dd")
+        : format(new Date(), "yyyy.MM.dd")
     );
     setFormatEnd(
-      endDate ? format(endDate, 'yyyy.MM.dd') : format(new Date(), 'yyyy.MM.dd')
+      endDate ? format(endDate, "yyyy.MM.dd") : format(new Date(), "yyyy.MM.dd")
     );
     CheckPriod(startDate, endDate);
   }, [startDate, endDate]);

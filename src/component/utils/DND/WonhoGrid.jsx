@@ -4,11 +4,16 @@ import GridData from "./GridData";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import CroftGuide from "../../Charts/CroftGuide/CroftGuide";
+import TotalResourceChart from "../../Charts/TotalResourceChart/TotalResourceChart";
+import MainLineAreaChart from "../../Charts/MixCharts/MainLineAreaChart";
 
 const WonhoGrid = ({ editMode, layout, setLayout }) => {
   const [wonhoGridData, setWonhoGridData] = useState([]);
   const [showDetail, setShowDetail] = useState(false);
+  const [showDatePicker1, setShowDatePicker1] = useState(false);
+  const [showDatePicker2, setShowDatePicker2] = useState(false);
 
+  console.log(showDatePicker2);
   useEffect(() => {
     setWonhoGridData((prevData) =>
       prevData.map((item) => {
@@ -17,11 +22,23 @@ const WonhoGrid = ({ editMode, layout, setLayout }) => {
             ...item,
             layout: { ...item.layout, h: showDetail ? 5 : 2 },
           };
+        } else if (item.id === 3) {
+          // id가 3일 때의 조건
+          return {
+            ...item,
+            layout: { ...item.layout, h: showDatePicker1 ? 5 : 2 },
+          };
+        } else if (item.id === 6) {
+          // id가 6일 때의 조건
+          return {
+            ...item,
+            layout: { ...item.layout, h: showDatePicker2 ? 6 : 4 },
+          };
         }
-        return item;
+        return item; // 다른 경우에는 item을 변경 없이 반환
       })
     );
-  }, [showDetail]);
+  }, [showDetail, showDatePicker1, showDatePicker2]); // 의존성 배열에 showDatePicker1과 showDatePicker2 추가
 
   // useEffect(() => {
   //   const storedData = localStorage.getItem("checkedItems");
@@ -132,6 +149,19 @@ const WonhoGrid = ({ editMode, layout, setLayout }) => {
                 showDetail={showDetail}
                 setShowDetail={setShowDetail}
                 // 다른 필요한 props
+              />
+            ) : item.id === 3 ? (
+              <TotalResourceChart
+                showDatePicker1={showDatePicker1}
+                setShowDatePicker1={setShowDatePicker1}
+              />
+            ) : item.id === 6 ? (
+              <MainLineAreaChart
+                showDatePicker2={showDatePicker2}
+                setShowDatePicker2={setShowDatePicker2}
+                APIoption="218"
+                ChartName="급수 데이터"
+                route="/dash/environment/total/temp"
               />
             ) : (
               React.cloneElement(item.component, {
