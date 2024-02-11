@@ -21,11 +21,10 @@ const SingleSales = () => {
         setPeriod={setPeriod}
       />
       <div className="my-[11px] mx-[25px]">
-        <div>차트 사이즈 수정 예정</div>
         <div className="flex w-full rounded-[10px] flex-wrap gap-2">
-          <TotalCost />
+          <TotalCost years={years} />
           <div className="flex flex-col gap-2">
-            <TotalSales />
+            <TotalSales years={years} />
             <div className="w-[650px] h-[335px] bg-white rounded-[10px] ">
               <PieChart years={pieYears} setYears={setPieYears} />
               <div>

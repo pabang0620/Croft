@@ -18,10 +18,6 @@ const PieChart = ({ years, setYears }) => {
     { name: '수도요금', value: 2000000 },
     { name: '고정비', value: 1000000 },
   ]);
-  console.log('data');
-  console.log(data);
-  console.log('isLoading');
-  console.log(isLoading);
 
   useEffect(() => {
     if (!isLoading) {
@@ -37,7 +33,7 @@ const PieChart = ({ years, setYears }) => {
     }
 
     // temp = data.data.filter((item) => item.year.includes(years));
-  }, [data, isLoading, years, monthlyData]);
+  }, [data, isLoading]);
 
   // Calculate total for percentage calculations
   const total = monthlyData.reduce((sum, item) => sum + item.value, 0);

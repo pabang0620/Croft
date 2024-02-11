@@ -25,9 +25,15 @@ const SalesSubBar = ({ years, setYears, period, setPeriod }) => {
   // 연간 비교 보고서 #CROFT-CRM-SINGLE-SALES > 5 years(sample) 로 이동
   const handlePeriodClick = (text) => {
     setPeriod(text);
-    if (text === '3') navigate('/single-sales/years/3');
-    if (text === '5') navigate('/single-sales/years/5');
-    if (text === '10') navigate('/single-sales/years/10');
+    if (text === '3' && new Date().getFullYear().toString().slice(-2) - 19 >= 2)
+      navigate('/single-sales/years/3');
+    if (text === '5' && new Date().getFullYear().toString().slice(-2) - 19 >= 4)
+      navigate('/single-sales/years/5');
+    if (
+      text === '10' &&
+      new Date().getFullYear().toString().slice(-2) - 19 >= 9
+    )
+      navigate('/single-sales/years/10');
   };
   return (
     <div className="w-full h-[45px] pl-[29px] pt-[4px] flex items-center cursor-pointer select-none border-b-[1px] border-base400 bg-base200">
