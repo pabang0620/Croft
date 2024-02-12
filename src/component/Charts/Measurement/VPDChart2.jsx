@@ -1,15 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
+import { useNavigate } from 'react-router-dom';
 import { useChartData } from '../../utils/api/Charts/ChartAPI';
 import { VPD, calcVPD } from '../../utils/Data/VPDColorData';
 
-const VPDChart = ({
-  APIoption,
-  ChartName,
-  registerChart,
-  chartKey,
-  route,
-}) => {
+const VPDChart = ({ registerChart, chartKey, route }) => {
+  const navigate = useNavigate();
+  const handleRoute = (route) => {
+    if (route) navigate(route);
+    window.scrollTo(0, 0);
+  };
   // 온도 및 습도 데이터
   const {
     data: tempHumidityData,
@@ -20,7 +20,7 @@ const VPDChart = ({
     `chartData-VPDChart`
   );
 
-  const colorData = VPD.BASE_DATASET;
+  // const colorData = VPD.BASE_DATASET;
   // VPD 데이터
   const {
     data: vpdData,
@@ -65,11 +65,16 @@ const VPDChart = ({
 
     const option = {
       grid: {
-        top: '10px',
-        left: '4%',
+        top: '15%',
+        left: '5%',
         right: '24px',
-        bottom: '3%',
+        bottom: '5%',
         containLabel: true,
+      },
+      title: {
+        text: 'VPD',
+        top: '5%',
+        left: '2%',
       },
       tooltip: {},
       // tooltip: {
@@ -230,7 +235,17 @@ const VPDChart = ({
   ]);
 
   return (
-    <div ref={chartRef} className="w-full h-full bg-white rounded-[10px]" />
+    <div className="relative bg-white rounded-lg w-full h-full">
+      <div ref={chartRef} className="absolute top-1 left-1 w-[95%] h-[90%]" />
+      <div className="flex w-full h-fit justify-end absolute bottom-[9px] right-4">
+        <button
+          className="text-[#124946] text-xs font-normal leading-normal"
+          onClick={() => handleRoute(route)}
+        >
+          자세히 보기
+        </button>
+      </div>
+    </div>
   );
 };
 

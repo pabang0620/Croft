@@ -17,7 +17,7 @@ const ContainerWrapper = ({ setContainer }) => {
   // 임의로 아래와 같이 구성해둠
   return (
     <>
-      {!isLoading && data?.data && (
+      {!isLoading ? (
         <div className="flex flex-wrap gap-[30px]">
           <SingleContainer
             data={data?.data[0]}
@@ -55,6 +55,8 @@ const ContainerWrapper = ({ setContainer }) => {
             setContainer={setContainer}
           />
         </div>
+      ) : (
+        <div>Loading...</div>
       )}
     </>
   );

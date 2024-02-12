@@ -58,9 +58,9 @@
 
 //     setDataPoints(newDataPoints);
 //   }, [data, isLoading, error]);
-import React, { useEffect, useState } from "react";
-import { useChartData } from "../../utils/api/Charts/ChartAPI";
-import MeasureName from "./MeasureName";
+import React, { useEffect, useState } from 'react';
+import { useChartData } from '../../utils/api/Charts/ChartAPI';
+import MeasureName from './MeasureName';
 
 const TimeMeasure = ({ APIoption, ChartName }) => {
   const dataType = APIoption;
@@ -83,10 +83,10 @@ const TimeMeasure = ({ APIoption, ChartName }) => {
     // API 데이터에서 직접 dataPoints 상태를 설정
     const newDataPoints = data.data.map((item) => {
       const date = new Date(item.kr_time);
-      const timeLabel = `${date.getHours().toString().padStart(2, "0")}:${date
+      const timeLabel = `${date.getHours().toString().padStart(2, '0')}:${date
         .getMinutes()
         .toString()
-        .padStart(2, "0")}`;
+        .padStart(2, '0')}`;
       return { time: timeLabel, value: item.value };
     });
 
@@ -147,24 +147,24 @@ const TimeMeasure = ({ APIoption, ChartName }) => {
   return (
     <div className="flex flex-row">
       <MeasureName ChartName={ChartName} />
-      <div className="flex justify-between bg-white h-[25px] pl-[8px] pr-[8px] items-center relative w-[554px]  border-b-[1px] border-gray-400">
+      <div className="flex justify-between bg-white h-[25px] pl-[8px] pr-[8px] items-center relative w-[80%]  border-b-[1px] border-gray-400">
         {dataPoints.map((item, index) => (
           <div
             key={index}
             className={`w-[4px] h-[14px] ${
               item.value === 100
-                ? "bg-[#124946]"
+                ? 'bg-[#124946]'
                 : item.value === 0
-                ? "bg-white"
-                : "bg-transparent"
+                ? 'bg-white'
+                : 'bg-transparent'
             } ${
               continuousRanges.some((range) => index === range.start)
-                ? "rounded-l-[5px]"
-                : ""
+                ? 'rounded-l-[5px]'
+                : ''
             } ${
               continuousRanges.some((range) => index === range.end)
-                ? "rounded-r-[5px]"
-                : ""
+                ? 'rounded-r-[5px]'
+                : ''
             }`}
           />
         ))}
@@ -174,8 +174,8 @@ const TimeMeasure = ({ APIoption, ChartName }) => {
             className="absolute flex items-center text-xs text-white"
             style={{
               left: `${range.start * 2}px`, // 연속 구간의 시작 지점으로 left 위치 설정
-              top: "0",
-              height: "100%",
+              top: '0',
+              height: '100%',
             }}
           >
             <span className="ml-[30px] font-bold">ON</span>

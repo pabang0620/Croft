@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { format } from 'date-fns';
-import PeriodCalendar from './PeriodCalendar';
-import { CheckPriod } from '../Data/CalendarData';
+import { useState, useEffect } from "react";
+import { format } from "date-fns";
+import PeriodCalendar from "./PeriodCalendar";
+import { CheckPriod } from "../Data/CalendarData";
 
 const PickPeriodDate3 = ({
   startDate,
@@ -10,20 +10,22 @@ const PickPeriodDate3 = ({
   setEndDate,
   specificDate,
   setSpecificDate,
+  isOpen,
+  setIsOpen,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   const [formatStart, setFormatStart] = useState(
-    format(new Date(), 'yyyy.MM.dd')
+    format(new Date(), "yyyy.MM.dd")
   );
-  const [formatEnd, setFormatEnd] = useState(format(new Date(), 'yyyy.MM.dd'));
+  const [formatEnd, setFormatEnd] = useState(format(new Date(), "yyyy.MM.dd"));
   useEffect(() => {
     setFormatStart(
       startDate
-        ? format(startDate, 'yyyy.MM.dd')
-        : format(new Date(), 'yyyy.MM.dd')
+        ? format(startDate, "yyyy.MM.dd")
+        : format(new Date(), "yyyy.MM.dd")
     );
     setFormatEnd(
-      endDate ? format(endDate, 'yyyy.MM.dd') : format(new Date(), 'yyyy.MM.dd')
+      endDate ? format(endDate, "yyyy.MM.dd") : format(new Date(), "yyyy.MM.dd")
     );
     CheckPriod(startDate, endDate);
   }, [startDate, endDate]);
@@ -51,8 +53,7 @@ const PickPeriodDate3 = ({
       {/* 모달 외부 클릭 시 닫히게 설정 */}
       {isOpen ? (
         // 임의로 위치 조절
-
-        <div className={`absolute top-[-11rem] left-[41rem] flex z-30`}>
+        <div className={`absolute top-[-18.75rem] left-[-1rem] flex z-30`}>
           <div className="w-fit h-fit ">
             <PeriodCalendar
               startDate={startDate}

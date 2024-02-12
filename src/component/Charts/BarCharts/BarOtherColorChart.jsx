@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from "react";
-import * as echarts from "echarts";
-import { useChartData } from "../../utils/api/Charts/ChartAPI";
+import React, { useEffect, useRef } from 'react';
+import * as echarts from 'echarts';
+import { useChartData } from '../../utils/api/Charts/ChartAPI';
 
-const BarOtherColorChart = ({ ChartName, APIoption }) => {
+const BarOtherColorChart = ({ ChartName, APIoption, date }) => {
   const chartRef = useRef(null);
 
   const { data, isLoading, error } = useChartData(
@@ -25,8 +25,7 @@ const BarOtherColorChart = ({ ChartName, APIoption }) => {
 
     const seenHours = new Set();
     const filteredData = data.data.filter((item) => {
-      const date = new Date(item.kr_time);
-      const hour = date.getHours();
+      const hour = date ? date?.getHours() : new Date().getHours();
 
       if (hour % 2 === 0 && !seenHours.has(hour)) {
         seenHours.add(hour);
@@ -50,21 +49,21 @@ const BarOtherColorChart = ({ ChartName, APIoption }) => {
     const option = {
       grid: {
         // 다른 설정을 유지하면서 bottom만 조정
-        bottom: "20%", // 필요에 따라 이 값을 조정
+        bottom: '20%', // 필요에 따라 이 값을 조정
       },
       title: {
         text: ChartName,
-        top: "5%",
-        left: "2%",
+        top: '5%',
+        left: '2%',
       },
       tooltip: {
-        trigger: "axis",
+        trigger: 'axis',
         axisPointer: {
-          type: "shadow",
+          type: 'shadow',
         },
       },
       xAxis: {
-        type: "category",
+        type: 'category',
         data: xLabels,
         axisLabel: {
           interval: 0, // 모든 라벨을 표시
@@ -75,7 +74,7 @@ const BarOtherColorChart = ({ ChartName, APIoption }) => {
         axisLabel: {
           fontSize: 10,
         },
-        type: "value",
+        type: 'value',
         min: 0,
         max: maxYAxis,
         interval: 5,
@@ -83,17 +82,17 @@ const BarOtherColorChart = ({ ChartName, APIoption }) => {
       series: [
         {
           name: ChartName,
-          type: "bar",
+          type: 'bar',
           data: seriesData,
           itemStyle: {
             color: function (params) {
               // 3.0 제한 되는 수치 데이터값을 넣으면 됨
-              return params.data > 15 ? "#931E14" : "#4472c4";
+              return params.data > 15 ? '#931E14' : '#4472c4';
             },
           },
           markArea: {
             itemStyle: {
-              color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
+              color: 'rgba(79, 254, 35, 0.3)', // #4FFE234D와 유사한 RGBA 색상
             },
             data: [
               [

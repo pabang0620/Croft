@@ -1,18 +1,18 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getMonth, getISOWeek, startOfWeek } from 'date-fns';
-import PickPeriodDate3 from '../../utils/DatePicker/PickPeriodDate3';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getMonth, getISOWeek, startOfWeek } from "date-fns";
+import PickPeriodDate3 from "../../utils/DatePicker/PickPeriodDate3";
 import {
   PercentUpDown,
   ResourceIcon,
   TempResource,
-} from '../../utils/Data/SingleResourceData';
+} from "../../utils/Data/SingleResourceData";
 
-const TotalResourceChart = () => {
+const TotalResourceChart = ({ showDatePicker1, setShowDatePicker1 }) => {
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState(startOfWeek(new Date()));
   const [endDate, setEndDate] = useState(new Date());
-  const [specificDate, setSpecificDate] = useState('이번주');
+  const [specificDate, setSpecificDate] = useState("이번주");
 
   return (
     <div className="bg-white w-full h-full rounded-[10px] flex flex-col p-4 relative">
@@ -34,7 +34,7 @@ const TotalResourceChart = () => {
             </div>
             <div
               className={`font-semibold ${
-                item.percentUp ? 'text-error' : 'text-accent'
+                item.percentUp ? "text-error" : "text-accent"
               }`}
             >
               {PercentUpDown(item.percentUp)} {item.percentNum} %
@@ -50,9 +50,10 @@ const TotalResourceChart = () => {
           setEndDate={setEndDate}
           specificDate={specificDate}
           setSpecificDate={setSpecificDate}
+          isOpen={showDatePicker1}
+          setIsOpen={setShowDatePicker1}
         />
-
-        <div onClick={() => navigate('/single-resource')}>전체 사용량 보기</div>
+        <div onClick={() => navigate("/single-resource")}>전체 사용량 보기</div>
       </div>
     </div>
   );

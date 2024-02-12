@@ -1,19 +1,20 @@
-import React from "react";
-import MainSliderDiv from "../../Graphs/MainSliderDiv";
-import MainBarChartLine from "../../Charts/BarCharts/MainBarChartLine";
-import MainBarChart from "../../Charts/BarCharts/MainBarChart";
-import MainRTRLineChart from "../../Charts/LineCharts/MainRTRLineChart";
-import MainLineChart from "../../Charts/LineCharts/MainLineChart";
-import MainFootLineChart from "../../Charts/LineCharts/MainFootLineChart";
-import MainSmoothedLineChart from "../../Charts/LineCharts/MainSmoothedLineChart";
-import MainSmoothedLineChartAdd from "../../Charts/LineCharts/MainSmoothedLineChartAdd";
-import MainLineAreaChart from "../../Charts/MixCharts/MainLineAreaChart";
-import MainBarLine2Chart from "../../Charts/MixCharts/MainBarLine2Chart";
-import TotalReportChart from "../../Charts/TotalReportChart/TotalReportChart";
-import GreenhouseScore from "../../Charts/GreenhouseScore";
-import CroftGuide from "../../Charts/CroftGuide/CroftGuide";
-import TotalResourceChart from "../../Charts/TotalResourceChart/TotalResourceChart";
-import VPDChart from "../../Charts/Measurement/VPDChart";
+import React from 'react';
+import { format, subDays } from 'date-fns';
+import MainSliderDiv from '../../Graphs/MainSliderDiv';
+import MainBarChartLine from '../../Charts/BarCharts/MainBarChartLine';
+import MainBarChart from '../../Charts/BarCharts/MainBarChart';
+import MainRTRLineChart from '../../Charts/LineCharts/MainRTRLineChart';
+import MainLineChart from '../../Charts/LineCharts/MainLineChart';
+import MainFootLineChart from '../../Charts/LineCharts/MainFootLineChart';
+import MainSmoothedLineChart from '../../Charts/LineCharts/MainSmoothedLineChart';
+import MainSmoothedLineChartAdd from '../../Charts/LineCharts/MainSmoothedLineChartAdd';
+import MainLineAreaChart from '../../Charts/MixCharts/MainLineAreaChart';
+import MainBarLine2Chart from '../../Charts/MixCharts/MainBarLine2Chart';
+import TotalReportChart from '../../Charts/TotalReportChart/TotalReportChart';
+import GreenhouseScore from '../../Charts/GreenhouseScore';
+import CroftGuide from '../../Charts/CroftGuide/CroftGuide';
+import TotalResourceChart from '../../Charts/TotalResourceChart/TotalResourceChart';
+import VPDChart from '../../Charts/Measurement/VPDChart2';
 const positionMap = {
   0: { x: 0, y: 0, w: 4, h: 2 }, // width 4, height 2
   1: { x: 4, y: 0, w: 2, h: 2 }, // width 2, height 2
@@ -38,7 +39,7 @@ const positionMap = {
 
 const GridData = [
   {
-    chartID: "GreenhouseTotal",
+    chartID: 'GreenhouseTotal',
     id: 0,
     component: (
       <TotalReportChart title="온실 환경 종합" time="10:25" size={50} />
@@ -46,31 +47,32 @@ const GridData = [
     layout: positionMap[0],
   },
   {
-    chartID: "TotalScore",
+    chartID: 'TotalScore',
     id: 1,
     component: <GreenhouseScore />,
     layout: positionMap[1],
   },
   {
-    chartID: "CroftGuide",
+    chartID: 'CroftGuide',
     id: 2,
     component: <CroftGuide />,
     layout: positionMap[2],
   },
   {
-    chartID: "ResourceTotal",
+    chartID: 'ResourceTotal',
     id: 3,
     component: <TotalResourceChart />,
     layout: positionMap[3],
   },
   {
-    chartID: "RTR",
+    chartID: 'RTR',
     id: 4,
     component: (
       <MainSliderDiv
         dataName="avg_temp"
         queryName="rtr"
         title="RTR"
+        route="/dash/environment/RTR"
         absData1="0"
         absData2="1.2"
         absData3="1.5"
@@ -84,13 +86,14 @@ const GridData = [
     layout: positionMap[4],
   },
   {
-    chartID: "PHOTOPERIOD",
+    chartID: 'PHOTOPERIOD',
     id: 5,
     component: (
       <MainSliderDiv
         dataName="photo_period_hour"
         queryName="photo_period"
         title="Photo Period"
+        route="/dash/environment/PP"
         absData1="0"
         absData2="6"
         absData3="10"
@@ -104,31 +107,52 @@ const GridData = [
     layout: positionMap[5],
   },
   {
-    chartID: "DailyWaterSupply",
+    chartID: 'DailyWaterSupply',
     id: 6,
-    component: <MainLineAreaChart APIoption="218" ChartName="급수 데이터" />,
+    component: (
+      <MainLineAreaChart
+        APIoption="218"
+        ChartName="급수 데이터"
+        route="/dash/environment/total/temp"
+      />
+    ),
     layout: positionMap[6],
   },
   {
-    chartID: "DailyTempChange",
+    chartID: 'DailyTempChange',
     id: 7,
-    component: <MainBarLine2Chart ChartName="평균 온도" />,
+    component: (
+      <MainBarLine2Chart
+        ChartName="평균 온도"
+        route="/dash/environment/total/temp"
+        locate="dash"
+        startDate={format(subDays(new Date(), 7), 'yyyy-MM-dd')}
+        endDate={format(subDays(new Date(), -1), 'yyyy-MM-dd')}
+      />
+    ),
     layout: positionMap[7],
   },
   {
-    chartID: "DLI",
+    chartID: 'DLI',
     id: 8,
-    component: <MainLineChart APIoption="220" ChartName="DLI" />,
+    component: (
+      <MainLineChart
+        APIoption="220"
+        ChartName="DLI"
+        route="/dash/environment/DLI"
+      />
+    ),
     layout: positionMap[8],
   },
   {
-    chartID: "VPD",
+    chartID: 'VPD',
     id: 9,
     component: (
       <MainSliderDiv
         dataName="vpd"
         queryName="vpd"
         title="VPD"
+        route="/dash/environment/VPD"
         absData2="1.2"
         absData3="1.5"
         absData4="3"
@@ -141,71 +165,98 @@ const GridData = [
     layout: positionMap[9],
   },
   {
-    chartID: "WeeklyDLI",
+    chartID: 'WeeklyDLI',
     id: 10,
-    component: <MainBarChartLine ChartName="DLI" />,
+    component: (
+      <MainBarChartLine ChartName="DLI" route="/dash/environment/DLI" />
+    ),
     layout: positionMap[10],
   },
   {
-    chartID: "WeeklyPHOTOPERIOD",
+    chartID: 'WeeklyPHOTOPERIOD',
     id: 11,
-    component: <MainBarChart ChartName="Photo Period" />,
+    component: (
+      <MainBarChart ChartName="Photo Period" route="/dash/environment/PP" />
+    ),
     layout: positionMap[11],
   },
   {
-    chartID: "DailyRTR",
+    chartID: 'DailyRTR',
     id: 12,
-    component: <MainRTRLineChart ChartName="RTR" />,
+    component: (
+      <MainRTRLineChart ChartName="RTR" route="/dash/environment/RTR" />
+    ),
     layout: positionMap[12],
   },
   {
-    chartID: "DailyTempChange",
+    chartID: 'DailyTempChange',
     id: 13,
     component: (
-      <MainSmoothedLineChart APIoption="198" ChartName="온실 온도" unit="℃" />
+      <MainSmoothedLineChart
+        APIoption="198"
+        ChartName="온실 온도"
+        unit="℃"
+        route="/dash/environment/total/temp"
+      />
     ),
     layout: positionMap[13],
   },
   {
-    chartID: "DailyHumidityChange",
+    chartID: 'DailyHumidityChange',
     id: 14,
     component: (
-      <MainSmoothedLineChart APIoption="199" ChartName="온실 습도" unit="%" />
+      <MainSmoothedLineChart
+        APIoption="199"
+        ChartName="온실 습도"
+        unit="%"
+        route="/dash/environment/total/humidity"
+      />
     ),
     layout: positionMap[14],
   },
   {
-    chartID: "DailyCO2Change",
+    chartID: 'DailyCO2Change',
     id: 15,
     component: (
-      <MainSmoothedLineChart APIoption="225" ChartName="온실 CO2" unit="ppm" />
+      <MainSmoothedLineChart
+        APIoption="225"
+        ChartName="온실 CO2"
+        unit="ppm"
+        route="/dash/environment/total/co2"
+      />
     ),
     layout: positionMap[15],
   },
   {
-    chartID: "DailySolarChange",
+    chartID: 'DailySolarChange',
     id: 16,
     component: (
       <MainSmoothedLineChartAdd
         APIoption="244"
         ChartName="외부 광량"
         unit="w/m²"
+        route="/dash/environment/total/solar"
       />
     ),
     layout: positionMap[16],
   },
   {
-    chartID: "DailyWaterUse",
+    chartID: 'DailyWaterUse',
     id: 17,
     component: (
-      <MainFootLineChart APIoption="218" ChartName="물 사용량" unit="liter" />
+      <MainFootLineChart
+        APIoption="218"
+        ChartName="물 사용량"
+        unit="liter"
+        route="/single-resource"
+      />
     ),
     layout: positionMap[17],
   },
   {
-    chartID: "VPD",
+    chartID: 'VPD',
     id: 18,
-    component: <VPDChart />,
+    component: <VPDChart route="/dash/environment/VPD"/>,
     layout: positionMap[18],
   },
 ];

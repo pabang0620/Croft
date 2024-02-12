@@ -1,15 +1,26 @@
-import React, { useEffect, useRef } from "react";
-import * as echarts from "echarts";
-import { useChartData } from "../../utils/api/Charts/ChartAPI";
-import { format } from "date-fns";
+import React, { useEffect, useRef } from 'react';
+import * as echarts from 'echarts';
+import { format } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
+import { useChartData } from '../../utils/api/Charts/ChartAPI';
 
-const MainRTRLineChart = ({ ChartName, unit, registerChart, chartKey }) => {
+const MainRTRLineChart = ({
+  ChartName,
+  unit,
+  registerChart,
+  chartKey,
+  route,
+}) => {
   const chartRef = useRef(null);
-
+  const navigate = useNavigate();
+  const handleRoute = (route) => {
+    if (route) navigate(route);
+    window.scrollTo(0, 0);
+  };
   // RTR 데이터를 가져오는 API 호출
   const { data, isLoading, error } = useChartData(
-    "http://croft-ai.iptime.org:40401/api/v1/farms/rtr/aweek",
-    "chartData-RTR"
+    'http://croft-ai.iptime.org:40401/api/v1/farms/rtr/aweek',
+    'chartData-RTR'
   );
 
   useEffect(() => {
@@ -21,7 +32,7 @@ const MainRTRLineChart = ({ ChartName, unit, registerChart, chartKey }) => {
 
       // 날짜, RTR 및 평균 온도 데이터 추출
       const xLabels = data.data.map((item) =>
-        format(new Date(item.date), "EE")
+        format(new Date(item.date), 'EE')
       );
 
       const rtrValues = data.data.map((item) => item.day_rtr);
@@ -35,47 +46,47 @@ const MainRTRLineChart = ({ ChartName, unit, registerChart, chartKey }) => {
       const option = {
         grid: {
           // 다른 설정을 유지하면서 bottom만 조정
-          bottom: "20%", // 필요에 따라 이 값을 조정
+          bottom: '20%', // 필요에 따라 이 값을 조정
         },
         title: {
           text: ChartName,
-          top: "5%",
-          left: "2%",
+          top: '5%',
+          left: '2%',
         },
         graphic: [
           {
-            id: "hoverData",
-            type: "text",
-            left: "center", // 차트 가운데에 위치
+            id: 'hoverData',
+            type: 'text',
+            left: 'center', // 차트 가운데에 위치
             top: 10, // 상단에서 10px 아래에 위치
             style: {
-              text: "0", // 초기 텍스트 설정
+              text: '0', // 초기 텍스트 설정
               fontSize: 16,
-              fontWeight: "bold",
-              fill: "#333", // 텍스트 색상
-              textAlign: "center", // 텍스트 정렬 방식
+              fontWeight: 'bold',
+              fill: '#333', // 텍스트 색상
+              textAlign: 'center', // 텍스트 정렬 방식
             },
             z: 100,
           },
         ],
         tooltip: {
-          trigger: "axis",
+          trigger: 'axis',
           axisPointer: {
-            type: "shadow",
+            type: 'shadow',
           },
           formatter: (params) => {
             return `${params[0].name}<br/>${ChartName}: ${params[0].value} ${unit}`;
           },
         },
         xAxis: {
-          type: "category",
+          type: 'category',
           data: xLabels,
           axisLabel: {
             fontSize: 8, // 폰트 크기 조정
           },
         },
         yAxis: {
-          type: "value",
+          type: 'value',
           max: roundedValue, // 계산된 최대값
           interval: 10, // 계산된 간격
           axisLabel: {
@@ -86,18 +97,18 @@ const MainRTRLineChart = ({ ChartName, unit, registerChart, chartKey }) => {
         series: [
           {
             name: ChartName,
-            type: "line",
+            type: 'line',
             smooth: true,
             data: rtrValues, // y축 데이터
             itemStyle: {
               // 데이터 포인트 색상 설정
-              color: "tomato",
+              color: 'tomato',
               borderWidth: 2, // 포인트의 테두리 두께
-              borderColor: "tomato", // 포인트의 테두리 색상
+              borderColor: 'tomato', // 포인트의 테두리 색상
             },
             markArea: {
               itemStyle: {
-                color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
+                color: 'rgba(79, 254, 35, 0.3)', // #4FFE234D와 유사한 RGBA 색상
               },
               data: [
                 [
@@ -111,8 +122,8 @@ const MainRTRLineChart = ({ ChartName, unit, registerChart, chartKey }) => {
       };
       chartInstance.setOption(option);
 
-      chartInstance.on("mouseover", function (params) {
-        if (params.componentType === "series") {
+      chartInstance.on('mouseover', function (params) {
+        if (params.componentType === 'series') {
           const dataValue = params.value; // 호버된 데이터 포인트의 값
           chartInstance.setOption({
             graphic: {
@@ -138,7 +149,19 @@ const MainRTRLineChart = ({ ChartName, unit, registerChart, chartKey }) => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading data</div>;
 
-  return <div ref={chartRef} className="w-full h-full bg-white rounded-lg" />;
+  return (
+    <div className="relative bg-white rounded-lg w-full h-full">
+      <div ref={chartRef} className="absolute top-1 left-1 w-[95%] h-[90%]" />
+      <div className="flex w-full h-fit justify-end absolute bottom-[9px] right-5">
+        <button
+          className="text-[#124946] text-xs font-normal leading-normal"
+          onClick={() => handleRoute(route)}
+        >
+          자세히 보기
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default MainRTRLineChart;

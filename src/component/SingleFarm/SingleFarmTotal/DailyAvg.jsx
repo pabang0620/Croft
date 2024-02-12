@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import { format, startOfWeek } from 'date-fns';
+import { format, subDays } from 'date-fns';
 import PickPeriodDate2 from '../../utils/DatePicker/PickPeriodDate2';
 import LineChart from '../../Charts/LineCharts/LineChart';
 import Line2Chart from '../../Charts/LineCharts/Line2Chart';
-import Line4Chart from '../../Charts/LineCharts/Line4Chart';
+// import Line4Chart from '../../Charts/LineCharts/Line4Chart';
 import MainBarLine2Chart from '../../Charts/MixCharts/MainBarLine2Chart';
 
 const DailyAvg = () => {
-  const [startDate, setStartDate] = useState(startOfWeek(new Date()));
+  const [startDate, setStartDate] = useState(subDays(new Date(), 7));
   const [endDate, setEndDate] = useState(new Date());
-  const [specificDate, setSpecificDate] = useState('이번주');
+  const [specificDate, setSpecificDate] = useState('지난 7일');
 
   return (
     <div className="flex flex-col w-full h-full justify-between px-[17px] py-[12px] select-none">
@@ -29,7 +29,21 @@ const DailyAvg = () => {
         <div className="flex gap-[48px] flex-grow min-h-[20rem]">
           {/* 평균온도 그래프인데 모양이 조금 다르네 ?  */}
           <div className="w-[50%] h-full">
-            <MainBarLine2Chart key="7" ChartName="평균 온도" />
+            <MainBarLine2Chart
+              key="7"
+              ChartName="평균 온도"
+              locate="avg"
+              startDate={
+                startDate
+                  ? format(startDate, 'yyyy-MM-dd')
+                  : format(new Date(), 'yyyy-MM-dd')
+              }
+              endDate={
+                endDate
+                  ? format(endDate, 'yyyy-MM-dd')
+                  : format(new Date(), 'yyyy-MM-dd')
+              }
+            />
           </div>
           {/* <div className="w-[50%] h-full">
             <Line4Chart ChartName="" />
@@ -39,15 +53,54 @@ const DailyAvg = () => {
               ChartName="평균 습도"
               APIoption="199"
               APIoption2="224"
+              locate="avg"
+              startDate={
+                startDate
+                  ? format(startDate, 'yyyy-MM-dd')
+                  : format(new Date(), 'yyyy-MM-dd')
+              }
+              endDate={
+                endDate
+                  ? format(endDate, 'yyyy-MM-dd')
+                  : format(new Date(), 'yyyy-MM-dd')
+              }
             />
           </div>
         </div>
         <div className="flex gap-[48px] flex-grow min-h-[20rem]">
           <div className="w-[50%] min-h-full">
-            <LineChart ChartName="평균 DLI" APIoption="220" />
+            <LineChart
+              ChartName="평균 DLI"
+              APIoption="220"
+              locate="avg"
+              startDate={
+                startDate
+                  ? format(startDate, 'yyyy-MM-dd')
+                  : format(new Date(), 'yyyy-MM-dd')
+              }
+              endDate={
+                endDate
+                  ? format(endDate, 'yyyy-MM-dd')
+                  : format(new Date(), 'yyyy-MM-dd')
+              }
+            />
           </div>
           <div className="w-[50%] min-h-full">
-            <LineChart ChartName="평균 CO2 농도" APIoption="225" />
+            <LineChart
+              ChartName="평균 CO2 농도"
+              APIoption="225"
+              locate="avg"
+              startDate={
+                startDate
+                  ? format(startDate, 'yyyy-MM-dd')
+                  : format(new Date(), 'yyyy-MM-dd')
+              }
+              endDate={
+                endDate
+                  ? format(endDate, 'yyyy-MM-dd')
+                  : format(new Date(), 'yyyy-MM-dd')
+              }
+            />
           </div>
         </div>
       </div>

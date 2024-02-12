@@ -1,8 +1,9 @@
-import * as echarts from "echarts";
-import React, { useEffect, useRef } from "react";
-import { useChartData } from "../../utils/api/Charts/ChartAPI";
+import * as echarts from 'echarts';
+import React, { useEffect, useRef } from 'react';
+import { useChartData } from '../../utils/api/Charts/ChartAPI';
 
 const Line4Chart = ({ dataoff }) => {
+  // 해당 차트는 날짜 선택하는 부분이 api에 없어서 날짜 데이터를 props로 넣어서 호출할 수 없음
   const chartRef = useRef(null);
 
   const { data, isLoading, error } = useChartData(
@@ -52,7 +53,7 @@ const Line4Chart = ({ dataoff }) => {
       xLabels = uniqueTimes.map((time) => {
         const date = new Date(time);
         return `${date.getHours()}:${
-          date.getMinutes() < 10 ? "0" : ""
+          date.getMinutes() < 10 ? '0' : ''
         }${date.getMinutes()}`;
       });
     } else {
@@ -63,12 +64,12 @@ const Line4Chart = ({ dataoff }) => {
     const series = [
       {
         smooth: true,
-        name: "외부온도",
-        type: "line",
+        name: '외부온도',
+        type: 'line',
         data: data227,
         markArea: {
           itemStyle: {
-            color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
+            color: 'rgba(79, 254, 35, 0.3)', // #4FFE234D와 유사한 RGBA 색상
           },
           // data: [
           //   [
@@ -80,12 +81,12 @@ const Line4Chart = ({ dataoff }) => {
       },
       {
         smooth: true,
-        name: "온실온도",
-        type: "line",
+        name: '온실온도',
+        type: 'line',
         data: data198,
         markArea: {
           itemStyle: {
-            color: "rgb(255, 0, 0 , 0.2)", // 빨강
+            color: 'rgb(255, 0, 0 , 0.2)', // 빨강
           },
           // data: [
           //   [
@@ -101,45 +102,45 @@ const Line4Chart = ({ dataoff }) => {
       series.push(
         {
           smooth: true,
-          name: "VENT 온도 셋팅",
-          type: "line",
+          name: 'VENT 온도 셋팅',
+          type: 'line',
           data: data205,
           lineStyle: {
-            type: "dashed", // 점선 스타일로 변경
-            color: "#FF0000", // 색상을 빨간색으로 설정
+            type: 'dashed', // 점선 스타일로 변경
+            color: '#FF0000', // 색상을 빨간색으로 설정
           },
           itemStyle: {
-            color: "#FF0000", // 선 및 포인트의 색상을 빨간색으로 설정
+            color: '#FF0000', // 선 및 포인트의 색상을 빨간색으로 설정
           },
-          symbol: "none", // 데이터 포인트 위의 점 제거
+          symbol: 'none', // 데이터 포인트 위의 점 제거
         },
         {
           smooth: true,
-          name: "VENT 온도 셋팅",
-          type: "line",
+          name: 'VENT 온도 셋팅',
+          type: 'line',
           data: data241,
           lineStyle: {
-            type: "dashed", // 점선 스타일로 변경
-            color: "#FF0000", // 색상을 빨간색으로 설정
+            type: 'dashed', // 점선 스타일로 변경
+            color: '#FF0000', // 색상을 빨간색으로 설정
           },
           itemStyle: {
-            color: "#FF0000", // 선 및 포인트의 색상을 빨간색으로 설정
+            color: '#FF0000', // 선 및 포인트의 색상을 빨간색으로 설정
           },
-          symbol: "none", // 데이터 포인트 위의 점 제거
+          symbol: 'none', // 데이터 포인트 위의 점 제거
         },
         {
           smooth: true,
-          name: "Heating 온도 셋팅",
-          type: "line",
+          name: 'Heating 온도 셋팅',
+          type: 'line',
           data: data204,
           lineStyle: {
-            type: "dashed", // 점선 스타일로 변경
-            color: "black", // 색상을 빨간색으로 설정
+            type: 'dashed', // 점선 스타일로 변경
+            color: 'black', // 색상을 빨간색으로 설정
           },
           itemStyle: {
-            color: "black", // 선 및 포인트의 색상을 빨간색으로 설정
+            color: 'black', // 선 및 포인트의 색상을 빨간색으로 설정
           },
-          symbol: "none", // 데이터 포인트 위의 점 제거
+          symbol: 'none', // 데이터 포인트 위의 점 제거
         }
       );
     }
@@ -151,29 +152,29 @@ const Line4Chart = ({ dataoff }) => {
     if (!dataoff) {
       series.push(
         {
-          type: "text",
-          left: "5%", // VENT 텍스트의 x 좌표
-          top: "30%", // VENT 텍스트의 y 좌표
+          type: 'text',
+          left: '5%', // VENT 텍스트의 x 좌표
+          top: '30%', // VENT 텍스트의 y 좌표
           style: {
-            text: "VENT", // 표시할 텍스트
+            text: 'VENT', // 표시할 텍스트
             fontSize: 10,
-            fontWeight: "bold",
-            fill: "#fff", // 글자색을 하얀색으로 설정
-            backgroundColor: "#f00", // 배경색을 빨간색으로 설정
+            fontWeight: 'bold',
+            fill: '#fff', // 글자색을 하얀색으로 설정
+            backgroundColor: '#f00', // 배경색을 빨간색으로 설정
             borderRadius: 10, // 배경의 둥근 모서리
             padding: 2,
           },
         },
         {
-          type: "text",
-          left: "5%", // Heat 텍스트의 x 좌표
-          top: "34.5%", // Heat 텍스트의 y 좌표
+          type: 'text',
+          left: '5%', // Heat 텍스트의 x 좌표
+          top: '34.5%', // Heat 텍스트의 y 좌표
           style: {
-            text: "HEAT", // 표시할 텍스트
+            text: 'HEAT', // 표시할 텍스트
             fontSize: 10,
-            fontWeight: "bold",
-            fill: "#fff", // 글자색을 하얀색으로 설정
-            backgroundColor: "black", // 배경색을 빨간색으로 설정
+            fontWeight: 'bold',
+            fill: '#fff', // 글자색을 하얀색으로 설정
+            backgroundColor: 'black', // 배경색을 빨간색으로 설정
             borderRadius: 10, // 배경의 둥근 모서리
             padding: 2,
           },
@@ -183,31 +184,31 @@ const Line4Chart = ({ dataoff }) => {
     const option = {
       grid: {
         // 다른 설정을 유지하면서 bottom만 조정
-        bottom: "20%", // 필요에 따라 이 값을 조정
+        bottom: '20%', // 필요에 따라 이 값을 조정
       },
       title: {
-        text: "평균 온도",
-        top: "5%",
-        left: "2%",
+        text: '평균 온도',
+        top: '5%',
+        left: '2%',
       },
       tooltip: {
-        trigger: "axis",
-        axisPointer: { type: "cross" },
+        trigger: 'axis',
+        axisPointer: { type: 'cross' },
       },
       graphic: graphic,
 
       legend: {
-        data: ["외부온도", "온실온도", "VENT 온도 셋팅", "Heating 온도 셋팅"],
+        data: ['외부온도', '온실온도', 'VENT 온도 셋팅', 'Heating 온도 셋팅'],
         textStyle: {
-          color: "#333", // 범례 텍스트 색상
+          color: '#333', // 범례 텍스트 색상
           fontSize: 12, // 범례 텍스트 크기
         },
         itemWidth: 10,
         itemHeight: 10,
-        icon: "rect",
+        icon: 'rect',
       },
       xAxis: {
-        type: "category",
+        type: 'category',
         data: xLabels,
         axisLine: {
           show: false, // x축 라인 숨기기
@@ -219,9 +220,9 @@ const Line4Chart = ({ dataoff }) => {
       yAxis: {
         axisLabel: {
           fontSize: 10,
-          margin: "10",
+          margin: '10',
         },
-        type: "value",
+        type: 'value',
         min: -5,
         max: maxData198,
         interval: 5,

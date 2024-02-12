@@ -57,7 +57,7 @@ const TotalReport = ({
         <div className="mb-[28px]">{Title('급수 상태 보고')}</div>
         <div className="flex">
           <div className="w-[366px] h-[305px] bg-white rounded-[10px]">
-            <BarOtherColorChart />
+            <BarOtherColorChart date={date} />
           </div>
           <div>임시 차트</div>
         </div>

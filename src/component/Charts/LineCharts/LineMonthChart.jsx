@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
-import * as echarts from "echarts";
-import { useChartData } from "../../utils/api/Charts/ChartAPI";
+import React, { useEffect, useRef } from 'react';
+import * as echarts from 'echarts';
+import { useChartData } from '../../utils/api/Charts/ChartAPI';
 
 const LineMonthChart = ({ queryname }) => {
   const { data, isLoading, error } = useChartData(
@@ -35,21 +35,21 @@ const LineMonthChart = ({ queryname }) => {
     const option = {
       grid: {
         // 다른 설정을 유지하면서 bottom만 조정
-        bottom: "20%", // 필요에 따라 이 값을 조정
+        bottom: '20%', // 필요에 따라 이 값을 조정
       },
       title: {
         text: queryname,
-        top: "5%",
-        left: "2%",
+        top: '5%',
+        left: '2%',
       },
       tooltip: {
-        trigger: "axis",
+        trigger: 'axis',
         axisPointer: {
-          type: "shadow",
+          type: 'shadow',
         },
       },
       xAxis: {
-        type: "category",
+        type: 'category',
         data: data.data.map((item) => {
           const date = new Date(item.kr_time);
           return `${date.getMonth() + 1}.${date.getDate()}`; // '월.일' 형식으로 변환
@@ -59,7 +59,7 @@ const LineMonthChart = ({ queryname }) => {
         },
       },
       yAxis: {
-        type: "value",
+        type: 'value',
         axisLabel: {
           fontSize: 10, // 글꼴 크기를 10px로 설정
         },
@@ -67,7 +67,7 @@ const LineMonthChart = ({ queryname }) => {
       series: [
         {
           name: `일자별 ${queryname}`,
-          type: "bar",
+          type: 'bar',
           data: chartData, // 시리즈 데이터를 chartData로 설정
           //   markArea: {
           //     itemStyle: {
@@ -94,9 +94,17 @@ const LineMonthChart = ({ queryname }) => {
   }, [data]);
 
   return (
-    <>
+    <div className="flex flex-col gap-[31px] w-full  h-[380px] px-[3.3125rem] relative">
+      <div className="absolute top-[15%] h-full w-[150px]">
+        <div className="relative h-full w-full flex flex-col">
+          <div className="absolute top-[33%]  w-[150px] pt-[10px] border-t border-base400 flex flex-col">
+            <div className="text-sm mb-1">권장</div>
+          </div>
+          <div className="absolute top-[47%]  w-[150px] pt-[10px] border-t border-base400 flex flex-col" />
+        </div>
+      </div>
       <div className="w-full h-full" ref={chartRef}></div>
-    </>
+    </div>
   );
 };
 

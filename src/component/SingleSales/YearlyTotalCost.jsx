@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import StackedBarLineChart from '../Charts/MixCharts/StackedBarLineChart';
+import StackedBarLineChart from '../Charts/MixCharts/YearlyStackedBarLineChart';
 import { useChartData } from '../utils/api/Charts/ChartAPI';
 import IncreaseUpDown from './IncreaseUpDownAndCost';
 
-const TotalCost = ({ years }) => {
+const TotalCost = ({ years, period }) => {
   const { data, isLoading } = useChartData(
     `${
       process.env.REACT_APP_BASE_API_KEY
-    }/v1/farms/revenue-expense?period=yearly&year=${years - 1}`,
+    }/v1/farms/revenue-expense?period=yearly&year=${years - period}`,
     `revenue-expense-yearly-${years}}`
   );
   const [totalData, SetTotalData] = useState([
@@ -36,24 +36,35 @@ const TotalCost = ({ years }) => {
           lastFilteredData[0].personnel_expense +
           lastFilteredData[0].fixed_cost +
           lastFilteredData[0].resource_bill;
+        const filteredRevenue = data?.data.reduce((acc, cur) => {
+          return acc + cur.revenue;
+        }, 0);
+        const filteredProfit = data?.data.reduce((acc, cur) => {
+          return acc + cur.profit;
+        }, 0);
+        const filteredTotal = data?.data.reduce((acc, cur) => {
+          return (
+            acc + cur.personnel_expense + cur.fixed_cost + cur.resource_bill
+          );
+        }, 0);
         SetTotalData([
           {
             title: '총 매출액',
             cost: `${revenue?.toLocaleString('ko-KR')}`,
-            last: lastFilteredData[0].revenue,
-            current: revenue,
+            last: lastFilteredData[0].revenue, //추후 기준이 되는 금액을 이 부분에 넣어주세요
+            current: filteredRevenue,
           },
           {
             title: '순수익',
             cost: `${profit?.toLocaleString('ko-KR')}`,
-            last: lastFilteredData[0].profit,
-            current: profit,
+            last: lastFilteredData[0].profit, //추후 기준이 되는 금액을 이 부분에 넣어주세요
+            current: filteredProfit,
           },
           {
             title: '비용',
             cost: `${TempTotal?.toLocaleString('ko-KR')}`,
-            last: lastTempTotal,
-            current: TempTotal,
+            last: lastTempTotal, //추후 기준이 되는 금액을 이 부분에 넣어주세요
+            current: filteredTotal,
           },
         ]);
       } else {
@@ -84,7 +95,7 @@ const TotalCost = ({ years }) => {
       </div>
       {/* bar2갠데 하나가 3색인거  */}
       <div className="w-[822px] h-[523px] bg-white rounded-[10px]">
-        <StackedBarLineChart years={years} />
+        <StackedBarLineChart years={2023} period={period} />
       </div>
     </div>
   );
