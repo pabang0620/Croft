@@ -178,7 +178,7 @@ const TimeMeasure = ({ APIoption, ChartName }) => {
               height: "100%",
             }}
           >
-            <span className="ml-[10px] font-bold">ON</span>
+            <span className="ml-[30px] font-bold">ON</span>
           </div>
         ))}
       </div>
