@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react';
-import * as echarts from 'echarts';
-import { format, subDays } from 'date-fns';
-import { useNavigate } from 'react-router-dom';
-import { useChartData } from '../../utils/api/Charts/ChartAPI';
+import React, { useEffect, useRef } from "react";
+import * as echarts from "echarts";
+import { format, subDays } from "date-fns";
+import { useNavigate } from "react-router-dom";
+import { useChartData } from "../../utils/api/Charts/ChartAPI";
 
 const MainBarLine2Chart = ({
   ChartName,
@@ -44,7 +44,7 @@ const MainBarLine2Chart = ({
     // 데이터에서 227과 198의 데이터를 분리하여 추출
     const uniqueDates = new Set();
     data.data.forEach((item) => {
-      const formattedDate = format(new Date(item.kr_time), 'MM.dd');
+      const formattedDate = format(new Date(item.kr_time), "MM.dd");
       uniqueDates.add(formattedDate);
     });
 
@@ -74,32 +74,32 @@ const MainBarLine2Chart = ({
     const option = {
       grid: {
         // 필요에 따라 이 값을 조정(차트 사이즈 조절)
-        top: '25%',
-        bottom: '8%',
+        top: "25%",
+        bottom: "8%",
       },
       title: {
         text: ChartName,
-        top: '0%',
-        left: '2%',
+        top: "0%",
+        left: "2%",
       },
       tooltip: {
-        trigger: 'axis',
-        axisPointer: { type: 'cross' },
+        trigger: "axis",
+        axisPointer: { type: "cross" },
       },
       legend: {
-        data: ['온실온도편차', '온실평균온도', '외부평균온도'],
+        data: ["온실온도편차", "온실평균온도", "외부평균온도"],
         textStyle: {
-          color: '#000', // 범례 텍스트 색상
+          color: "#000", // 범례 텍스트 색상
           fontSize: 12, // 범례 텍스트 크기
         },
         itemWidth: 10,
         itemHeight: 10,
-        icon: 'rect',
-        left: '12%', // 가로 중앙에 위치
-        top: '15%', // 타이틀 아래에 위치하도록 조정
+        icon: "rect",
+        left: "12%", // 가로 중앙에 위치
+        top: "15%", // 타이틀 아래에 위치하도록 조정
       },
       xAxis: {
-        type: 'category',
+        type: "category",
         data: dates,
         axisLine: {
           show: false, // x축 라인 숨기기
@@ -111,7 +111,7 @@ const MainBarLine2Chart = ({
       yAxis: {
         axisLabel: {
           fontSize: 10,
-          margin: '10',
+          margin: "10",
         },
         // splitLine: {
         //   lineStyle: {
@@ -125,37 +125,37 @@ const MainBarLine2Chart = ({
       },
       series: [
         {
-          name: '온실온도최소', // 최소 온도
-          type: 'bar',
-          stack: 'Total',
+          name: "온실온도최소", // 최소 온도
+          type: "bar",
+          stack: "Total",
           data: data198Min,
           itemStyle: {
-            borderColor: 'transparent',
-            color: 'transparent',
+            borderColor: "transparent",
+            color: "transparent",
           },
           emphasis: {
             itemStyle: {
-              borderColor: 'transparent',
-              color: 'transparent',
+              borderColor: "transparent",
+              color: "transparent",
             },
           },
         },
         {
-          name: '온실온도편차', // 최대 온도
-          type: 'bar',
-          stack: 'Total',
+          name: "온실온도편차", // 최대 온도
+          type: "bar",
+          stack: "Total",
           data: data198Max,
           itemStyle: {
-            color: '#D95F5F', // 적당한 색상으로 설정
+            color: "#D95F5F", // 적당한 색상으로 설정
           },
         },
         {
-          name: '온실평균온도',
-          type: 'line',
+          name: "온실평균온도",
+          type: "line",
           data: data198,
           markArea: {
             itemStyle: {
-              color: 'rgba(79, 254, 35, 0.3)', // #4FFE234D와 유사한 RGBA 색상
+              color: "rgba(79, 254, 35, 0.3)", // #4FFE234D와 유사한 RGBA 색상
             },
             data: [
               [
@@ -166,8 +166,8 @@ const MainBarLine2Chart = ({
           },
         },
         {
-          name: '외부평균온도',
-          type: 'line',
+          name: "외부평균온도",
+          type: "line",
           data: data227,
         },
       ],
@@ -190,7 +190,7 @@ const MainBarLine2Chart = ({
   return (
     <div className="relative bg-white rounded-lg w-full h-full">
       <div ref={chartRef} className="absolute top-1 left-1 w-[95%] h-[90%]" />
-      {locate !== 'avg' && (
+      {locate !== "avg" && (
         <div className="flex w-full h-fit justify-end absolute bottom-[9px] right-4">
           <button
             className="text-[#124946] text-xs font-normal leading-normal"

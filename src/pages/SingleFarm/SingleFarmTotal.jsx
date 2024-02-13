@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import BasicSubBar from '../../layout/NavBar/SubNavBar/BasicSubBar';
-import GreenHouseTotal from '../../component/SingleFarm/SingleFarmTotal/GreenHouseTotal';
-import WaterData from '../../component/SingleFarm/SingleFarmTotal/WaterData';
-import DailyAvg from '../../component/SingleFarm/SingleFarmTotal/DailyAvg';
+import React, { useState } from "react";
+import BasicSubBar from "../../layout/NavBar/SubNavBar/BasicSubBar";
+import GreenHouseTotal from "../../component/SingleFarm/SingleFarmTotal/GreenHouseTotal";
+import WaterData from "../../component/SingleFarm/SingleFarmTotal/WaterData";
+import DailyAvg from "../../component/SingleFarm/SingleFarmTotal/DailyAvg";
 
 const SingleFarmTotal = () => {
   //데이터 입출력
@@ -18,7 +18,7 @@ const SingleFarmTotal = () => {
 
   return (
     <div className="flex flex-col">
-      <BasicSubBar title={'온실환경 종합'} />
+      <BasicSubBar title={"온실환경 종합"} />
       <div className="my-[11px] mx-[25px] flex flex-col gap-[10px] max-w-[90%]">
         <div className="w-full bg-white h-[52rem] rounded-[10px]">
           <GreenHouseTotal critical={critical} alert={alert} date={date} />

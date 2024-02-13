@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { format } from 'date-fns';
+import React, { useState, useEffect } from "react";
+import { format } from "date-fns";
 // import Line4ChartNone from "../../Charts/LineCharts/Line4ChartNone";
-import Line4Chart from '../../Charts/LineCharts/Line4Chart';
-import Measurement from '../../Charts/Measurement/Measurement';
-import { useChartData } from '../../utils/api/Charts/ChartAPI';
+import Line4Chart from "../../Charts/LineCharts/Line4Chart";
+import Measurement from "../../Charts/Measurement/Measurement";
+import { useChartData } from "../../utils/api/Charts/ChartAPI";
+import GreenHouseTemper1 from "./GreenHouseTemper1";
 
 const GreenHouseTemper = () => {
-  const today = format(new Date(), 'yyyy.MM.dd');
+  const today = format(new Date(), "yyyy.MM.dd");
   const { data, isLoading } = useChartData(
     `${process.env.REACT_APP_BASE_API_KEY}/v1/farms/similar/weather?is_combined=true&data_type=219`,
-    'similar-temper'
+    "similar-temper"
   );
   const [selectedDate, setSelectedDate] = useState(today);
   useEffect(() => {
@@ -36,15 +37,20 @@ const GreenHouseTemper = () => {
               <div className="font-bold text-lg">22℃</div>
             </div>
           </div>
-          <div className="w-[80%] h-[390px] ">
-            <Line4Chart dataoff="dataoff" />
+          <div className="w-[100%] h-[600px]">
+            <GreenHouseTemper1 />
           </div>
+          {/* <div className="w-[80%] h-[390px]">
+            <Line4Chart dataoff="dataoff" />
+          </div> */}
         </div>
-        {/* temp 이미지 */}
-        <div className="w-[90%]">
+        {/* <div className="w-[90%]">
           <Measurement />
-        </div>
+        </div> */}
       </div>
+
+      {/* 구분선 */}
+
       <div className="flex flex-col flex-grow w-[40%] gap-7">
         <div className="flex w-full mr-4 flex-wrap rounded-[10px] px-4 bg-lightest-gray items-center text-xs">
           <div className="h-[2.1875rem] flex items-center mr-9">
@@ -91,14 +97,17 @@ const GreenHouseTemper = () => {
               <div className="font-bold text-lg">22℃</div>
             </div>
           </div>
-          <div className="w-full h-[390px] ">
+          <div className="w-[100%] h-[600px]">
+            <GreenHouseTemper1 />
+          </div>{" "}
+          {/* <div className="w-full h-[390px] ">
             <Line4Chart />
-          </div>
+          </div> */}
         </div>
         {/* temp 이미지 */}
-        <div className="w-[90%]">
+        {/* <div className="w-[90%]">
           <Measurement />
-        </div>
+        </div> */}
       </div>
     </div>
   );
