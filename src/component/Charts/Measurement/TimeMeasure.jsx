@@ -146,8 +146,7 @@ const TimeMeasure = ({ APIoption, ChartName }) => {
 
   return (
     <div className="flex flex-row">
-      <MeasureName ChartName={ChartName} />
-      <div className="flex justify-between bg-white h-[25px] pl-[8px] pr-[8px] items-center relative w-[80%]  border-b-[1px] border-gray-400">
+      <div className="flex justify-between bg-white h-[25px] pl-[8px] pr-[8px] items-center relative w-[477px] ml-[51px] border-b-[1px] border-gray-400">
         {dataPoints.map((item, index) => (
           <div
             key={index}
@@ -178,7 +177,7 @@ const TimeMeasure = ({ APIoption, ChartName }) => {
               height: "100%",
             }}
           >
-            <span className="ml-[15px] font-bold">ON</span>
+            <span className="ml-[-20px] font-bold">ON</span>
           </div>
         ))}
       </div>

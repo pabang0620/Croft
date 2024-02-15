@@ -37,7 +37,7 @@ const GreenHouseTemper = () => {
               <div className="font-bold text-lg">22℃</div>
             </div>
           </div>
-          <div className="w-[100%] h-[600px]">
+          <div className="w-[540px] h-[500px]">
             <GreenHouseTemper1 />
           </div>
           {/* <div className="w-[80%] h-[390px]">
@@ -97,17 +97,10 @@ const GreenHouseTemper = () => {
               <div className="font-bold text-lg">22℃</div>
             </div>
           </div>
-          <div className="w-[100%] h-[600px]">
+          <div className="w-[540px] h-[500px]">
             <GreenHouseTemper1 />
           </div>{" "}
-          {/* <div className="w-full h-[390px] ">
-            <Line4Chart />
-          </div> */}
         </div>
-        {/* temp 이미지 */}
-        {/* <div className="w-[90%]">
-          <Measurement />
-        </div> */}
       </div>
     </div>
   );

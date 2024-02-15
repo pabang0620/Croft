@@ -1,6 +1,7 @@
 import * as echarts from "echarts";
 import React, { useEffect, useRef } from "react";
 import { useChartData } from "../../utils/api/Charts/ChartAPI";
+import TimeMeasure from "../../Charts/Measurement/TimeMeasure";
 
 const GreenHouseTemper1 = ({ dataoff }) => {
   // 해당 차트는 날짜 선택하는 부분이 api에 없어서 날짜 데이터를 props로 넣어서 호출할 수 없음
@@ -182,12 +183,12 @@ const GreenHouseTemper1 = ({ dataoff }) => {
     const option = {
       grid: [
         // 기존 차트의 grid 설정
-        { left: "5%", right: "2%", top: "10%", height: "60%" },
+        { left: "10%", right: "2%", top: "10%", height: "60%" },
         // 4개의 추가 차트에 대한 grid 설정
-        { left: "5%", right: "2%", top: "80%", height: "4%" },
-        { left: "5%", right: "2%", top: "85%", height: "4%" },
-        { left: "5%", right: "2%", top: "90%", height: "4%" },
-        { left: "5%", right: "2%", top: "95%", height: "4%" },
+        { left: "10%", right: "2%", top: "80%", height: "4%" },
+        { left: "10%", right: "2%", top: "85%", height: "4%" },
+        { left: "10%", right: "2%", top: "90%", height: "4%" },
+        { left: "10%", right: "2%", top: "95%", height: "4%" },
       ],
       xAxis: [
         // 첫 번째 차트의 X축 설정
@@ -209,9 +210,7 @@ const GreenHouseTemper1 = ({ dataoff }) => {
           data: xLabels,
           axisLabel: { show: false },
           splitLine: { show: false },
-          axisLine: {
-            show: false, // x축 라인 숨기기
-          },
+
           axisTick: {
             show: false,
           },
@@ -222,9 +221,7 @@ const GreenHouseTemper1 = ({ dataoff }) => {
           data: xLabels,
           axisLabel: { show: false },
           splitLine: { show: false },
-          axisLine: {
-            show: false, // x축 라인 숨기기
-          },
+
           axisTick: {
             show: false,
           },
@@ -235,9 +232,7 @@ const GreenHouseTemper1 = ({ dataoff }) => {
           data: xLabels,
           axisLabel: { show: false },
           splitLine: { show: false },
-          axisLine: {
-            show: false, // x축 라인 숨기기
-          },
+
           axisTick: {
             show: false,
           },
@@ -248,9 +243,7 @@ const GreenHouseTemper1 = ({ dataoff }) => {
           data: xLabels,
           axisLabel: { show: false },
           splitLine: { show: false },
-          axisLine: {
-            show: false, // x축 라인 숨기기
-          },
+
           axisTick: {
             show: false,
           },
@@ -287,7 +280,7 @@ const GreenHouseTemper1 = ({ dataoff }) => {
       ],
       title: {
         text: "평균 온도",
-        top: "5%",
+        top: "0%",
         left: "2%",
       },
       tooltip: {
@@ -411,6 +404,15 @@ const GreenHouseTemper1 = ({ dataoff }) => {
   return (
     <>
       <div ref={chartRef} className="w-full h-full" />
+      <div className="m-[2px] w-full">
+        <TimeMeasure APIoption="233" ChartName="FCU" />
+      </div>
+      <div className="m-[2px] w-full">
+        <TimeMeasure APIoption="234" ChartName="Heating Pipe" />
+      </div>
+      <div className="m-[2px] w-full">
+        <TimeMeasure APIoption="226" ChartName="CO2 Value" />
+      </div>
     </>
   );
 };
