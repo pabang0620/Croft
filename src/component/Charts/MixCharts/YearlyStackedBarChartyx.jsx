@@ -25,8 +25,6 @@ const StackedBarChartyx = ({ years, period }) => {
   const [barData5, setBarData5] = useState(generateDummyData(5, 500));
 
   useEffect(() => {
-    console.log('YearlyStackedBarChartyx data');
-    console.log(data);
     let filteredYears = [];
     let filteredBar1 = [];
     let filteredBar2 = [];
@@ -36,13 +34,9 @@ const StackedBarChartyx = ({ years, period }) => {
 
     const chartInstance = echarts.init(chartRef.current);
 
-    //데이터값 저장
-    console.log('for문 전');
+    //데이터값 저장.
     for (let i = 0; i < period; i++) {
       setBarData1([...barData1, i]);
-      console.log('for문 돌아가고있어~!');
-      console.log('data?.data[i].year');
-      console.log(data?.data[i].year);
       filteredYears.push(data?.data[i].year);
       filteredBar1.push(data?.data[i].personnel_expense);
       filteredBar2.push(data?.data[i].electricity_bill);
@@ -50,17 +44,13 @@ const StackedBarChartyx = ({ years, period }) => {
       filteredBar4.push(data?.data[i].water_bill);
       filteredBar5.push(data?.data[i].fixed_cost);
     }
-    console.log('for문 후');
-    console.log(filteredYears);
+
     if (!isLoading && filteredYears.length > 0) {
-      console.log('YearlyStackedBarChartyx data successssssssssss');
-      console.log(data);
       setBarData1(filteredBar1);
       setBarData2(filteredBar2);
       setBarData3(filteredBar3);
       setBarData4(filteredBar4);
       setBarData5(filteredBar5);
-      console.log(filteredBar1);
     }
 
     const option = {
