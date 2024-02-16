@@ -94,7 +94,7 @@ const LineAreaMeasure = ({ APIoption, ChartName, registerChart, chartKey }) => {
       <MeasureName ChartName={ChartName} />
       <div
         ref={chartRef}
-        className="w-full h-[25px] bg-white border-b-[1px] border-gray-400"
+        className="w-[554px] h-[25px] bg-white border-b-[1px] border-gray-400"
       />
     </div>
   );
